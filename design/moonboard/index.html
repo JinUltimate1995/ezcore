@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE Moonboard — brand brainstorm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@500;700;900&family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #08090c;
+    --panel: #101218;
+    --panel2: #151824;
+    --line: #232838;
+    --txt: #eef1f6;
+    --mut: #8b93a7;
+    --acc: #35e0ff;
+  }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 80% -10%, #14202e 0%, var(--bg) 55%) fixed, var(--bg);
+    color: var(--txt);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 28px 120px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; }
+  header.board { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+  .kicker { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .22em; color: var(--mut); }
+  h1 { font-family: "Unbounded", sans-serif; font-weight: 900; font-size: clamp(34px, 5vw, 58px); letter-spacing: -.01em; }
+  h1 .ez { color: var(--acc); }
+  .sub { color: var(--mut); max-width: 62ch; margin-top: 8px; }
+  section { margin-top: 38px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .sec-num { font-family: "JetBrains Mono", monospace; color: var(--acc); font-size: 13px; }
+  h2 { font-family: "Space Grotesk", sans-serif; font-size: 22px; letter-spacing: -.01em; }
+  .sec-hint { color: var(--mut); font-size: 13px; margin-left: auto; }
+  .grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .card {
+    background: linear-gradient(180deg, var(--panel2), var(--panel));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    position: relative;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: #33405a; }
+  .card.picked { border-color: var(--acc); box-shadow: 0 0 0 1px var(--acc), 0 12px 40px -18px var(--acc); }
+  .card h3 { font-family: "Space Grotesk", sans-serif; font-size: 16px; margin: 12px 0 4px; }
+  .card p { color: var(--mut); font-size: 13px; }
+  .tag { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--mut); border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; margin-bottom: 10px; }
+  .pick {
+    margin-top: 14px; width: 100%; cursor: pointer;
+    font-family: "Space Grotesk", sans-serif; font-size: 13px; font-weight: 700;
+    background: transparent; color: var(--txt);
+    border: 1px solid var(--line); border-radius: 12px; padding: 9px;
+    transition: all .15s ease;
+  }
+  .pick:hover { border-color: var(--acc); color: var(--acc); }
+  .picked .pick { background: var(--acc); border-color: var(--acc); color: #06121a; }
+  .logo-stage { height: 130px; display: flex; align-items: center; justify-content: center; background: #0a0d14; border: 1px dashed #2a3348; border-radius: 12px; }
+  /* type specimens */
+  .specimen { background: #0a0d14; border-radius: 12px; padding: 16px; margin-top: 10px; }
+  .specimen .aa { font-size: 34px; line-height: 1.1; }
+  .specimen .sentence { color: var(--mut); font-size: 14px; margin-top: 6px; }
+  .specimen [contenteditable] { outline: none; border-bottom: 1px dashed transparent; }
+  .specimen [contenteditable]:hover { border-color: #33405a; }
+  .mono { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--mut); margin-top: 8px; }
+  /* swatches */
+  .swatches { display: flex; gap: 8px; margin-top: 12px; }
+  .sw { flex: 1; height: 44px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); position: relative; cursor: pointer; }
+  .sw span { position: absolute; bottom: -18px; left: 0; right: 0; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--mut); }
+  .swrow { margin-bottom: 26px; }
+  .minidemo { margin-top: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  /* XMB demo */
+  .xmb { background: linear-gradient(180deg, #0a1220, #060a12); padding: 18px 14px; }
+  .xmb-row { display: flex; gap: 10px; align-items: center; justify-content: center; }
+  .xmb-it { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-family: "Space Grotesk"; font-weight: 700; font-size: 13px; color: #cfe3ee;
+    background: #16202f; border: 1px solid #263349; opacity: .45; transform: scale(.82);
+    transition: all .22s cubic-bezier(.2,.9,.25,1.2); cursor: pointer; }
+  .xmb-it.on { opacity: 1; transform: scale(1.12); border-color: var(--acc); box-shadow: 0 0 24px -6px var(--acc); color: #fff; }
+  .xmb-cap { text-align: center; font-size: 12px; color: var(--mut); margin-top: 10px; min-height: 18px; }
+  .xmb-nav { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+  .xmb-nav button { background: #16202f; color: var(--txt); border: 1px solid #263349; border-radius: 8px; padding: 4px 14px; cursor: pointer; }
+  /* coverflow demo */
+  .flow { background: linear-gradient(180deg, #141010, #0a0808); padding: 22px 10px 14px; perspective: 700px; }
+  .flow-row { display: flex; gap: 4px; align-items: center; justify-content: center; }
+  .fcard { width: 74px; height: 104px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Space Grotesk"; font-weight: 700; font-size: 15px; color: rgba(255,255,255,.85);
+    transition: all .25s ease; border: 1px solid rgba(255,255,255,.14); position: relative; }
+  .fcard small { position: absolute; bottom: 6px; font-size: 9px; font-weight: 400; opacity: .7; }
+  .fcard.l2 { transform: rotateY(52deg) scale(.8); opacity: .45; }
+  .fcard.l1 { transform: rotateY(38deg) scale(.9); opacity: .7; }
+  .fcard.c0 { transform: scale(1.12); box-shadow: 0 18px 40px -12px rgba(0,0,0,.8); }
+  .fcard.c0::after { content: ""; position: absolute; inset: 100% 0 auto; height: 34px; border-radius: 8px;
+    background: inherit; filter: blur(1px); opacity: .28; transform: scaleY(-1); mask: linear-gradient(#000, transparent); -webkit-mask: linear-gradient(#000, transparent); }
+  .fcard.r1 { transform: rotateY(-38deg) scale(.9); opacity: .7; }
+  .fcard.r2 { transform: rotateY(-52deg) scale(.8); opacity: .45; }
+  .flow-cap { text-align: center; font-size: 12px; color: var(--mut); margin-top: 12px; min-height: 18px; }
+  /* noir grid demo */
+  .noir { background: #0b0d10; padding: 16px; }
+  .noir-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .ncard { aspect-ratio: 1; border-radius: 12px; background: #14171d; border: 1px solid #222835;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #9aa4b5;
+    cursor: pointer; transition: all .15s ease; }
+  .ncard:hover { border-color: #c6ff4a; color: #c6ff4a; box-shadow: 0 0 18px -6px #c6ff4a; transform: scale(1.04); }
+  .ncard.play { background: #c6ff4a; color: #0a0c0a; border-color: #c6ff4a; }
+  /* principles */
+  .prin { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .prin:last-child { border: 0; }
+  .prin b { font-family: "JetBrains Mono", monospace; color: var(--acc); font-size: 12px; min-width: 44px; padding-top: 3px; }
+  .prin p { font-size: 14px; } .prin p span { color: var(--mut); }
+  /* verdict bar */
+  #verdict { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 50;
+    background: rgba(13,16,24,.92); backdrop-filter: blur(12px); border: 1px solid #33405a; border-radius: 16px;
+    padding: 12px 18px; display: flex; gap: 14px; align-items: center; max-width: min(92vw, 760px);
+    box-shadow: 0 20px 60px -20px #000; font-size: 13px; }
+  #verdict .v { color: var(--mut); } #verdict .v b { color: var(--txt); }
+  #lock { background: var(--acc); color: #06121a; border: 0; border-radius: 10px; padding: 9px 18px;
+    font-family: "Space Grotesk"; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  #lock:disabled { opacity: .35; cursor: default; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="board">
+    <div>
+      <div class="kicker">EZCORE · BRAND MOONBOARD · V1</div>
+      <h1><span class="ez">ez</span>CORE</h1>
+      <p class="sub">One beautiful, unified emulator. Pick a logo, a voice (type), a night-mode theme, and a library direction. Click <b>Use this</b> on your favorites, then lock the verdict at the bottom — it lands straight in our chat.</p>
+    </div>
+  </header>
+
+  <!-- 1 · LOGO -->
+  <section id="s-logo">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Logo</h2><span class="sec-hint">SVG · scales to app icon · must read at 48px</span></div>
+    <div class="grid4">
+      <div class="card" data-group="logo" data-name="Chip Core">
+        <span class="tag">A · CHIP CORE</span>
+        <div class="logo-stage">
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <rect x="18" y="18" width="40" height="40" rx="9" stroke="#35e0ff" stroke-width="4"/>
+            <path d="M30 33 L42 38 L30 43 Z" fill="#35e0ff"/>
+            <path d="M18 28v-6M18 54v-6M28 18h-6M54 18h-6M58 28v-6M58 54v-6M28 58h-6M54 58h-6" stroke="#35e0ff" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Chip Core</h3>
+        <p>Emulation = silicon. Play triangle etched on a chip die with pin-out ticks. Reads instantly as "runs games".</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="logo" data-name="Lowercase Ligature">
+        <span class="tag">B · WORDMARK</span>
+        <div class="logo-stage">
+          <svg width="150" height="60" viewBox="0 0 150 60" fill="none">
+            <text x="8" y="40" font-family="Unbounded, sans-serif" font-weight="900" font-size="27" fill="#eef1f6">ez<tspan fill="#c6ff4a">CORE</tspan></text>
+            <rect x="8" y="46" width="40" height="4" rx="2" fill="#c6ff4a"/>
+          </svg>
+        </div>
+        <h3>Lowercase Ligature</h3>
+        <p>Friendly "ez" + engineered "CORE". The underline is a progress bar at 68% — always loading the next game.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="logo" data-name="Cartridge Slot">
+        <span class="tag">C · CARTRIDGE</span>
+        <div class="logo-stage">
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <rect x="14" y="10" width="48" height="56" rx="8" stroke="#eef1f6" stroke-width="4"/>
+            <rect x="24" y="22" width="28" height="10" rx="2" fill="#ffb347"/>
+            <path d="M24 44h28M24 50h18" stroke="#3a4358" stroke-width="4" stroke-linecap="round"/>
+            <path d="M30 60l6-8 6 8" stroke="#ffb347" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Cartridge Slot</h3>
+        <p>A cart sliding home. Nostalgia without pixels — the amber label + chevron says "insert coin, press play".</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="logo" data-name="Hex Core">
+        <span class="tag">D · HEX CORE</span>
+        <div class="logo-stage">
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <path d="M38 8 L64 23 V53 L38 68 L12 53 V23 Z" stroke="#b48cff" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="38" cy="38" r="9" fill="#b48cff"/>
+            <circle cx="38" cy="38" r="3.5" fill="#0a0d14"/>
+          </svg>
+        </div>
+        <h3>Hex Core</h3>
+        <p>Modular cores, literally: a hex nut with a glowing core. Speaks "pluggable emulation engine" to nerds.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · TYPE -->
+  <section id="s-type">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Type voice</h2><span class="sec-hint">click the big lines to edit — test your own words</span></div>
+    <div class="grid3">
+      <div class="card" data-group="type" data-name="Grotesk System">
+        <span class="tag">A · GROTESK SYSTEM</span>
+        <div class="specimen">
+          <div class="aa" style="font-family:'Space Grotesk'" contenteditable>Continue playing?</div>
+          <div class="sentence" style="font-family:'Inter'">Chrono Trigger · 12h 40m · save slot 2 from last night</div>
+          <div class="mono">mslug3.zip · mame2003 · 60fps</div>
+        </div>
+        <h3>Space Grotesk + Inter + JetBrains Mono</h3>
+        <p>Technical, confident, Linear-adjacent. Display has quirky warmth; UI text stays invisible.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="type" data-name="Arcade Brutal">
+        <span class="tag">B · ARCADE BRUTAL</span>
+        <div class="specimen">
+          <div class="aa" style="font-family:'Unbounded';font-weight:700" contenteditable>PRESS START</div>
+          <div class="sentence" style="font-family:'Sora'">Metroid Fusion · 94% items · last played 2h ago</div>
+          <div class="mono">fusion.gba · mgba · cheats: 2 on</div>
+        </div>
+        <h3>Unbounded + Sora + JetBrains Mono</h3>
+        <p>Loud, poster-like, unforgettable. Risks shouting in small UI — best for headers and splash.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="type" data-name="Quiet Tactile">
+        <span class="tag">C · QUIET TACTILE</span>
+        <div class="specimen">
+          <div class="aa" style="font-family:'Sora';font-weight:800" contenteditable>Good evening.</div>
+          <div class="sentence" style="font-family:'Inter'">Three games are waiting where you left them.</div>
+          <div class="mono">covers cached · saves synced · cores up to date</div>
+        </div>
+        <h3>Sora + Inter + JetBrains Mono</h3>
+        <p>Early-iPhone calm. The OS disappears and only your games remain. Safest at small sizes.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · THEME -->
+  <section id="s-theme">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Night themes</h2><span class="sec-hint">dark cyberpunk · one accent only · no RGB clutter</span></div>
+    <div class="grid3">
+      <div class="card" data-group="theme" data-name="XMB Drift">
+        <span class="tag">A · XMB DRIFT</span>
+        <div class="swrow swatches">
+          <div class="sw" style="background:#070b14"><span>#070B14</span></div>
+          <div class="sw" style="background:#101828"><span>#101828</span></div>
+          <div class="sw" style="background:#35e0ff"><span>#35E0FF</span></div>
+          <div class="sw" style="background:#eef1f6"><span>#EEF1F6</span></div>
+        </div>
+        <h3>XMB Drift</h3>
+        <p>Deep-sea navy, signal cyan. The PSP-at-midnight feeling. Cyan = play, selection, life.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="theme" data-name="Amber Cart">
+        <span class="tag">B · AMBER CART</span>
+        <div class="swrow swatches">
+          <div class="sw" style="background:#0e0c0a"><span>#0E0C0A</span></div>
+          <div class="sw" style="background:#1a1512"><span>#1A1512</span></div>
+          <div class="sw" style="background:#ffb347"><span>#FFB347</span></div>
+          <div class="sw" style="background:#f3ede4"><span>#F3EDE4</span></div>
+        </div>
+        <h3>Amber Cart</h3>
+        <p>Warm CRT glow, cartridge-label amber. Nostalgic without a single pixel-font cliché.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="theme" data-name="Pulse Noir">
+        <span class="tag">C · PULSE NOIR</span>
+        <div class="swrow swatches">
+          <div class="sw" style="background:#0a0c0a"><span>#0A0C0A</span></div>
+          <div class="sw" style="background:#141814"><span>#141814</span></div>
+          <div class="sw" style="background:#c6ff4a"><span>#C6FF4A</span></div>
+          <div class="sw" style="background:#edf2e9"><span>#EDF2E9</span></div>
+        </div>
+        <h3>Pulse Noir</h3>
+        <p>Acid-lime pulse on near-black. Highest energy, most "emulator that means business".</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · LIBRARY UX -->
+  <section id="s-ux">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Library direction</h2><span class="sec-hint">playable mini-demos — click around</span></div>
+    <div class="grid3">
+      <div class="card" data-group="ux" data-name="XMB Rail">
+        <span class="tag">A · XMB RAIL</span>
+        <div class="minidemo xmb">
+          <div class="xmb-row" id="xmbRow"></div>
+          <div class="xmb-cap" id="xmbCap">Chrono Trigger · SNES</div>
+          <div class="xmb-nav"><button type="button" id="xmbPrev">‹</button><button type="button" id="xmbPlay">▶ PLAY</button><button type="button" id="xmbNext">›</button></div>
+        </div>
+        <h3>XMB Rail</h3>
+        <p>Horizontal system rail, game strip below the fold. D-pad native. Scales to 500 games without scrolling hell.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="ux" data-name="Cover Drift">
+        <span class="tag">B · COVER DRIFT</span>
+        <div class="minidemo flow">
+          <div class="flow-row" id="flowRow"></div>
+          <div class="flow-cap" id="flowCap">Tap a cover to bring it forward</div>
+        </div>
+        <h3>Cover Drift</h3>
+        <p>iPod luxury: covers glide with reflection + inertia. Pure Theater mode for the collection you love showing off.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+      <div class="card" data-group="ux" data-name="Noir Grid">
+        <span class="tag">C · NOIR GRID</span>
+        <div class="minidemo noir">
+          <div class="noir-grid" id="noirGrid"></div>
+          <div class="flow-cap">Hover to glow · click to mark playing</div>
+        </div>
+        <h3>Noir Grid</h3>
+        <p>Dense, fast, tactile. Hover-glow + one-tap play. The "I have 2,000 ROMs and zero patience" layout.</p>
+        <button class="pick" type="button">Use this</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PRINCIPLES -->
+  <section id="s-rules">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Locked principles</h2><span class="sec-hint">non-negotiable, whatever wins above</span></div>
+    <div class="card">
+      <div class="prin"><b>G→P</b><p>Game → Play. <span>Never expose core / renderer / BIOS / config before the first frame. Auto-pick the core, remember it.</span></p></div>
+      <div class="prin"><b>1AC</b><p>One accent color. <span>Cyan OR amber OR lime — never two. No gradients-for-fun, no RGB gamer clutter.</span></p></div>
+      <div class="prin"><b>48PX</b><p>Logo must read at 48px. <span>If the mark dies small, it dies. Test every concept as a home-screen icon.</span></p></div>
+      <div class="prin"><b>TACT</b><p>Every tap answers. <span>Early-iPhone rule: press states, haptics, spring physics. Nothing feels dead.</span></p></div>
+      <div class="prin"><b>BYOD</b><p>Bring your own dumps. <span>No Nintendo marks, no ROM talk in UI copy, no gray-area buttons. Ever.</span></p></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="verdict" role="status">
+  <span class="v" id="vtext">Pick one per section ↑ — <b>logo · type · theme · ux</b></span>
+  <button id="lock" type="button" disabled>Lock verdict →</button>
+</div>
+
+<script>
+  const picks = { logo: null, type: null, theme: null, ux: null };
+  const vtext = document.getElementById('vtext');
+  const lock = document.getElementById('lock');
+
+  document.querySelectorAll('.card[data-group]').forEach(card => {
+    card.querySelector('.pick').addEventListener('click', () => {
+      const g = card.dataset.group;
+      document.querySelectorAll(`.card[data-group="${g}"]`).forEach(c => c.classList.remove('picked'));
+      card.classList.add('picked');
+      picks[g] = card.dataset.name;
+      render();
+    });
+  });
+
+  function render() {
+    const parts = ['logo', 'type', 'theme', 'ux'].map(g =>
+      picks[g] ? `<b>${picks[g]}</b>` : `<b style="color:#5b6376">…</b>`);
+    vtext.innerHTML = `Verdict: ${parts.join(' · ')}`;
+    lock.disabled = Object.values(picks).some(v => !v);
+  }
+
+  lock.addEventListener('click', () => {
+    const msg = `ezCore moonboard verdict — logo: ${picks.logo}; type: ${picks.type}; theme: ${picks.theme}; library UX: ${picks.ux}. Lock these into docs/BRAND.md and use them for the Flutter theme + app icon.`;
+    if (window.hermes && window.hermes.send) window.hermes.send(msg);
+    else alert(msg);
+  });
+
+  /* ---- XMB demo ---- */
+  const games = [
+    ['CT', 'Chrono Trigger · SNES', '#1c3a5e'], ['MF', 'Metroid Fusion · GBA', '#5e1c2a'],
+    ['OOT', 'Ocarina of Time · N64', '#1e5e3a'], ['SH', 'Silent Hill · PS1', '#3a3a44'],
+    ['M3', 'Mario Kart DS · NDS', '#5e4a1c'], ['P3', 'Persona 3 · PSP', '#4a1c5e']
+  ];
+  let xi = 0;
+  const xmbRow = document.getElementById('xmbRow');
+  const xmbCap = document.getElementById('xmbCap');
+  games.forEach((g, i) => {
+    const d = document.createElement('div');
+    d.className = 'xmb-it'; d.textContent = g[0]; d.title = g[1];
+    d.style.background = `linear-gradient(160deg, ${g[2]}, #0c1420)`;
+    d.addEventListener('click', () => { xi = i; xdraw(); });
+    xmbRow.appendChild(d);
+  });
+  function xdraw() {
+    [...xmbRow.children].forEach((el, i) => el.classList.toggle('on', i === xi));
+    xmbCap.textContent = games[xi][1] + ' — ready';
+  }
+  document.getElementById('xmbPrev').onclick = () => { xi = (xi + games.length - 1) % games.length; xdraw(); };
+  document.getElementById('xmbNext').onclick = () => { xi = (xi + 1) % games.length; xdraw(); };
+  document.getElementById('xmbPlay').onclick = () => { xmbCap.textContent = '▶ ' + games[xi][1] + ' — booting…'; };
+  xdraw();
+
+  /* ---- Coverflow demo ---- */
+  const flowRow = document.getElementById('flowRow');
+  const flowCap = document.getElementById('flowCap');
+  const tiles = [
+    ['FFVII', 'Final Fantasy VII', '#233a6e'], ['SOTN', 'Symphony of Night', '#5e233a'],
+    ['MGS', 'Metal Gear Solid', '#2a4a2a'], ['CT', 'Chrono Trigger', '#6e5a23'],
+    ['RE2', 'Resident Evil 2', '#3a3a3a']
+  ];
+  let fi = 2;
+  tiles.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'fcard'; d.innerHTML = `${t[0]}<small>${t[1].split(' ')[0]}</small>`;
+    d.style.background = `linear-gradient(165deg, ${t[2]}, #0b0b0e)`;
+    d.addEventListener('click', () => { fi = i; fdraw(); });
+    flowRow.appendChild(d);
+  });
+  function fdraw() {
+    [...flowRow.children].forEach((el, i) => {
+      const off = i - fi;
+      el.className = 'fcard ' + (off === 0 ? 'c0' : off === -1 ? 'l1' : off === -2 ? 'l2' : off === 1 ? 'r1' : 'r2');
+    });
+    flowCap.textContent = tiles[fi][1] + ' — tap ▶ in the real app to play';
+  }
+  fdraw();
+
+  /* ---- Noir grid demo ---- */
+  const noirGrid = document.getElementById('noirGrid');
+  ['GB', 'GBA', 'NES', 'SNES', 'N64', 'PS1', 'PSP', 'DS'].forEach(s => {
+    const d = document.createElement('div');
+    d.className = 'ncard'; d.textContent = s;
+    d.addEventListener('click', () => {
+      noirGrid.querySelectorAll('.ncard').forEach(x => { x.classList.remove('play'); x.textContent = x.dataset.s; });
+      d.dataset.s = d.textContent; d.classList.add('play'); d.textContent = '▶';
+    });
+    d.dataset.s = s;
+    noirGrid.appendChild(d);
+  });
+
+  render();
+</script>
+</body>
+</html>
