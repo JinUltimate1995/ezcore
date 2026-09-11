@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE setups — pick a direction</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#08090c;color:#eef1f6;-webkit-font-smoothing:antialiased;padding:48px 28px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+.k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#8b93a7}
+h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;font-weight:600;margin:8px 0}
+h1 span{color:#7170ff}
+.sub{color:#8a8f98;max-width:64ch;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:32px}
+a.card{display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:22px;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.card .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:#62666d}
+.card h2{font-size:20px;font-weight:600;letter-spacing:-.01em;margin:8px 0 4px}
+.card p{color:#8a8f98;font-size:14px}
+.card .go{margin-top:12px;font-size:13px;color:#828fff;font-weight:500}
+.note{margin-top:28px;color:#62666d;font-size:13px}
+.note a{color:#828fff}
+code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,.05);padding:2px 6px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="k">EZCORE · MOONBOARD SETUPS · V1</div>
+  <h1>Seven directions<span>.</span></h1>
+  <p class="sub">Full setups for the ezCORE brand board — each a complete page in a different design language. Served locally; open any card. The original brainstorm board still lives at <code>design/moonboard/index.html</code>.</p>
+  <div class="grid">
+    <a class="card" href="linear-ops/"><div class="n">01 · LINEAR</div><h2>Ops Deck</h2><p>Ultra-minimal dark. Command palette, library table, core manager. Density without noise.</p><div class="go">Open →</div></a>
+    <a class="card" href="stripe-editorial/"><div class="n">02 · STRIPE</div><h2>Editorial</h2><p>Light, whisper-weight headlines, blue-tinted shadows. The premium publisher take.</p><div class="go">Open →</div></a>
+    <a class="card" href="raycast-command/"><div class="n">03 · RAYCAST</div><h2>Command Bar</h2><p>Type-to-play launcher, keycap hints, extension grid. Keyboard-first chrome.</p><div class="go">Open →</div></a>
+    <a class="card" href="spotify-shelf/"><div class="n">04 · SPOTIFY</div><h2>Cover Shelf</h2><p>Shelves, continue-playing rail, now-playing bar. The collection as jukebox.</p><div class="go">Open →</div></a>
+    <a class="card" href="notion-field/"><div class="n">05 · NOTION</div><h2>Field Catalog</h2><p>Warm minimal catalog with table/board views. Calm, reading-first library.</p><div class="go">Open →</div></a>
+    <a class="card" href="xai-terminal/"><div class="n">06 · TERMINAL</div><h2>Core Console</h2><p>Stark monochrome monospace. Boot log, live status, command line. Zero chrome.</p><div class="go">Open →</div></a>
+    <a class="card" href="p5-kinetic/"><div class="n">07 · P5 KINETIC</div><h2>Particle Arcade</h2><p>Generative particle field + kinetic type. The living poster direction.</p><div class="go">Open →</div></a>
+  </div>
+  <p class="note">Built from loaded skills: popular-web-designs · claude-design · p5js · design-md · sketch · moonboard-design-system. <a href="../">← back to the moonboard</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE — Cover Shelf</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#121212;color:#fff;-webkit-font-smoothing:antialiased}
+.app{display:flex;min-height:100vh}
+aside{width:230px;flex:none;background:#121212;padding:22px 14px;display:flex;flex-direction:column;gap:4px;border-right:1px solid #1f1f1f}
+.logo{display:flex;gap:10px;align-items:center;font-weight:700;font-size:17px;padding:0 10px 20px}
+.nitem{display:flex;gap:12px;align-items:center;padding:9px 12px;border-radius:6px;color:#b3b3b3;font-size:14px;font-weight:600;cursor:pointer;border:0;background:none;width:100%;text-align:left;font-family:inherit}
+.nitem.on{color:#fff;background:#1f1f1f}
+.nitem:hover{color:#fff}
+.nsec{color:#b3b3b3;font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:16px 12px 6px}
+main{flex:1;background:linear-gradient(#1c2b1f,#121212 420px);padding:26px 30px 130px;min-width:0}
+.search{display:flex;align-items:center;gap:10px;background:#1f1f1f;border-radius:500px;padding:11px 20px;max-width:380px;box-shadow:rgb(18,18,18) 0 1px 0,rgb(124,124,124) 0 0 0 1px inset}
+.search input{background:none;border:0;outline:0;color:#fff;font-family:inherit;font-size:14px;width:100%}
+.search input::placeholder{color:#b3b3b3}
+h1{font-size:24px;font-weight:700;margin:26px 0 4px}
+.dim{color:#b3b3b3;font-size:14px}
+h2{font-size:18px;font-weight:600;margin:28px 0 14px}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px}
+.tile{background:#181818;border-radius:8px;padding:14px;cursor:pointer;transition:background .15s}
+.tile:hover{background:#252525}
+.cover{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:rgba(255,255,255,.92);box-shadow:rgba(0,0,0,.3) 0 8px 8px;position:relative}
+.cover .p{position:absolute;right:8px;bottom:8px;width:44px;height:44px;border-radius:50%;background:#1ed760;color:#000;border:0;font-size:17px;font-weight:700;cursor:pointer;opacity:0;transform:translateY(6px);transition:all .15s;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.tile:hover .p{opacity:1;transform:none}
+.tile h3{font-size:14px;font-weight:700;margin:12px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile p{font-size:12px;color:#b3b3b3}
+.nowbar{position:fixed;left:230px;right:0;bottom:0;background:#181818;border-top:1px solid #252525;padding:12px 24px;display:flex;align-items:center;gap:16px;box-shadow:rgba(0,0,0,.5) 0 8px 24px}
+.np-cover{width:52px;height:52px;border-radius:6px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700}
+.np-t{font-size:13px;font-weight:700}
+.np-s{font-size:11px;color:#b3b3b3}
+.np-ctl{margin-left:auto;display:flex;gap:10px;align-items:center}
+.round{width:44px;height:44px;border-radius:50%;border:0;background:#1ed760;color:#000;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+.ghostb{background:#1f1f1f;color:#fff;border:0;border-radius:9999px;padding:8px 18px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;cursor:pointer;font-family:inherit}
+.prog{flex:1;max-width:340px;height:4px;border-radius:2px;background:#4d4d4d;position:relative;cursor:pointer}
+.prog i{position:absolute;left:0;top:0;bottom:0;width:32%;border-radius:2px;background:#1ed760}
+@media(max-width:800px){aside{display:none}.nowbar{left:0}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="logo"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#1ed760"/><path d="M8.5 7.5 L14 11 L8.5 14.5 Z" fill="#000"/></svg>ezCORE</div>
+    <button class="nitem on" type="button">⌂&nbsp; Home</button>
+    <button class="nitem" type="button">⌕&nbsp; Search</button>
+    <button class="nitem" type="button">▤&nbsp; Your Library</button>
+    <div class="nsec">Systems</div>
+    <button class="nitem sys" data-s="all" type="button">✦&nbsp; All systems</button>
+    <button class="nitem sys" data-s="snes" type="button">▸&nbsp; Super Nintendo</button>
+    <button class="nitem sys" data-s="gba" type="button">▸&nbsp; Game Boy Advance</button>
+    <button class="nitem sys" data-s="psx" type="button">▸&nbsp; PlayStation</button>
+    <button class="nitem sys" data-s="gc" type="button">▸&nbsp; GameCube</button>
+    <div class="nsec">Legal</div>
+    <div class="nitem" style="cursor:default">♡&nbsp; BYOD — your dumps only</div>
+  </aside>
+  <main>
+    <div class="search">⌕<input id="q" type="text" placeholder="What do you want to play?" autocomplete="off"></div>
+    <h1>Good evening</h1>
+    <p class="dim">Three games are waiting where you left them.</p>
+    <h2>Continue playing</h2>
+    <div class="shelf" id="shelf"></div>
+    <h2>Freshly synced saves</h2>
+    <div class="shelf" id="shelf2"></div>
+  </main>
+</div>
+<div class="nowbar">
+  <div class="np-cover" id="npc" style="background:#1c3a5e">CT</div>
+  <div><div class="np-t" id="npt">Chrono Trigger</div><div class="np-s" id="nps">SNES · snes9x · paused</div></div>
+  <div class="np-ctl">
+    <div class="prog" id="prog"><i id="progi"></i></div>
+    <button class="ghostb" type="button" id="states">States (2)</button>
+    <button class="round" type="button" id="bigplay">▶</button>
+  </div>
+</div>
+<script>
+const games=[
+ {t:'Chrono Trigger',s:'snes',c:'#1c3a5e',a:'CT',sub:'SNES · snes9x',p:32},
+ {t:'Metroid Fusion',s:'gba',c:'#5e1c2a',a:'MF',sub:'GBA · mGBA · ★',p:94},
+ {t:'Silent Hill',s:'psx',c:'#3a3a44',a:'SH',sub:'PS1 · swanstation',p:12},
+ {t:'Wind Waker',s:'gc',c:'#1e5e3a',a:'WW',sub:'GC · dolphin',p:61},
+ {t:'FF Tactics',s:'psx',c:'#4a1c5e',a:'FFT',sub:'PS1 · swanstation',p:48},
+ {t:'Golden Sun',s:'gba',c:'#6e5a23',a:'GS',sub:'GBA · mGBA',p:77}];
+const shelf=document.getElementById('shelf'),shelf2=document.getElementById('shelf2'),q=document.getElementById('q');
+let sys='all',playing=false,cur=games[0],prog=32;
+function tile(g){return `<div class="tile" data-t="${g.t}"><div class="cover" style="background:linear-gradient(150deg,${g.c},#101010)">${g.a}<button class="p" data-p="${g.t}" type="button">▶</button></div><h3>${g.t}</h3><p>${g.sub}</p></div>`}
+function draw(){const f=q.value.toLowerCase();const list=games.filter(g=>(sys==='all'||g.s===sys)&&g.t.toLowerCase().includes(f));shelf.innerHTML=list.map(tile).join('')||'<p class="dim">No games match. Import a folder to grow the shelf.</p>';shelf2.innerHTML=games.slice().reverse().slice(0,3).map(tile).join('')}
+function setNow(g,play){cur=g;document.getElementById('npc').textContent=g.a;document.getElementById('npc').style.background=g.c;document.getElementById('npt').textContent=g.t;playing=!!play;sync()}
+function sync(){document.getElementById('nps').textContent=g_toSub();document.getElementById('bigplay').textContent=playing?'❚❚':'▶';document.getElementById('progi').style.width=prog+'%'}
+function g_toSub(){return cur.sub+(playing?' · playing':' · paused')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(!b)return;e.stopPropagation();const g=games.find(x=>x.t===b.dataset.p);prog=g.p;setNow(g,true)});
+document.getElementById('bigplay').onclick=()=>{playing=!playing;sync()};
+document.getElementById('states').onclick=e=>{e.target.textContent='States ('+(2+((Math.random()*2)|0))+') · synced ✓';setTimeout(()=>e.target.textContent='States (2)',1600)};
+document.getElementById('prog').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();prog=Math.round((e.clientX-r.left)/r.width*100);sync()};
+q.addEventListener('input',draw);
+document.querySelectorAll('.sys').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sys').forEach(x=>x.classList.remove('on'));b.classList.add('on');sys=b.dataset.s;draw()});
+document.querySelector('.sys').classList.add('on');draw();sync();
+</script>
+</body>
+</html>

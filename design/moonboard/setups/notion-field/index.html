@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE — Field Catalog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f7f5f2;color:#1a1c1e;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 28px 90px}
+nav{display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid #e8e2d8}
+.mark{font-family:'Source Serif 4',Georgia,serif;font-weight:650;font-size:20px;display:flex;gap:10px;align-items:center}
+nav span.l{color:#6c7278;font-size:14px}
+nav .sp{flex:1}
+.view{display:flex;gap:6px;background:#efece6;border-radius:8px;padding:3px}
+.view button{border:0;background:none;font-family:inherit;font-size:13px;font-weight:500;color:#6c7278;border-radius:6px;padding:6px 14px;cursor:pointer}
+.view button.on{background:#fff;color:#1a1c1e;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+header{padding:56px 0 10px}
+h1{font-family:'Source Serif 4',Georgia,serif;font-weight:650;font-size:52px;letter-spacing:-.02em;line-height:1.05}
+header p{color:#6c7278;font-size:17px;margin-top:12px;max-width:60ch}
+.chips{display:flex;gap:8px;margin:26px 0 6px;flex-wrap:wrap}
+.chip{border:1px solid #ddd6c9;background:#fff;border-radius:99px;padding:6px 15px;font-size:13px;font-weight:500;color:#6c7278;cursor:pointer;font-family:inherit}
+.chip.on{background:#1a1c1e;color:#f7f5f2;border-color:#1a1c1e}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;background:#fff;border:1px solid #e8e2d8;border-radius:10px;overflow:hidden}
+th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;padding:12px 16px;border-bottom:1px solid #e8e2d8;background:#faf8f4}
+td{padding:13px 16px;border-bottom:1px solid #f0ece4}
+tr:last-child td{border-bottom:0}
+td.t{font-weight:600}
+td .m{color:#9aa0a6;font-size:12px;font-family:'JetBrains Mono',ui-monospace,monospace}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;background:#eef4ec;color:#2e7d32}
+.pill.warn{background:#fdf3e3;color:#9b6829}
+.board{display:none;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.board.on{display:grid}
+.bcol{background:#efece6;border-radius:10px;padding:12px}
+.bcol h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;margin-bottom:10px}
+.bcard{background:#fff;border:1px solid #e8e2d8;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer}
+.bcard:hover{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.bcard b{font-size:14px}
+.bcard p{font-size:12px;color:#6c7278;margin-top:4px}
+.playrow{display:flex;gap:10px;margin-top:26px;align-items:center;background:#1a1c1e;color:#f7f5f2;border-radius:12px;padding:18px 22px}
+.playrow .big{font-family:'Source Serif 4',Georgia,serif;font-size:20px}
+.playbtn{margin-left:auto;background:#f7f5f2;color:#1a1c1e;border:0;border-radius:8px;padding:12px 26px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+footer{margin-top:60px;color:#9aa0a6;font-size:13px;display:flex;justify-content:space-between;border-top:1px solid #e8e2d8;padding-top:20px}
+@media(max-width:760px){.board.on{grid-template-columns:1fr}h1{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="mark">◧ ezCORE</span><span class="l">Library</span><span class="l">Cores</span><span class="l">Cheats</span>
+    <span class="sp"></span>
+    <div class="view"><button type="button" id="vT" class="on">Table</button><button type="button" id="vB">Board</button></div>
+  </nav>
+  <header>
+    <h1>A calm shelf for loud games.</h1>
+    <p>Your library as a readable catalog. Filter by system, flip between table and board, press play. The emulator stays out of the sentence.</p>
+  </header>
+  <div class="chips" id="chips"></div>
+  <table id="tbl"><tr><th>Title</th><th>System</th><th>Core</th><th>Status</th><th>Last played</th></tr></table>
+  <div class="board" id="brd"></div>
+  <div class="playrow"><span class="big" id="pt">Metroid Fusion — ready.</span><button class="playbtn" type="button" id="play">▶ Play</button></div>
+  <footer><span>ezCORE · setups/notion-field</span><span>warm paper · serif voice · database views</span></footer>
+</div>
+<script>
+const games=[
+ {t:'Chrono Trigger',sys:'SNES',core:'snes9x 1.63',st:['ready',''],last:'2h ago'},
+ {t:'Metroid Fusion',sys:'GBA',core:'mgba 0.11',st:['ready',''],last:'last night'},
+ {t:'Silent Hill',sys:'PS1',core:'swanstation 1.0',st:['needs BIOS','warn'],last:'—'},
+ {t:'Wind Waker',sys:'GC',core:'dolphin rolling',st:['ready',''],last:'3d ago'},
+ {t:'Ocarina of Time',sys:'N64',core:'mupen64plus 2.8',st:['ready',''],last:'1w ago'},
+ {t:'Mario Kart DS',sys:'NDS',core:'melonDS 0.9.3',st:['ready',''],last:'2w ago'}];
+const systems=['All','SNES','GBA','PS1','GC','N64','NDS'];
+let sys='All',view='table',cur=games[1];
+const chips=document.getElementById('chips'),tbl=document.getElementById('tbl'),brd=document.getElementById('brd');
+chips.innerHTML=systems.map(s=>`<button type="button" class="chip${s===sys?' on':''}" data-s="${s}">${s}</button>`).join('');
+chips.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;sys=b.dataset.s;chips.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));draw()};
+function rows(){return games.filter(g=>sys==='All'||g.sys===sys)}
+function draw(){
+ const list=rows();
+ tbl.querySelectorAll('tr.d').forEach(r=>r.remove());
+ brd.innerHTML='';
+ list.forEach(g=>{
+  const tr=document.createElement('tr');tr.className='d';
+  tr.innerHTML=`<td class="t">${g.t}<br><span class="m">${g.t.toLowerCase().replace(/[^a-z]+/g,'')}.rom</span></td><td>${g.sys}</td><td><span class="m">${g.core}</span></td><td><span class="pill ${g.st[1]}">${g.st[0]}</span></td><td>${g.last}</td>`;
+  tr.style.cursor='pointer';tr.onclick=()=>pick(g);tbl.appendChild(tr);
+  const c=document.createElement('div');c.className='bcol';
+ });
+ const cols=[['Now playing',list.slice(0,2)],['Up next',list.slice(2,4)],['Backlog',list.slice(4)]];
+ cols.forEach(([h,items])=>{const c=document.createElement('div');c.className='bcol';c.innerHTML=`<h4>${h}</h4>`;items.forEach(g=>{const d=document.createElement('div');d.className='bcard';d.innerHTML=`<b>${g.t}</b><p>${g.sys} · ${g.core}</p>`;d.onclick=()=>pick(g);c.appendChild(d)});brd.appendChild(c)});
+ tbl.style.display=view==='table'?'':'none';brd.classList.toggle('on',view==='board');
+}
+function pick(g){cur=g;document.getElementById('pt').textContent=`${g.t} — ${g.st[0]}.`}
+document.getElementById('vT').onclick=e=>{view='table';vT.classList.add('on');vB.classList.remove('on');draw()};
+document.getElementById('vB').onclick=e=>{view='board';vB.classList.add('on');vT.classList.remove('on');draw()};
+document.getElementById('play').onclick=e=>{e.target.textContent='▶ Booting…';document.getElementById('pt').textContent=`${cur.t} — first frame incoming.`;setTimeout(()=>e.target.textContent='▶ Play',1500)};
+draw();
+</script>
+</body>
+</html>

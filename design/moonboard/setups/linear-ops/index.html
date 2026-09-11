@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE — Linear Ops Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"cv01","ss03";background:#08090a;color:#f7f8f8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px}
+nav{display:flex;align-items:center;gap:26px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;background:rgba(8,9,10,.85);backdrop-filter:blur(10px);z-index:5}
+.mark{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
+.mark svg{display:block}
+nav a.nl{color:#d0d6e0;text-decoration:none;font-size:13px;font-weight:500}
+nav a.nl:hover{color:#f7f8f8}
+.kbd{margin-left:auto;display:flex;gap:10px;align-items:center}
+.cmdk{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 12px;cursor:pointer}
+.cmdk:hover{color:#f7f8f8;border-color:rgba(255,255,255,.2)}
+.cta{background:#5e6ad2;color:#fff;border:0;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.cta:hover{background:#828fff}
+.hero{text-align:center;padding:84px 0 54px}
+.pill{display:inline-block;font-size:12px;font-weight:500;color:#d0d6e0;border:1px solid #23252a;border-radius:9999px;padding:3px 12px;margin-bottom:22px}
+.pill b{color:#828fff;font-weight:500}
+h1{font-size:64px;font-weight:500;letter-spacing:-1.408px;line-height:1}
+.hero p{color:#8a8f98;font-size:18px;font-weight:300;margin:20px auto 0;max-width:560px;line-height:1.6}
+.hero .row{margin-top:28px;display:flex;gap:12px;justify-content:center}
+.ghost{background:rgba(255,255,255,.02);color:#e2e4e7;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px 16px;font-size:14px;cursor:pointer;font-family:inherit}
+.tabs{display:flex;gap:6px;margin:10px 0 18px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:0}
+.tabs button{background:none;border:0;color:#8a8f98;font-family:inherit;font-size:13px;font-weight:500;padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent}
+.tabs button.on{color:#f7f8f8;border-color:#7170ff}
+.panel{display:none}
+.panel.on{display:block}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11px;font-weight:500;color:#62666d;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+td{padding:12px;border-bottom:1px solid #141516;color:#d0d6e0}
+td:first-child{color:#f7f8f8;font-weight:500}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:8px}
+.dot.warn{background:#7170ff}
+.card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+h3{font-size:20px;font-weight:600;letter-spacing:-.24px;margin-bottom:6px}
+.mut{color:#8a8f98;font-size:15px;font-weight:300}
+.type{font-size:48px;font-weight:500;letter-spacing:-1.056px;margin:6px 0}
+.palette{display:flex;gap:8px;margin-top:14px}
+.sw{flex:1;height:46px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
+footer{margin-top:70px;padding-top:22px;border-top:1px solid rgba(255,255,255,.05);color:#62666d;font-size:12px;display:flex;justify-content:space-between}
+#pal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:50}
+#pal.open{display:flex}
+.palbox{width:min(560px,92vw);background:#191a1b;border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);overflow:hidden}
+.palbox input{width:100%;background:transparent;border:0;outline:0;color:#f7f8f8;font-size:16px;font-family:inherit;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.prow{padding:11px 18px;font-size:13px;color:#d0d6e0;display:flex;justify-content:space-between;cursor:pointer}
+.prow small{color:#62666d;font-family:'JetBrains Mono',monospace;font-size:11px}
+.prow.sel,.prow:hover{background:rgba(113,112,255,.12)}
+@media(max-width:700px){h1{font-size:40px;letter-spacing:-.8px}.grid2{grid-template-columns:1fr}nav a.nl{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="mark"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="4" fill="#5e6ad2"/><path d="M7.5 6.5 L12 10 L7.5 13.5 Z" fill="#fff"/></svg>ezCORE</span>
+    <a class="nl" href="#lib">Library</a><a class="nl" href="#cores">Cores</a><a class="nl" href="#type">Type</a>
+    <span class="kbd"><button class="cmdk" id="kbtn" type="button">⌘K&nbsp;&nbsp;play anything</button><button class="cta" type="button">Get ezCORE</button></span>
+  </nav>
+
+  <div class="hero">
+    <span class="pill">v0.1 · <b>18 cores</b> · macOS / Windows / iOS / Android</span>
+    <h1>Game → Play.</h1>
+    <p>One library, every system. ezCORE picks the core, loads your dump, and puts the first frame up before you finish reading this sentence.</p>
+    <div class="row"><button class="cta" type="button">Start playing</button><button class="ghost" type="button" id="ghost">Open command bar</button></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button type="button" class="on" data-t="lib">Library</button>
+    <button type="button" data-t="cores">Cores</button>
+    <button type="button" data-t="type">Type &amp; tokens</button>
+  </div>
+
+  <div class="panel on" id="p-lib">
+    <table>
+      <tr><th>TITLE</th><th>SYSTEM</th><th>CORE</th><th>STATUS</th><th>LAST PLAYED</th></tr>
+      <tr><td>Chrono Trigger</td><td class="mono">snes</td><td class="mono">snes9x 1.63</td><td><span class="dot"></span>ready</td><td class="mono">2h ago</td></tr>
+      <tr><td>Metroid Fusion</td><td class="mono">gba</td><td class="mono">mgba 0.11</td><td><span class="dot"></span>ready</td><td class="mono">last night</td></tr>
+      <tr><td>Silent Hill</td><td class="mono">psx</td><td class="mono">swanstation 1.0</td><td><span class="dot warn"></span>needs BIOS</td><td class="mono">—</td></tr>
+      <tr><td>Wind Waker</td><td class="mono">gc</td><td class="mono">dolphin rolling</td><td><span class="dot"></span>ready</td><td class="mono">3d ago</td></tr>
+      <tr><td>Elite (DOS)</td><td class="mono">dos</td><td class="mono">dosbox-pure</td><td><span class="dot"></span>ready</td><td class="mono">1w ago</td></tr>
+    </table>
+  </div>
+
+  <div class="panel" id="p-cores">
+    <div class="grid2">
+      <div class="card"><h3>Modular cores</h3><p class="mut">Install, update, remove. Pinned SHA per artifact, signed registry. Nothing ships a ROM, BIOS, or key — ever.</p><p class="mono" style="margin-top:10px">sameboy 1.0.3 · gambatte · mgba · snes9x · … +13 more</p></div>
+      <div class="card"><h3>Cheats, states, sync</h3><p class="mut">Per-game cheat profiles, slot-0 autosave on backgrounding, and a save-sync seam (local today, iCloud/OneDrive tomorrow).</p><p class="mono" style="margin-top:10px">SaveSyncProvider · slot/n.bin · sha-pinned</p></div>
+    </div>
+  </div>
+
+  <div class="panel" id="p-type">
+    <div class="type">Inter, engineered.</div>
+    <p class="mut">Display 48/510/−1.056 · Body 16/400 · Mono labels in JetBrains Mono 12. One accent: <span class="mono" style="color:#828fff">#7170ff</span>. Surfaces step luminance, never color.</p>
+    <div class="palette"><div class="sw" style="background:#08090a"></div><div class="sw" style="background:#0f1011"></div><div class="sw" style="background:#191a1b"></div><div class="sw" style="background:#5e6ad2"></div><div class="sw" style="background:#7170ff"></div></div>
+  </div>
+
+  <footer><span>ezCORE · setups/linear-ops</span><span class="mono">ABI v1 · 23 tests green</span></footer>
+</div>
+
+<div id="pal" role="dialog" aria-label="command palette">
+  <div class="palbox">
+    <input id="pin" type="text" placeholder="Type a game or action…" autocomplete="off">
+    <div id="pres"></div>
+  </div>
+</div>
+<script>
+const rows=[["▶ Chrono Trigger","snes · snes9x"],["▶ Metroid Fusion","gba · mgba"],["▶ Silent Hill","psx · swanstation"],["▶ Wind Waker","gc · dolphin"],["＋ Install core…","registry"],["⤓ Check core updates","3 available"],["⌘ Open settings","video · audio · input"]];
+const pal=document.getElementById('pal'),pin=document.getElementById('pin'),pres=document.getElementById('pres');
+function draw(f){pres.innerHTML=rows.filter(r=>r[0].toLowerCase().includes(f)).map((r,i)=>`<div class="prow${i===0?' sel':''}"><span>${r[0]}</span><small>${r[1]}</small></div>`).join('')||'<div class="prow"><span>No match</span><small>esc</small></div>'}
+function open(){pal.classList.add('open');pin.value='';draw('');setTimeout(()=>pin.focus(),30)}
+function shut(){pal.classList.remove('open')}
+document.getElementById('kbtn').onclick=open;document.getElementById('ghost').onclick=open;
+pal.addEventListener('click',e=>{if(e.target===pal)shut()});
+pin.addEventListener('input',()=>draw(pin.value.toLowerCase()));
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('open')?shut():open()}if(e.key==='Escape')shut()});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById('p-'+b.dataset.t).classList.add('on')});
+</script>
+</body>
+</html>

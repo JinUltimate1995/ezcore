@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE — Stripe Editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;font-feature-settings:"ss01";background:#fff;color:#061b31;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px}
+nav{display:flex;align-items:center;gap:28px;padding:18px 24px;position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);z-index:5;border-radius:0 0 6px 6px}
+.mark{font-weight:600;font-size:17px;display:flex;gap:9px;align-items:center}
+nav a{color:#061b31;text-decoration:none;font-size:14px;font-weight:400}
+nav .sp{flex:1}
+.btn{background:#533afd;color:#fff;border:0;border-radius:4px;padding:8px 16px;font-size:16px;font-family:inherit;cursor:pointer}
+.btn:hover{background:#4434d4}
+.btn.ghost{background:transparent;color:#533afd;border:1px solid #b9b9f9}
+.btn.ghost:hover{background:rgba(83,58,253,.05)}
+.hero{text-align:center;padding:96px 0 60px}
+.hero h1{font-size:56px;font-weight:300;letter-spacing:-1.4px;line-height:1.03}
+.hero h1 em{font-style:normal;color:#533afd}
+.hero p{font-size:18px;font-weight:300;color:#64748d;margin:22px auto 0;max-width:600px;line-height:1.4}
+.hero .row{margin-top:30px;display:flex;gap:12px;justify-content:center}
+h2.sec{font-size:32px;font-weight:300;letter-spacing:-.64px;margin:70px 0 8px}
+p.lede{font-size:18px;font-weight:300;color:#64748d;max-width:640px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.card{background:#fff;border:1px solid #e5edf5;border-radius:6px;padding:26px;box-shadow:rgba(50,50,93,.25) 0 30px 45px -30px,rgba(0,0,0,.1) 0 18px 36px -18px}
+.card h3{font-size:22px;font-weight:300;letter-spacing:-.22px;margin-bottom:8px}
+.card p{font-size:16px;font-weight:300;color:#64748d}
+.mono{font-family:'Source Code Pro',monospace;font-size:12px;font-weight:500}
+.badge{display:inline-block;background:rgba(21,190,83,.2);color:#108c3d;border:1px solid rgba(21,190,83,.4);border-radius:4px;font-size:10px;font-weight:300;padding:1px 6px;margin-bottom:12px}
+.swatches{display:flex;gap:8px;margin-top:14px}
+.sw{flex:1;height:52px;border-radius:4px;border:1px solid #e5edf5}
+.dark{background:#1c1e54;color:#fff;border-radius:8px;padding:44px;margin-top:70px}
+.dark h2{font-size:32px;font-weight:300;letter-spacing:-.64px}
+.dark p{color:rgba(255,255,255,.7);font-size:16px;font-weight:300;margin-top:10px;max-width:620px}
+.corerow{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:14px 18px;margin-top:12px;font-size:15px}
+.corerow .mono{color:rgba(255,255,255,.65)}
+.corerow:first-of-type{margin-top:24px}
+footer{margin-top:70px;color:#64748d;font-size:14px;font-weight:300;display:flex;justify-content:space-between;border-top:1px solid #e5edf5;padding-top:22px}
+@media(max-width:760px){.hero h1{font-size:36px}.grid3{grid-template-columns:1fr}nav a{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="mark"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="1" y="1" width="18" height="18" rx="4" fill="#533afd"/><path d="M7 6.5 L12.5 10 L7 13.5 Z" fill="#fff"/></svg>ezCORE</span>
+    <a href="#collection">Collection</a><a href="#cores">Cores</a><a href="#type">Typography</a>
+    <span class="sp"></span><button class="btn" type="button">Start now</button>
+  </nav>
+
+  <div class="hero">
+    <h1>Every game you own,<br><em>one quiet shelf.</em></h1>
+    <p>ezCORE is the emulator that disappears. Eighteen systems, one library, zero configuration — your collection, presented like a publisher would.</p>
+    <div class="row"><button class="btn" type="button">Start now</button><button class="btn ghost" type="button">Browse the collection</button></div>
+  </div>
+
+  <h2 class="sec" id="collection">The collection</h2>
+  <p class="lede">Cover-first, text-second. Each card carries its system, core, and last-played moment — nothing else competes for attention.</p>
+  <div class="grid3">
+    <div class="card"><span class="badge">CONTINUE · 94%</span><h3>Metroid Fusion</h3><p>Game Boy Advance · mGBA 0.11<br>Last played last night · slot 2</p><p class="mono" style="margin-top:12px;color:#2874ad">fusion.gba · 60fps · 2 cheats on</p></div>
+    <div class="card"><span class="badge">NEW SAVE</span><h3>Chrono Trigger</h3><p>Super Nintendo · Snes9x 1.63<br>Millennial Fair, first visit</p><p class="mono" style="margin-top:12px;color:#2874ad">chrono.sfc · integer scale · CRT-lite</p></div>
+    <div class="card"><span class="badge">FAVORITE</span><h3>Wind Waker</h3><p>GameCube · Dolphin rolling<br>Outset Island · 12h 40m</p><p class="mono" style="margin-top:12px;color:#2874ad">windwaker.iso · 2× IR · widescreen</p></div>
+  </div>
+
+  <div class="dark" id="cores">
+    <h2> Eighteen cores. One registry.</h2>
+    <p>Signed, sha-pinned, removable. Desktop and Android fetch on demand; iOS bundles at build time. No ROMs, BIOS, or keys ship — or are linked — anywhere.</p>
+    <div class="corerow"><span>SameBoy 1.0.3 · mGBA 0.11 · Gambatte</span><span class="mono">MIT · MPL-2.0 · GPL-2.0</span></div>
+    <div class="corerow"><span>Snes9x 1.63 · Mesen 0.9.9 · Genesis Plus GX 1.7.4</span><span class="mono">custom-NC · GPL-3.0 · custom-NC</span></div>
+    <div class="corerow"><span>SwanStation 1.0 · melonDS 0.9.3 · PPSSPP 1.17</span><span class="mono">GPL-3.0 · GPL-3.0 · GPL-2.0+</span></div>
+    <div class="corerow"><span>Dolphin rolling · Flycast · Beetle Saturn · FBNeo</span><span class="mono">GPL-2.0+ · GPL-2.0 · GPL-2.0 · custom-NC</span></div>
+  </div>
+
+  <h2 class="sec" id="type">Typography, whispered</h2>
+  <p class="lede">Source Sans 3 at weight 300 for headlines and body. Deep navy <span class="mono">#061b31</span> instead of black. Purple <span class="mono">#533afd</span> only where fingers go.</p>
+
+  <footer><span>ezCORE · setups/stripe-editorial</span><span class="mono">ss01 · tnum · 4–8px radii</span></footer>
+</div>
+</body>
+</html>

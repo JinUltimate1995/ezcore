@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezCORE — Raycast Command</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"calt","kern","liga","ss03";background:#07080a;color:#f9f9f9;-webkit-font-smoothing:antialiased;letter-spacing:.2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px}
+nav{display:flex;align-items:center;gap:26px;padding:18px 0;position:sticky;top:0;background:rgba(7,8,10,.9);backdrop-filter:blur(10px);z-index:5;border-bottom:1px solid hsl(195,5%,15%)}
+.mark{display:flex;gap:9px;align-items:center;font-weight:600;font-size:15px}
+nav a{color:#9c9c9d;text-decoration:none;font-size:16px;font-weight:500}
+nav a:hover{color:#fff;text-decoration:underline}
+.pillbtn{margin-left:auto;background:hsla(0,0%,100%,.815);color:#18191a;border:0;border-radius:86px;padding:10px 22px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;font-family:inherit}
+.pillbtn:hover{background:#fff}
+.hero{text-align:center;padding:70px 0 30px;position:relative}
+.stripe{position:absolute;top:24px;left:50%;transform:translateX(-50%) rotate(-8deg);width:340px;height:14px;background:repeating-linear-gradient(-55deg,#FF6363 0 18px,transparent 18px 36px);opacity:.5;border-radius:4px}
+.hero h1{font-size:64px;font-weight:600;line-height:1.1;letter-spacing:0}
+.hero p{color:#cecece;font-size:18px;margin-top:16px}
+.cmd{max-width:620px;margin:34px auto 0;background:#101111;border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:rgb(27,28,30) 0 0 0 1px,rgb(7,8,10) 0 0 0 1px inset,rgba(0,0,0,.5) 0 0 0 2px,rgba(255,255,255,.19) 0 0 14px;overflow:hidden;text-align:left}
+.cmd input{width:100%;background:transparent;border:0;outline:0;color:#f9f9f9;font-size:16px;font-weight:500;font-family:inherit;padding:18px 20px;letter-spacing:.2px}
+.cmd input::placeholder{color:#6a6b6c}
+.rrow{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;color:#cecece;cursor:pointer}
+.rrow small{margin-left:auto;font-family:'Geist Mono',monospace;font-size:12px;color:#6a6b6c}
+.rrow.sel{background:hsla(202,100%,67%,.15)}
+.ric{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex:none}
+.keys{display:flex;gap:10px;justify-content:center;margin-top:22px;align-items:center;color:#6a6b6c;font-size:13px}
+.key{background:linear-gradient(#121212,#0d0d0d);border-radius:5px;padding:5px 11px;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:#f9f9f9;box-shadow:rgba(0,0,0,.4) 0 1.5px .5px 2.5px,rgba(255,255,255,.08) 0 1px 0 inset}
+h2{font-size:24px;font-weight:500;margin:64px 0 6px}
+.sub{color:#9c9c9d;font-size:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.card{background:#101111;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;box-shadow:rgb(27,28,30) 0 0 0 1px,rgb(7,8,10) 0 0 0 1px inset}
+.card h3{font-size:22px;font-weight:400;margin-bottom:8px}
+.card p{color:#9c9c9d;font-size:16px;line-height:1.6}
+.card .mono{font-family:'Geist Mono',monospace;font-size:12px;color:#55b3ff;margin-top:12px;letter-spacing:.2px}
+footer{margin-top:70px;color:#6a6b6c;font-size:12px;display:flex;justify-content:space-between;border-top:1px solid #2f3031;padding-top:20px}
+@media(max-width:760px){.hero h1{font-size:40px}.grid3{grid-template-columns:1fr}nav a{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="mark"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="1" y="1" width="18" height="18" rx="5" fill="#FF6363"/><path d="M7 6.5 L12.5 10 L7 13.5 Z" fill="#07080a"/></svg>ezCORE</span>
+    <a href="#play">Play</a><a href="#ext">Cores</a><a href="#keys">Shortcuts</a>
+    <button class="pillbtn" type="button">Download</button>
+  </nav>
+
+  <div class="hero" id="play">
+    <div class="stripe"></div>
+    <h1>Type it. Play it.</h1>
+    <p>ezCORE is a launcher before it is a library. Every game, core, cheat and setting is one keystroke away.</p>
+    <div class="cmd">
+      <input id="in" type="text" placeholder="ezcore ›  play chrono…" autocomplete="off">
+      <div id="res"></div>
+    </div>
+    <div class="keys"><span class="key">⌘</span><span class="key">K</span><span>to summon</span><span class="key">↵</span><span>to play</span><span class="key">esc</span><span>to vanish</span></div>
+  </div>
+
+  <h2 id="ext">Cores are extensions</h2>
+  <p class="sub">Install what you play. Everything else stays out of the way.</p>
+  <div class="grid3">
+    <div class="card"><h3>mGBA 0.11</h3><p>Game Boy Advance in an afternoon-flat package. Save states, cheats, link-cable-ready timing.</p><div class="mono">MPL-2.0 · 3.0 MB · ✓ installed</div></div>
+    <div class="card"><h3>SwanStation 1.0</h3><p>PlayStation with OpenBIOS fallback — most discs boot with zero BIOS hunting.</p><div class="mono">GPL-3.0 · on demand</div></div>
+    <div class="card"><h3>melonDS 0.9.3</h3><p>Dual-screen DS with touch mapping that respects your thumbs.</p><div class="mono">GPL-3.0 · on demand</div></div>
+    <div class="card"><h3>Dolphin <span style="color:#FF6363">●</span></h3><p>GameCube/Wii for desktop-class machines. The heavyweight, honestly labeled.</p><div class="mono">GPL-2.0+ · desktop only</div></div>
+    <div class="card"><h3>PPSSPP 1.17</h3><p>PSP at full speed with interpreter fallback where JIT is forbidden.</p><div class="mono">GPL-2.0+ · on demand</div></div>
+    <div class="card"><h3>+ 13 more</h3><p>SameBoy to FBNeo, each sha-pinned and removable in one keystroke.</p><div class="mono">signed registry · SBOM</div></div>
+  </div>
+
+  <footer><span>ezCORE · setups/raycast-command</span><span>opacity hovers · double-ring cards · red punctuates</span></footer>
+</div>
+<script>
+const items=[["▶ Play Chrono Trigger","snes · snes9x · 2h ago","#5e6ad2"],["▶ Play Metroid Fusion","gba · mgba · favorite","#27a644"],["▶ Play Wind Waker","gc · dolphin","#55b3ff"],["＋ Install melonDS core","registry · GPL-3.0","#9c9c9d"],["⤓ Update 3 cores","swanstation · ppsspp · mesen","#ffbc33"],["⚙ Toggle integer scaling","video","#9c9c9d"],["⌘ Open cheat profiles","2 on · fusion","#FF6363"]];
+const input=document.getElementById('in'),res=document.getElementById('res');
+function draw(f){const m=items.filter(r=>r[0].toLowerCase().includes(f));res.innerHTML=m.map((r,i)=>`<div class="rrow${i===0?' sel':''}"><span class="ric" style="background:${r[2]}">${r[0].charAt(0)}</span><span>${r[0]}</span><small>${r[1]}</small></div>`).join('')||'<div class="rrow"><span>Nothing found</span><small>esc</small></div>'}
+input.addEventListener('input',()=>draw(input.value.toLowerCase()));
+input.addEventListener('keydown',e=>{if(e.key==='Enter'){const t=res.querySelector('.sel span:nth-child(2)');if(t)t.textContent='▶ Booting… (demo)'}});
+draw('');
+</script>
+</body>
+</html>
