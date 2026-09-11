@@ -1,0 +1,5 @@
+/Users/jinultimate/Projects/Mobile/universal-emulator/bridge/build/CMakeFiles/huh_bridge.dir
+/Users/jinultimate/Projects/Mobile/universal-emulator/bridge/build/CMakeFiles/test_abi.dir
+/Users/jinultimate/Projects/Mobile/universal-emulator/bridge/build/CMakeFiles/test.dir
+/Users/jinultimate/Projects/Mobile/universal-emulator/bridge/build/CMakeFiles/edit_cache.dir
+/Users/jinultimate/Projects/Mobile/universal-emulator/bridge/build/CMakeFiles/rebuild_cache.dir
