@@ -3,62 +3,106 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ezCORE — core console</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<title>ezCORE — infrastructure for play</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#000;color:#fff;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
-pre.logo{font-size:11px;line-height:1.35;color:#fff;margin:18px 0 6px}
-.dim{color:#666}.mid{color:#aaa}.ok{color:#fff}.inv{color:#000;background:#fff;padding:0 6px}
-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13px}
-td{padding:5px 10px 5px 0;vertical-align:top}
-td:last-child{text-align:right;color:#aaa;white-space:nowrap}
-.bar{color:#333}
-#out{margin-top:8px;min-height:120px}
+body{background:#1f2228;color:#fff;font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px 96px}
+nav{display:flex;align-items:center;gap:24px;padding:20px 0}
+.brand{font-family:'Geist Mono',monospace;font-size:14px;letter-spacing:1.4px;color:#fff;text-decoration:none}
+nav a.l{color:#fff;text-decoration:none;font-size:14px}
+nav a.l:hover{color:rgba(255,255,255,.5)}
+nav .sp{flex:1}
+.btn{font-family:'Geist Mono',monospace;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;background:#fff;color:#1f2228;border:0;border-radius:0;padding:12px 24px;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.9)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}
+.btn.ghost:hover{background:rgba(255,255,255,.05)}
+.hero{text-align:center;padding:96px 0 72px}
+.tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);padding:4px 8px;color:#fff;margin-bottom:48px}
+h1{font-family:'Geist Mono',monospace;font-weight:300;font-size:clamp(56px,13vw,190px);line-height:1;letter-spacing:0}
+.hero p{color:rgba(255,255,255,.7);font-size:18px;max-width:600px;margin:32px auto 0}
+.hero .row{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:0;padding:32px 24px}
+.card:hover{border-color:rgba(255,255,255,.2)}
+.card h2{font-size:30px;font-weight:400;line-height:1.2}
+.card p{color:rgba(255,255,255,.7);margin-top:12px}
+.card .mono{font-size:12px;color:rgba(255,255,255,.5);margin-top:20px;display:block;letter-spacing:1px;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;margin-top:48px;font-size:14px}
+td{padding:12px 8px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}
+td.c{font-family:'Geist Mono',monospace;font-size:13px}
+td:last-child{text-align:right;color:rgba(255,255,255,.5);white-space:nowrap}
+tr:hover td{background:rgba(255,255,255,.03)}
+.console{margin-top:72px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03)}
+.console .bar{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between}
+#out{padding:16px;font-family:'Geist Mono',monospace;font-size:13px;line-height:1.8;min-height:150px}
 #out div{white-space:pre-wrap;word-break:break-word}
-.cmdline{display:flex;gap:10px;margin-top:6px;align-items:baseline}
-.prompt{color:#fff;font-weight:700}
-#cmd{background:none;border:0;outline:0;color:#fff;font-family:inherit;font-size:14px;flex:1;caret-color:#fff}
-.hint{margin-top:34px;color:#555;font-size:12px}
-.hint b{color:#aaa}
-footer{margin-top:50px;color:#444;font-size:12px;display:flex;justify-content:space-between}
-.blink{animation:bl 1.1s steps(1) infinite}@keyframes bl{50%{opacity:0}}
-@media(max-width:640px){body{font-size:12px}}
+.cmdline{display:flex;gap:12px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.1);align-items:baseline}
+.prompt{font-family:'Geist Mono',monospace;font-weight:500}
+#cmd{background:transparent;border:0;outline:0;color:#fff;font-family:'Geist Mono',monospace;font-size:14px;flex:1;caret-color:#fff}
+#cmd:focus-visible{outline:2px solid rgb(59,130,246)}
+.tokens{margin-top:72px;display:flex;gap:8px;flex-wrap:wrap}
+.tokens span{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);padding:4px 8px;color:rgba(255,255,255,.7)}
+footer{margin-top:72px;color:rgba(255,255,255,.3);font-size:12px;display:flex;justify-content:space-between}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}.hero{padding:48px 0}nav a.l{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="dim">ezCORE v0.1.0 — core console · <span id="clock">--:--:--</span> · <span class="ok">●</span> runtime ok</div>
-<pre class="logo" id="asciilogo"></pre>
-  <div class="mid">18 cores · 0 roms shipped · 0 keys · BYOD only</div>
-  <table id="statustbl"></table>
-  <div id="out" aria-live="polite"></div>
-  <div class="cmdline"><span class="prompt">ezcore&gt;</span><input id="cmd" type="text" placeholder="type 'help'…" autocomplete="off" spellcheck="false"><span class="blink">▊</span></div>
-  <div class="hint"><b>commands:</b> help · list · systems · play &lt;id&gt; · core &lt;id&gt; · cheats &lt;id&gt; · status · clear</div>
-  <footer><span>ezCORE · setups/xai-terminal</span><span>monospace · monochrome · no chrome</span></footer>
+  <nav>
+    <a class="brand" href="#">EZCORE</a>
+    <a class="l" href="#cores">Cores</a><a class="l" href="#console">Console</a><a class="l" href="#policy">Policy</a>
+    <span class="sp"></span><button class="btn" type="button">Download</button>
+  </nav>
+
+  <div class="hero">
+    <span class="tag">v0.1 · 18 cores · BYOD only</span>
+    <h1>ezCORE</h1>
+    <p>Infrastructure for play. Eighteen emulator cores behind one stable runtime — no ROMs, no BIOS, no keys. Your dumps, one command away.</p>
+    <div class="row"><button class="btn" type="button" id="ctaPlay">Play now</button><button class="btn ghost" type="button" id="ctaCores">Browse cores</button></div>
+  </div>
+
+  <div class="grid2" id="cores">
+    <div class="card"><h2>One runtime, every system.</h2><p>Flutter UI talks to a small C ABI. The runtime owns lifecycle, frames, saves, cheats, and core selection. Cores are replaceable versioned artifacts — swap one without touching the frontend.</p><span class="mono">ABI v1 · 23 tests green</span></div>
+    <div class="card"><h2>Saves that survive you.</h2><p>Slot-0 autosave on backgrounding, opaque state bytes, and a sync seam: local vault today, iCloud and OneDrive tomorrow. Providers plug in; cores never change.</p><span class="mono">SaveSyncProvider · slot/n.bin</span></div>
+  </div>
+
+  <table>
+    <tr><td class="c">sameboy 1.0.3</td><td>Game Boy / Color · the reference-feel core</td><td>MIT · SHA-PINNED</td></tr>
+    <tr><td class="c">mgba 0.11</td><td>Game Boy Advance · states, cheats, link timing</td><td>MPL-2.0 · SHA-PINNED</td></tr>
+    <tr><td class="c">snes9x 1.63</td><td>Super Nintendo · balanced accuracy</td><td>CUSTOM-NC · SHA-PINNED</td></tr>
+    <tr><td class="c">swanstation 1.0</td><td>PlayStation · OpenBIOS fallback, zero BIOS hunting</td><td>GPL-3.0 · ON DEMAND</td></tr>
+    <tr><td class="c">melonds 0.9.3</td><td>Nintendo DS · touch mapping that respects thumbs</td><td>GPL-3.0 · ON DEMAND</td></tr>
+    <tr><td class="c">dolphin rolling</td><td>GameCube / Wii · desktop-class only, honestly labeled</td><td>GPL-2.0+ · DESKTOP</td></tr>
+  </table>
+
+  <div class="console" id="console">
+    <div class="bar"><span>core console — live</span><span id="clock">--:--:--</span></div>
+    <div id="out" aria-live="polite"></div>
+    <div class="cmdline"><span class="prompt">ezcore&gt;</span><input id="cmd" type="text" placeholder="type 'help'…" autocomplete="off" spellcheck="false"></div>
+  </div>
+
+  <div class="tokens" id="policy">
+    <span>#1F2228</span><span>Geist Mono 300</span><span>0px radius</span><span>no shadows</span><span>hover dims</span><span>3DS · Switch · PS2 — hold</span>
+  </div>
+
+  <footer><span class="mono">EZCORE · SETUPS/XAI-TERMINAL</span><span>monospace is the brand</span></footer>
 </div>
 <script>
-document.getElementById('asciilogo').textContent =
-"  ___ _______  ___  ____  _____ \n | __|_  / _ \\/ __|/ _ \\| __|\n | _| / / (_) | (__| (_) | _|  \n |___/___\\___/ \\___|\\___/|___|  v0.1";
-const cores=[["sameboy","1.0.3","gb/gbc","MIT"],["gambatte","0.5.0","gb/gbc","GPL-2.0"],["mgba","0.11","gba","MPL-2.0"],["snes9x","1.63","snes","custom-NC"],["mesen","0.9.9","nes","GPL-3.0"],["genesis_plus_gx","1.7.4","gen/sms","custom-NC"],["swanstation","1.0.0","psx","GPL-3.0"],["melonds","0.9.3","nds","GPL-3.0"],["ppsspp","1.17+git","psp","GPL-2.0+"],["flycast","2.2+git","dc","GPL-2.0"],["dolphin","rolling","gc/wii","GPL-2.0+"],["mupen64plus","2.8","n64","GPL-2.0"]];
+const cores=[["sameboy","1.0.3","gb/gbc","MIT"],["gambatte","0.5.0","gb/gbc","GPL-2.0"],["mgba","0.11","gba","MPL-2.0"],["snes9x","1.63","snes","CUSTOM-NC"],["mesen","0.9.9","nes","GPL-3.0"],["genesis_plus_gx","1.7.4","gen/sms","CUSTOM-NC"],["swanstation","1.0","psx","GPL-3.0"],["melonds","0.9.3","nds","GPL-3.0"],["ppsspp","1.17","psp","GPL-2.0+"],["flycast","2.2","dc","GPL-2.0"],["dolphin","rolling","gc/wii","GPL-2.0+"],["mupen64plus","2.8","n64","GPL-2.0"]];
 const games=[["ct","Chrono Trigger","snes","snes9x"],["mf","Metroid Fusion","gba","mgba"],["sh","Silent Hill","psx","swanstation"],["ww","Wind Waker","gc","dolphin"]];
-document.getElementById('statustbl').innerHTML =
- `<tr><td class="dim">CORES</td><td>18 staged · 17 pinned · 1 building</td></tr>`+
- `<tr><td class="dim">RUNTIME</td><td>ABI v1 · 23 tests green</td></tr>`+
- `<tr><td class="dim">SAVES</td><td>local vault · sync seam ready</td></tr>`+
- `<tr><td class="dim">POLICY</td><td>3ds / switch / ps2 — legal hold</td></tr>`;
 const out=document.getElementById('out'),cmd=document.getElementById('cmd');
-function say(t){const d=document.createElement('div');d.textContent=t;out.appendChild(d);out.scrollIntoView({block:'end'})}
+function say(t){const d=document.createElement('div');d.textContent=t;out.appendChild(d)}
 function run(raw){
- const[a,...rest]=raw.trim().split(/\s+/);const arg=(rest.join(' ')||'').toLowerCase();
+ const[a,...rest]=(raw.trim()||' ').split(/\s+/);const arg=(rest.join(' ')||'').toLowerCase();
  say('ezcore> '+raw.trim());
- if(!a)return;
  if(a==='help')say('help · list · systems · play <id> · core <id> · cheats <id> · status · clear');
  else if(a==='list')games.forEach(g=>say(` ${g[0].padEnd(4)} ${g[1].padEnd(18)} ${g[2].padEnd(5)} ${g[3]}`));
  else if(a==='systems')say('gb gbc gba nes snes genesis sms gg pce psx n64 nds psp dc gc saturn arcade scumm dos 2600');
- else if(a==='core'){const c=cores.find(x=>x[0]===arg);say(c?`${c[0]} ${c[1]} · ${c[2]} · ${c[3]} · sha-pinned ✓`:`unknown core '${arg}'. try: list`)}
- else if(a==='cheats'){say(arg==='mf'?'mf · 2 on: [Infinite Energy] [Moon Jump]':'no cheats filed for this game yet. press A to add.')}
+ else if(a==='core'){const c=cores.find(x=>x[0]===arg);say(c?`${c[0]} ${c[1]} · ${c[2]} · ${c[3]} · sha-pinned OK`:`unknown core '${arg}'. try: list`)}
+ else if(a==='cheats')say(arg==='mf'?'mf · 2 on: [Infinite Energy] [Moon Jump]':'no cheats filed for this game yet.');
  else if(a==='play'){const g=games.find(x=>x[0]===arg||x[1].toLowerCase().includes(arg));say(g?`booting ${g[1]} … first frame in 0.4s (demo)`:`unknown game '${arg}'. try: list`)}
  else if(a==='status')say('17/17 staged cores identify · saves local · sync: none configured');
  else if(a==='clear')out.innerHTML='';
@@ -67,7 +111,8 @@ function run(raw){
 cmd.addEventListener('keydown',e=>{if(e.key==='Enter'){run(cmd.value);cmd.value=''}});
 setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-GB')},1000);
 say('core console ready. 17 cores staged. type: list');
-setTimeout(()=>cmd.focus(),400);
+document.getElementById('ctaPlay').onclick=()=>{document.getElementById('console').scrollIntoView({behavior:'smooth'});cmd.focus()};
+document.getElementById('ctaCores').onclick=()=>{document.getElementById('cores').scrollIntoView({behavior:'smooth'})};
 </script>
 </body>
 </html>

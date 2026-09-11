@@ -23,8 +23,8 @@ h1{font-size:24px;font-weight:700;margin:26px 0 4px}
 .dim{color:#b3b3b3;font-size:14px}
 h2{font-size:18px;font-weight:600;margin:28px 0 14px}
 .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px}
-.tile{background:#181818;border-radius:8px;padding:14px;cursor:pointer;transition:background .15s}
-.tile:hover{background:#252525}
+.tile{background:#181818;border-radius:8px;padding:14px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s}
+.tile:hover{background:#252525;box-shadow:rgba(0,0,0,.3) 0 8px 8px;transform:translateY(-2px)}
 .cover{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:rgba(255,255,255,.92);box-shadow:rgba(0,0,0,.3) 0 8px 8px;position:relative}
 .cover .p{position:absolute;right:8px;bottom:8px;width:44px;height:44px;border-radius:50%;background:#1ed760;color:#000;border:0;font-size:17px;font-weight:700;cursor:pointer;opacity:0;transform:translateY(6px);transition:all .15s;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .tile:hover .p{opacity:1;transform:none}
@@ -99,6 +99,7 @@ document.getElementById('prog').onclick=e=>{const r=e.currentTarget.getBoundingC
 q.addEventListener('input',draw);
 document.querySelectorAll('.sys').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sys').forEach(x=>x.classList.remove('on'));b.classList.add('on');sys=b.dataset.s;draw()});
 document.querySelector('.sys').classList.add('on');draw();sync();
+setInterval(()=>{if(playing){prog=(prog+1)%100;document.getElementById('progi').style.width=prog+'%'}},1000);
 </script>
 </body>
 </html>

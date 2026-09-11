@@ -13,27 +13,28 @@ nav{display:flex;align-items:center;gap:26px;padding:18px 0;position:sticky;top:
 .mark{display:flex;gap:9px;align-items:center;font-weight:600;font-size:15px}
 nav a{color:#9c9c9d;text-decoration:none;font-size:16px;font-weight:500}
 nav a:hover{color:#fff;text-decoration:underline}
-.pillbtn{margin-left:auto;background:hsla(0,0%,100%,.815);color:#18191a;border:0;border-radius:86px;padding:10px 22px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;font-family:inherit}
-.pillbtn:hover{background:#fff}
-.hero{text-align:center;padding:70px 0 30px;position:relative}
+.pillbtn{margin-left:auto;background:hsla(0,0%,100%,.815);color:#18191a;border:0;border-radius:86px;padding:10px 22px;font-size:16px;font-weight:600;letter-spacing:.3px;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.pillbtn:hover{opacity:.6}
+.hero{text-align:center;padding:80px 0 40px;position:relative}
+.hero::before{content:"";position:absolute;left:50%;top:40px;transform:translateX(-50%);width:min(680px,90%);height:340px;background:radial-gradient(closest-side,rgba(215,201,175,.06),transparent);pointer-events:none}
 .stripe{position:absolute;top:24px;left:50%;transform:translateX(-50%) rotate(-8deg);width:340px;height:14px;background:repeating-linear-gradient(-55deg,#FF6363 0 18px,transparent 18px 36px);opacity:.5;border-radius:4px}
-.hero h1{font-size:64px;font-weight:600;line-height:1.1;letter-spacing:0}
-.hero p{color:#cecece;font-size:18px;margin-top:16px}
+.hero h1{font-size:64px;font-weight:600;line-height:1.1;letter-spacing:0;font-feature-settings:"liga" 0,"ss02","ss08"}
+.hero p{color:#cecece;font-size:18px;font-weight:400;line-height:1.15;letter-spacing:.2px;margin-top:16px}
 .cmd{max-width:620px;margin:34px auto 0;background:#101111;border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:rgb(27,28,30) 0 0 0 1px,rgb(7,8,10) 0 0 0 1px inset,rgba(0,0,0,.5) 0 0 0 2px,rgba(255,255,255,.19) 0 0 14px;overflow:hidden;text-align:left}
 .cmd input{width:100%;background:transparent;border:0;outline:0;color:#f9f9f9;font-size:16px;font-weight:500;font-family:inherit;padding:18px 20px;letter-spacing:.2px}
 .cmd input::placeholder{color:#6a6b6c}
-.rrow{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;color:#cecece;cursor:pointer}
+.rrow{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:14px;font-weight:500;color:#cecece;cursor:pointer}
 .rrow small{margin-left:auto;font-family:'Geist Mono',monospace;font-size:12px;color:#6a6b6c}
 .rrow.sel{background:hsla(202,100%,67%,.15)}
 .ric{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex:none}
 .keys{display:flex;gap:10px;justify-content:center;margin-top:22px;align-items:center;color:#6a6b6c;font-size:13px}
-.key{background:linear-gradient(#121212,#0d0d0d);border-radius:5px;padding:5px 11px;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:#f9f9f9;box-shadow:rgba(0,0,0,.4) 0 1.5px .5px 2.5px,rgba(255,255,255,.08) 0 1px 0 inset}
-h2{font-size:24px;font-weight:500;margin:64px 0 6px}
-.sub{color:#9c9c9d;font-size:16px}
+.key{background:linear-gradient(#121212,#0d0d0d);border-radius:4px;padding:5px 11px;font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:#f9f9f9;box-shadow:rgba(0,0,0,.4) 0 1.5px .5px 2.5px,rgba(255,255,255,.08) 0 1px 0 inset,rgba(0,0,0,.2) 0 -1px 0 inset}
+h2{font-size:24px;font-weight:500;letter-spacing:.2px;margin:80px 0 6px}
+.sub{color:#9c9c9d;font-size:16px;font-weight:500;line-height:1.6;letter-spacing:.2px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
 .card{background:#101111;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;box-shadow:rgb(27,28,30) 0 0 0 1px,rgb(7,8,10) 0 0 0 1px inset}
 .card h3{font-size:22px;font-weight:400;margin-bottom:8px}
-.card p{color:#9c9c9d;font-size:16px;line-height:1.6}
+.card p{color:#9c9c9d;font-size:16px;font-weight:500;line-height:1.6;letter-spacing:.2px}
 .card .mono{font-family:'Geist Mono',monospace;font-size:12px;color:#55b3ff;margin-top:12px;letter-spacing:.2px}
 footer{margin-top:70px;color:#6a6b6c;font-size:12px;display:flex;justify-content:space-between;border-top:1px solid #2f3031;padding-top:20px}
 @media(max-width:760px){.hero h1{font-size:40px}.grid3{grid-template-columns:1fr}nav a{display:none}}

@@ -3,97 +3,151 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ezCORE — Field Catalog</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&display=swap" rel="stylesheet">
+<title>ezCORE — your library, organized</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:#f7f5f2;color:#1a1c1e;-webkit-font-smoothing:antialiased}
-.wrap{max-width:980px;margin:0 auto;padding:0 28px 90px}
-nav{display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid #e8e2d8}
-.mark{font-family:'Source Serif 4',Georgia,serif;font-weight:650;font-size:20px;display:flex;gap:10px;align-items:center}
-nav span.l{color:#6c7278;font-size:14px}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;color:rgba(0,0,0,.95);background:#fff;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px 96px}
+nav{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1200px;margin:0 auto}
+.mark{font-weight:700;font-size:17px;display:flex;gap:9px;align-items:center}
+nav a.nl{color:rgba(0,0,0,.95);text-decoration:none;font-size:15px;font-weight:500}
+nav a.nl:hover{color:#0075de}
 nav .sp{flex:1}
-.view{display:flex;gap:6px;background:#efece6;border-radius:8px;padding:3px}
-.view button{border:0;background:none;font-family:inherit;font-size:13px;font-weight:500;color:#6c7278;border-radius:6px;padding:6px 14px;cursor:pointer}
-.view button.on{background:#fff;color:#1a1c1e;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-header{padding:56px 0 10px}
-h1{font-family:'Source Serif 4',Georgia,serif;font-weight:650;font-size:52px;letter-spacing:-.02em;line-height:1.05}
-header p{color:#6c7278;font-size:17px;margin-top:12px;max-width:60ch}
-.chips{display:flex;gap:8px;margin:26px 0 6px;flex-wrap:wrap}
-.chip{border:1px solid #ddd6c9;background:#fff;border-radius:99px;padding:6px 15px;font-size:13px;font-weight:500;color:#6c7278;cursor:pointer;font-family:inherit}
-.chip.on{background:#1a1c1e;color:#f7f5f2;border-color:#1a1c1e}
-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;background:#fff;border:1px solid #e8e2d8;border-radius:10px;overflow:hidden}
-th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;padding:12px 16px;border-bottom:1px solid #e8e2d8;background:#faf8f4}
-td{padding:13px 16px;border-bottom:1px solid #f0ece4}
-tr:last-child td{border-bottom:0}
+.btn{background:#0075de;color:#fff;border:1px solid transparent;border-radius:4px;padding:8px 16px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer}
+.btn:hover{background:#005bab}
+.btn:active{transform:scale(.9)}
+.btn.sec{background:rgba(0,0,0,.05);color:#000}
+.btn.sec:hover{background:rgba(0,0,0,.08)}
+.btn.sec:active{transform:scale(.9)}
+.btn:focus-visible{outline:2px solid #097fe8;outline-offset:2px}
+.hero{text-align:left;padding:110px 0 80px;max-width:800px}
+.badge{display:inline-block;background:#f2f9ff;color:#097fe8;border-radius:9999px;padding:4px 8px;font-size:12px;font-weight:600;letter-spacing:.125px;margin-bottom:20px}
+h1{font-size:64px;font-weight:700;line-height:1;letter-spacing:-2.125px;font-feature-settings:"lnum","locl"}
+.hero p{font-size:20px;font-weight:600;line-height:1.4;letter-spacing:-.125px;color:#615d59;margin:24px 0 32px;max-width:620px}
+.hero .row{display:flex;gap:12px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 96px}
+.metric{border:1px solid rgba(0,0,0,.1);border-radius:12px;padding:28px;box-shadow:rgba(0,0,0,.04) 0 4px 18px,rgba(0,0,0,.027) 0 2.025px 7.84688px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.01) 0 .175px 1.04062px}
+.metric b{font-size:40px;font-weight:700;display:block}
+.metric span{color:#615d59;font-size:16px}
+h2.sec{font-size:48px;font-weight:700;line-height:1;letter-spacing:-1.5px;font-feature-settings:"lnum";margin-bottom:12px}
+p.lede{font-size:16px;color:#615d59;max-width:640px}
+.alt{background:#f6f5f4;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);margin:96px -24px 0;padding:80px 24px}
+.altinner{max-width:1152px;margin:0 auto}
+.toolbar{display:flex;gap:8px;align-items:center;margin:28px 0 16px;flex-wrap:wrap}
+.view{display:flex;gap:4px;border:1px solid rgba(0,0,0,.1);border-radius:4px;padding:2px;background:#fff}
+.view button{border:0;background:none;font-family:inherit;font-size:14px;font-weight:500;color:#615d59;border-radius:4px;padding:6px 14px;cursor:pointer}
+.view button.on{background:rgba(0,0,0,.05);color:#000}
+.fbtn{border:1px solid rgba(0,0,0,.1);background:#fff;border-radius:9999px;padding:4px 12px;font-size:12px;font-weight:600;letter-spacing:.125px;color:#615d59;cursor:pointer;font-family:inherit}
+.fbtn.on{background:rgba(0,0,0,.95);color:#fff;border-color:rgba(0,0,0,.95)}
+table.lib{width:100%;border-collapse:collapse;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:12px;overflow:hidden;font-size:16px;box-shadow:rgba(0,0,0,.04) 0 4px 18px,rgba(0,0,0,.027) 0 2.025px 7.84688px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.01) 0 .175px 1.04062px}
+table.lib th{text-align:left;font-size:12px;font-weight:600;letter-spacing:.125px;color:#a39e98;padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.1);background:#fff}
+table.lib td{padding:14px 16px;border-bottom:1px solid rgba(0,0,0,.1)}
+table.lib tr:last-child td{border-bottom:0}
+table.lib tr.d{cursor:pointer}
+table.lib tr.d:hover{background:#f6f5f4}
 td.t{font-weight:600}
-td .m{color:#9aa0a6;font-size:12px;font-family:'JetBrains Mono',ui-monospace,monospace}
-.pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;background:#eef4ec;color:#2e7d32}
-.pill.warn{background:#fdf3e3;color:#9b6829}
-.board{display:none;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.pillok{display:inline-block;background:#f2f9ff;color:#097fe8;border-radius:9999px;padding:4px 8px;font-size:12px;font-weight:600;letter-spacing:.125px}
+.pillwarn{display:inline-block;background:#fdf3e3;color:#9b6829;border-radius:9999px;padding:4px 8px;font-size:12px;font-weight:600;letter-spacing:.125px}
+.board{display:none;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px}
 .board.on{display:grid}
-.bcol{background:#efece6;border-radius:10px;padding:12px}
-.bcol h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;margin-bottom:10px}
-.bcard{background:#fff;border:1px solid #e8e2d8;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer}
-.bcard:hover{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.bcol{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:12px;padding:14px;box-shadow:rgba(0,0,0,.04) 0 4px 18px,rgba(0,0,0,.027) 0 2.025px 7.84688px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.01) 0 .175px 1.04062px}
+.bcol h4{font-size:12px;font-weight:600;letter-spacing:.125px;color:#a39e98;margin-bottom:12px;text-transform:uppercase}
+.bcard{border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;background:#fff}
+.bcard:hover{border-color:#0075de}
 .bcard b{font-size:14px}
-.bcard p{font-size:12px;color:#6c7278;margin-top:4px}
-.playrow{display:flex;gap:10px;margin-top:26px;align-items:center;background:#1a1c1e;color:#f7f5f2;border-radius:12px;padding:18px 22px}
-.playrow .big{font-family:'Source Serif 4',Georgia,serif;font-size:20px}
-.playbtn{margin-left:auto;background:#f7f5f2;color:#1a1c1e;border:0;border-radius:8px;padding:12px 26px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
-footer{margin-top:60px;color:#9aa0a6;font-size:13px;display:flex;justify-content:space-between;border-top:1px solid #e8e2d8;padding-top:20px}
-@media(max-width:760px){.board.on{grid-template-columns:1fr}h1{font-size:36px}}
+.bcard p{font-size:12px;color:#615d59;margin-top:4px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.fcard{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:12px;padding:28px;box-shadow:rgba(0,0,0,.04) 0 4px 18px,rgba(0,0,0,.027) 0 2.025px 7.84688px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.01) 0 .175px 1.04062px}
+.fcard h3{font-size:22px;font-weight:700;letter-spacing:-.25px;margin-bottom:10px}
+.fcard p{font-size:16px;color:#615d59}
+.fcard a{color:#0075de;font-size:14px;font-weight:500;text-decoration:none}
+.fcard a:hover{text-decoration:underline}
+.cta{margin-top:96px;text-align:center;padding:80px 24px;border:1px solid rgba(0,0,0,.1);border-radius:16px;background:#fff;box-shadow:rgba(0,0,0,.01) 0 1px 3px,rgba(0,0,0,.02) 0 3px 7px,rgba(0,0,0,.02) 0 7px 15px,rgba(0,0,0,.04) 0 14px 28px,rgba(0,0,0,.05) 0 23px 52px}
+.cta h2{font-size:48px;font-weight:700;letter-spacing:-1.5px;line-height:1}
+.cta p{color:#615d59;font-size:20px;font-weight:600;margin:16px 0 28px}
+footer{margin-top:80px;color:#a39e98;font-size:14px;display:flex;justify-content:space-between;border-top:1px solid rgba(0,0,0,.1);padding-top:24px}
+@media(max-width:800px){h1{font-size:40px;letter-spacing:-1.2px}h2.sec,.cta h2{font-size:32px;letter-spacing:-.8px}.metrics,.cards3{grid-template-columns:1fr}.board.on{grid-template-columns:1fr}nav a.nl{display:none}}
 </style>
 </head>
 <body>
+<nav>
+  <span class="mark"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="1" y="1" width="20" height="20" rx="4" fill="rgba(0,0,0,.95)"/><path d="M7 7.5 L13 11 L7 14.5 Z" fill="#fff"/></svg>ezCORE</span>
+  <a class="nl" href="#library">Library</a><a class="nl" href="#cores">Cores</a><a class="nl" href="#policy">Policy</a>
+  <span class="sp"></span><button class="btn sec" type="button">Log in</button><button class="btn" type="button">Get ezCORE free</button>
+</nav>
 <div class="wrap">
-  <nav>
-    <span class="mark">◧ ezCORE</span><span class="l">Library</span><span class="l">Cores</span><span class="l">Cheats</span>
-    <span class="sp"></span>
+  <div class="hero">
+    <span class="badge">New · 18 cores staged</span>
+    <h1>Your library,<br>organized.</h1>
+    <p>Every game you own in one calm database. Filter by system, flip between table and board, press play. The emulator stays out of the sentence.</p>
+    <div class="row"><button class="btn" type="button" id="heroPlay">Get ezCORE free</button><button class="btn sec" type="button" id="heroBrowse">Browse the library ↓</button></div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><b>18</b><span>systems behind one runtime</span></div>
+    <div class="metric"><b>23</b><span>ABI tests green, every build</span></div>
+    <div class="metric"><b>0</b><span>ROMs, BIOS, or keys shipped</span></div>
+  </div>
+
+  <h2 class="sec" id="library">One database.<br>Every game.</h2>
+  <p class="lede">Views, filters, and favorites — the same primitives as your notes, pointed at your collection. <a href="#" style="color:#0075de" onclick="return false">How importing works →</a></p>
+  <div class="toolbar">
     <div class="view"><button type="button" id="vT" class="on">Table</button><button type="button" id="vB">Board</button></div>
-  </nav>
-  <header>
-    <h1>A calm shelf for loud games.</h1>
-    <p>Your library as a readable catalog. Filter by system, flip between table and board, press play. The emulator stays out of the sentence.</p>
-  </header>
-  <div class="chips" id="chips"></div>
-  <table id="tbl"><tr><th>Title</th><th>System</th><th>Core</th><th>Status</th><th>Last played</th></tr></table>
+    <span id="fchips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+  </div>
+  <table class="lib" id="tbl"><tr><th>TITLE</th><th>SYSTEM</th><th>CORE</th><th>STATUS</th><th>LAST PLAYED</th></tr></table>
   <div class="board" id="brd"></div>
-  <div class="playrow"><span class="big" id="pt">Metroid Fusion — ready.</span><button class="playbtn" type="button" id="play">▶ Play</button></div>
-  <footer><span>ezCORE · setups/notion-field</span><span>warm paper · serif voice · database views</span></footer>
+
+  <div class="alt"><div class="altinner">
+    <h2 class="sec" id="cores">Cores are pages.<br>Duplicate, remix, remove.</h2>
+    <p class="lede">Each core is a versioned, signed page in the registry. Install what you play; archive the rest.</p>
+    <div class="cards3">
+      <div class="fcard"><h3>mGBA 0.11</h3><p>Game Boy Advance with save states, cheats, and link-cable timing.</p><p style="margin-top:14px"><a href="#" onclick="return false">Install →</a></p></div>
+      <div class="fcard"><h3>SwanStation 1.0</h3><p>PlayStation with OpenBIOS fallback — most discs boot with zero BIOS hunting.</p><p style="margin-top:14px"><a href="#" onclick="return false">Install →</a></p></div>
+      <div class="fcard"><h3>melonDS 0.9.3</h3><p>Dual-screen DS with touch mapping that respects your thumbs.</p><p style="margin-top:14px"><a href="#" onclick="return false">Install →</a></p></div>
+    </div>
+  </div></div>
+
+  <div class="cta" id="policy">
+    <h2>Game → Play.</h2>
+    <p>Free and open source. Your dumps stay yours; 3DS, Switch and PS2 stay on legal hold.</p>
+    <button class="btn" type="button" id="ctaPlay">▶&nbsp; Start playing</button>
+  </div>
+
+  <footer><span>ezCORE · setups/notion-field</span><span>whisper borders · 4px CTAs · lnum</span></footer>
 </div>
 <script>
 const games=[
- {t:'Chrono Trigger',sys:'SNES',core:'snes9x 1.63',st:['ready',''],last:'2h ago'},
- {t:'Metroid Fusion',sys:'GBA',core:'mgba 0.11',st:['ready',''],last:'last night'},
- {t:'Silent Hill',sys:'PS1',core:'swanstation 1.0',st:['needs BIOS','warn'],last:'—'},
- {t:'Wind Waker',sys:'GC',core:'dolphin rolling',st:['ready',''],last:'3d ago'},
- {t:'Ocarina of Time',sys:'N64',core:'mupen64plus 2.8',st:['ready',''],last:'1w ago'},
- {t:'Mario Kart DS',sys:'NDS',core:'melonDS 0.9.3',st:['ready',''],last:'2w ago'}];
+ {t:'Chrono Trigger',sys:'SNES',core:'snes9x 1.63',st:['Ready',1],last:'2h ago'},
+ {t:'Metroid Fusion',sys:'GBA',core:'mgba 0.11',st:['Ready',1],last:'last night'},
+ {t:'Silent Hill',sys:'PS1',core:'swanstation 1.0',st:['Needs BIOS',0],last:'—'},
+ {t:'Wind Waker',sys:'GC',core:'dolphin rolling',st:['Ready',1],last:'3d ago'},
+ {t:'Ocarina of Time',sys:'N64',core:'mupen64plus 2.8',st:['Ready',1],last:'1w ago'},
+ {t:'Mario Kart DS',sys:'NDS',core:'melonDS 0.9.3',st:['Ready',1],last:'2w ago'}];
 const systems=['All','SNES','GBA','PS1','GC','N64','NDS'];
-let sys='All',view='table',cur=games[1];
-const chips=document.getElementById('chips'),tbl=document.getElementById('tbl'),brd=document.getElementById('brd');
-chips.innerHTML=systems.map(s=>`<button type="button" class="chip${s===sys?' on':''}" data-s="${s}">${s}</button>`).join('');
-chips.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;sys=b.dataset.s;chips.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));draw()};
-function rows(){return games.filter(g=>sys==='All'||g.sys===sys)}
+let sys='All',view='table';
+const fchips=document.getElementById('fchips'),tbl=document.getElementById('tbl'),brd=document.getElementById('brd');
+fchips.innerHTML=systems.map(s=>`<button type="button" class="fbtn${s===sys?' on':''}" data-s="${s}">${s}</button>`).join('');
+fchips.onclick=e=>{const b=e.target.closest('.fbtn');if(!b)return;sys=b.dataset.s;fchips.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on',x===b));draw()};
 function draw(){
- const list=rows();
- tbl.querySelectorAll('tr.d').forEach(r=>r.remove());
- brd.innerHTML='';
+ const list=games.filter(g=>sys==='All'||g.sys===sys);
+ tbl.querySelectorAll('tr.d').forEach(r=>r.remove());brd.innerHTML='';
  list.forEach(g=>{
   const tr=document.createElement('tr');tr.className='d';
-  tr.innerHTML=`<td class="t">${g.t}<br><span class="m">${g.t.toLowerCase().replace(/[^a-z]+/g,'')}.rom</span></td><td>${g.sys}</td><td><span class="m">${g.core}</span></td><td><span class="pill ${g.st[1]}">${g.st[0]}</span></td><td>${g.last}</td>`;
-  tr.style.cursor='pointer';tr.onclick=()=>pick(g);tbl.appendChild(tr);
-  const c=document.createElement('div');c.className='bcol';
- });
- const cols=[['Now playing',list.slice(0,2)],['Up next',list.slice(2,4)],['Backlog',list.slice(4)]];
- cols.forEach(([h,items])=>{const c=document.createElement('div');c.className='bcol';c.innerHTML=`<h4>${h}</h4>`;items.forEach(g=>{const d=document.createElement('div');d.className='bcard';d.innerHTML=`<b>${g.t}</b><p>${g.sys} · ${g.core}</p>`;d.onclick=()=>pick(g);c.appendChild(d)});brd.appendChild(c)});
+  tr.innerHTML=`<td class="t">${g.t}</td><td>${g.sys}</td><td style="color:#615d59">${g.core}</td><td><span class="${g.st[1]?'pillok':'pillwarn'}">${g.st[0]}</span></td><td style="color:#615d59">${g.last}</td>`;
+  tr.onclick=()=>{document.getElementById('ctaPlay').textContent=`▶  Play ${g.t}`;document.getElementById('policy').scrollIntoView({behavior:'smooth'})};
+  tbl.appendChild(tr)});
+ [['Now playing',list.slice(0,2)],['Up next',list.slice(2,4)],['Backlog',list.slice(4)]].forEach(([h,items])=>{
+  const c=document.createElement('div');c.className='bcol';c.innerHTML=`<h4>${h}</h4>`;
+  items.forEach(g=>{const d=document.createElement('div');d.className='bcard';d.innerHTML=`<b>${g.t}</b><p>${g.sys} · ${g.core}</p>`;c.appendChild(d)});brd.appendChild(c)});
  tbl.style.display=view==='table'?'':'none';brd.classList.toggle('on',view==='board');
 }
-function pick(g){cur=g;document.getElementById('pt').textContent=`${g.t} — ${g.st[0]}.`}
-document.getElementById('vT').onclick=e=>{view='table';vT.classList.add('on');vB.classList.remove('on');draw()};
-document.getElementById('vB').onclick=e=>{view='board';vB.classList.add('on');vT.classList.remove('on');draw()};
-document.getElementById('play').onclick=e=>{e.target.textContent='▶ Booting…';document.getElementById('pt').textContent=`${cur.t} — first frame incoming.`;setTimeout(()=>e.target.textContent='▶ Play',1500)};
+document.getElementById('vT').onclick=()=>{view='table';vT.classList.add('on');vB.classList.remove('on');draw()};
+document.getElementById('vB').onclick=()=>{view='board';vB.classList.add('on');vT.classList.remove('on');draw()};
+document.getElementById('ctaPlay').onclick=e=>{e.target.textContent='▶  Booting… (demo)';setTimeout(()=>e.target.textContent='▶  Start playing',1500)};
+document.getElementById('heroPlay').onclick=()=>document.getElementById('policy').scrollIntoView({behavior:'smooth'});
+document.getElementById('heroBrowse').onclick=()=>document.getElementById('library').scrollIntoView({behavior:'smooth'});
 draw();
 </script>
 </body>

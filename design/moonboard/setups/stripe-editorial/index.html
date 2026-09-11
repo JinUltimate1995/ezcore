@@ -17,8 +17,9 @@ nav .sp{flex:1}
 .btn:hover{background:#4434d4}
 .btn.ghost{background:transparent;color:#533afd;border:1px solid #b9b9f9}
 .btn.ghost:hover{background:rgba(83,58,253,.05)}
-.hero{text-align:center;padding:96px 0 60px}
-.hero h1{font-size:56px;font-weight:300;letter-spacing:-1.4px;line-height:1.03}
+.hero{text-align:center;padding:96px 0 60px;position:relative}
+.hero::before{content:"";position:absolute;left:50%;top:30px;transform:translateX(-50%);width:min(720px,94%);height:300px;background:radial-gradient(closest-side,rgba(249,107,190,.14),rgba(83,58,253,.08),transparent);pointer-events:none}
+.hero h1{font-size:56px;font-weight:300;letter-spacing:-1.4px;line-height:1.03;position:relative}
 .hero h1 em{font-style:normal;color:#533afd}
 .hero p{font-size:18px;font-weight:300;color:#64748d;margin:22px auto 0;max-width:600px;line-height:1.4}
 .hero .row{margin-top:30px;display:flex;gap:12px;justify-content:center}
@@ -29,6 +30,14 @@ p.lede{font-size:18px;font-weight:300;color:#64748d;max-width:640px}
 .card h3{font-size:22px;font-weight:300;letter-spacing:-.22px;margin-bottom:8px}
 .card p{font-size:16px;font-weight:300;color:#64748d}
 .mono{font-family:'Source Code Pro',monospace;font-size:12px;font-weight:500}
+.tnum{font-feature-settings:"tnum"}
+.code2{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:26px}
+.codecard{background:#0d253d;border-radius:8px;padding:26px;box-shadow:rgba(50,50,93,.25) 0 30px 45px -30px,rgba(0,0,0,.1) 0 18px 36px -18px;overflow-x:auto}
+.codecard pre{font-family:'Source Code Pro',monospace;font-size:12px;font-weight:500;line-height:2;color:#e5edf5}
+.codecard .k{color:#f96bee}.codecard .s{color:#9be29b}.codecard .c{color:#64748d}
+.dropzone{border:1px dashed #362baa;border-radius:8px;padding:26px;display:flex;flex-direction:column;justify-content:center;background:rgba(83,58,253,.03)}
+.dropzone h3{font-size:22px;font-weight:300;letter-spacing:-.22px;margin-bottom:8px}
+.dropzone p{font-size:16px;font-weight:300;color:#64748d}
 .badge{display:inline-block;background:rgba(21,190,83,.2);color:#108c3d;border:1px solid rgba(21,190,83,.4);border-radius:4px;font-size:10px;font-weight:300;padding:1px 6px;margin-bottom:12px}
 .swatches{display:flex;gap:8px;margin-top:14px}
 .sw{flex:1;height:52px;border-radius:4px;border:1px solid #e5edf5}
@@ -62,6 +71,23 @@ footer{margin-top:70px;color:#64748d;font-size:14px;font-weight:300;display:flex
     <div class="card"><span class="badge">CONTINUE · 94%</span><h3>Metroid Fusion</h3><p>Game Boy Advance · mGBA 0.11<br>Last played last night · slot 2</p><p class="mono" style="margin-top:12px;color:#2874ad">fusion.gba · 60fps · 2 cheats on</p></div>
     <div class="card"><span class="badge">NEW SAVE</span><h3>Chrono Trigger</h3><p>Super Nintendo · Snes9x 1.63<br>Millennial Fair, first visit</p><p class="mono" style="margin-top:12px;color:#2874ad">chrono.sfc · integer scale · CRT-lite</p></div>
     <div class="card"><span class="badge">FAVORITE</span><h3>Wind Waker</h3><p>GameCube · Dolphin rolling<br>Outset Island · 12h 40m</p><p class="mono" style="margin-top:12px;color:#2874ad">windwaker.iso · 2× IR · widescreen</p></div>
+  </div>
+
+  <h2 class="sec">The registry, as code</h2>
+  <p class="lede">Every core is a signed manifest. Pin it, fetch it, remove it — <span class="mono tnum">sha256:950cb26a…</span> or it does not boot.</p>
+  <div class="code2">
+    <div class="codecard"><pre><span class="c">// cores/mgba/manifest.json</span>
+{
+  <span class="k">"id"</span>: <span class="s">"mgba"</span>,
+  <span class="k">"version"</span>: <span class="s">"0.11"</span>,
+  <span class="k">"systems"</span>: [<span class="s">"gba"</span>],
+  <span class="k">"license"</span>: <span class="s">"MPL-2.0"</span>,
+  <span class="k">"artifacts"</span>: {
+    <span class="k">"macos-arm64"</span>: <span class="s">"sha256:950c…"</span>,
+    <span class="k">"ios-arm64"</span>: <span class="s">"bundled"</span>
+  }
+}</pre></div>
+    <div class="dropzone"><h3>Drop a folder of dumps here</h3><p>ezCORE fingerprints each file, matches its system, and files it on the shelf. Folders stay where they are — nothing uploads, ever.</p><p class="mono tnum" style="margin-top:12px;color:#533afd">12 files · 3 systems · 0 uploads</p></div>
   </div>
 
   <div class="dark" id="cores">

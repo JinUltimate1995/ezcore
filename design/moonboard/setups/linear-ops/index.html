@@ -4,53 +4,53 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ezCORE — Linear Ops Deck</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"cv01","ss03";background:#08090a;color:#f7f8f8;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px}
 nav{display:flex;align-items:center;gap:26px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;background:rgba(8,9,10,.85);backdrop-filter:blur(10px);z-index:5}
-.mark{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
+.mark{display:flex;align-items:center;gap:9px;font-weight:510;font-size:15px}
 .mark svg{display:block}
-nav a.nl{color:#d0d6e0;text-decoration:none;font-size:13px;font-weight:500}
+nav a.nl{color:#d0d6e0;text-decoration:none;font-size:13px;font-weight:510}
 nav a.nl:hover{color:#f7f8f8}
 .kbd{margin-left:auto;display:flex;gap:10px;align-items:center}
 .cmdk{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 12px;cursor:pointer}
 .cmdk:hover{color:#f7f8f8;border-color:rgba(255,255,255,.2)}
-.cta{background:#5e6ad2;color:#fff;border:0;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.cta{background:#5e6ad2;color:#fff;border:0;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:510;cursor:pointer;font-family:inherit}
 .cta:hover{background:#828fff}
-.hero{text-align:center;padding:84px 0 54px}
-.pill{display:inline-block;font-size:12px;font-weight:500;color:#d0d6e0;border:1px solid #23252a;border-radius:9999px;padding:3px 12px;margin-bottom:22px}
-.pill b{color:#828fff;font-weight:500}
-h1{font-size:64px;font-weight:500;letter-spacing:-1.408px;line-height:1}
-.hero p{color:#8a8f98;font-size:18px;font-weight:300;margin:20px auto 0;max-width:560px;line-height:1.6}
+.hero{text-align:center;padding:96px 0 64px}
+.pill{display:inline-block;font-size:12px;font-weight:510;color:#d0d6e0;border:1px solid #23252a;border-radius:9999px;padding:3px 12px;margin-bottom:22px}
+.pill b{color:#828fff;font-weight:510}
+h1{font-size:64px;font-weight:510;letter-spacing:-1.408px;line-height:1}
+.hero p{color:#8a8f98;font-size:18px;font-weight:400;letter-spacing:-.165px;margin:20px auto 0;max-width:560px;line-height:1.6}
 .hero .row{margin-top:28px;display:flex;gap:12px;justify-content:center}
-.ghost{background:rgba(255,255,255,.02);color:#e2e4e7;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px 16px;font-size:14px;cursor:pointer;font-family:inherit}
+.ghost{background:rgba(255,255,255,.02);color:#e2e4e7;border:1px solid rgb(36,40,44);border-radius:6px;padding:8px 16px;font-size:14px;font-weight:510;cursor:pointer;font-family:inherit}
 .tabs{display:flex;gap:6px;margin:10px 0 18px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:0}
-.tabs button{background:none;border:0;color:#8a8f98;font-family:inherit;font-size:13px;font-weight:500;padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent}
+.tabs button{background:none;border:0;color:#8a8f98;font-family:inherit;font-size:13px;font-weight:510;padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent}
 .tabs button.on{color:#f7f8f8;border-color:#7170ff}
 .panel{display:none}
 .panel.on{display:block}
 table{width:100%;border-collapse:collapse;font-size:14px}
-th{text-align:left;font-size:11px;font-weight:500;color:#62666d;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+th{text-align:left;font-size:11px;font-weight:510;color:#62666d;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
 td{padding:12px;border-bottom:1px solid #141516;color:#d0d6e0}
-td:first-child{color:#f7f8f8;font-weight:500}
+td:first-child{color:#f7f8f8;font-weight:510}
 .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:8px}
 .dot.warn{background:#7170ff}
 .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:18px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-h3{font-size:20px;font-weight:600;letter-spacing:-.24px;margin-bottom:6px}
-.mut{color:#8a8f98;font-size:15px;font-weight:300}
-.type{font-size:48px;font-weight:500;letter-spacing:-1.056px;margin:6px 0}
+h3{font-size:20px;font-weight:590;letter-spacing:-.24px;margin-bottom:6px}
+.mut{color:#8a8f98;font-size:15px;font-weight:400;letter-spacing:-.165px}
+.type{font-size:48px;font-weight:510;letter-spacing:-1.056px;margin:6px 0}
 .palette{display:flex;gap:8px;margin-top:14px}
 .sw{flex:1;height:46px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
 footer{margin-top:70px;padding-top:22px;border-top:1px solid rgba(255,255,255,.05);color:#62666d;font-size:12px;display:flex;justify-content:space-between}
 #pal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:50}
 #pal.open{display:flex}
-.palbox{width:min(560px,92vw);background:#191a1b;border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);overflow:hidden}
-.palbox input{width:100%;background:transparent;border:0;outline:0;color:#f7f8f8;font-size:16px;font-family:inherit;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
-.prow{padding:11px 18px;font-size:13px;color:#d0d6e0;display:flex;justify-content:space-between;cursor:pointer}
+.palbox{width:min(560px,92vw);background:#191a1b;border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:rgba(0,0,0,0) 0 8px 2px,rgba(0,0,0,.01) 0 5px 2px,rgba(0,0,0,.04) 0 3px 2px,rgba(0,0,0,.07) 0 1px 1px,rgba(0,0,0,.08) 0 0 1px,rgba(0,0,0,.5) 0 24px 64px;overflow:hidden}
+.palbox input{width:100%;background:transparent;border:0;outline:0;color:#f7f8f8;font-size:16px;font-weight:400;font-family:inherit;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.prow{padding:11px 18px;font-size:13px;font-weight:510;color:#d0d6e0;display:flex;justify-content:space-between;cursor:pointer}
 .prow small{color:#62666d;font-family:'JetBrains Mono',monospace;font-size:11px}
 .prow.sel,.prow:hover{background:rgba(113,112,255,.12)}
 @media(max-width:700px){h1{font-size:40px;letter-spacing:-.8px}.grid2{grid-template-columns:1fr}nav a.nl{display:none}}
