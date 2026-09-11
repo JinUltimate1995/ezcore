@@ -1,5 +1,0 @@
-# ninja log v7
-1	42	1789138031997753667	CMakeFiles/test_abi.dir/test/test_abi.c.o	3b7ebae1dc15a22a
-1	48	1789138041013967320	CMakeFiles/huh_bridge.dir/src/bridge.c.o	3a900ac0e294accd
-48	138	1789138041061372516	libhuh_bridge.dylib	4e938d39c00fa7f8
-138	175	1789138041151480314	test_abi	155ab6c1f8a7696d
