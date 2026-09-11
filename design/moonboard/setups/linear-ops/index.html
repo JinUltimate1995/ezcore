@@ -3,124 +3,327 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ezCORE — Linear Ops Deck</title>
+<title>ezCORE · V2 Board 01 — Linear Ops</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#08090a;--panel:#0f1011;--elev:#191a1b;--t1:#f7f8f8;--t2:#d0d6e0;--t3:#8a8f98;--t4:#62666d;--acc:#5e6ad2;--acc2:#7170ff;--accH:#828fff;--bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.05);--ok:#10b981;--line:#141516}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"cv01","ss03";background:#08090a;color:#f7f8f8;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px}
-nav{display:flex;align-items:center;gap:26px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;background:rgba(8,9,10,.85);backdrop-filter:blur(10px);z-index:5}
+body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"cv01","ss03";background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 100px}
+.mono{font-family:'JetBrains Mono',monospace}
+/* masthead */
+.mast{display:flex;align-items:center;gap:14px;padding:20px 0;border-bottom:1px solid var(--bd2);position:sticky;top:0;background:rgba(8,9,10,.88);backdrop-filter:blur(10px);z-index:20}
 .mark{display:flex;align-items:center;gap:9px;font-weight:510;font-size:15px}
-.mark svg{display:block}
-nav a.nl{color:#d0d6e0;text-decoration:none;font-size:13px;font-weight:510}
-nav a.nl:hover{color:#f7f8f8}
-.kbd{margin-left:auto;display:flex;gap:10px;align-items:center}
-.cmdk{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 12px;cursor:pointer}
-.cmdk:hover{color:#f7f8f8;border-color:rgba(255,255,255,.2)}
-.cta{background:#5e6ad2;color:#fff;border:0;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:510;cursor:pointer;font-family:inherit}
-.cta:hover{background:#828fff}
-.hero{text-align:center;padding:96px 0 64px}
-.pill{display:inline-block;font-size:12px;font-weight:510;color:#d0d6e0;border:1px solid #23252a;border-radius:9999px;padding:3px 12px;margin-bottom:22px}
-.pill b{color:#828fff;font-weight:510}
-h1{font-size:64px;font-weight:510;letter-spacing:-1.408px;line-height:1}
-.hero p{color:#8a8f98;font-size:18px;font-weight:400;letter-spacing:-.165px;margin:20px auto 0;max-width:560px;line-height:1.6}
-.hero .row{margin-top:28px;display:flex;gap:12px;justify-content:center}
+.dtag{font-size:11px;font-weight:510;color:var(--t2);border:1px solid #23252a;border-radius:9999px;padding:3px 12px}
+.dtag b{color:var(--accH);font-weight:510}
+.mast .sp{flex:1}
+.swatches{display:flex;gap:6px}
+.sw{width:22px;height:22px;border-radius:6px;border:1px solid var(--bd)}
+.cmdk{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);background:rgba(255,255,255,.02);border:1px solid var(--bd);border-radius:6px;padding:6px 12px;cursor:pointer}
+.cmdk:hover{color:var(--t1)}
+.cta{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:510;cursor:pointer;font-family:inherit}
+.cta:hover{background:var(--accH)}
 .ghost{background:rgba(255,255,255,.02);color:#e2e4e7;border:1px solid rgb(36,40,44);border-radius:6px;padding:8px 16px;font-size:14px;font-weight:510;cursor:pointer;font-family:inherit}
-.tabs{display:flex;gap:6px;margin:10px 0 18px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:0}
-.tabs button{background:none;border:0;color:#8a8f98;font-family:inherit;font-size:13px;font-weight:510;padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent}
-.tabs button.on{color:#f7f8f8;border-color:#7170ff}
-.panel{display:none}
-.panel.on{display:block}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{text-align:left;font-size:11px;font-weight:510;color:#62666d;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
-td{padding:12px;border-bottom:1px solid #141516;color:#d0d6e0}
-td:first-child{color:#f7f8f8;font-weight:510}
-.mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a8f98}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:8px}
-.dot.warn{background:#7170ff}
-.card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:18px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-h3{font-size:20px;font-weight:590;letter-spacing:-.24px;margin-bottom:6px}
-.mut{color:#8a8f98;font-size:15px;font-weight:400;letter-spacing:-.165px}
-.type{font-size:48px;font-weight:510;letter-spacing:-1.056px;margin:6px 0}
-.palette{display:flex;gap:8px;margin-top:14px}
-.sw{flex:1;height:46px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
-footer{margin-top:70px;padding-top:22px;border-top:1px solid rgba(255,255,255,.05);color:#62666d;font-size:12px;display:flex;justify-content:space-between}
+/* sections */
+.sec{font-size:13px;font-weight:510;color:var(--t4);letter-spacing:.08em;margin:88px 0 8px}
+.sec b{color:var(--acc2)}
+h2.st{font-size:32px;font-weight:510;letter-spacing:-.704px;line-height:1.13}
+p.lede{color:var(--t3);font-size:15px;font-weight:400;letter-spacing:-.165px;margin-top:10px;max-width:660px;line-height:1.6}
+/* logo row */
+.logorow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.logocard{background:rgba(255,255,255,.02);border:1px solid var(--bd);border-radius:8px;padding:28px;min-height:210px;display:flex;flex-direction:column;gap:14px;cursor:pointer;position:relative}
+.logocard:hover{background:rgba(255,255,255,.04)}
+.logocard.picked{border-color:var(--acc2)}
+.logocard .pk{position:absolute;top:12px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--acc2);display:none}
+.logocard.picked .pk{display:block}
+.logocard .stage{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--bd2);border-radius:6px;min-height:120px}
+.logocard h4{font-size:15px;font-weight:590}
+.logocard p{font-size:13px;color:var(--t3)}
+/* type */
+.spec{font-size:64px;font-weight:510;letter-spacing:-1.408px;line-height:1;border:1px solid var(--bd2);border-radius:8px;padding:30px;margin-top:24px;background:rgba(255,255,255,.02);outline:none}
+.spec:focus{border-color:var(--acc2)}
+.specsub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t4);margin-top:8px}
+.scaletable{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+.scaletable td{padding:12px;border-bottom:1px solid var(--line);color:var(--t2)}
+/* theme wall */
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:24px}
+.cell{border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.cell i{display:block;height:74px}
+.cell span{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);padding:8px 10px;background:var(--panel)}
+/* windows */
+.win{background:var(--panel);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-top:24px}
+.wbar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--bd2)}
+.wbar .dots{display:flex;gap:6px}
+.wbar .dots i{width:10px;height:10px;border-radius:50%;background:#2a2d33}
+.wbar .dots i:first-child{background:var(--acc)}
+.wbar .wt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t4);margin-left:8px}
+.wbar .wr{margin-left:auto;display:flex;gap:8px;align-items:center}
+.wbody{display:grid;grid-template-columns:210px 1fr;min-height:430px}
+.side{border-right:1px solid var(--bd2);padding:16px 10px;display:flex;flex-direction:column;gap:2px}
+.snav{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:6px;color:var(--t3);font-size:13px;font-weight:510;cursor:pointer;border:0;background:none;width:100%;text-align:left;font-family:inherit}
+.snav:hover{color:var(--t1);background:rgba(255,255,255,.03)}
+.snav.on{color:var(--t1);background:rgba(113,112,255,.12)}
+.snav .n{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t4)}
+.ssec{font-size:10px;font-weight:510;color:var(--t4);padding:14px 12px 4px;letter-spacing:.06em}
+.main{padding:20px 22px;min-width:0}
+.fpills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.fpill{background:transparent;color:var(--t2);border:1px solid #23252a;border-radius:9999px;padding:4px 14px;font-size:12px;font-weight:510;cursor:pointer;font-family:inherit}
+.fpill.on{color:var(--t1);border-color:var(--acc2);background:rgba(113,112,255,.1)}
+table.app{width:100%;border-collapse:collapse;font-size:13px}
+table.app th{text-align:left;font-size:10px;font-weight:510;color:var(--t4);padding:8px 10px;border-bottom:1px solid var(--bd2);letter-spacing:.05em}
+table.app td{padding:11px 10px;border-bottom:1px solid var(--line);color:var(--t2)}
+table.app tr.r{cursor:pointer}
+table.app tr.r:hover td{background:rgba(255,255,255,.02)}
+table.app td.tt{color:var(--t1);font-weight:510}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:8px}
+.dot.warn{background:var(--acc2)}.dot.dim{background:#3a3d44}
+.npbar{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--elev);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;font-size:12px}
+.npbar .pp{width:30px;height:30px;border-radius:50%;background:var(--acc);border:0;color:#fff;font-size:12px;cursor:pointer;flex:none}
+.npbar .tk{flex:1;height:4px;border-radius:2px;background:#2a2d33;position:relative;cursor:pointer}
+.npbar .tk i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--acc2)}
+/* detail */
+.dhead{display:flex;gap:18px;align-items:flex-start}
+.cov{width:120px;height:120px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:590;font-size:26px;border:1px solid var(--bd)}
+.dhead h3{font-size:32px;font-weight:590;letter-spacing:-.704px;line-height:1.1}
+.dmeta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t4);margin-top:8px}
+.drow{display:flex;gap:10px;margin-top:14px;align-items:center;flex-wrap:wrap}
+.boot{flex:1;min-width:140px;height:6px;border-radius:3px;background:#2a2d33;overflow:hidden;display:none}
+.boot i{display:block;height:100%;width:0;background:var(--acc2)}
+.dcols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.dcard{background:rgba(255,255,255,.02);border:1px solid var(--bd);border-radius:8px;padding:16px}
+.dcard h5{font-size:13px;font-weight:590;margin-bottom:10px}
+.slot{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--bd2);border-radius:6px;margin-bottom:8px;font-size:12px;cursor:pointer}
+.slot:hover{border-color:var(--acc2)}
+.slot .mono{font-size:10px;color:var(--t4);margin-left:auto}
+.cheat{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.cheat:last-child{border-bottom:0}
+.tgl{margin-left:auto;width:34px;height:20px;border-radius:9999px;background:#2a2d33;border:1px solid var(--bd);cursor:pointer;position:relative;flex:none}
+.tgl::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--t3);transition:all .15s}
+.tgl.on{background:var(--acc)}
+.tgl.on::after{left:16px;background:#fff}
+select.env{background:var(--elev);color:var(--t1);border:1px solid var(--bd);border-radius:6px;font-family:inherit;font-size:12px;padding:7px 10px;width:100%;margin-bottom:8px}
+.kv{display:flex;justify-content:space-between;font-size:12px;color:var(--t3);padding:6px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border:0}
+.kv .mono{font-size:11px;color:var(--t2)}
+/* cores */
+.corerow td .mono{font-size:11px}
+.upd{font-size:11px;font-weight:510;color:var(--acc2);background:rgba(113,112,255,.1);border:1px solid rgba(113,112,255,.3);border-radius:9999px;padding:3px 12px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.upd:hover{background:rgba(113,112,255,.2)}
+.rm{font-size:11px;color:var(--t4);background:none;border:0;cursor:pointer;font-family:inherit}
+.rm:hover{color:var(--t1)}
+.upbar{height:6px;border-radius:3px;background:#2a2d33;overflow:hidden;margin-top:12px;display:none}
+.upbar i{display:block;height:100%;width:0;background:var(--acc2)}
+.searchin{background:transparent;border:1px solid var(--bd);border-radius:6px;color:var(--t1);font-family:inherit;font-size:12px;padding:7px 12px;width:200px;outline:none}
+.searchin:focus{border-color:var(--acc2)}
+/* verdict */
+.verdict{margin-top:88px;background:var(--panel);border:1px solid var(--bd);border-radius:12px;padding:28px}
+.verdict h3{font-size:20px;font-weight:590;letter-spacing:-.24px}
+.verdict .opts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.verdict .sum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accH);margin-top:16px;min-height:18px}
+footer{margin-top:60px;color:var(--t4);font-size:12px;display:flex;justify-content:space-between;border-top:1px solid var(--bd2);padding-top:20px}
 #pal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:50}
 #pal.open{display:flex}
-.palbox{width:min(560px,92vw);background:#191a1b;border:1px solid rgba(255,255,255,.08);border-radius:12px;box-shadow:rgba(0,0,0,0) 0 8px 2px,rgba(0,0,0,.01) 0 5px 2px,rgba(0,0,0,.04) 0 3px 2px,rgba(0,0,0,.07) 0 1px 1px,rgba(0,0,0,.08) 0 0 1px,rgba(0,0,0,.5) 0 24px 64px;overflow:hidden}
-.palbox input{width:100%;background:transparent;border:0;outline:0;color:#f7f8f8;font-size:16px;font-weight:400;font-family:inherit;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
-.prow{padding:11px 18px;font-size:13px;font-weight:510;color:#d0d6e0;display:flex;justify-content:space-between;cursor:pointer}
-.prow small{color:#62666d;font-family:'JetBrains Mono',monospace;font-size:11px}
+.palbox{width:min(560px,92vw);background:var(--elev);border:1px solid var(--bd);border-radius:12px;box-shadow:rgba(0,0,0,0) 0 8px 2px,rgba(0,0,0,.01) 0 5px 2px,rgba(0,0,0,.04) 0 3px 2px,rgba(0,0,0,.07) 0 1px 1px,rgba(0,0,0,.08) 0 0 1px,rgba(0,0,0,.5) 0 24px 64px;overflow:hidden}
+.palbox input{width:100%;background:transparent;border:0;outline:0;color:var(--t1);font-size:16px;font-family:inherit;padding:16px 18px;border-bottom:1px solid var(--bd)}
+.prow{padding:11px 18px;font-size:13px;font-weight:510;color:var(--t2);display:flex;justify-content:space-between;cursor:pointer}
+.prow small{color:var(--t4);font-family:'JetBrains Mono',monospace;font-size:11px}
 .prow.sel,.prow:hover{background:rgba(113,112,255,.12)}
-@media(max-width:700px){h1{font-size:40px;letter-spacing:-.8px}.grid2{grid-template-columns:1fr}nav a.nl{display:none}}
+@media(max-width:860px){.logorow,.dcols{grid-template-columns:1fr}.wall{grid-template-columns:repeat(3,1fr)}.wbody{grid-template-columns:1fr}.side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--bd2)}.spec{font-size:40px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <nav>
-    <span class="mark"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="4" fill="#5e6ad2"/><path d="M7.5 6.5 L12 10 L7.5 13.5 Z" fill="#fff"/></svg>ezCORE</span>
-    <a class="nl" href="#lib">Library</a><a class="nl" href="#cores">Cores</a><a class="nl" href="#type">Type</a>
-    <span class="kbd"><button class="cmdk" id="kbtn" type="button">⌘K&nbsp;&nbsp;play anything</button><button class="cta" type="button">Get ezCORE</button></span>
-  </nav>
-
-  <div class="hero">
-    <span class="pill">v0.1 · <b>18 cores</b> · macOS / Windows / iOS / Android</span>
-    <h1>Game → Play.</h1>
-    <p>One library, every system. ezCORE picks the core, loads your dump, and puts the first frame up before you finish reading this sentence.</p>
-    <div class="row"><button class="cta" type="button">Start playing</button><button class="ghost" type="button" id="ghost">Open command bar</button></div>
+  <div class="mast">
+    <span class="mark"><svg width="18" height="18" viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="4" fill="#5e6ad2"/><path d="M7.5 6.5 L12 10 L7.5 13.5 Z" fill="#fff"/></svg>ezCORE</span>
+    <span class="dtag">BOARD 01 · <b>LINEAR OPS</b> · v2</span>
+    <span class="sp"></span>
+    <span class="swatches"><span class="sw" style="background:#08090a"></span><span class="sw" style="background:#191a1b"></span><span class="sw" style="background:#5e6ad2"></span><span class="sw" style="background:#7170ff"></span></span>
+    <button class="cmdk" id="kbtn" type="button">⌘K</button>
   </div>
 
-  <div class="tabs" role="tablist">
-    <button type="button" class="on" data-t="lib">Library</button>
-    <button type="button" data-t="cores">Cores</button>
-    <button type="button" data-t="type">Type &amp; tokens</button>
+  <div class="sec">SURFACE-FIRST · <b>page = Decide/Learn · screens = Explore + Inspect + Operate</b></div>
+  <h2 class="st">The ops deck for your childhood.</h2>
+  <p class="lede">Density without noise. One indigo accent, luminance-stepped surfaces, and a command palette that reaches every game, core, cheat and setting. Below: brand construction, then three working product screens.</p>
+
+  <div class="sec">§01 — <b>LOGO</b> · pick one</div>
+  <h2 class="st">Three marks, one circuit.</h2>
+  <div class="logorow">
+    <div class="logocard picked" data-v="logo:A"><span class="pk">PICKED</span><div class="stage"><svg width="72" height="72" viewBox="0 0 72 72"><rect x="8" y="8" width="56" height="56" rx="14" fill="#5e6ad2"/><path d="M30 24 L48 36 L30 48 Z" fill="#fff"/><circle cx="52" cy="20" r="4" fill="#08090a"/><circle cx="52" cy="20" r="2" fill="#7170ff"/></svg></div><h4>A · Chip Play</h4><p>Rounded silicon, play-triangle die, single status LED. Reads at 16px favicon and 180px icon.</p></div>
+    <div class="logocard" data-v="logo:B"><span class="pk">PICKED</span><div class="stage"><svg width="120" height="56" viewBox="0 0 120 56"><rect x="4" y="6" width="44" height="44" rx="10" fill="none" stroke="#5e6ad2" stroke-width="3"/><path d="M20 20 L32 28 L20 36 Z" fill="#7170ff"/><text x="56" y="37" font-family="Inter,sans-serif" font-weight="510" font-size="24" fill="#f7f8f8">ez<tspan fill="#828fff">CORE</tspan></text></svg></div><h4>B · Wordmark lockup</h4><p>Outlined chip + lowercase ez with indigo CORE. For headers, boot screen, press kit.</p></div>
+    <div class="logocard" data-v="logo:C"><span class="pk">PICKED</span><div class="stage"><svg width="72" height="72" viewBox="0 0 72 72"><rect x="8" y="8" width="56" height="56" rx="6" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/><text x="36" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="20" fill="#f7f8f8">eC</text><circle cx="56" cy="16" r="4" fill="#10b981"/></svg></div><h4>C · Mono badge</h4><p>Berkeley-style eC monogram in a 6px-radius badge. Terminal, tray, favicon fallback.</p></div>
   </div>
 
-  <div class="panel on" id="p-lib">
-    <table>
-      <tr><th>TITLE</th><th>SYSTEM</th><th>CORE</th><th>STATUS</th><th>LAST PLAYED</th></tr>
-      <tr><td>Chrono Trigger</td><td class="mono">snes</td><td class="mono">snes9x 1.63</td><td><span class="dot"></span>ready</td><td class="mono">2h ago</td></tr>
-      <tr><td>Metroid Fusion</td><td class="mono">gba</td><td class="mono">mgba 0.11</td><td><span class="dot"></span>ready</td><td class="mono">last night</td></tr>
-      <tr><td>Silent Hill</td><td class="mono">psx</td><td class="mono">swanstation 1.0</td><td><span class="dot warn"></span>needs BIOS</td><td class="mono">—</td></tr>
-      <tr><td>Wind Waker</td><td class="mono">gc</td><td class="mono">dolphin rolling</td><td><span class="dot"></span>ready</td><td class="mono">3d ago</td></tr>
-      <tr><td>Elite (DOS)</td><td class="mono">dos</td><td class="mono">dosbox-pure</td><td><span class="dot"></span>ready</td><td class="mono">1w ago</td></tr>
-    </table>
+  <div class="sec">§02 — <b>TYPE</b> · Inter Variable cv01+ss03</div>
+  <h2 class="st">Inter, engineered. Click it — it's live.</h2>
+  <div class="spec" contenteditable="true" spellcheck="false">Game → Play.</div>
+  <div class="specsub">EDITABLE SPECIMEN · 64/510/−1.408 · type over it</div>
+  <table class="scaletable">
+    <tr><td style="font-size:32px;font-weight:510;letter-spacing:-.704px">Section heads ship at 32.</td><td class="mono" style="font-size:11px;color:#62666d">32/510/−0.704</td></tr>
+    <tr><td style="font-size:20px;font-weight:590;letter-spacing:-.24px">Feature titles get the only 590 on the page.</td><td class="mono" style="font-size:11px;color:#62666d">20/590/−0.24</td></tr>
+    <tr><td style="font-size:15px;font-weight:400;letter-spacing:-.165px;color:#8a8f98">Body reads at 15px regular with relaxed 1.6 rhythm, always one step dimmer than the title above it.</td><td class="mono" style="font-size:11px;color:#62666d">15/400/−0.165</td></tr>
+    <tr><td class="mono" style="font-size:12px;color:#8a8f98">snes9x 1.63 · sha256:950c… · slot/n.bin</td><td class="mono" style="font-size:11px;color:#62666d">MONO 12</td></tr>
+  </table>
+
+  <div class="sec">§03 — <b>THEME</b> · luminance steps, never color</div>
+  <h2 class="st">Darkness is the whitespace.</h2>
+  <div class="wall">
+    <div class="cell"><i style="background:#08090a"></i><span>#08090a · canvas</span></div>
+    <div class="cell"><i style="background:#0f1011"></i><span>#0f1011 · panel</span></div>
+    <div class="cell"><i style="background:#191a1b"></i><span>#191a1b · raised</span></div>
+    <div class="cell"><i style="background:#28282c"></i><span>#28282c · hover</span></div>
+    <div class="cell"><i style="background:#5e6ad2"></i><span>#5e6ad2 · CTA</span></div>
+    <div class="cell"><i style="background:#7170ff"></i><span>#7170ff · active</span></div>
   </div>
 
-  <div class="panel" id="p-cores">
-    <div class="grid2">
-      <div class="card"><h3>Modular cores</h3><p class="mut">Install, update, remove. Pinned SHA per artifact, signed registry. Nothing ships a ROM, BIOS, or key — ever.</p><p class="mono" style="margin-top:10px">sameboy 1.0.3 · gambatte · mgba · snes9x · … +13 more</p></div>
-      <div class="card"><h3>Cheats, states, sync</h3><p class="mut">Per-game cheat profiles, slot-0 autosave on backgrounding, and a save-sync seam (local today, iCloud/OneDrive tomorrow).</p><p class="mono" style="margin-top:10px">SaveSyncProvider · slot/n.bin · sha-pinned</p></div>
+  <div class="sec">§04 — <b>SCREENS</b> · working product, three surfaces</div>
+  <h2 class="st">Screen A · Library <span class="mono" style="font-size:12px;color:#62666d">EXPLORE</span></h2>
+  <p class="lede">Filter, scan, pick. Rows carry state; the now-playing bar is always one tap away.</p>
+  <div class="win">
+    <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span class="wt">ezcore — library</span><span class="wr"><button class="cmdk" type="button" data-pal>⌘K</button></span></div>
+    <div class="wbody">
+      <div class="side">
+        <button class="snav on" type="button">◫&nbsp; Library <span class="n">6</span></button>
+        <button class="snav" type="button">★&nbsp; Favorites <span class="n">2</span></button>
+        <button class="snav" type="button">◷&nbsp; Recent</button>
+        <div class="ssec">SYSTEMS</div>
+        <button class="snav" type="button" data-sys="snes">Super Nintendo</button>
+        <button class="snav" type="button" data-sys="gba">Game Boy Adv.</button>
+        <button class="snav" type="button" data-sys="psx">PlayStation</button>
+        <button class="snav" type="button" data-sys="gc">GameCube</button>
+      </div>
+      <div class="main">
+        <div class="fpills" id="libpills"></div>
+        <table class="app" id="libtbl"><tr><th>TITLE</th><th>CORE</th><th>STATUS</th><th>LAST</th></tr></table>
+        <div class="npbar"><button class="pp" id="npplay" type="button">▶</button><div><div id="npt" style="font-weight:510">Metroid Fusion</div><div class="mono" id="nps" style="font-size:10px;color:#62666d">gba · mgba · paused</div></div><div class="tk" id="nptk"><i id="npi" style="width:64%"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="panel" id="p-type">
-    <div class="type">Inter, engineered.</div>
-    <p class="mut">Display 48/510/−1.056 · Body 16/400 · Mono labels in JetBrains Mono 12. One accent: <span class="mono" style="color:#828fff">#7170ff</span>. Surfaces step luminance, never color.</p>
-    <div class="palette"><div class="sw" style="background:#08090a"></div><div class="sw" style="background:#0f1011"></div><div class="sw" style="background:#191a1b"></div><div class="sw" style="background:#5e6ad2"></div><div class="sw" style="background:#7170ff"></div></div>
+  <h2 class="st" style="margin-top:56px">Screen B · Game detail <span class="mono" style="font-size:12px;color:#62666d">INSPECT</span></h2>
+  <p class="lede">Everything about one game: boot it, roll its states, tune its cheats — without leaving the page.</p>
+  <div class="win">
+    <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span class="wt">ezcore — metroid fusion</span><span class="wr"><span class="mono" style="font-size:10px;color:#62666d">slot autosave ●</span></span></div>
+    <div class="wbody" style="grid-template-columns:1fr">
+      <div class="main">
+        <div class="dhead">
+          <div class="cov" style="background:linear-gradient(150deg,#5e1c2a,#101010)">MF</div>
+          <div style="flex:1;min-width:0">
+            <h3>Metroid Fusion</h3>
+            <div class="dmeta">GBA · MGBA 0.11 · MPL-2.0 · SHA-PINNED · 12H 40M PLAYED</div>
+            <div class="drow"><button class="cta" id="boot" type="button">▶&nbsp; Play</button><button class="ghost" type="button">Continue · 94%</button><div class="boot" id="bootbar"><i id="booti"></i></div></div>
+          </div>
+        </div>
+        <div class="dcols">
+          <div class="dcard"><h5>Save states</h5><div id="slots"></div></div>
+          <div class="dcard"><h5>Cheats · 2 on</h5><div id="cheats"></div></div>
+        </div>
+        <div class="dcols" style="margin-top:14px">
+          <div class="dcard"><h5>Per-game video</h5>
+            <select class="env"><option>Integer scale · on</option><option>Integer scale · off</option></select>
+            <select class="env"><option>Shader · CRT-lite</option><option>Shader · none</option><option>Shader · LCD grid</option></select>
+          </div>
+          <div class="dcard"><h5>File</h5>
+            <div class="kv"><span>ROM</span><span class="mono">fusion.gba</span></div>
+            <div class="kv"><span>Fingerprint</span><span class="mono">sha256:9f2c…</span></div>
+            <div class="kv"><span>Sync</span><span class="mono">local vault ✓</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <footer><span>ezCORE · setups/linear-ops</span><span class="mono">ABI v1 · 23 tests green</span></footer>
+  <h2 class="st" style="margin-top:56px">Screen C · Core manager <span class="mono" style="font-size:12px;color:#62666d">OPERATE</span></h2>
+  <p class="lede">Eighteen versioned artifacts. Update all with one press; watch the queue drain.</p>
+  <div class="win">
+    <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span class="wt">ezcore — cores</span><span class="wr"><input class="searchin" id="cq" type="text" placeholder="Filter cores…"></span></div>
+    <div class="wbody" style="grid-template-columns:1fr">
+      <div class="main">
+        <div class="drow" style="margin-top:0"><button class="cta" id="updall" type="button">⤓&nbsp; Update all (3)</button><span class="mono" id="updmsg" style="font-size:11px;color:#62666d">signed registry · SBOM attached</span></div>
+        <div class="upbar" id="upbar"><i id="upi"></i></div>
+        <table class="app" id="coretbl" style="margin-top:14px"><tr><th>CORE</th><th>SYSTEMS</th><th>LICENSE</th><th>SIZE</th><th style="text-align:right">STATE</th></tr></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <h3>Lock the verdict for Board 01</h3>
+    <p class="lede">Picks save locally. When all seven boards are done, the picks merge into <span class="mono" style="font-size:12px">docs/BRAND.md</span>.</p>
+    <div class="opts">
+      <button class="fpill" data-v="theme:linear" type="button">Use this theme</button>
+      <button class="fpill" data-v="type:linear-inter" type="button">Use this type</button>
+      <button class="fpill" data-v="screens:linear-ops" type="button">Use these screens</button>
+    </div>
+    <div class="sum" id="vsum"></div>
+  </div>
+
+  <footer><span>ezCORE · board 01/linear-ops · v2</span><span class="mono">slop 6→2 · surface-first · verified</span></footer>
 </div>
 
 <div id="pal" role="dialog" aria-label="command palette">
-  <div class="palbox">
-    <input id="pin" type="text" placeholder="Type a game or action…" autocomplete="off">
-    <div id="pres"></div>
-  </div>
+  <div class="palbox"><input id="pin" type="text" placeholder="Type a game or action…" autocomplete="off"><div id="pres"></div></div>
 </div>
 <script>
+const GAMES=[
+ {t:'Chrono Trigger',sys:'snes',core:'snes9x 1.63',st:'ready',last:'2h ago',chev:0,prog:32,c:'#1c3a5e'},
+ {t:'Metroid Fusion',sys:'gba',core:'mgba 0.11',st:'playing',last:'now',chev:2,prog:64,c:'#5e1c2a'},
+ {t:'Silent Hill',sys:'psx',core:'swanstation 1.0',st:'bios',last:'—',chev:0,prog:0,c:'#3a3a44'},
+ {t:'Wind Waker',sys:'gc',core:'dolphin rolling',st:'ready',last:'3d ago',chev:0,prog:61,c:'#1e5e3a'},
+ {t:'Ocarina of Time',sys:'n64',core:'mupen64plus 2.8',st:'sync',last:'1w ago',chev:1,prog:48,c:'#4a3a1c'},
+ {t:'Mario Kart DS',sys:'nds',core:'melonDS 0.9.3',st:'ready',last:'2w ago',chev:0,prog:77,c:'#1c4a5e'}];
+const CORES=[
+ ['sameboy 1.0.3','gb · gbc','MIT','1.2 MB','installed'],['gambatte 0.5','gb · gbc','GPL-2.0','0.9 MB','installed'],
+ ['mgba 0.11','gba','MPL-2.0','3.0 MB','installed'],['snes9x 1.63','snes','custom-NC','2.4 MB','update'],
+ ['mesen 0.9.9','nes','GPL-3.0','4.1 MB','installed'],['genesis_plus_gx 1.7.4','gen · sms','custom-NC','2.0 MB','installed'],
+ ['swanstation 1.0','psx','GPL-3.0','9.8 MB','update'],['melonds 0.9.3','nds','GPL-3.0','3.6 MB','installed'],
+ ['ppsspp 1.17','psp','GPL-2.0+','18 MB','update'],['dolphin rolling','gc · wii','GPL-2.0+','32 MB','installed']];
+let libf='all',cur=GAMES[1],playing=true;
+const pills=['all','snes','gba','psx','gc','n64','nds'];
+document.getElementById('libpills').innerHTML=pills.map(p=>`<button type="button" class="fpill${p==='all'?' on':''}" data-p="${p}">${p==='all'?'All systems':p.toUpperCase()}</button>`).join('');
+function stdot(s){return s==='ready'?'<span class="dot"></span>ready':s==='playing'?'<span class="dot"></span><b>playing</b>':s==='bios'?'<span class="dot warn"></span>needs BIOS':'<span class="dot dim"></span>syncing'}
+function drawLib(){const tb=document.getElementById('libtbl');tb.querySelectorAll('tr.r').forEach(r=>r.remove());
+ GAMES.filter(g=>libf==='all'||g.sys===libf).forEach(g=>{const tr=document.createElement('tr');tr.className='r';
+ tr.innerHTML=`<td class="tt">${g.t}</td><td class="mono" style="font-size:11px">${g.core}</td><td>${stdot(g.st)}</td><td class="mono" style="font-size:11px">${g.last}</td>`;
+ tr.onclick=()=>setNow(g);tb.appendChild(tr)})}
+document.getElementById('libpills').onclick=e=>{const b=e.target.closest('.fpill');if(!b)return;libf=b.dataset.p;document.querySelectorAll('#libpills .fpill').forEach(x=>x.classList.toggle('on',x===b));drawLib()};
+document.querySelectorAll('[data-sys]').forEach(b=>b.onclick=()=>{libf=b.dataset.sys;document.querySelectorAll('#libpills .fpill').forEach(x=>x.classList.toggle('on',x.dataset.p===libf));drawLib()});
+function setNow(g){cur=g;document.getElementById('npt').textContent=g.t;syncNp()}
+function syncNp(){document.getElementById('nps').textContent=`${cur.sys} · ${cur.core.split(' ')[0]} · ${playing?'playing':'paused'}`;document.getElementById('npplay').textContent=playing?'❚❚':'▶';document.getElementById('npi').style.width=cur.prog+'%'}
+document.getElementById('npplay').onclick=()=>{playing=!playing;syncNp()};
+document.getElementById('nptk').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();cur.prog=Math.round((e.clientX-r.left)/r.width*100);syncNp()};
+/* detail */
+const SLOTS=[['Auto · background save','2 min ago'],['Slot 1 · Magma interior','last night'],['Slot 2 · empty','—'],['Slot 3 · empty','—']];
+document.getElementById('slots').innerHTML=SLOTS.map(s=>`<div class="slot"><span class="dot${s[1]==='—'?' dim':''}"></span>${s[0]}<span class="mono">${s[1]}</span></div>`).join('');
+document.getElementById('slots').onclick=e=>{const s=e.target.closest('.slot');if(!s)return;s.style.borderColor='#7170ff';setTimeout(()=>s.style.borderColor='',600)};
+const CHEATS=[['Infinite Energy',true],['Moon Jump',true],['Have All Missiles',false],['Debug Menu',false]];
+function drawCh(){document.getElementById('cheats').innerHTML=CHEATS.map((c,i)=>`<div class="cheat">${c[0]}<button type="button" class="tgl${c[1]?' on':''}" data-i="${i}" aria-label="toggle ${c[0]}"></button></div>`).join('')}
+drawCh();
+document.getElementById('cheats').onclick=e=>{const b=e.target.closest('.tgl');if(!b)return;CHEATS[+b.dataset.i][1]=!CHEATS[+b.dataset.i][1];drawCh()};
+document.getElementById('boot').onclick=e=>{const bar=document.getElementById('bootbar'),fill=document.getElementById('booti');bar.style.display='block';let p=0;e.target.textContent='Booting…';const iv=setInterval(()=>{p+=20;fill.style.width=p+'%';if(p>=100){clearInterval(iv);e.target.innerHTML='❚❚&nbsp; Playing';setTimeout(()=>{bar.style.display='none';fill.style.width='0';e.target.innerHTML='▶&nbsp; Play'},1200)}},160)};
+/* cores */
+function drawCores(f=''){const tb=document.getElementById('coretbl');tb.querySelectorAll('tr.r').forEach(r=>r.remove());
+ CORES.filter(c=>(c[0]+c[1]).toLowerCase().includes(f)).forEach(c=>{const tr=document.createElement('tr');tr.className='r';
+ tr.innerHTML=`<td class="tt mono" style="font-size:12px">${c[0]}</td><td class="mono" style="font-size:11px">${c[1]}</td><td class="mono" style="font-size:11px">${c[2]}</td><td class="mono" style="font-size:11px">${c[3]}</td><td style="text-align:right">${c[4]==='update'?'<button type="button" class="upd">Update</button>':c[4]==='installed'?'<button type="button" class="rm">Remove</button>':'<button type="button" class="upd">Install</button>'}</td>`;
+ tr.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.className==='rm'){b.textContent='Removed';b.disabled=true}else{b.textContent='✓ Done';b.disabled=true}};
+ tb.appendChild(tr)})}
+drawCores();
+document.getElementById('cq').addEventListener('input',e=>drawCores(e.target.value.toLowerCase()));
+document.getElementById('updall').onclick=e=>{const bar=document.getElementById('upbar'),fill=document.getElementById('upi'),msg=document.getElementById('updmsg');bar.style.display='block';let p=0;e.target.disabled=true;const iv=setInterval(()=>{p+=9;fill.style.width=p+'%';msg.textContent=`updating… ${Math.min(p,100)}% · verifying signatures`;if(p>=100){clearInterval(iv);msg.textContent='3 updated · signatures verified ✓';e.target.textContent='✓ Up to date';drawCores()}},140)};
+/* palette */
 const rows=[["▶ Chrono Trigger","snes · snes9x"],["▶ Metroid Fusion","gba · mgba"],["▶ Silent Hill","psx · swanstation"],["▶ Wind Waker","gc · dolphin"],["＋ Install core…","registry"],["⤓ Check core updates","3 available"],["⌘ Open settings","video · audio · input"]];
 const pal=document.getElementById('pal'),pin=document.getElementById('pin'),pres=document.getElementById('pres');
-function draw(f){pres.innerHTML=rows.filter(r=>r[0].toLowerCase().includes(f)).map((r,i)=>`<div class="prow${i===0?' sel':''}"><span>${r[0]}</span><small>${r[1]}</small></div>`).join('')||'<div class="prow"><span>No match</span><small>esc</small></div>'}
-function open(){pal.classList.add('open');pin.value='';draw('');setTimeout(()=>pin.focus(),30)}
-function shut(){pal.classList.remove('open')}
-document.getElementById('kbtn').onclick=open;document.getElementById('ghost').onclick=open;
-pal.addEventListener('click',e=>{if(e.target===pal)shut()});
-pin.addEventListener('input',()=>draw(pin.value.toLowerCase()));
-document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('open')?shut():open()}if(e.key==='Escape')shut()});
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById('p-'+b.dataset.t).classList.add('on')});
+function drawP(f){pres.innerHTML=rows.filter(r=>r[0].toLowerCase().includes(f)).map((r,i)=>`<div class="prow${i===0?' sel':''}"><span>${r[0]}</span><small>${r[1]}</small></div>`).join('')||'<div class="prow"><span>No match</span><small>esc</small></div>'}
+function openP(){pal.classList.add('open');pin.value='';drawP('');setTimeout(()=>pin.focus(),30)}
+function shutP(){pal.classList.remove('open')}
+document.getElementById('kbtn').onclick=openP;document.querySelectorAll('[data-pal]').forEach(b=>b.onclick=openP);
+pal.addEventListener('click',e=>{if(e.target===pal)shutP()});
+pin.addEventListener('input',()=>drawP(pin.value.toLowerCase()));
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('open')?shutP():openP()}if(e.key==='Escape')shutP()});
+/* verdict */
+const V=JSON.parse(localStorage.getItem('ez-v2')||'{}');
+function syncV(){document.getElementById('vsum').textContent=Object.keys(V).length?('PICKS → '+Object.entries(V).map(([k,v])=>`${k}:${v}`).join(' · ')):'no picks yet on this board';document.querySelectorAll('[data-v]').forEach(b=>{const[k,v]=b.dataset.v.split(':');b.classList.toggle('on',V[k]===v)});document.querySelectorAll('.logocard').forEach(c=>c.classList.toggle('picked',V.logo===c.dataset.v.split(':')[1]))}
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const[k,v]=b.dataset.v.split(':');V[k]=v;localStorage.setItem('ez-v2',JSON.stringify(V));syncV()});
+document.querySelectorAll('.logocard').forEach(c=>c.onclick=()=>{V.logo=c.dataset.v.split(':')[1];localStorage.setItem('ez-v2',JSON.stringify(V));syncV()});
+drawLib();syncNp();syncV();
 </script>
 </body>
 </html>
