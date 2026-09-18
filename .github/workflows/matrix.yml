@@ -61,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: host tooling (gmake for SameBoy BootROMs, cmake/ninja)
         run: brew install cmake ninja pkg-config make rgbds
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: 17
