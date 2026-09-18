@@ -74,6 +74,23 @@ the staged cores match the committed pins, and the bundle is rebuilt for the
 target OS. It also bundles **exactly** the cores whose manifest `delivery`
 promises `bundled` for that OS — held cores stay out even when staged.
 
+### macOS signing & pins (read this before touching codesign)
+
+- macOS staged artifacts are **ad-hoc signed at stage time** and the pins
+  describe those signed bytes. Ad-hoc signatures are not reproducible, so
+  **never sign after pinning** and never re-sign a pinned artifact —
+  `pin_artifacts` will (correctly) fail and the app will refuse to stage.
+- During bundling, `release.sh` signs only the runtime dylib
+  (`Contents/Frameworks/`) and the app itself (with
+  `macos/Runner/Release.entitlements`). The core dylibs in
+  `Contents/Resources/` are **not** signed again — that would break the pins
+  the app verifies before staging. Resources/ nested code does not require a
+  signature, and the ad-hoc path has no hardened runtime, so `dlopen` works.
+- For a future notarized build: hardened runtime + library validation needs
+  either the `disable-library-validation` entitlement or cores signed with
+  the same team ID **and re-pinned to the signed bytes** (one build → sign →
+  pin → ship, no re-signing).
+
 ## CI release
 
 Actions → **Release** → *Run workflow*:
