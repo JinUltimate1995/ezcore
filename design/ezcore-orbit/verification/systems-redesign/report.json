@@ -1,0 +1,45 @@
+{
+  "states": [
+    {
+      "platform": "ios",
+      "orientation": "portrait",
+      "cores": 18
+    },
+    {
+      "platform": "ios",
+      "orientation": "landscape",
+      "cores": 18
+    },
+    {
+      "platform": "android",
+      "orientation": "portrait",
+      "cores": 18
+    },
+    {
+      "platform": "android",
+      "orientation": "landscape",
+      "cores": 18
+    },
+    {
+      "platform": "mac",
+      "orientation": "desktop",
+      "cores": 18
+    },
+    {
+      "platform": "windows",
+      "orientation": "desktop",
+      "cores": 18
+    },
+    {
+      "platform": "linux",
+      "orientation": "desktop",
+      "cores": 18
+    },
+    {
+      "platform": "web",
+      "orientation": "desktop",
+      "cores": 18
+    }
+  ],
+  "errors": []
+}

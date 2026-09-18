@@ -1,0 +1,3114 @@
+{
+  "states": [
+    {
+      "id": "ios-portrait-library",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 99.332275390625,
+        "y": 293.57623291015625,
+        "width": 189.33544921875,
+        "height": 263.16461181640625,
+        "top": 293.57623291015625,
+        "right": 288.667724609375,
+        "bottom": 556.7408447265625,
+        "left": 99.332275390625
+      },
+      "stage": {
+        "x": 0,
+        "y": 252,
+        "width": 388,
+        "height": 360.953125,
+        "top": 252,
+        "right": 388,
+        "bottom": 612.953125,
+        "left": 0
+      },
+      "play": {
+        "x": 35,
+        "y": 755,
+        "width": 260,
+        "height": 48,
+        "top": 755,
+        "right": 295,
+        "bottom": 803,
+        "left": 35
+      },
+      "dialog": null,
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 75,
+        "top": 169,
+        "right": 388,
+        "bottom": 244,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-portrait-systems",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 71,
+        "top": 118,
+        "right": 388,
+        "bottom": 189,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-portrait-details",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 16,
+        "y": 178.796875,
+        "width": 356,
+        "height": 524.390625,
+        "top": 178.796875,
+        "right": 372,
+        "bottom": 703.1875,
+        "left": 16
+      },
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 71,
+        "top": 118,
+        "right": 388,
+        "bottom": 189,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-portrait-vault",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 1137,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 107.890625,
+        "top": 169,
+        "right": 388,
+        "bottom": 276.890625,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-portrait-pause",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 1137,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 16,
+        "y": 147.609375,
+        "width": 356,
+        "height": 586.78125,
+        "top": 147.609375,
+        "right": 372,
+        "bottom": 734.390625,
+        "left": 16
+      },
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 107.890625,
+        "top": 169,
+        "right": 388,
+        "bottom": 276.890625,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-portrait-settings",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 959,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 75,
+        "top": 118,
+        "right": 388,
+        "bottom": 193,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "ios-landscape-library",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 454.21044921875,
+        "y": 155.64378356933594,
+        "width": 57.5791015625,
+        "height": 80.03166198730469,
+        "top": 155.64378356933594,
+        "right": 511.78955078125,
+        "bottom": 235.67544555664062,
+        "left": 454.21044921875
+      },
+      "stage": {
+        "x": 112,
+        "y": 143,
+        "width": 742,
+        "height": 109.78125,
+        "top": 143,
+        "right": 854,
+        "bottom": 252.78125,
+        "left": 112
+      },
+      "play": {
+        "x": 635.703125,
+        "y": 291.390625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 291.390625,
+        "right": 755,
+        "bottom": 337.390625,
+        "left": 635.703125
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 50,
+        "top": 85,
+        "right": 854,
+        "bottom": 135,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "ios-landscape-systems",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 40,
+        "top": 40,
+        "right": 854,
+        "bottom": 80,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "ios-landscape-details",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 30,
+        "y": 12,
+        "width": 794,
+        "height": 364,
+        "top": 12,
+        "right": 824,
+        "bottom": 376,
+        "left": 30
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 40,
+        "top": 40,
+        "right": 854,
+        "bottom": 80,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "ios-landscape-vault",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 401,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 76.796875,
+        "top": 85,
+        "right": 854,
+        "bottom": 161.796875,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "ios-landscape-pause",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 401,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 147,
+        "y": 12,
+        "width": 560,
+        "height": 364,
+        "top": 12,
+        "right": 707,
+        "bottom": 376,
+        "left": 147
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 76.796875,
+        "top": 85,
+        "right": 854,
+        "bottom": 161.796875,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "ios-landscape-settings",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 763,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 42,
+        "top": 40,
+        "right": 854,
+        "bottom": 82,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-portrait-library",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 99.332275390625,
+        "y": 293.57623291015625,
+        "width": 189.33544921875,
+        "height": 263.16461181640625,
+        "top": 293.57623291015625,
+        "right": 288.667724609375,
+        "bottom": 556.7408447265625,
+        "left": 99.332275390625
+      },
+      "stage": {
+        "x": 0,
+        "y": 252,
+        "width": 388,
+        "height": 360.953125,
+        "top": 252,
+        "right": 388,
+        "bottom": 612.953125,
+        "left": 0
+      },
+      "play": {
+        "x": 35,
+        "y": 755,
+        "width": 260,
+        "height": 48,
+        "top": 755,
+        "right": 295,
+        "bottom": 803,
+        "left": 35
+      },
+      "dialog": null,
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 75,
+        "top": 169,
+        "right": 388,
+        "bottom": 244,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-portrait-systems",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 71,
+        "top": 118,
+        "right": 388,
+        "bottom": 189,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-portrait-details",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 854,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 16,
+        "y": 178.796875,
+        "width": 356,
+        "height": 524.390625,
+        "top": 178.796875,
+        "right": 372,
+        "bottom": 703.1875,
+        "left": 16
+      },
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 71,
+        "top": 118,
+        "right": 388,
+        "bottom": 189,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-portrait-vault",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 1137,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 107.890625,
+        "top": 169,
+        "right": 388,
+        "bottom": 276.890625,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-portrait-pause",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 1137,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 16,
+        "y": 147.609375,
+        "width": 356,
+        "height": 586.78125,
+        "top": 147.609375,
+        "right": 372,
+        "bottom": 734.390625,
+        "left": 16
+      },
+      "header": {
+        "x": 0,
+        "y": 169,
+        "width": 388,
+        "height": 107.890625,
+        "top": 169,
+        "right": 388,
+        "bottom": 276.890625,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-portrait-settings",
+      "w": 388,
+      "h": 854,
+      "sw": 388,
+      "sh": 959,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 118,
+        "width": 388,
+        "height": 75,
+        "top": 118,
+        "right": 388,
+        "bottom": 193,
+        "left": 0
+      },
+      "nav": {
+        "x": 24,
+        "y": 58,
+        "width": 340,
+        "height": 50,
+        "top": 58,
+        "right": 364,
+        "bottom": 108,
+        "left": 24
+      }
+    },
+    {
+      "id": "android-landscape-library",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 454.21044921875,
+        "y": 155.64378356933594,
+        "width": 57.5791015625,
+        "height": 80.03166198730469,
+        "top": 155.64378356933594,
+        "right": 511.78955078125,
+        "bottom": 235.67544555664062,
+        "left": 454.21044921875
+      },
+      "stage": {
+        "x": 112,
+        "y": 143,
+        "width": 742,
+        "height": 109.78125,
+        "top": 143,
+        "right": 854,
+        "bottom": 252.78125,
+        "left": 112
+      },
+      "play": {
+        "x": 635.703125,
+        "y": 291.390625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 291.390625,
+        "right": 755,
+        "bottom": 337.390625,
+        "left": 635.703125
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 50,
+        "top": 85,
+        "right": 854,
+        "bottom": 135,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-landscape-systems",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 40,
+        "top": 40,
+        "right": 854,
+        "bottom": 80,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-landscape-details",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 388,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 30,
+        "y": 12,
+        "width": 794,
+        "height": 364,
+        "top": 12,
+        "right": 824,
+        "bottom": 376,
+        "left": 30
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 40,
+        "top": 40,
+        "right": 854,
+        "bottom": 80,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-landscape-vault",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 401,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 76.796875,
+        "top": 85,
+        "right": 854,
+        "bottom": 161.796875,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-landscape-pause",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 401,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 147,
+        "y": 12,
+        "width": 560,
+        "height": 364,
+        "top": 12,
+        "right": 707,
+        "bottom": 376,
+        "left": 147
+      },
+      "header": {
+        "x": 112,
+        "y": 85,
+        "width": 742,
+        "height": 76.796875,
+        "top": 85,
+        "right": 854,
+        "bottom": 161.796875,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "android-landscape-settings",
+      "w": 854,
+      "h": 388,
+      "sw": 854,
+      "sh": 763,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 112,
+        "y": 40,
+        "width": 742,
+        "height": 42,
+        "top": 40,
+        "right": 854,
+        "bottom": 82,
+        "left": 112
+      },
+      "nav": {
+        "x": 40,
+        "y": 58.5,
+        "width": 72,
+        "height": 257,
+        "top": 58.5,
+        "right": 112,
+        "bottom": 315.5,
+        "left": 40
+      }
+    },
+    {
+      "id": "mac-desktop-library",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 641,
+      "cover": {
+        "x": 435.3655090332031,
+        "y": 180.07070922851562,
+        "width": 205.26901245117188,
+        "height": 285.31646728515625,
+        "top": 180.07070922851562,
+        "right": 640.634521484375,
+        "bottom": 465.3871765136719,
+        "left": 435.3655090332031
+      },
+      "stage": {
+        "x": 72,
+        "y": 135,
+        "width": 932,
+        "height": 391.328125,
+        "top": 135,
+        "right": 1004,
+        "bottom": 526.328125,
+        "left": 72
+      },
+      "play": {
+        "x": 785.703125,
+        "y": 565.65625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 565.65625,
+        "right": 905,
+        "bottom": 611.65625,
+        "left": 785.703125
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 50,
+        "top": 77,
+        "right": 1004,
+        "bottom": 127,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "mac-desktop-systems",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 641,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "mac-desktop-details",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 641,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 57,
+        "y": 123.90625,
+        "width": 890,
+        "height": 393.1875,
+        "top": 123.90625,
+        "right": 947,
+        "bottom": 517.09375,
+        "left": 57
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "mac-desktop-vault",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 641,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "mac-desktop-pause",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 641,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 222,
+        "y": 29.40625,
+        "width": 560,
+        "height": 582.1875,
+        "top": 29.40625,
+        "right": 782,
+        "bottom": 611.59375,
+        "left": 222
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "mac-desktop-settings",
+      "w": 1004,
+      "h": 641,
+      "sw": 1004,
+      "sh": 755,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 42,
+        "top": 32,
+        "right": 1004,
+        "bottom": 74,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 192,
+        "width": 72,
+        "height": 257,
+        "top": 192,
+        "right": 72,
+        "bottom": 449,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-library",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 644,
+      "cover": {
+        "x": 434.582275390625,
+        "y": 180.4156494140625,
+        "width": 206.83544921875,
+        "height": 287.5,
+        "top": 180.4156494140625,
+        "right": 641.417724609375,
+        "bottom": 467.9156494140625,
+        "left": 434.582275390625
+      },
+      "stage": {
+        "x": 72,
+        "y": 135,
+        "width": 932,
+        "height": 394.328125,
+        "top": 135,
+        "right": 1004,
+        "bottom": 529.328125,
+        "left": 72
+      },
+      "play": {
+        "x": 785.703125,
+        "y": 568.65625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 568.65625,
+        "right": 905,
+        "bottom": 614.65625,
+        "left": 785.703125
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 50,
+        "top": 77,
+        "right": 1004,
+        "bottom": 127,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-systems",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 644,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-details",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 644,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 57,
+        "y": 125.40625,
+        "width": 890,
+        "height": 393.1875,
+        "top": 125.40625,
+        "right": 947,
+        "bottom": 518.59375,
+        "left": 57
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-vault",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 644,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-pause",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 644,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 222,
+        "y": 30.90625,
+        "width": 560,
+        "height": 582.1875,
+        "top": 30.90625,
+        "right": 782,
+        "bottom": 613.09375,
+        "left": 222
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "windows-desktop-settings",
+      "w": 1004,
+      "h": 644,
+      "sw": 1004,
+      "sh": 755,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 42,
+        "top": 32,
+        "right": 1004,
+        "bottom": 74,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 193.5,
+        "width": 72,
+        "height": 257,
+        "top": 193.5,
+        "right": 72,
+        "bottom": 450.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-library",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 634,
+      "cover": {
+        "x": 437.2009582519531,
+        "y": 179.26849365234375,
+        "width": 201.59811401367188,
+        "height": 280.2056884765625,
+        "top": 179.26849365234375,
+        "right": 638.799072265625,
+        "bottom": 459.47418212890625,
+        "left": 437.2009582519531
+      },
+      "stage": {
+        "x": 72,
+        "y": 135,
+        "width": 932,
+        "height": 384.328125,
+        "top": 135,
+        "right": 1004,
+        "bottom": 519.328125,
+        "left": 72
+      },
+      "play": {
+        "x": 785.703125,
+        "y": 558.65625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 558.65625,
+        "right": 905,
+        "bottom": 604.65625,
+        "left": 785.703125
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 50,
+        "top": 77,
+        "right": 1004,
+        "bottom": 127,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-systems",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 634,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-details",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 634,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 57,
+        "y": 120.40625,
+        "width": 890,
+        "height": 393.1875,
+        "top": 120.40625,
+        "right": 947,
+        "bottom": 513.59375,
+        "left": 57
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-vault",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 634,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-pause",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 634,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 222,
+        "y": 25.90625,
+        "width": 560,
+        "height": 582.1875,
+        "top": 25.90625,
+        "right": 782,
+        "bottom": 608.09375,
+        "left": 222
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "linux-desktop-settings",
+      "w": 1004,
+      "h": 634,
+      "sw": 1004,
+      "sh": 755,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 42,
+        "top": 32,
+        "right": 1004,
+        "bottom": 74,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 188.5,
+        "width": 72,
+        "height": 257,
+        "top": 188.5,
+        "right": 72,
+        "bottom": 445.5,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-library",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 615,
+      "cover": {
+        "x": 442.18511962890625,
+        "y": 177.07070922851562,
+        "width": 191.6297607421875,
+        "height": 266.3607482910156,
+        "top": 177.07070922851562,
+        "right": 633.8148803710938,
+        "bottom": 443.43145751953125,
+        "left": 442.18511962890625
+      },
+      "stage": {
+        "x": 72,
+        "y": 135,
+        "width": 932,
+        "height": 365.328125,
+        "top": 135,
+        "right": 1004,
+        "bottom": 500.328125,
+        "left": 72
+      },
+      "play": {
+        "x": 785.703125,
+        "y": 539.65625,
+        "width": 119.296875,
+        "height": 46,
+        "top": 539.65625,
+        "right": 905,
+        "bottom": 585.65625,
+        "left": 785.703125
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 50,
+        "top": 77,
+        "right": 1004,
+        "bottom": 127,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-systems",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 615,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": null,
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-details",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 615,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 57,
+        "y": 110.90625,
+        "width": 890,
+        "height": 393.1875,
+        "top": 110.90625,
+        "right": 947,
+        "bottom": 504.09375,
+        "left": 57
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 40,
+        "top": 32,
+        "right": 1004,
+        "bottom": 72,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-vault",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 615,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-pause",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 615,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 222,
+        "y": 16.40625,
+        "width": 560,
+        "height": 582.1875,
+        "top": 16.40625,
+        "right": 782,
+        "bottom": 598.59375,
+        "left": 222
+      },
+      "header": {
+        "x": 72,
+        "y": 77,
+        "width": 932,
+        "height": 76.796875,
+        "top": 77,
+        "right": 1004,
+        "bottom": 153.796875,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    },
+    {
+      "id": "web-desktop-settings",
+      "w": 1004,
+      "h": 615,
+      "sw": 1004,
+      "sh": 755,
+      "cover": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "play": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "dialog": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "header": {
+        "x": 72,
+        "y": 32,
+        "width": 932,
+        "height": 42,
+        "top": 32,
+        "right": 1004,
+        "bottom": 74,
+        "left": 72
+      },
+      "nav": {
+        "x": 0,
+        "y": 179,
+        "width": 72,
+        "height": 257,
+        "top": 179,
+        "right": 72,
+        "bottom": 436,
+        "left": 0
+      }
+    }
+  ],
+  "errors": [],
+  "failures": []
+}

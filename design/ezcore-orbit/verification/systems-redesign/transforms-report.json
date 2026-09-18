@@ -1,0 +1,36 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "height": 700,
+      "selections": 18
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "selections": 18
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "selections": 18
+    },
+    {
+      "width": 860,
+      "height": 390,
+      "selections": 18
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "selections": 18
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "selections": 18
+    }
+  ],
+  "errors": [],
+  "matrix_checks": 1944
+}

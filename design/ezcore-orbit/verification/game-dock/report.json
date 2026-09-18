@@ -1,0 +1,45 @@
+{
+  "states": [
+    {
+      "platform": "ios",
+      "orientation": "portrait",
+      "games_checked": 10
+    },
+    {
+      "platform": "ios",
+      "orientation": "landscape",
+      "games_checked": 10
+    },
+    {
+      "platform": "android",
+      "orientation": "portrait",
+      "games_checked": 10
+    },
+    {
+      "platform": "android",
+      "orientation": "landscape",
+      "games_checked": 10
+    },
+    {
+      "platform": "mac",
+      "orientation": "desktop",
+      "games_checked": 10
+    },
+    {
+      "platform": "windows",
+      "orientation": "desktop",
+      "games_checked": 10
+    },
+    {
+      "platform": "linux",
+      "orientation": "desktop",
+      "games_checked": 10
+    },
+    {
+      "platform": "web",
+      "orientation": "desktop",
+      "games_checked": 10
+    }
+  ],
+  "errors": []
+}

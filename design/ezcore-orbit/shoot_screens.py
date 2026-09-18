@@ -1,0 +1,26 @@
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+out=Path(__file__).parent/'verification'
+with sync_playwright() as p:
+ b=p.chromium.launch()
+ page=b.new_page(viewport={'width':1280,'height':760})
+ page.goto('http://127.0.0.1:8770/ezCORE-Orbit.html',wait_until='networkidle')
+ page.wait_for_timeout(900)
+ page.locator('#details-selected').click()
+ page.wait_for_timeout(700)
+ page.screenshot(path=str(out/'os-details.png'))
+ page.keyboard.press('Escape')
+ page.locator('#play-selected').click()
+ page.wait_for_timeout(700)
+ page.screenshot(path=str(out/'os-pause.png'))
+ page.keyboard.press('Escape')
+ page.locator('#grid-view').click()
+ page.wait_for_timeout(400)
+ page.screenshot(path=str(out/'os-grid.png'))
+ page.locator('[data-collection="vault"]').click()
+ page.wait_for_timeout(400)
+ page.screenshot(path=str(out/'os-vault.png'))
+ page.locator('.nav [data-go="settings"]').click()
+ page.wait_for_timeout(400)
+ page.screenshot(path=str(out/'os-settings.png'))
+ b.close()
