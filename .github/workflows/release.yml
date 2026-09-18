@@ -48,7 +48,7 @@ jobs:
           EZCORE_CODESIGN_IDENTITY: ${{ secrets.EZCORE_CODESIGN_IDENTITY }}
         run: scripts/release.sh macos --out dist/
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ezcore-macos
           path: dist/ezcore-*-macos-arm64.zip
@@ -80,7 +80,7 @@ jobs:
           EZCORE_VERSION: ${{ github.event.inputs.version || 'dev' }}
         run: scripts/release.sh windows --out dist/
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ezcore-windows
           path: dist/ezcore-*-windows-x64.zip
@@ -112,7 +112,7 @@ jobs:
           EZCORE_VERSION: ${{ github.event.inputs.version || 'dev' }}
         run: scripts/release.sh linux --out dist/
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ezcore-linux
           path: dist/ezcore-*-linux-x64.tar.gz
@@ -153,7 +153,7 @@ jobs:
           EZCORE_KEY_PASSWORD: ${{ secrets.EZCORE_KEY_PASSWORD }}
         run: scripts/release.sh android --out dist/
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ezcore-android
           path: dist/ezcore-*-android-arm64.apk

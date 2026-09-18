@@ -43,7 +43,7 @@ jobs:
         run: |
           python3 scripts/build_catalog.py
           flutter test test/core_matrix_test.dart
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: cores-${{ runner.os }}
           path: |
@@ -76,7 +76,7 @@ jobs:
         run: EZCORE_PLATFORM=android scripts/build_core.sh --tier-android
       - name: ios tier
         run: EZCORE_PLATFORM=ios scripts/build_core.sh --tier-ios
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: cores-mobile
           path: |
