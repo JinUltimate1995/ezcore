@@ -15,7 +15,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -58,7 +58,7 @@ jobs:
       ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
       ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/27.2.12479018
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: host tooling (gmake for SameBoy BootROMs, cmake/ninja)
         run: brew install cmake ninja pkg-config make rgbds
       - uses: actions/setup-java@v4
