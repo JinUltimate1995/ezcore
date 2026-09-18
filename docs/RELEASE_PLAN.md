@@ -1,9 +1,28 @@
 # ezCORE v1 Release Plan
 
-> **Date:** 2026-09-18
+> **Date:** 2026-09-19 (updated — decisions settled, first release scoped)
 > **Status:** Active — supersedes `ROADMAP.md` (stale pre-build draft) for v1 scope.
 > **Goal:** a first public build an actual user can install, import their own
 > dumps into, play, save, and update — on macOS first, then mobile.
+
+## v0.1.0 scope (first public release)
+
+| Platform | Artifact | Status |
+|---|---|---|
+| macOS arm64 | `ezcore-0.1.0-macos-arm64.zip` (ad-hoc signed) | builds locally, verified |
+| Android arm64 | `ezcore-0.1.0-android-arm64.apk` (release-signed) | builds locally, verified |
+| Windows x64 | — | deferred: needs the CI matrix (Actions billing currently blocks CI) |
+| Linux x64 | — | deferred: same |
+| iOS | — | skipped for now: needs an Apple Developer identity (per decision) |
+
+Other settled decisions: **no Mac App Store** (GPL-3.0 is incompatible with
+the App Store ToS, and sandbox review adds calendar time — ezCORE is a
+download from GitHub Releases); **cloud sync deferred to v1.1**; repo lives
+at `github.com/JinUltimate1995/ezcore`.
+
+This release ships with a plain-language heads-up: it is an early build,
+several cores are verified only on macOS, and Windows/Linux binaries do not
+exist yet. Issues and PRs are the support path.
 
 Definition of v1 done: unsigned GitHub release for macOS (notarized if an
 Apple identity is available) + published store listings or TestFlight/beta
@@ -33,9 +52,11 @@ explicitly "macOS + Windows/Linux desktop, mobile beta to follow."
    (`file_selector`, powerbox-native) + `BookmarkStore.swift` security-
    scoped bookmarks (`ezcore/files` channel) + `ScopedFiles` seam with
    passthrough elsewhere; player holds access across session open.
-2. **Fresh-clone bootstrap** — SCRIPTS DONE, full nuke-verify pending
-   (last gate before release: move `native/`+`runtime/build*` aside and
-   run the documented chain to green).
+2. **Fresh-clone bootstrap** — scripts verified piecewise on this machine
+   (headers fetch, runtime + CTest, catalog, analyze, 187 tests, pin
+   check). A full nuke-and-rebuild (delete `native/` + `runtime/build*` and
+   re-run the documented chain) has **not** been re-run since the final UI
+   pass — do it before tagging anything after v0.1.0.
 3. **BIOS check + guidance** — DONE (`BiosCheck` service + player boot
    gate naming exact missing files + Systems dock row; the dead
    `biosStatus` map was removed instead of populated).
@@ -89,13 +110,20 @@ Commercial-game compatibility claims, RetroAchievements, libretro-database
 cheat downloads (ship the comment fix only), Firebase/Stripe scaffolding
 from the old roadmap draft.
 
-## Decisions needed from you (* = blocking)
+## Decisions (settled 2026-09-19)
 
-- Distribution: GitHub releases only, or also Mac App Store? (Store =
-  stricter sandbox review + calendar time.)
-- Apple Developer identity available for notarization / TestFlight? *
-- Cloud sync in v1.1: build backend vs iCloud/Play-data vs drop?
-- Android signing key + Play account owner?
+- **Distribution:** GitHub Releases only (no Mac App Store — GPL-3.0 is
+  incompatible with App Store ToS §3.3.2 and store review adds calendar
+  time). macOS ships ad-hoc signed (notarized when an Apple identity is
+  available).
+- **iOS:** skipped for this release — no Apple Developer identity yet;
+  unsigned builds are dev-only. Code stays iOS-ready (interpreter policy
+  enforced in manifests).
+- **Android:** release keystore generated; keystore + credentials live in
+  GitHub Actions secrets; **APK is attached to the GitHub Release** (no
+  Play Store submission for now).
+- **Cloud sync:** deferred to v1.1 (local Time Capsule vault covers v1).
+- **Repo:** `JinUltimate1995/ezcore` (public, GPL-3.0-only).
 
 ## Risks
 

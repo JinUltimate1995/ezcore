@@ -1,13 +1,20 @@
 # Architecture Decision Records
 
 > Every significant decision is logged here with context, options considered, and rationale.
+>
+> **Note (2026-09-19):** this log started as a planning document. Where a
+> decision was later reversed, the ADR carries a **Superseded** status line —
+> the current state of the project lives in [`ARCHITECTURE.md`](ARCHITECTURE.md)
+> and [`RELEASE_PLAN.md`](RELEASE_PLAN.md).
 
 ---
 
 ## ADR-001: Runtime Language — C++
 
 **Date:** 2026-09-16
-**Status:** Accepted
+**Status:** ~~Accepted~~ **Superseded** — the runtime shipped as **C11**
+(`runtime/src/runtime.c`); no C++ migration happened, and the C ABI boundary
+turned out to be all that mattered. See `ARCHITECTURE.md`.
 
 ### Context
 
@@ -112,7 +119,9 @@ ezCore needs to support 50+ emulation systems. Monolithic core integration would
 ## ADR-004: Cloud Saves as Primary Feature
 
 **Date:** 2026-09-16
-**Status:** Accepted
+**Status:** ~~Accepted~~ **Superseded** — cloud sync is deferred to v1.1
+(backend, auth, conflict policy and privacy review are not v1 work); the
+local Time Capsule vault is the v1 save story. See `RELEASE_PLAN.md`.
 
 ### Context
 
@@ -357,7 +366,9 @@ ROM dropped in folder
 ## ADR-010: Payment Platform — Stripe + RevenueCat
 
 **Date:** 2026-09-16
-**Status:** Accepted
+**Status:** ~~Accepted~~ **Superseded** — payments are not part of v1; no
+payment code ships (the old roadmap's Firebase/Stripe scaffolding was
+explicitly dropped). Revisit if/when a paid tier exists.
 
 ### Context
 

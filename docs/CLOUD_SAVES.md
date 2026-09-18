@@ -1,5 +1,9 @@
 # ezCore Cloud Saves Specification
 
+> **Status:** planned for **v1.1** — not in v1.0.0. The local Time Capsule
+> vault fully covers v1. Priority/positioning lines below are from the
+> planning phase and are not commitments.
+
 > **Version:** 1.0
 > **Date:** 2026-09-16
 > **Status:** Draft

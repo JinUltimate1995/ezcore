@@ -1,9 +1,12 @@
 # ezCore — Master Plan
 
+> **Status:** planning draft (2026-09-16) — **superseded** by
+> [`RELEASE_PLAN.md`](RELEASE_PLAN.md) (v1 scope) and
+> [`ARCHITECTURE.md`](ARCHITECTURE.md) (as-built). Kept for history; parts of
+> it (C++ runtime, download infrastructure) were never built as written.
+>
 > **Version:** 1.0
-> **Date:** 2026-09-16
-> **Status:** Draft — ready for vibe coding
-> **Stack:** C++ (runtime) + Flutter/Dart (UI) + C/C++ (libretro cores)
+> **Stack as written:** C++ (runtime) + Flutter/Dart (UI) + C/C++ (libretro cores)
 
 ---
 

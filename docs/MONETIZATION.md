@@ -1,5 +1,9 @@
 # ezCore Monetization Plan
 
+> **Status:** planning draft — **not part of v1.0.0 and not a commitment.**
+> ezCORE ships free and fully local; cloud sync and any paid tier are
+> deferred past v1.1 and nothing here is decided. Kept for history.
+
 > **Version:** 1.0
 > **Date:** 2026-09-16
 > **Status:** Draft

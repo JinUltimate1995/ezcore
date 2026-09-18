@@ -1,5 +1,9 @@
 # ezCore Development Roadmap
 
+> **Status:** planning draft (2026-09-16) — **superseded** by
+> [`RELEASE_PLAN.md`](RELEASE_PLAN.md), which is the live v1 scope.
+> Kept for history.
+
 > **Version:** 1.0
 > **Date:** 2026-09-16
 > **Status:** Draft
