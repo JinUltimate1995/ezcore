@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Arcade Neon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0612;--bg2:#160a1e;--panel:#1a0f26;--panel2:#221430;--line:#2a1c3a;--txt:#ece6f4;--mut:#9a8aae;--acc:#C6FF4A;--neon:rgba(198,255,74,.4)}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:radial-gradient(120% 80% at 50% -10%,#201030 0%,var(--bg) 60%) fixed;color:var(--txt);-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+.bound{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+/* crt overlay */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:100;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0,transparent 1px,transparent 3px,rgba(0,0,0,.08) 4px);
+  mix-blend-mode:multiply;
+}
+
+/* header */
+.head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--mut)}
+h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);letter-spacing:-.01em;text-shadow:0 0 20px var(--neon)}
+h1 .ez{color:var(--acc)}
+.sub{color:var(--mut);max-width:62ch;margin-top:8px;font-size:14px}
+
+/* toolbar */
+.toolbar{display:flex;gap:8px;margin:24px 0 16px;flex-wrap:wrap}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:6px 14px;border-radius:20px;font-family:'Space Grotesk';font-size:12px;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--acc);box-shadow:0 0 12px -4px var(--neon)}
+.chip.on{background:var(--acc);color:#0d0612;border-color:(--acc);box-shadow:0 0 20px -4px var(--neon)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.card{
+  aspect-ratio:3/4;border-radius:12px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,var(--c1),var(--c2));
+  border:1px solid var(--line);cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.25,1.2);
+}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.7));pointer-events:none}
+.card .title{position:absolute;bottom:8px;left:8px;right:8px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 3px #000;z-index:2}
+.card .tag{position:absolute;top:6px;left:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--acc);z-index:2;text-shadow:0 0 8px var(--neon)}
+.card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--acc);box-shadow:0 0 30px -6px var(--neon)}
+.card .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;background:rgba(0,0,0,.4);z-index:3}
+.card:hover .play-overlay{opacity:1}
+.card .play-overlay span{font-family:'Unbounded';font-size:14px;color:var(--acc);text-shadow:0 0 12px var(--neon)}
+
+/* now playing */
+.now-playing{margin-top:32px;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:16px;display:flex;gap:16px;align-items:center}
+.now-playing .art{width:80px;aspect-ratio:3/4;border-radius:8px;background:linear-gradient(165deg,#201030,#0d0612);border:1px solid var(--line);flex-shrink:0}
+.now-playing .info{flex:1}
+.now-playing .info h3{font-family:'Unbounded';font-size:18px;margin-bottom:4px}
+.now-playing .info .meta{color:var(--mut);font-size:12px}
+.play-btn{background:var(--acc);color:#0d0612;border:0;border-radius:8px;padding:10px 24px;font-family:'Space Grotesk';font-weight:700;cursor:pointer}
+.play-btn:hover{box-shadow:0 0 24px -4px var(--neon)}
+
+/* scanline flicker */
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:.98}}
+body{animation:flicker .1s infinite}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker mono">EZCORE · ARCADE · NEON</div>
+    <h1><span class="ez">ez</span>CORE</h1>
+  </div>
+  <p class="sub">Synthwave restrained. Neon accents on void-black. CRT scanlines. The cabin-fever cozy emulator. Never RGB clutter.</p>
+
+  <div class="toolbar">
+    <button class="chip on">All Games</button>
+    <button class="chip">Favorites</button>
+    <button class="chip">Recently Played</button>
+    <button class="chip">Systems</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="now-playing">
+    <div class="art"></div>
+    <div class="info">
+      <h3>Chrono Trigger</h3>
+      <div class="meta">SNES-042 · 1994 · Save Slot 2 · 78% complete</div>
+    </div>
+    <button class="play-btn">▶ Continue</button>
+  </div>
+</div>
+
+<script>
+const G=[
+  {t:'Chrono Trigger',tag:'SNES-042',c1:'#1a0f26',c2:'#0d0612'},
+  {t:'Metroid Fusion',tag:'GBA-017',c1:'#0f1a26',c2:'#060a12'},
+  {t:'Ocarina of Time',tag:'N64-008',c1:'#1a1a0f',c2:'#0a0a06'},
+  {t:'Silent Hill',tag:'PS1-031',c1:'#261616',c2:'#120808'},
+  {t:'Persona 3',tag:'PSP-014',c1:'#261626',c2:'#120a16'},
+  {t:'Final Fantasy VII',tag:'PS1-001',c1:'#0f1a26',c2:'#060a12'},
+  {t:'Metal Gear Solid',tag:'PS1-019',c1:'#1a261a',c2:'#0a120a'},
+  {t:'Resident Evil 2',tag:'PS1-028',c1:'#261a1a',c2:'#120a0a'},
+  {t:'Street Fighter II',tag:'SNES-003',c1:'#261a0f',c2:'#120a06'},
+  {t:'EarthBound',tag:'SNES-067',c1:'#1a2620',c2:'#0a1210'},
+  {t:'Super Mario World',tag:'SNES-001',c1:'#26200f',c2:'#121006'},
+  {t:'Pokémon Gold',tag:'GBA-001',c1:'#26260f',c2:'#121206'}
+];
+const grid=document.getElementById('grid');
+G.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='card';
+  d.style.setProperty('--c1',g.c1);d.style.setProperty('--c2',g.c2);
+  d.innerHTML=`<span class="tag">${g.tag}</span><span class="title">${g.t}</span><div class="play-overlay"><span>▶ PLAY</span></div>`;
+  grid.appendChild(d);
+});
+</script>
+</body>
+</html>

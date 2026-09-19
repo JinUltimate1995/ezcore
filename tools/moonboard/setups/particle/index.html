@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Particle Field</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07080d;--txt:#eef1f6;--mut:#8b93a7;--acc:#C6FF4A;--glow:rgba(198,255,74,.3)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:#07080d;color:#eef1f6;-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+.bound{font-family:'Unbounded',sans-serif}
+
+canvas{position:fixed;inset:0;z-index:0}
+.ui{position:fixed;z-index:5;pointer-events:none}
+.ui .clickable{pointer-events:auto}
+
+/* top bar */
+.top{top:0;left:0;right:0;display:flex;align-items:center;gap:16px;padding:16px 24px;background:linear-gradient(180deg,rgba(7,8,13,.9),transparent)}
+.mark{font-family:'Unbounded';font-weight:900;font-size:16px;pointer-events:auto}.mark b{color:var(--acc)}
+.spacer{flex:1}
+.hud{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);letter-spacing:.1em}
+
+/* center hint */
+.hint{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;transition:opacity .3s}
+.hint.hide{opacity:0}
+.hint h2{font-family:'Unbounded';font-weight:900;font-size:clamp(32px,5vw,56px);margin-bottom:8px;text-shadow:0 0 30px var(--glow)}
+.hint p{color:var(--mut);font-size:14px}
+
+/* vitrine */
+.vitrine{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:6;
+  width:min(92vw,480px);background:rgba(13,16,24,.78);backdrop-filter:blur(24px);
+  border:1px solid #232838;border-radius:16px;padding:20px;
+  box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  display:none;
+}
+.vitrine.show{display:block}
+.vitrine h3{font-family:'Unbounded';font-weight:700;font-size:18px;margin-bottom:4px}
+.vitrine .meta{color:var(--mut);font-size:13px;margin-bottom:12px}
+.vitrine .actions{display:flex;gap:8px}
+.vitrine button{flex:1;padding:10px;border-radius:8px;font-family:'Space Grotesk';font-weight:700;font-size:13px;cursor:pointer;border:0}
+.vitrine .primary{background:var(--acc);color:#0a0c0a}
+.vitrine .ghost{background:transparent;color:#eef1f6;border:1px solid #232838}
+.vitrine .close{position:absolute;top:12px;right:12px;background:transparent;border:0;color:var(--mut);cursor:pointer;font-size:16px}
+
+/* bottom controls */
+.bottom{bottom:24px;left:0;right:0;display:flex;justify-content:center;gap:8px;padding:0 24px}
+.bottom button{background:rgba(13,16,24,.7);backdrop-filter:blur(10px);color:var(--txt);border:1px solid #232838;border-radius:99px;padding:8px 16px;font-family:'Space Grotesk';font-size:12px;font-weight:600;pointer-events:auto;cursor:pointer}
+.bottom button:hover{border-color:var(--acc);color:var(--acc)}
+</style>
+</head>
+<body>
+
+<div class="ui">
+  <div class="top">
+    <span class="mark">ez<b>CORE</b></span>
+    <div class="spacer"></div>
+    <span class="hud" id="hud">SEED 7 · 60FPS · 260 MOTES</span>
+  </div>
+</div>
+
+<div class="hint" id="hint">
+  <h2>Your shelf, alive.</h2>
+  <p>Move to stir · click a cover to focus · ↵ to play</p>
+</div>
+
+<div class="vitrine clickable" id="vitrine">
+  <button class="close" onclick="closeVitrine()">✕</button>
+  <h3 id="vTitle">Chrono Trigger</h3>
+  <div class="meta" id="vMeta">SNES-042 · 1994 · Save Slot 2 · 78%</div>
+  <div class="actions">
+    <button class="primary" id="vPlay">▶ Continue</button>
+    <button class="ghost" onclick="closeVitrine()">Details</button>
+  </div>
+</div>
+
+<div class="bottom clickable">
+  <button onclick="reseed()">↻ Reseed</button>
+  <button onclick="togglePause()">⏸ Pause</button>
+  <button onclick="toggleHelp()">? Help</button>
+</div>
+
+<script>
+p5.disableFriendlyErrors=true;
+const PALETTE=['#c6ff4a','#35e0ff','#ffb347','#b48cff','#ff6b8a','#eef1f6'];
+const TITLES=['CT','MF','OOT','SH','MGS','FF7','WW','RE2','SOTN','MK','P3','M2'];
+const FULL=['Chrono Trigger','Metroid Fusion','Ocarina of Time','Silent Hill','Metal Gear Solid','Final Fantasy VII','Wind Waker','Resident Evil 2','Symphony of the Night','Mario Kart DS','Persona 3','Mega Man 2'];
+const TAGS=['SNES-042','GBA-017','N64-008','PS1-031','PS1-019','PS1-001','---','PS1-028','PS1-044','DS-022','PSP-014','NES-002'];
+let parts=[],seed=7,focus=null,paused=false;
+function setup(){
+  const c=createCanvas(windowWidth,Math.max(windowHeight,900));
+  c.parent(document.body);
+  c.elt.style.position='fixed';c.elt.style.inset='0';c.elt.style.zIndex='0';
+  pixelDensity(1);randomSeed(seed);noiseSeed(seed);colorMode(HSB,360,100,100,100);frameRate(60);
+  for(let i=0;i<260;i++)parts.push(newMote(i));
+}
+function newMote(i){
+  return {x:random(width),y:random(height),r:random(2,10),c:PALETTE[i%PALETTE.length],o:random(.3,.95),sp:random(.2,.95),ph:random(1000),chip:i%13===0?TITLES[i%TITLES.length]:null,idx:i%TITLES.length};
+}
+function draw(){
+  if(paused)return;
+  background(7,8,13,20);
+  const mx=mouseX,my=mouseY;
+  for(const p of parts){
+    const n=noise(p.x*.0016,p.y*.0016,frameCount*.0018+p.ph);
+    const a=n*4*PI;p.x+=Math.cos(a)*p.sp;p.y+=Math.sin(a)*p.sp;
+    const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy)||1;
+    if(d<160){p.x+=dx/d*1.8;p.y+=dy/d*1.8;}
+    if(p.x<-20)p.x=width+20;if(p.x>width+20)p.x=-20;
+    if(p.y<-20)p.y=height+20;if(p.y>height+20)p.y=-20;
+    const isF=focus&&focus.idx===p.idx&&p.chip;
+    noStroke();const col=color(p.c);col.setAlpha(p.o*(isF?100:55));
+    fill(col);circle(p.x,p.y,p.r*(isF?3:1)*2);
+    if(p.chip){fill(235,10,96);textAlign(CENTER,CENTER);textStyle(BOLD);textSize(isF?16:10);text(p.chip,p.x,p.y-(isF?28:16));}
+  }
+  document.getElementById('hud').textContent=`SEED ${seed} · ${Math.round(frameRate())}FPS · ${parts.length} MOTES`+(focus?` · ◉ ${focus.chip}`:' · MOVE TO STIR');
+}
+function mousePressed(){
+  if(mouseY<0||mouseButton!==LEFT)return;
+  let best=null,bd=1e9;
+  for(const p of parts){if(!p.chip)continue;const d=(p.x-mouseX)**2+(p.y-mouseY)**2;if(d<bd){bd=d;best=p;}}
+  if(best&&bd<140*140){focus=best;showVitrine(best)}else{focus=null;closeVitrine()}
+}
+function showVitrine(p){
+  document.getElementById('vTitle').textContent=FULL[p.idx];
+  document.getElementById('vMeta').textContent=TAGS[p.idx]+' · Save Slot 2 · 78%';
+  document.getElementById('vPlay').textContent='▶ '+ (p.idx%2?'Continue':'Play');
+  document.getElementById('vitrine').classList.add('show');
+  document.getElementById('hint').classList.add('hide');
+}
+function closeVitrine(){document.getElementById('vitrine').classList.remove('show')}
+function reseed(){seed=Math.floor(Math.random()*9999);randomSeed(seed);noiseSeed(seed);focus=null;closeVitrine();parts=parts.map((_,i)=>newMote(i))}
+function togglePause(){paused=!paused;document.querySelector('.bottom button:nth-child(2)').textContent=paused?'▶ Play':'⏸ Pause'}
+function toggleHelp(){document.getElementById('hint').classList.toggle('hide')}
+document.getElementById('vPlay').onclick=function(e){e.target.textContent='▶ Booting…';setTimeout(()=>{e.target.textContent='▶ Continue';closeVitrine()},1500)};
+function keyPressed(){
+  if(key==='s'||key==='S')saveCanvas('ezcore-field','png');
+  if(key==='r'||key==='R')reseed();
+  if(key===' ')togglePause();
+  if(key==='Escape')closeVitrine();
+}
+function windowResized(){resizeCanvas(windowWidth,Math.max(windowHeight,900))}
+</script>
+</body>
+</html>

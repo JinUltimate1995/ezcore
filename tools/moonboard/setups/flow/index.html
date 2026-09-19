@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Cover Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#121018;--bg2:#1a1222;--panel:#1e1628;--panel2:#251c30;--line:#2e2340;--txt:#ece8f4;--mut:#8b7ea0;--acc:#B48CFF;--glow:rgba(180,140,255,.35)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:radial-gradient(120% 80% at 50% -10%,#201630 0%,var(--bg) 60%) fixed;color:var(--txt);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.mono{font-family:'JetBrains Mono',monospace}
+.bound{font-family:'Unbounded',sans-serif}
+.top{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:rgba(18,16,24,.85);backdrop-filter:blur(10px);z-index:5}
+.mark{font-family:'Unbounded';font-weight:900;font-size:16px}.mark b{color:var(--acc)}
+.nav{display:flex;gap:4px;margin-left:24px}
+.nav button{background:transparent;border:0;color:var(--mut);padding:7px 14px;font-family:'Space Grotesk';font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;transition:all .15s}
+.nav button:hover{color:var(--txt)}
+.nav button.on{background:var(--panel2);color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.main{flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden;perspective:900px}
+
+/* cover flow */
+.flow{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding:40px 0}
+.flow-row{display:flex;gap:0;align-items:center;justify-content:center;transform-style:preserve-3d}
+.fcard{
+  width:180px;height:260px;border-radius:12px;position:absolute;
+  background:linear-gradient(165deg,var(--c1),var(--c2));
+  border:1px solid var(--line);cursor:pointer;
+  transition:all .5s cubic-bezier(.2,.9,.25,1.2);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);overflow:hidden;
+}
+.fcard::before{content:'';position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.75));z-index:1}
+.fcard::after{
+  content:'';position:absolute;inset:100% 0 auto 0;height:120px;border-radius:12px;
+  background:inherit;filter:blur(1px);opacity:.25;transform:scaleY(-1);mask:linear-gradient(#000,transparent);-webkit-mask:linear-gradient(#000,transparent);pointer-events:none;
+}
+.fcard .t{font-family:'Unbounded';font-weight:700;font-size:14px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7);z-index:2}
+.fcard .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--acc);margin-top:4px;z-index:2}
+.fcard.center{transform:translateX(0) translateZ(0) scale(1.15);box-shadow:0 20px 60px -10px var(--glow);border-color:var(--acc);z-index:10}
+.fcard.left1{transform:translateX(-200px) translateZ(-60px) rotateY(38deg) scale(.92);opacity:.7;z-index:8}
+.fcard.left2{transform:translateX(-360px) translateZ(-140px) rotateY(50deg) scale(.78);opacity:.4;z-index:6}
+.fcard.right1{transform:translateX(200px) translateZ(-60px) rotateY(-38deg) scale(.92);opacity:.7;z-index:8}
+.fcard.right2{transform:translateX(360px) translateZ(-140px) rotateY(-50deg) scale(.78);opacity:.4;z-index:6}
+
+/* bottom shelf */
+.shelf{padding:20px 24px;border-top:1px solid var(--line);background:rgba(18,16,24,.9);backdrop-filter:blur(10px)}
+.shelf-label{font-family:'Unbounded';font-weight:700;font-size:18px;margin-bottom:10px}
+.shelf-sub{color:var(--mut);font-size:12px;margin-bottom:12px}
+.shelf-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
+.shelf-row::-webkit-scrollbar{display:none}
+.shelf-card{flex-shrink:0;width:90px;aspect-ratio:3/4;border-radius:8px;background:linear-gradient(165deg,var(--c1),var(--c2));border:1px solid var(--line);cursor:pointer;transition:all .2s;display:flex;align-items:flex-end;padding:6px}
+.shelf-card:hover{transform:translateY(-3px);border-color:var(--acc)}
+.shelf-card span{font-size:9px;font-weight:700;color:#fff;text-shadow:0 1px 3px #000}
+
+.info-bar{display:flex;align-items:center;gap:16px;padding:10px 24px;background:rgba(18,16,24,.95);border-top:1px solid var(--line)}
+.info-bar .big{font-family:'Unbounded';font-weight:900;font-size:16px}
+.info-bar .meta{color:var(--mut);font-size:12px;flex:1}
+.play{background:var(--acc);color:#1a1020;border:0;border-radius:8px;padding:8px 18px;font-family:'Space Grotesk';font-weight:700;font-size:13px;cursor:pointer}
+.play:hover{box-shadow:0 0 18px -4px var(--acc)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <span class="mark">ez<b>CORE</b></span>
+  <nav class="nav"><button class="on">Library</button><button>Systems</button><button>Saves</button><button>Settings</button></nav>
+</div>
+
+<div class="main">
+  <div class="flow"><div class="flow-row" id="flowRow"></div></div>
+</div>
+
+<div class="info-bar">
+  <div class="big" id="infoT">Final Fantasy VII</div>
+  <div class="meta"><span id="infoTag">PS1-001</span> · 1997 · Save Slot 3 · 94%</div>
+  <button class="play" id="playBtn">▶ Play</button>
+</div>
+
+<div class="shelf">
+  <div class="shelf-label">Recently Played</div>
+  <div class="shelf-row" id="shelfRow"></div>
+</div>
+
+<script>
+const G=[
+  {t:'Final Fantasy VII',tag:'PS1-001',c1:'#233a6e',c2:'#0d1828'},
+  {t:'Symphony of the Night',tag:'PS1-044',c1:'#5e233a',c2:'#1c0d18'},
+  {t:'Metal Gear Solid',tag:'PS1-019',c1:'#2a4a2a',c2:'#0d1c0d'},
+  {t:'Chrono Trigger',tag:'SNES-042',c1:'#1c3a5e',c2:'#0d1c2b'},
+  {t:'Persona 3',tag:'PSP-014',c1:'#4a1c5e',c2:'#1c0d28'},
+  {t:'Resident Evil 2',tag:'PS1-028',c1:'#3a3a3a',c2:'#181818'},
+  {t:'Silent Hill',tag:'PS1-031',c1:'#3a3a44',c2:'#181820'},
+  {t:'Metroid Fusion',tag:'GBA-017',c1:'#1e5e3a',c2:'#0d1c2b'}
+];
+const row=document.getElementById('flowRow');
+let idx=0;
+function draw(){
+  row.innerHTML='';
+  G.forEach((g,i)=>{
+    const d=document.createElement('div');d.className='fcard';
+    const off=i[idx+G.length]%G.length;
+    d.style.setProperty('--c1',g.c1);d.style.setProperty('--c2',g.c2);
+    let cls='';
+    if(off===0)cls='center';else if(off===1||off===-(G.length-1))cls='right1';else if(off===-1||off===G.length-1)cls='left1';else if(off===2||off===-(G.length-2))cls='right2';else if(off===-2||off===G.length-2)cls='left2';
+    if(cls)d.className+=' '+cls;
+    d.innerHTML=`<span class="t">${g.t}</span><span class="tag">${g.tag}</span>`;
+    d.onclick=()=>{idx=i;draw();update()};
+    row.appendChild(d);
+  });
+}
+function update(){const g=G[idx];document.getElementById('infoT').textContent=g.t;document.getElementById('infoTag').textContent=g.tag;document.getElementById('playBtn').textContent='▶ '+(idx%2?'Continue':'Play')}
+draw();update();
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){idx=(idx+1)%G.length;draw();update()}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){idx=(idx-1+G.length)%G.length;draw();update()}
+  if(e.key==='Enter'){const b=document.getElementById('playBtn');b.textContent='▶ Booting…';setTimeout(update,1200)}
+});
+
+// shelf
+const shelf=document.getElementById('shelfRow');
+G.slice(0,6).forEach(g=>{const d=document.createElement('div');d.className='shelf-card';d.style.setProperty('--c1',g.c1);d.style.setProperty('--c2',g.c2);d.innerHTML=`<span>${g.t}</span>`;shelf.appendChild(d)});
+</script>
+</body>
+</html>

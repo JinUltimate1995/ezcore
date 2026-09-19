@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Noir Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0c0a08;--char:#181310;--vitrine:#1e1814;--plinth:#26201c;--bone:#EDE8DF;--ash:#9BA0A8;--hair:#2C2620;--brass:#FFB347;--amber:rgba(255,179,71,.15)}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:radial-gradient(120% 80% at 50% -10%,#1c1610 0%,var(--bg) 60%) fixed;color:var(--bone);-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+.serif{font-family:'Newsreader',Georgia,serif}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+/* header */
+.head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px;flex-wrap:wrap}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--ash)}
+h1{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(32px,5vw,48px);letter-spacing:-.01em}
+h1 .ez{color:var(--brass)}
+.sub{color:var(--ash);max-width:62ch;margin-top:8px;font-size:14px}
+
+/* toolbar */
+.toolbar{display:flex;gap:8px;margin:24px 0 16px;flex-wrap:wrap;align-items:center}
+.chip{background:var(--char);border:1px solid var(--hair);color:var(--bone);padding:6px 14px;border-radius:20px;font-family:'Space Grotesk';font-size:12px;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--brass)}
+.chip.on{background:var(--brass);color:#0c0a08;border-color:var(--brass)}
+.search{display:flex;align-items:center;gap:8px;background:var(--char);border:1px solid var(--hair);border-radius:8px;padding:6px 12px;margin-left:auto}
+.search input{background:transparent;border:0;color:var(--bone);font-family:'Space Grotesk';font-size:13px;width:160px;outline:none}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.card{
+  aspect-ratio:3/4;border-radius:10px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,var(--c1),var(--c2));
+  border:1px solid var(--hair);cursor:pointer;transition:all .25s ease;
+}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.8));pointer-events:none}
+.card .title{position:absolute;bottom:8px;left:8px;right:8px;font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 3px #000;z-index:2;font-family:'Space Grotesk'}
+.card .tag{position:absolute;top:6px;left:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--brass);z-index:2;opacity:0;transition:opacity .2s}
+.card:hover .tag{opacity:1}
+.card:hover{border-color:var(--brass);box-shadow:0 0 20px -4px var(--amber);transform:scale(1.04)}
+.card.playing{background:var(--brass);animation:pulse 2s infinite}
+.card.playing::before{content:'▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;color:#0c0a08;z-index:3}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px -4px var(--amber)}50%{box-shadow:0 0 30px -2px var(--amber)}}
+
+/* placard */
+.placard{margin-top:32px;background:var(--char);border:1px solid var(--hair);border-radius:16px;padding:24px;display:grid;grid-template-columns:200px 1fr;gap:24px}
+.placard .art{width:200px;aspect-ratio:3/4;border-radius:8px;background:linear-gradient(165deg,#1c1610,#0c0a08);border:1px solid var(--hair)}
+.placard .info h2{font-family:'Newsreader',Georgia,serif;font-size:28px;font-weight:600;margin-bottom:4px}
+.placard .info .meta{color:var(--ash);font-size:13px;margin-bottom:16px}
+.placard .info .meta span{color:var(--brass)}
+.placard .actions{display:flex;gap:8px}
+.placard .actions button{padding:10px 20px;border-radius:8px;font-family:'Space Grotesk';font-weight:600;font-size:13px;cursor:pointer;border:0;transition:all .15s}
+.placard .actions .primary{background:var(--brass);color:#0c0a08}
+.placard .actions .ghost{background:transparent;color:var(--bone);border:1px solid var(--hair)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker mono">EZCORE · NOIR GRID · MUSEUM</div>
+    <h1><span class="ez">ez</span>CORE</h1>
+  </div>
+  <p class="sub">A private museum of play. Hover to reveal catalog numbers. Click to mark as playing. Warm spotlight on near-black.</p>
+
+  <div class="toolbar">
+    <button class="chip on">All Games</button>
+    <button class="chip">♥ Favorites</button>
+    <button class="chip">Recently Played</button>
+    <button class="chip">Collections</button>
+    <div class="search"><input placeholder="Search…"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="placard">
+    <div class="art"></div>
+    <div class="info">
+      <h2>Chrono Trigger</h2>
+      <div class="meta"><span>SNES-042</span> · 1994 · 1.2 MB · Save Slot 2 · 78% complete</div>
+      <div class="actions">
+        <button class="primary">▶ Continue Playing</button>
+        <button class="ghost">♡ Favorite</button>
+        <button class="ghost">Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const G=[
+  {t:'Chrono Trigger',tag:'SNES-042',c1:'#1c1810',c2:'#0c0a08'},
+  {t:'Metroid Fusion',tag:'GBA-017',c1:'#141c14',c2:'#0a0c0a'},
+  {t:'Ocarina of Time',tag:'N64-008',c1:'#1c1810',c2:'#0c0a08'},
+  {t:'Silent Hill',tag:'PS1-031',c1:'#181818',c2:'#0a0a0a'},
+  {t:'Persona 3',tag:'PSP-014',c1:'#1c1020',c2:'#0c0810'},
+  {t:'Mario Kart DS',tag:'DS-022',c1:'#101c18',c2:'#080c0a'},
+  {t:'Final Fantasy VII',tag:'PS1-001',c1:'#181820',c2:'#0a0a10'},
+  {t:'Symphony of Night',tag:'PS1-044',c1:'#201018',c2:'#10080c'},
+  {t:'Metal Gear Solid',tag:'PS1-019',c1:'#101810',c2:'#080c08'},
+  {t:'Resident Evil 2',tag:'PS1-028',c1:'#181818',c2:'#0a0a0a'},
+  {t:'Street Fighter II',tag:'SNES-003',c1:'#1c1810',c2:'#0c0a08'},
+  {t:'EarthBound',tag:'SNES-067',c1:'#181c18',c2:'#0a0c0a'},
+  {t:'Super Mario World',tag:'SNES-001',c1:'#1c1810',c2:'#0c0a08'},
+  {t:'Pokémon Gold',tag:'GBA-001',c1:'#1c1c10',c2:'#0c0c08'},
+  {t:'Zelda: Link\'s Awakening',tag:'GBA-012',c1:'#101c10',c2:'#080c08'},
+  {t:'Castlevania: SOTN',tag:'PS1-044',c1:'#201018',c2:'#10080c'}
+];
+const grid=document.getElementById('grid');
+G.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='card';
+  d.style.setProperty('--c1',g.c1);d.style.setProperty('--c2',g.c2);
+  d.innerHTML=`<span class="tag">${g.tag}</span><span class="title">${g.t}</span>`;
+  d.onclick=()=>{document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));d.classList.add('playing')};
+  grid.appendChild(d);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — XMB Drift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#061018; --bg2:#0a1f33; --panel:#0d1c2b; --panel2:#112838;
+  --line:#1a3048; --txt:#e8eef6; --mut:#7a9ab8; --acc:#35E0FF; --dim:#1a3048;
+}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  background:radial-gradient(120% 80% at 50% -10%,#0d2238 0%,var(--bg) 60%) fixed;
+  color:var(--txt);-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+}
+.mono{font-family:'JetBrains Mono',monospace}
+.bound{font-family:'Unbounded',sans-serif}
+
+/* ── top bar ── */
+.top{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:rgba(6,16,24,.85);backdrop-filter:blur(10px);z-index:5}
+.mark{font-family:'Unbounded';font-weight:900;font-size:16px}.mark b{color:var(--acc)}
+.nav{display:flex;gap:4px;margin-left:24px}
+.nav button{background:transparent;border:0;color:var(--mut);padding:7px 14px;font-family:'Space Grotesk';font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;transition:all .15s}
+.nav button:hover{color:var(--txt);background:var(--panel)}
+.nav button.on{background:var(--panel2);color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
+.search input{background:transparent;border:0;color:var(--txt);font-family:'Space Grotesk';font-size:13px;width:180px;outline:none}
+.search kbd{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+
+/* ── main ── */
+.main{flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+/* ── system rail ── */
+.rail{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.sys{flex-shrink:0;width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:11px;color:var(--mut);background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:all .25s cubic-bezier(.2,.9,.25,1.2);position:relative}
+.sys:hover{border-color:var(--acc);color:var(--txt)}
+.sys.on{transform:scale(1.18);border-color:var(--acc);box-shadow:0 0 24px -4px var(--acc);color:#fff;background:var(--panel2)}
+.sys .led{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--dim)}
+.sys.on .led{background:var(--acc);box-shadow:0 0 6px var(--acc)}
+
+/* ── wave / cover strip ── */
+.wave{flex:1;padding:24px 0 0;position:relative;overflow:hidden}
+.wave-label{display:flex;align-items:baseline;gap:12px;padding:0 24px 10px}
+.wave-label h2{font-family:'Unbounded';font-weight:700;font-size:22px;letter-spacing:-.01em}
+.wave-label .sub{color:var(--mut);font-size:13px}
+.wave-track{display:flex;gap:14px;padding:10px 24px 30px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.wave-track::-webkit-scrollbar{display:none}
+.cover{
+  flex-shrink:0;width:140px;aspect-ratio:3/4;border-radius:10px;position:relative;
+  background:linear-gradient(165deg,var(--c1,#1a3048),var(--c2,#0d1c2b));
+  border:1px solid var(--line);cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.25,1.2);
+  scroll-snap-align:start;overflow:hidden;
+}
+.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.7));pointer-events:none}
+.cover .title{position:absolute;bottom:8px;left:8px;right:8px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8);z-index:2}
+.cover .tag{position:absolute;top:6px;left:6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--acc);background:rgba(6,16,24,.7);padding:2px 6px;border-radius:4px;z-index:2}
+.cover:hover{transform:translateY(-6px) scale(1.04);border-color:var(--acc);box-shadow:0 16px 40px -10px rgba(53,224,255,.3)}
+.cover.on{transform:translateY(-10px) scale(1.1);border-color:var(--acc);box-shadow:0 20px 50px -10px rgba(53,224,255,.5)}
+
+/* ── info panel ── */
+.info{padding:16px 24px;border-top:1px solid var(--line);background:rgba(6,16,24,.85);backdrop-filter:blur(10px);display:flex;align-items:center;gap:20px}
+.info .big{font-family:'Unbounded';font-weight:900;font-size:20px}
+.info .meta{color:var(--mut);font-size:13px;flex:1}
+.info .meta span{color:var(--acc)}
+.play{background:var(--acc);color:#06121a;border:0;border-radius:10px;padding:10px 22px;font-family:'Space Grotesk';font-weight:700;font-size:14px;cursor:pointer;transition:all .15s}
+.play:hover{transform:scale(1.04);box-shadow:0 0 20px -4px var(--acc)}
+.hint{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut)}
+
+/* ── bg wave ── */
+.wave-bg{position:absolute;bottom:0;left:0;right:0;height:200px;opacity:.06;pointer-events:none}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <span class="mark">ez<b>CORE</b></span>
+  <nav class="nav">
+    <button class="on">Library</button>
+    <button>Systems</button>
+    <button>Saves</button>
+    <button>Settings</button>
+  </nav>
+  <div class="search">
+    <input placeholder="Search games…" value="">
+    <kbd>⌘K</kbd>
+  </div>
+</div>
+
+<div class="main">
+  <!-- SYSTEM RAIL -->
+  <div class="rail" id="rail"></div>
+
+  <!-- WAVE -->
+  <div class="wave">
+    <div class="wave-label">
+      <h2 id="waveTitle">Super Nintendo</h2>
+      <span class="sub" id="waveSub">42 games · Snes9x 1.62 ✓</span>
+    </div>
+    <div class="wave-track" id="track"></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    <div>
+      <div class="big" id="infoTitle">Chrono Trigger</div>
+      <div class="meta"><span>SNES-042</span> · 1994 · 1.2 MB · Save Slot 2 · 78% complete</div>
+    </div>
+    <button class="play" id="playBtn">▶ Continue</button>
+    <div class="hint">← → navigate · ↵ play</div>
+  </div>
+</div>
+
+<script>
+const SYSTEMS=[
+  {n:'ALL',c:'#35E0FF'},{n:'SNES',c:'#1c3a5e'},{n:'GBA',c:'#1e5e3a'},{n:'NES',c:'#5e4a1c'},
+  {n:'PS1',c:'#3a3a44'},{n:'PSP',c:'#4a1c5e'},{n:'N64',c:'#5e1c2a'},{n:'GEN',c:'#2a4a4a'},
+  {n:'DS',c:'#1c5e4a'},{n:'ARC',c:'#5e2a1c'}
+];
+const GAMES=[
+  {t:'Chrono Trigger',tag:'SNES-042',c1:'#1c3a5e',c2:'#0d1c2b'},
+  {t:'Metroid Fusion',tag:'GBA-017',c1:'#1e5e3a',c2:'#0d1c2b'},
+  {t:'Ocarina of Time',tag:'N64-008',c1:'#5e4a1c',c2:'#1c1810'},
+  {t:'Silent Hill',tag:'PS1-031',c1:'#3a3a44',c2:'#181820'},
+  {t:'Persona 3',tag:'PSP-014',c1:'#4a1c5e',c2:'#1c0d28'},
+  {t:'Mario Kart DS',tag:'DS-022',c1:'#1c5e4a',c2:'#0d1c18'},
+  {t:'Final Fantasy VII',tag:'PS1-001',c1:'#233a6e',c2:'#0d1828'},
+  {t:'Symphony of Night',tag:'PS1-044',c1:'#5e233a',c2:'#1c0d18'},
+  {t:'Metal Gear Solid',tag:'PS1-019',c1:'#2a4a2a',c2:'#0d1c0d'},
+  {t:'Resident Evil 2',tag:'PS1-028',c1:'#3a3a3a',c2:'#181818'},
+  {t:'Street Fighter II',tag:'SNES-003',c1:'#5e1c2a',c2:'#1c0d10'},
+  {t:'EarthBound',tag:'SNES-067',c1:'#1c5e5e',c2:'#0d1c1c'}
+];
+
+const rail=document.getElementById('rail');
+let sysIdx=1;let gameIdx=0;
+SYSTEMS.forEach((s,i)=>{
+  const d=document.createElement('div');d.className='sys'+(i===sysIdx?' on':'');d.innerHTML=s.n+'<div class="led"></div>';
+  d.onclick=()=>{sysIdx=i;[...rail.children].forEach((x,j)=>x.classList.toggle('on',j===sysIdx));document.getElementById('waveTitle').textContent=s.n==='ALL'?'All Games':s.n};
+  rail.appendChild(d);
+});
+
+const track=document.getElementById('track');
+GAMES.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='cover'+(i===gameIdx?' on':'');
+  d.style.setProperty('--c1',g.c1);d.style.setProperty('--c2',g.c2);
+  d.innerHTML=`<span class="tag">${g.tag}</span><span class="title">${g.t}</span>`;
+  d.onclick=()=>{gameIdx=i;[...track.children].forEach((x,j)=>x.classList.toggle('on',j===gameIdx));updateInfo()};
+  track.appendChild(d);
+});
+function updateInfo(){const g=GAMES[gameIdx];document.getElementById('infoTitle').textContent=g.t;document.getElementById('playBtn').textContent='▶ '+(Math.random()>.5?'Continue':'Play')}
+updateInfo();
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'){gameIdx=(gameIdx+1)%GAMES.length;[...track.children].forEach((x,j)=>x.classList.toggle('on',j===gameIdx));track.children[gameIdx].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});updateInfo()}
+  if(e.key==='ArrowLeft'){gameIdx=(gameIdx-1+GAMES.length)%GAMES.length;[...track.children].forEach((x,j)=>x.classList.toggle('on',j===gameIdx));track.children[gameIdx].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});updateInfo()}
+  if(e.key==='Enter'){document.getElementById('playBtn').textContent='▶ Booting…';setTimeout(updateInfo,1200)}
+  if(e.key==='ArrowDown'){sysIdx=(sysIdx+1)%SYSTEMS.length;[...rail.children].forEach((x,j)=>x.classList.toggle('on',j===sysIdx));document.getElementById('waveTitle').textContent=SYSTEMS[sysIdx].n}
+  if(e.key==='ArrowUp'){sysIdx=(sysIdx-1+SYSTEMS.length)%SYSTEMS.length;[...rail.children].forEach((x,j)=>x.classList.toggle('on',j===sysIdx));document.getElementById('waveTitle').textContent=SYSTEMS[sysIdx].n}
+});
+</script>
+</body>
+</html>

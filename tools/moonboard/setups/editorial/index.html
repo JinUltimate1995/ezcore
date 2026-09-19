@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f5ef;--bg2:#e8e4d8;--panel:#fffef9;--panel2:#f5f2ea;--line:#d8d2c4;--txt:#1a1b1e;--mut:#7a7568;--acc:#C8A96A;--shadow:0 2px 8px rgba(0,0,0,.08)}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+.serif{font-family:'Newsreader',Georgia,serif}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+/* header */
+.head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--mut)}
+h1{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(32px,5vw,52px);letter-spacing:-.01em}
+h1 .ez{color:var(--acc)}
+.sub{color:var(--mut);max-width:62ch;margin-top:8px;font-size:14px}
+
+/* hero */
+.hero{margin:32px 0;padding:32px;background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.hero h2{font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:600;line-height:1.15;margin-bottom:10px}
+.hero p{color:var(--mut);font-size:14px;line-height:1.6;margin-bottom:16px}
+.hero .cta{display:flex;gap:10px}
+.hero .cta button{padding:10px 20px;border-radius:8px;font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;border:0}
+.hero .cta .primary{background:var(--txt);color:var(--bg)}
+.hero .cta .ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+.hero .visual{aspect-ratio:4/3;background:var(--bg2);border-radius:16px;border:1px solid var(--line);position:relative;overflow:hidden}
+.hero .visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(0,0,0,.03))}
+
+/* sections */
+.section{margin-top:48px}
+.section-label{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.section-label h3{font-family:'Newsreader',Georgia,serif;font-size:24px;font-weight:600}
+.section-label .sub{font-size:13px;color:var(--mut)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:14px;cursor:pointer;transition:all .2s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.card .art{width:100%;aspect-ratio:3/4;border-radius:8px;background:linear-gradient(165deg,var(--c1),var(--c2));margin-bottom:10px;position:relative;overflow:hidden}
+.card .art::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.4))}
+.card .title{font-size:13px;font-weight:600;margin-bottom:2px}
+.card .meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
+
+/* quote */
+.quote{margin-top:48px;padding:32px;background:var(--panel);border:1px solid var(--line);border-radius:20px;text-align:center}
+.quote blockquote{font-family:'Newsreader',Georgia,serif;font-size:22px;font-style:italic;color:var(--txt);max-width:60ch;margin:0 auto 12px}
+.quote cite{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);font-style:normal}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker mono">EZCORE · EDITORIAL · STRIPE</div>
+    <h1><span class="ez">ez</span>CORE</h1>
+  </div>
+  <p class="sub">Light mode premium. Whisper-weight headlines, blue-tinted shadows, editorial spacing. The premium publisher take on an emulator.</p>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <h2>Your games, kept beautifully.</h2>
+        <p>One beautiful, unified emulator for as many systems as possible. No core thinking required. Game → Play.</p>
+        <div class="cta">
+          <button class="primary">Enter the Vault</button>
+          <button class="ghost">See how it works</button>
+        </div>
+      </div>
+      <div class="visual"></div>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="section">
+    <div class="section-label">
+      <h3>Continue Playing</h3>
+      <span class="sub">Pick up where you left off</span>
+    </div>
+    <div class="grid" id="grid1"></div>
+  </div>
+
+  <!-- DISCOVER -->
+  <div class="section">
+    <div class="section-label">
+      <h3>Discover</h3>
+      <span class="sub">Curated for you</span>
+    </div>
+    <div class="grid" id="grid2"></div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote">
+    <blockquote>"Opening ezCore should feel like entering a beautiful digital gaming space."</blockquote>
+    <cite>— ezCORE product vision</cite>
+  </div>
+</div>
+
+<script>
+const G=[
+  {t:'Chrono Trigger',tag:'SNES-042',c1:'#1c3a5e',c2:'#0d1c2b'},
+  {t:'Metroid Fusion',tag:'GBA-017',c1:'#1e5e3a',c2:'#0d1c2b'},
+  {t:'Ocarina of Time',tag:'N64-008',c1:'#5e4a1c',c2:'#1c1810'},
+  {t:'Silent Hill',tag:'PS1-031',c1:'#3a3a44',c2:'#181820'},
+  {t:'Persona 3',tag:'PSP-014',c1:'#4a1c5e',c2:'#1c0d28'},
+  {t:'Mario Kart DS',tag:'DS-022',c1:'#1c5e4a',c2:'#0d1c18'}
+];
+[g1,g2]=['grid1','grid2'].map(id=>document.getElementById(id));
+G.forEach((g,i)=>{
+  const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<div class="art" style="--c1:${g.c1};--c2:${g.c2}"></div><div class="title">${g.t}</div><div class="meta">${g.tag}</div>`;
+  (i<3?g1:g2).appendChild(d);
+});
+</script>
+</body>
+</html>

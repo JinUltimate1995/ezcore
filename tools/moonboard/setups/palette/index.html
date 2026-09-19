@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ezCORE — Command Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0d10;--bg2:#11161c;--panel:#161c24;--panel2:#1c2430;--line:#242c38;--txt:#e8eef4;--mut:#7a8a9a;--acc:#35E0FF}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0d10;color:var(--txt);-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center}
+.mono{font-family:'JetBrains Mono',monospace}
+.bg{position:fixed;inset:0;background:radial-gradient(120% 80% at 50% -10%,#141c28 0%,#0a0d10 60%) fixed}
+
+/* command palette */
+.palette{position:relative;z-index:5;width:min(94vw,620px);background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px -20px #000,0 0 0 1px rgba(0,0,0,.4);overflow:hidden}
+.search-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.search-row input{background:transparent;border:0;color:var(--txt);font-family:'Inter';font-size:16px;width:100%;outline:none;font-weight:500}
+.search-row input::placeholder{color:var(--mut)}
+.kbd{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0}
+.results{max-height:400px;overflow-y:auto}
+.group{padding:8px 0}
+.group-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase;padding:6px 16px 4px}
+.result{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;transition:all .1s}
+.result:hover,.result.active{background:var(--panel2)}
+.result .icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--mut);flex-shrink:0}
+.result .label{flex:1;font-size:14px;font-weight:500}
+.result .sub{font-size:12px;color:var(--mut)}
+.result .key{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut);background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:1px 6px}
+
+/* key hints */
+.hints{display:flex;gap:12px;padding:10px 16px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mut)}
+.hints span{display:flex;align-items:center;gap:4px}
+
+.footer{padding:20px;text-align:center;color:var(--mut);font-size:12px;position:fixed;bottom:10px;left:0;right:0}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="palette">
+  <div class="search-row">
+    <input id="q" placeholder="Type a command or search…" autofocus>
+    <span class="kbd">ESC</span>
+  </div>
+  <div class="results" id="results"></div>
+  <div class="hints">
+    <span>↑↓ navigate</span>
+    <span>↵ select</span>
+    <span>ESC close</span>
+    <span style="margin-left:auto;color:#35E0FF">⌘K everywhere</span>
+  </div>
+</div>
+<div class="footer">ezCORE · keyboard-first command launcher · Raycast/Superhuman style</div>
+
+<script>
+const ACTIONS=[
+  {icon:'▶',label:'Play Chrono Trigger',sub:'Continue · Save Slot 2',group:'Recent'},
+  {icon:'▶',label:'Play Metroid Fusion',sub:'Continue · Save Slot 1',group:'Recent'},
+  {icon:'♥',label:'Add Chrono Trigger to Favorites',sub:'Collection action',group:'Actions'},
+  {icon:'⚙',label:'Open Game Settings',sub:'SNES-042 · Snes9x 1.62',group:'Actions'},
+  {icon:'⏺',label:'Save State',sub:'Current game · Slot 3',group:'Actions'},
+  {icon:'↺',label:'Restore Save State',sub:'SNES-042 · Slot 2 · 78%',group:'Actions'},
+  {icon:'📂',label:'Add ROM Folder',sub:'Scan for new games',group:'Library'},
+  {icon:'🔍',label:'Verify Library',sub:'Hash-check all ROMs',group:'Library'},
+  {icon:'⬇',label:'Check for Updates',sub:'Cores · Modules · App',group:'System'},
+  {icon:'🎮',label:'Map Controller',sub:'Xbox Wireless · Xbox layout',group:'System'},
+  {icon:'◐',label:'Toggle Dark Mode',sub:'Gallery Dark (current)',group:'System'},
+  {icon:'?',label:'Open Diagnostics',sub:'Core · Pad · FPS · Logs',group:'System'}
+];
+const results=document.getElementById('results');
+const q=document.getElementById('q');
+let active=0;
+function render(){
+  const val=q.value.toLowerCase();
+  const filtered=ACTIONS.filter(a=>a.label.toLowerCase().includes(val)||a.sub.toLowerCase().includes(val));
+  let html='';let lastGroup='';
+  filtered.forEach((a,i)=>{
+    if(a.group!==lastGroup){html+=`<div class="group-label">${a.group}</div>`;lastGroup=a.group}
+    html+=`<div class="result ${i===active?'active':''}" onclick="select(${i})"><span class="icon">${a.icon}</span><span class="label">${a.label}</span><span class="sub">${a.sub}</span></div>`;
+  });
+  results.innerHTML=html||'<div style="padding:20px;text-align:center;color:var(--mut)">No results</div>';
+}
+render();
+q.addEventListener('input',()=>{active=0;render()});
+q.addEventListener('keydown',e=>{
+  const val=q.value.toLowerCase();
+  const filtered=ACTIONS.filter(a=>a.label.toLowerCase().includes(val)||a.sub.toLowerCase().includes(val));
+  if(e.key==='ArrowDown'){e.preventDefault();active=(active+1)%filtered.length;render()}
+  if(e.key==='ArrowUp'){e.preventDefault();active=(active-1+filtered.length)%filtered.length;render()}
+  if(e.key==='Enter'){alert('Selected: '+filtered[active].label)}
+  if(e.key==='Escape'){q.value='';active=0;render()}
+});
+function select(i){alert('Selected: '+ACTIONS[i].label)}
+</script>
+</body>
+</html>
