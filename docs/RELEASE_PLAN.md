@@ -104,7 +104,62 @@ explicitly "macOS + Windows/Linux desktop, mobile beta to follow."
 - Native hardening (small, could ride along): make `retro_cheat_*` symbols
   optional at load instead of failing cores without them.
 
-## Explicitly out of v1
+## v1.1 scope (next — Cloud sync + cores-on-demand evaluation)
+
+**Timing:** after v0.1.1 ships and the macOS play-through loop is fully
+verified end-to-end (import → boot → play → save → restore on a real
+homebrew ROM). Target: Q4 2026.
+
+### 1. ezCORE Cloud (paid service) — the monetization centerpiece
+
+- Opt-in subscription. Local Time Capsule vault stays complete for free.
+- Syncs: save states (slots 0–9 per game), SRAM/EEPROM/flash, per-game
+  settings, cheat states, play time. No ROMs ever leave the device.
+- Backend: Firebase Auth (anonymous + email) + Cloud Storage. Privacy
+  review required before launch (no analytics, no tracking, no sale of
+  user data — see `docs/MONETIZATION.md`).
+- Client: `CloudSyncService` (Dart) with offline-first queue, conflict
+  resolution (last-writer-wins + manual merge), and a sync status pill
+  in the Library toolbar.
+- Pricing: TBD (benchmark against PPSSPP Gold, NGC/Switch emulator
+  cloud services). Target: $1.99–$2.99/month or $19.99/year.
+- Legal: subscription ToS + privacy policy + data processing agreement
+  before any beta ships.
+
+### 2. Cores-on-demand evaluation (unlocks iOS App Store someday)
+
+- Current model: all bundled cores ship in the app, update with app
+  releases. Problem: App Store review 2.5.2/4.7 technically forbids
+  "downloading executable code" — even though cores are emulator
+  binaries, not scripts, Apple's interpretation is unpredictable.
+- Evaluation axes:
+  1. Can we bundle all cores for iOS and stay under the 200 MB
+     over-the-air download limit? (15 macOS cores = ~260 MB; iOS
+     cores are smaller — measure.)
+  2. Can we offer a "core pack" as an in-app purchase that downloads
+     additional cores after install? If yes, this opens a second
+     revenue stream (core packs as IAPs).
+  3. Can we ship a "lite" iOS build with a subset of cores and let
+     users add more on demand? If yes, this unlocks the App Store.
+- Decision: defer actual implementation until v1.1. This evaluation
+  gates the iOS App Store roadmap.
+
+### 3. Play-through verification (closes the v0.1.1 gap)
+
+- Import a homebrew test ROM (fixtures in gitignored `native/test-roms/`),
+  boot it, play, save, restore — on a real macOS install (not just
+  the test harness).
+- Screenshot the running app at each step. Update `docs/MATRIX.md`
+  honestly with what works and what doesn't.
+- Goal: prove the full loop works before asking anyone else to try.
+
+### 4. What's not in v1.1
+
+- No new cores (the 15-core set is frozen for now).
+- No RetroAchievements, no netplay, no rewind.
+- No new platform builds (Windows/Linux stay deferred until CI runs).
+- No iOS App Store submission (gated on cores-on-demand evaluation
+  + Apple Developer identity).
 
 Commercial-game compatibility claims, RetroAchievements, libretro-database
 cheat downloads (ship the comment fix only), Firebase/Stripe scaffolding
