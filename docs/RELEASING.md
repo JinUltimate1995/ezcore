@@ -132,4 +132,11 @@ gh api -X PUT repos/JinUltimate1995/ezcore/branches/main/protection/required_sta
 ```
 
 Also re-add the CI badge to the README (first badge in the badge row) when
-green runs exist.
+green runs exist, and re-enable the workflows (they are disabled while CI
+cannot run — Actions tab → *Enable workflow*, or):
+
+```bash
+for wf in ci.yml matrix.yml release.yml labeler.yml; do
+  gh workflow enable "$wf" --repo JinUltimate1995/ezcore
+done
+```
