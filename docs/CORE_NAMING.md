@@ -1,8 +1,8 @@
 # ezCORE core identity & provenance
 
-> **Status:** names chosen by maintainer 2026-09-19. 12 settled, **5 flagged**
-> for a collision swap (§3). Repos are not renamed until §3 closes.
-> Supersedes the earlier candidate-menu draft.
+> **Status:** implemented 2026-09-19. All 17 core identifiers renamed across
+> manifests, catalog, registry, app, tests and build scripts.
+> Remaining: rename the private GitHub repos, and a real trademark search.
 
 ---
 
@@ -18,57 +18,88 @@ in a core name:
    names themselves (NES, Game Boy, PlayStation, Mega Drive) belong to
    Nintendo/Sony/Sega.
 
-Upstream is credited **inside** the repo — source URL + license + a
-not-affiliated note — never in the name. See the `provenance` block in §5.
+Upstream is credited **inside** the repo — source URL, licence, and a
+not-affiliated note in the manifest `provenance` block — never in the name.
 
-Corollary, learned the hard way: **do not create one of our cores per upstream
-core.** Two third-party GB/GBC emulators do not justify two ezCORE GB/GBC
-cores. One system → one core.
+Two corollaries, both learned the hard way:
 
-## 2. Settled names
+- **Do not create one of our cores per upstream core.** Two third-party GB/GBC
+  emulators do not justify two ezCORE GB/GBC cores. One system → one core.
+- **A bare `GPL-2.0` in a manifest is not a licence finding.** See §5.
 
-| System | Core name | Upstream engine | Upstream license | Distributable? |
+## 2. Final names
+
+| System | Core name | Upstream engine | Upstream licence | Ships? |
 |---|---|---|---|---|
-| NES / FDS | **NesByte** | libretro/Mesen | GPL-3+ | yes |
+| NES / FDS | **NesByte** | libretro/Mesen | GPL-3.0-or-later | yes |
 | GB / GBC | **PocketBit** | LIJI32/SameBoy | Expat (MIT) | yes |
 | GBA | **AdvanceBit** | libretro/mgba | MPL-2.0 | yes |
-| SNES | Mode7 *(flagged)* | snes9xgit/snes9x | non-commercial custom | **no — recipe only** |
-| Genesis / MD / SMS / GG | Blast *(flagged)* | Genesis-Plus-GX | non-commercial custom | **no — recipe only** |
-| Atari 2600 | **Joystick** | libretro/stella2023 | GPL-2+ | yes |
-| PC Engine / TG-16 | **CardCon** | beetle-pce-fast-libretro | GPL-3+ | yes |
-| Saturn | Parallax *(flagged)* | beetle-saturn-libretro | GPL-2+ | yes |
-| PS1 | **Geometry1** | libretro/swanstation | GPL-3 | yes |
-| N64 | **RCP64** | mupen64plus-libretro-nx | GPL-3+ | yes |
-| NDS | Twin *(flagged)* | libretro/melonDS | GPL-3 | yes |
-| PSP | **PortComp** | hrydgard/ppsspp | GPL-2+ | yes |
-| Dreamcast | **DreamArc** | flyinghead/flycast | GPL-2+ | yes |
-| GameCube / Wii | Box *(flagged)* | libretro/dolphin | GPLv2+ (states GPLv3-compatible) | yes |
+| SNES | **SuperFX** | snes9xgit/snes9x | non-commercial custom | **no — recipe only** |
+| Genesis / MD / SMS / GG | **BlastProc** | Genesis-Plus-GX | non-commercial custom | **no — recipe only** |
+| Atari 2600 | **Joystick** | libretro/stella2023 | GPL-2.0-or-later | yes |
+| PC Engine / TG-16 | **CardCon** | beetle-pce-fast-libretro | GPL-2.0-or-later | yes |
+| Saturn | **TwinSH** | beetle-saturn-libretro | GPL-2.0-or-later | yes |
+| PS1 | **Geometry1** | libretro/swanstation | GPL-3.0 | yes |
+| N64 | **RCP64** | mupen64plus-libretro-nx | GPL-2.0-or-later | yes |
+| NDS | **DualScreen** | libretro/melonDS | GPL-3.0 | yes |
+| PSP | **PortComp** | hrydgard/ppsspp | GPL-2.0-or-later | yes |
+| Dreamcast | **DreamArc** | flyinghead/flycast | GPL-2.0-or-later | yes |
+| GameCube / Wii | **PowerCube** | libretro/dolphin | GPL-2.0-or-later | yes |
 | Arcade / Neo Geo | **CoinBox** | libretro/FBNeo | non-commercial custom | **no — recipe only** |
-| DOS | **RealMode** | libretro/dosbox-pure | GPL-2+ | yes |
-| SCUMM / adventure | **PointClick** | scummvm/scummvm | GPL-3+ | yes |
+| DOS | **RealMode** | libretro/dosbox-pure | GPL-2.0-or-later | yes |
+| SCUMM / adventure | **PointClick** | scummvm/scummvm | GPL-3.0-or-later | yes |
 
-**GB/GBC is one core, not two.** Engine chosen is SameBoy (Expat/MIT) — and
-that is not a preference, it is forced by §4: Gambatte is GPL-2.0-**only** and
-cannot ship alongside our GPL-3.0 app. `ColorBit` is therefore unused and free
-if a second GB core is ever wanted.
+**Reserved / unused — `ColorBit`.** One shippable GB/GBC engine exists today
+(SameBoy), so PocketBit covers both `gb` and `gbc`. ColorBit becomes live only
+if a second *shippable* GB/GBC engine is added; mGBA is MPL-2.0 and does
+GB/GBC, so it is the realistic candidate.
 
-## 3. Open — 5 names need a swap (real software collisions)
+**Gambatte gets no core name**, because it can never ship with ezCORE (§5). Its
+build recipe is retained and callable by hand (`scripts/build_core.sh
+gambatte`), but it is out of every TIER list, unbundled on every OS, and
+documented as gated rather than presented as one of our cores.
 
-Screened against existing software. These five have a notable live collision;
-the other twelve are clean.
+## 3. Collision screening
 
-| Pick | What it collides with | Suggested swap (same style) |
-|---|---|---|
-| `mode7` | Mode 7 Limited (UK game studio, *Frozen Synapse*); several repos | `LayerBit` · `AffineBit` |
-| `blast` | julianshapiro/blast (1.5k★); NVIDIAGameWorks/Blast (453★) | `BlastBit` · `RushBit` |
-| `parallax` | wagerfield/parallax (16.6k★ — widely known) | `ParallaxBit` · `TwinSH2` |
-| `box` | Box, Inc.; cdgriffith/Box (2.8k★); box-project/box | `PowerBox` · `CubeBit` |
-| `twin` | cosmos72/twin (1.1k★ — terminal WM) | `TwinBit` · `DuoScreen` |
+Rejected outright: `vega`/`polaris` (AMD silicon), `monolith` (Monolith
+Productions), `obsidian` (Obsidian.md + Obsidian Entertainment), `chroma`
+(Razer Chroma), `halide` (Halide app + language), `lumen` (Laravel),
+`aurora`/`glacier` (AWS), `nautilus` (GNOME), `horizon` (Switch OS codename),
+`prism` (PrismLauncher), `ledger` (Ledger wallets), `vertex` (Google),
+`floppy` (FlashFloppy), `corona`, `cirrus`.
 
-The `*Bit` pattern is already your own family (NesByte, PocketBit, AdvanceBit),
-so a swap keeps the set coherent.
+Rejected on the second pass, when the maintainer's picks were checked:
+`mode7` (Mode 7 Limited, UK studio), `blast` (NVIDIA Blast, 453★), `parallax`
+(wagerfield/parallax, 16.6k★), `box` (Box, Inc.), `twin` (cosmos72/twin) —
+replaced by **SuperFX, BlastProc, TwinSH, PowerCube, DualScreen**, which all
+scan clear.
 
-## 4. License finding — Gambatte cannot ship
+An unrelated GitHub handle being taken is **not** disqualifying: every short
+word is taken (100M+ users) and our path is already namespaced.
+
+## 4. How the rename was applied
+
+Our identifier changed; provenance did not. A blind find/replace would have
+corrupted attribution, so the migration was deliberately narrow:
+
+- **rewritten:** manifest `id` + `name`, `cores/catalog.json`,
+  `cores/registry.json`, the id maps in `lib/screens/*` and
+  `lib/widgets/hardware_art.dart`, test fixtures, `scripts/fill_manifest_data.py`
+  keys, `scripts/build_core.sh` function names + `stage` ids + TIER lists,
+  `native/cores*/` directories
+- **never touched:** `upstream`, `homepage`, `license_url`, `provenance.*`,
+  upstream clone URLs, `$SRC_DIR/<upstream>` build-scratch paths
+
+Two traps worth remembering:
+
+- In `build_core.sh`, `out="snes9x_libretro.$LIB_SUFFIX"` names the file
+  **upstream's own makefile emits**, and `--target mgba_libretro` names
+  **upstream's cmake target**. Renaming either breaks the build. Only
+  `stage <our-id>` changes; `stage()` renames the artifact to ours.
+- A token pass matching `'mgba'` misses path-embedded ids like
+  `'cores/mgba/manifest.json'`. Both passes were needed.
+
+## 5. Licence finding — Gambatte cannot ship
 
 `native/src/gambatte-libretro/libgambatte/src/gambatte.cpp`:
 
@@ -77,33 +108,43 @@ so a swap keeps the set coherent.
  *   published by the Free Software Foundation.
 ```
 
-No "or later" grant anywhere in the tree (0 files). **Gambatte is
-GPL-2.0-only.** Our app is **GPL-3.0**. GPL-2.0-only and GPL-3.0 are mutually
-incompatible — the FSF treats a dlopen'd plugin shipped in the same bundle as
-a combined work, so that combination cannot be distributed. **Gambatte is
-currently marked `bundled` for macOS and Android.** Dropping it (as decided)
-closes the issue.
+63 files grant v2-only, **zero** grant "or later". **GPL-2.0-only** cannot form
+a combined work with our GPL-3.0-only app (the FSF treats a dlopen'd plugin
+shipped in the same bundle as one work), and it was marked `bundled` for macOS
+and Android. It is now unbundled everywhere.
 
-Corrected false alarms — flagged by a crude scan, then verified properly and
-**fine**:
+`scripts/legal_audit.py` was hardened so this class of bug cannot recur:
 
-| Core | Evidence |
-|---|---|
-| flycast | 527 source files grant "any later version", 0 say v2-only → GPL-2+ |
-| ppsspp | 5236 files "any later version", 0 v2-only → GPL-2+ |
-| dolphin | COPYING states GPLv2+ and "in aggregate … compatible with GPLv3" |
+- GPL-2.0-only is never bundleable
+- **a bare, ambiguous `GPL-2.0` is now a violation when bundled** — that
+  ambiguity is precisely how this shipped unnoticed
+- licence classing distinguishes `-only` / `-or-later` / ambiguous
 
-Still open, lower priority:
+That change immediately surfaced six more cores sitting on a bare `GPL-2.0`
+while bundled. Each was resolved from its own sources — vendored trees
+excluded, comment-wrapped headers normalised, because C comment asterisks sit
+*inside* wrapped licence phrases and defeat a plain grep:
 
-- **Stella** ships a bare GPL-2 `License.txt` with only thin "or later"
-  evidence (3 files). Needs a proper per-file pass before release. Not showing
-  as v2-only today, so no action yet.
-- **SameBoy**'s Expat grant explicitly **excludes** its `iOS` and `HexFiend`
-  directories — we do not build those; do not borrow from them.
-- snes9x / genesis_plus_gx / fbneo are non-commercial custom licences, so
-  their GPL-version question is moot: they never ship a binary.
+| Core | 'or later' | v2-only | Result |
+|---|---|---|---|
+| beetle_pce | 38 | 0 | GPL-2.0-or-later |
+| beetle_saturn | 95 | 0 | GPL-2.0-or-later |
+| dosbox_pure | 240 | 0 | GPL-2.0-or-later |
+| flycast | 527 | 0 | GPL-2.0-or-later |
+| mupen64plus | 353 | 0 | GPL-2.0-or-later |
+| stella | 4 | 0 | GPL-2.0-or-later |
 
-## 5. Provenance block (to add to every manifest)
+**Correction:** a first crude scan flagged flycast, ppsspp and dolphin as
+GPL-2.0-only. That was wrong — all three are fine (dolphin's COPYING states
+GPLv2+ and "in aggregate … compatible with the GPLv3 license").
+
+Open, lower priority: Stella's "or later" evidence is thin (4 files) — worth a
+per-file pass before release. SameBoy's Expat grant excludes its `iOS` and
+`HexFiend` directories; we do not build those.
+
+## 6. Provenance block
+
+Every manifest now carries:
 
 ```json
 "provenance": {
@@ -114,19 +155,21 @@ Still open, lower priority:
 }
 ```
 
-Attribution becomes explicit rather than implied by a name.
-`THIRD_PARTY_NOTICES.md` stays the index of record.
+Attribution is explicit rather than implied by a name, and
+`THIRD_PARTY_NOTICES.md` remains the index of record.
 
-## 6. Not verified
+## 7. Verified after the rename
 
-`web_search` is unavailable in this session, so **no trademark register,
-domain, or app-store search was done.** §3 is screened against known software
-only. Before a name goes on a public repo it needs a real trademark search.
+`flutter analyze lib test` clean · `flutter test` **192/192** · CTest **5/5**
+(`boot_nesbyte`, `boot_pocketbit`, `boot_advancebit`) · `scripts/legal_audit.py`
+clean · catalog regenerated with 21 entries.
 
-## 7. Next steps
+## 8. Remaining
 
-1. Close §3 (5 swaps) and §4 (confirm Gambatte removal).
-2. Rename the private repos to `ezcore-core-<name>`; delete the Gambatte one.
-3. Set `name` + add `provenance` in each `cores/<id>/manifest.json`.
-4. Regenerate `cores/catalog.json`; re-run `scripts/legal_audit.py`.
-5. Revert the `boot_gambatte` CTest entry added while wiring Mesen.
+1. Rename (or delete and recreate) the 18 private `ezcore-core-<upstream>` repos
+   to `ezcore-core-<name>`; delete the Gambatte one.
+2. A trademark search per name. `web_search` was unavailable for this entire
+   session, so §3 is screened against known software only — no live register,
+   domain, or app-store check has happened.
+3. `docs/MATRIX.md` prose still names cores by upstream engine in places. That
+   is correct as attribution, but narrative rows should lead with our core name.

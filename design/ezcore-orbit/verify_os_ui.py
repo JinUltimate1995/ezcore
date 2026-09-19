@@ -14,7 +14,7 @@ with sync_playwright() as p:
     assert page.locator('#system-strip').is_visible()
     page.locator('[data-filter="All systems"]').click()
     assert page.locator('#library').is_visible()
-    page.locator('[data-library-core="mgba"]').click()
+    page.locator('[data-library-core="advancebit"]').click()
     assert page.locator('.game-case').count()==2
     page.locator('[data-library-core="gambatte"]').click()
     assert page.locator('#no-games').is_visible(), 'Per-core filter must not show another engine games'

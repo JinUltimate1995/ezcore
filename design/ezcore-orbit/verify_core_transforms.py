@@ -42,7 +42,7 @@ with sync_playwright() as p:
    report['matrix_checks']+=result['checks']
   report['viewports'].append({'width':w,'height':h,'selections':len(ids)})
  # Also check real animated navigation settles at the same endpoint.
- pg.evaluate("prefs.motion=true;applyPrefs();selectCore('mgba')")
+ pg.evaluate("prefs.motion=true;applyPrefs();selectCore('advancebit')")
  pg.wait_for_timeout(800)
  pg.locator('#core-next').click()
  pg.wait_for_timeout(850)

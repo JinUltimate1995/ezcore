@@ -30,7 +30,7 @@ with sync_playwright() as p:
     a,d=m['card'],m['stage']
     assert a['top']>=d['top']-1 and a['bottom']<=d['bottom']+1,(platform,core,'card clipping',m)
     assert m['toggle']['bottom']<=m['h'] and m['toggle']['height']>=44,(platform,core,m)
-   ch.evaluate("selectCore('mgba')");ch.wait_for_timeout(800)
+   ch.evaluate("selectCore('advancebit')");ch.wait_for_timeout(800)
    pg.locator('#stage').screenshot(path=str(OUT/f'{platform}-{orientation}.png'))
    report['states'].append({'platform':platform,'orientation':orientation,'cores':18})
  # Actual user actions, cancellation, persistence and no library/save deletion.
@@ -45,7 +45,7 @@ with sync_playwright() as p:
  assert ch.locator('#browse-core').is_disabled()
  assert before==ch.evaluate('JSON.stringify({games:games.map(g=>g.id),saves})')
  pg.reload(wait_until='networkidle');pg.wait_for_function('ready');pg.locator('[data-screen="systems"]').click();ch=pg.frames[1]
- ch.evaluate("selectCore('mgba')")
+ ch.evaluate("selectCore('advancebit')")
  assert ch.locator('#core-toggle').inner_text()=='Add core'
  ch.locator('#core-toggle').click()
  assert ch.locator('#core-toggle').inner_text()=='Remove core'
@@ -59,11 +59,11 @@ with sync_playwright() as p:
  assert ch.locator('#cores-empty').is_visible()
  ch.locator('[data-core-scope="all"]').click()
  assert ch.locator('.core-card').count()==18
- ch.evaluate("selectCore('mgba')")
+ ch.evaluate("selectCore('advancebit')")
  ch.locator('#core-next').click()
  assert ch.evaluate('state.core')=='gambatte'
  ch.locator('#core-next').press('ArrowRight')
- assert ch.evaluate('state.core')=='mesen'
+ assert ch.evaluate('state.core')=='nesbyte'
  assert not report['errors'],report['errors']
  b.close()
 (OUT/'report.json').write_text(json.dumps(report,indent=2))
