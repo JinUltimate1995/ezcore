@@ -11,7 +11,7 @@
 |---|---|---|
 | macOS arm64 | `ezcore-0.1.0-macos-arm64.zip` (ad-hoc signed) | builds locally, verified |
 | Android arm64 | `ezcore-0.1.0-android-arm64.apk` (release-signed) | builds locally, verified |
-| Windows x64 | — | deferred: needs the CI matrix (Actions billing currently blocks CI) |
+| Windows x64 | — | deferred: needs the CI matrix (not running yet) |
 | Linux x64 | — | deferred: same |
 | iOS | — | skipped for now: needs an Apple Developer identity (per decision) |
 

@@ -101,9 +101,9 @@ Actions → **Release** → *Run workflow*:
 
 The workflow builds each platform, uploads artifacts, then creates the
 GitHub Release with the notes file for that tag (or generated notes when no
-file exists). **Current caveat:** the GitHub Actions billing state on the
-maintainer account must be healthy for CI to run at all — check
-`gh run list` first; if CI is paused, use the local path.
+file exists). **Current caveat:** CI is not running on this repo yet —
+check `gh run list` first; until a green run exists, use the local path
+below (and see the branch-protection note at the bottom of this file).
 
 ## Post-release checklist
 
@@ -113,3 +113,23 @@ maintainer account must be healthy for CI to run at all — check
 - [ ] `docs/MATRIX.md` reflects what actually shipped
 - [ ] Discussions/issue templates still point at the right docs
 - [ ] Offline keystore backup confirmed (Android)
+
+## Branch protection (temporary state)
+
+`main` still protects against force-pushes and deletions and asks for one
+review on PRs. The six CI checks (`ci/dart-gates`, `ci/native-linux`,
+`ci/macos`, `ci/windows`, `ci/android`, `ci/ios`) are **not currently
+required** — they cannot report while CI is not running, and
+required-but-never-reported checks would block every PR. Re-enable them
+once CI runs again:
+
+```bash
+gh api -X PUT repos/JinUltimate1995/ezcore/branches/main/protection/required_status_checks \
+  -F strict=true \
+  -f 'contexts[]=ci/dart-gates' -f 'contexts[]=ci/native-linux' \
+  -f 'contexts[]=ci/macos' -f 'contexts[]=ci/windows' \
+  -f 'contexts[]=ci/android' -f 'contexts[]=ci/ios'
+```
+
+Also re-add the CI badge to the README (first badge in the badge row) when
+green runs exist.
