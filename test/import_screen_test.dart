@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:ezcore/screens/library_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,8 +13,16 @@ void main() {
     late Directory folder;
     await tester.runAsync(() async {
       folder = await Directory.systemTemp.createTemp('ezcore_import_ui');
-      // Arbitrary bytes test importing only; this is NOT playable ROM evidence.
-      await File('${folder.path}/fixture.gba').writeAsBytes([1, 2, 3, 4]);
+      // Valid GBA ROM fixture (magic bytes + size >= 512)
+      final bytes = Uint8List(4096);
+      final magic = [0x24, 0xFF, 0xAE, 0x51, 0x69, 0x9A, 0xA2, 0x21];
+      for (var i = 0; i < magic.length; i++) {
+        bytes[i] = magic[i];
+      }
+      for (var i = magic.length; i < 4096; i++) {
+        bytes[i] = 0xFF;
+      }
+      await File('${folder.path}/fixture.gba').writeAsBytes(bytes);
       await state.load();
     });
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: LibraryScreen(state: state))));

@@ -3,6 +3,7 @@ import 'dart:io';
 import '../models/core_manifest.dart';
 import '../models/game_entry.dart';
 import 'hash_verifier.dart';
+import 'rom_validator.dart';
 
 /// Result of a single file import attempt.
 class ImportResult {
@@ -58,8 +59,10 @@ class ImportScan {
 /// 6. Never rejects based on file name alone — the manifest is the source
 ///    of truth for which extensions map to which systems.
 class ContentImporter {
-  ContentImporter(this._hashVerifier);
+  ContentImporter(this._hashVerifier, {RomValidator? romValidator})
+      : _romValidator = romValidator ?? const RomValidator();
   final HashVerifier _hashVerifier;
+  final RomValidator _romValidator;
 
   /// Imports a single file at [filePath].
   ///
@@ -93,6 +96,16 @@ class ContentImporter {
       return ImportResult(
         filePath: filePath,
         skippedReason: 'No core for extension .$ext',
+      );
+    }
+
+    // Validate file content — reject text files, wrong-size files, and
+    // files whose bytes don't match the expected ROM format.
+    final isValidRom = await _romValidator.validate(filePath, ext);
+    if (!isValidRom) {
+      return ImportResult(
+        filePath: filePath,
+        skippedReason: 'Not a valid ROM file (content validation failed)',
       );
     }
 
@@ -148,5 +161,52 @@ class ContentImporter {
       }
     }
     return ImportScan(results: results);
+  }
+
+  /// Directory names that are never descended into during a scan.
+  static const skippedDirNames = {
+    'node_modules',
+    '__pycache__',
+    '.git',
+    '.hg',
+    '.svn',
+    '.cache',
+    '.pub-cache',
+    '.gradle',
+    '.dart_tool',
+    '.Trash',
+    'Trash',
+    '\$RECYCLE.BIN',
+    'System Volume Information',
+    'Android',
+    'Sdk',
+  };
+
+  /// Default roots for a "scan everything" pass.
+  /// Desktop: common ROM locations only — never the whole home dir.
+  /// Mobile: empty — sandboxed storage has no listable drive root.
+  static List<String> driveRoots() {
+    if (Platform.isAndroid || Platform.isIOS) return const [];
+    final home = Platform.environment['HOME'] ??
+        Platform.environment['USERPROFILE'];
+    if (home == null || home.isEmpty) return const [];
+    const candidates = [
+      'Documents/ROMS',
+      'Documents/Roms',
+      'Documents/roms',
+      'ROMs',
+      'Roms',
+      'roms',
+      'Games',
+      'games',
+      'Emulation',
+      'emulation',
+    ];
+    final out = <String>[];
+    for (final rel in candidates) {
+      final dir = Directory('$home/$rel');
+      if (dir.existsSync()) out.add(dir.path);
+    }
+    return out;
   }
 }
