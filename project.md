@@ -2157,4 +2157,56 @@ RELEASE
 ↓
 NEXT ITERATION
 
+============================================================
+79. SCRATCH AGENT TOOLING NEVER ENTERS THE REPO
+============================================================
+
+Scratch agent tooling is tooling an AI creates while doing a task:
+
+- screenshot drivers
+- input injectors
+- capture helpers
+- probe scripts
+- one-off diagnostic utilities
+
+These are NOT project code.
+
+Scratch tooling must NEVER be committed to the repository.
+It lives in /tmp (or an equivalent ephemeral location), is wiped
+when the task ends, and never becomes part of any commit.
+
+Only real, permanent tests belong in test/.
+
+Before finishing any task, confirm:
+
+git status --short
+
+shows no scratch files. If an AI created helpers during
+debugging, delete them. The repository ships to contributors,
+not to one machine's task session.
+
+============================================================
+80. PUSH HYGIENE
+============================================================
+
+Every push is verified file-by-file.
+
+Before pushing, confirm:
+
+- git status --short
+- git diff --stat
+- the exact commit list
+
+NEVER push AI-generated documentation clutter — session notes,
+status files, summary files, plan files — unless the maintainer
+explicitly approves it as important for the open-source
+repository.
+
+README, CHANGELOG, and developer documentation are the
+legitimate exception, and are still reviewed.
+
+Every push report lists the exact files pushed.
+
+Before finishing any task, git status --short must be clean.
+
 This is the permanent ezCORE development system.

@@ -84,6 +84,8 @@ Before changing any code for a non-trivial task, **STOP** and inspect:
 - Rewrite files, configs, or lockfiles unrelated to the task
 - Remove copyright notices or modify licenses
 - Override human instructions
+- Commit scratch agent tooling — screenshot drivers, input injectors, capture helpers, probe scripts go in /tmp only, are wiped when the task ends, and are never committed; only real permanent tests live in `test/` (project.md §79)
+- Push AI-generated doc clutter — session notes, status/summary/plan files — without explicit maintainer approval; verify every push file-by-file (`git status --short`, `git diff --stat`, commit list) and list exact files pushed (project.md §80)
 
 ---
 
