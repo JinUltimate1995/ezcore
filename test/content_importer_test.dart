@@ -327,5 +327,19 @@ void main() {
       expect(result.skippedCount, 2);
       expect(result.errorCount, 0);
     });
+
+    test('skips hidden directories during scan', () async {
+      final hiddenDir = Directory('${tmpDir.path}/.hidden');
+      await hiddenDir.create();
+      final gbaFile = await createFakeRom(hiddenDir, 'game', 'gba');
+      hashVerifier._hashes[gbaFile.path] = 'hash1';
+
+      final result = await importer.scanDirectory(
+        tmpDir.path,
+        knownShas: {},
+        catalog: _catalog(),
+      );
+      expect(result.importedCount, 0);
+    });
   });
 }
