@@ -1,8 +1,10 @@
 # ezCORE core identity & provenance
 
 > **Status:** implemented 2026-09-19. All 17 core identifiers renamed across
-> manifests, catalog, registry, app, tests and build scripts.
-> Remaining: rename the private GitHub repos, and a real trademark search.
+> manifests, catalog, registry, app, tests and build scripts; the private
+> GitHub repos carry the codenames (`ezcore-core-<codename>`), each with a
+> verified standalone recipe, CI, and credit (2026-09-20, ADR-012).
+> Remaining: a real trademark search.
 
 ---
 
@@ -49,10 +51,13 @@ Two corollaries, both learned the hard way:
 | DOS | **RealMode** | libretro/dosbox-pure | GPL-2.0-or-later | yes |
 | SCUMM / adventure | **PointClick** | scummvm/scummvm | GPL-3.0-or-later | yes |
 
-**Reserved / unused — `ColorBit`.** One shippable GB/GBC engine exists today
-(SameBoy), so PocketBit covers both `gb` and `gbc`. ColorBit becomes live only
-if a second *shippable* GB/GBC engine is added; mGBA is MPL-2.0 and does
-GB/GBC, so it is the realistic candidate.
+**Reserved — `ColorBit`.** One shippable GB/GBC engine exists today
+(SameBoy), so PocketBit covers both `gb` and `gbc`. ColorBit is reserved for
+ezCORE's own fresh-written Game Boy Color engine — the long-term
+first-party path (ADR-012). The slot exists as
+`ezcore-core-colorbit`: a roadmap, commitments, and no engine yet. If a
+second *shippable* third-party GB/GBC engine is added first, mGBA (MPL-2.0)
+is the realistic candidate.
 
 **Gambatte gets no core name**, because it can never ship with ezCORE (§5). Its
 build recipe is retained and callable by hand (`scripts/build_core.sh
