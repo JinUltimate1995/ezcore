@@ -429,6 +429,46 @@ Release acceptance requires an actual app-level content/import/play/input/audio/
 save/reopen run; contract tests and a successful build alone are insufficient.
 Earlier monetization/cloud-first release priorities are not goals of this slice.
 
+## ADR-012: Core repository policy — independent builds, full credit, first-party over time
+
+**Status:** Accepted (2026-09-20).
+
+Every emulator engine ships under an ezCORE-owned codename (NesByte, PocketBit,
+AdvanceBit, …). The codename is ezCORE's brand; the upstream project's name is
+never hidden and never used as the core's name. This is deliberate: no renamed
+forks, no quiet re-licensing, no upstream confusion.
+
+How each core is created, in priority order:
+
+1. **Independent build (current standard).** Each core lives in its own
+   repository (`ezcore-core-<codename>`) holding only ezCORE-owned scaffolding:
+   a GPL-3.0 build recipe, CI, and documentation. The engine is fetched at build
+   time from the pinned upstream repository as a git submodule. No upstream file
+   is copied, renamed, or committed. Upstream is credited in every core README,
+   in the repo description, and in `THIRD_PARTY_NOTICES.md`.
+2. **Recipe-only for incompatible licences.** Where the upstream licence is
+   non-commercial (Snes9x, Genesis Plus GX, FBNeo), the repository ships the
+   build recipe and verifies it in CI, but **no binary is ever distributed**.
+3. **First-party cores (long term).** Cores written fresh from scratch by
+   ezCORE (ColorBit — Game Boy Color is the first reserved slot; see
+   `ezcore-core-colorbit`). Public hardware documentation only; no upstream
+   emulator source is copied or translated. Over time this replaces the
+   upstream-build path one system at a time.
+
+Non-negotiables for every core repository:
+
+- Zero game content: no ROMs, BIOS, firmware, decryption keys, game art, or
+  cheat databases — now or ever. Binaries are never committed; artifacts are
+  sha256-pinned at build time only.
+- No legal-hold targets: Switch, 3DS, and PS2 stay excluded everywhere (ADR-005).
+- Licence honesty: scaffolding is GPL-3.0 (matching ezCORE); the engine keeps
+  its upstream licence, stated by name in the README. Upstream licences that
+  are "GPL-2.0-or-later" are used under the "or later" terms, which make them
+  compatible with the GPL-3.0 app. GPL-2.0-only and non-commercial upstreams
+  are recipe-only.
+- Brand separation: the ezCORE name, icon, and lockups are reserved trade
+  marks (`TRADEMARKS.md`); forks must rename. Core codenames are ezCORE's.
+
 ## Open Decisions
 
 These need to be made before Phase 1:
