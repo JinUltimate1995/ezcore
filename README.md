@@ -7,73 +7,28 @@
 </p>
 
 <p align="center">
-  <strong>One app. Every console. Zero friction.</strong><br>
-  <em>ezCORE</em> is the multi-system emulator that just works — pick a game,
-  press play. No juggling emulators. No configuring cores. No compromise.
+  <strong>One beautiful, unified emulator.</strong><br>
+  <em>Game → Play</em> — pick a game and play; cores, saves and cheats stay out of the way.
 </p>
 
 <p align="center">
-  <a href="https://github.com/JinUltimate1995/ezcore/releases">
-    <img alt="Latest release" src="https://img.shields.io/github/v/release/JinUltimate1995/ezcore?include_prereleases&color=007BFF&label=release">
-  </a>
-  <a href="LICENSE">
-    <img alt="License" src="https://img.shields.io/badge/license-GPL--3.0--only-blue" />
-  </a>
-  <a href="https://github.com/JinUltimate1995/ezcore/stargazers">
-    <img alt="Stars" src="https://img.shields.io/github/stars/JinUltimate1995/ezcore?color=007BFF" />
-  </a>
-  <a href="https://github.com/JinUltimate1995/ezcore/releases">
-    <img alt="Downloads" src="https://img.shields.io/github/downloads/JinUltimate1995/ezcore/total?color=007BFF" />
-  </a>
-  <br>
-  <img alt="macOS" src="https://img.shields.io/badge/macOS-✓-success?color=0A0A0A">
-  <img alt="Android" src="https://img.shields.io/badge/Android-✓-success?color=0A0A0A">
-  <img alt="Windows" src="https://img.shields.io/badge/Windows-coming%20soon-lightgrey">
-  <img alt="Linux" src="https://img.shields.io/badge/Linux-coming%20soon-lightgrey">
-  <img alt="iOS" src="https://img.shields.io/badge/iOS-coming%20soon-lightgrey">
+  <a href="https://github.com/JinUltimate1995/ezcore/releases"><img alt="release" src="https://img.shields.io/github/v/release/JinUltimate1995/ezcore?include_prereleases&color=007BFF"></a>
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-GPL--3.0--only-blue"></a>
+  <a href="docs/MATRIX.md"><img alt="core matrix" src="https://img.shields.io/badge/core%20matrix-docs%2FMATRIX.md-informational"></a>
+  <img alt="macOS arm64" src="https://img.shields.io/badge/macOS-arm64-success">
+  <img alt="Android arm64" src="https://img.shields.io/badge/Android-arm64-success">
+  <img alt="Windows · Linux · iOS" src="https://img.shields.io/badge/Windows%20·%20Linux%20·%20iOS-from%20source-lightgrey">
 </p>
 
----
+An open-source multi-system emulator for your own game dumps: modular
+libretro cores behind a small stable C ABI, a polished console-style
+interface, full cheat support, and local save snapshots. Zero bundled
+games, BIOS, keys, or cheat databases — you bring your dumps, ezCORE does
+the rest.
 
-## Why ezCORE?
-
-You have games across ten different consoles. Today, that means ten different
-emulators, ten different settings menus, ten different save folders. **Done.**
-ezCORE replaces them with one beautiful, consistent interface — your whole
-collection, one library, one player, any device.
-
-### Modular by design
-
-Cores are plug-and-play. Add a system, remove a system — your games and saves
-stay safe. Every core ships inside the app; nothing to download, nothing to
-configure. If a new core drops, you get it in the next update.
-
-### Built for every screen
-
-The same app runs on your phone, your laptop, your desktop, your tablet.
-Pick the controls that fit — touch pad with haptics, keyboard, or gamepad.
-Same library. Same saves. Same you.
-
-### Peak UI, not "good enough for an emulator"
-
-We're not settling for a file picker and a render window. ezCORE is designed
-like a top-tier consumer app: CoverFlow library, gesture-driven player, live
-save snapshots, and a settings panel that actually makes sense. It looks and
-feels like you expect modern software to feel — because emulation doesn't mean
-"ugly."
-
-### Cheats that just work
-
-Built-in cheat support means you don't hunt down third-party tools or paste
-hex codes at midnight. Browse, enable, play. Your session, your rules.
-
-### Save anywhere (coming soon)
-
-Cloud sync is a priority. Start a run on macOS, continue on the train on your
-phone. Your save states, your library metadata — quietly following you across
-devices.
-
----
+```
+Flutter UI → C ABI / FFI → ezCore Runtime → modular libretro cores
+```
 
 ## Screens
 
@@ -83,100 +38,51 @@ devices.
 | **Time Capsule** | **Settings** |
 | ![Time Capsule — local save snapshots](docs/images/time-capsule.png) | ![Settings — six local tabs](docs/images/settings.png) |
 
-*(Real screenshots of the first public build on macOS — not mockups. UI is a work in progress.)*
+*(Real screenshots of the v0.1.0 build on macOS — not mockups.)*
 
----
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the layer rules and
+[`docs/MATRIX.md`](docs/MATRIX.md) for per-system verified status on each
+platform.
 
-## ⚠️ First release — please read
+## ⚠️ First release (v0.1.0) — please read
 
-This is an **early public build**. It's already genuinely fun, and we're
-shipping in the open because the fastest way to make it better is with you.
+**This is an early public build. Things may not work as expected.** We ship
+it because it's already genuinely fun, and because the fastest way to make
+it better is in the open.
 
-**What's verified today:**
+What we know going in:
 
-- ✅ **macOS (Apple Silicon):** app runs, imports your dumps, stages all bundled cores. 17 cores built; several boot-and-render verified end-to-end.
-- ✅ **Android (arm64):** builds and installs; cores cross-compiled and symbol-verified.
-- 🚧 **Windows / Linux:** build-from-source for now. Release binaries are next.
-- 🚧 **iOS:** support exists in the codebase but needs an Apple Developer identity. No TestFlight yet.
+- **macOS arm64** is the most verified target: the app runs, imports your
+  dumps, and stages all bundled cores for the player (v0.1.0 shipped 17;
+  the next build ships 15 — see [CHANGELOG.md](CHANGELOG.md)); 3 systems
+  are boot-and-render verified end-to-end in the harness — in-app
+  play-through verification is in progress (see [MATRIX.md](docs/MATRIX.md)).
+- **Android arm64** builds and installs; cores are cross-compiled and
+  symbol-verified, but on-device boot verification is still pending a device
+  lab.
+- **Windows and Linux** have no release binaries yet — for now they are
+  build-from-source platforms; the CI matrix that will build them is still
+  being brought up.
+- **iOS** support exists in the codebase (interpreter-only policy enforced
+  in manifests) but is not distributed yet — it needs an Apple Developer
+  identity. There is no TestFlight, no App Store, no iOS artifact.
+- **FBNeo (arcade)** is held from this release: its own manifest requires
+  compatibility-allowlist review before shipping.
 
-**Found a bug?** [Open an issue](https://github.com/JinUltimate1995/ezcore/issues/new/choose) — the template asks for exactly what we need.
+**Found a bug?** [Open an issue](https://github.com/JinUltimate1995/ezcore/issues/new/choose) — the bug template asks for exactly what we need.
 **Already fixed it?** PRs are welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
-**Want a feature?** Use the feature template; small and honest beats big and vague.
+**Want a feature?** Use the feature template; small and honest beats big and
+vague.
 
----
+## Bring your own dumps
 
-## Testers & contributors — most welcome
+ezCORE plays **only** files you supply yourself. It ships no ROMs,
+BIOS/firmware, decryption keys, game art, or cheat databases, and links to
+none. Game imports stay where you keep them — the library references your
+folders; nothing leaves your device. See [`TRADEMARKS.md`](TRADEMARKS.md),
+[`DMCA.md`](DMCA.md), [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-ezCORE grows with its community. If you want to:
-
-- 🎮 **Test** a core on your device and tell us what happened
-- 🐛 **Report** a bug with clear steps to reproduce
-- 💡 **Suggest** a feature that removes friction
-- 🛠️ **Contribute** code, docs, or design
-
-…we want to hear from you. Every contribution matters, and every tester
-makes the app better for everyone. See [`CONTRIBUTING.md`](CONTRIBUTING.md)
-for the details.
-
----
-
-## Systems & cores
-
-Built and load-verified on macOS arm64:
-
-GB/GBC (SameBoy) · GBA (mGBA) · NES/FDS (Mesen) ·
-Atari 2600 (Stella) · DOS (DOSBox Pure) · ScummVM (adventure games) ·
-TG-16 / PC Engine (Beetle PCE) · PS1 (SwanStation) · N64 (Mupen64Plus) ·
-DS (melonDS) · PSP (PPSSPP) · Dreamcast (Flycast) ·
-GameCube/Wii (Dolphin) · Saturn (Beetle Saturn).
-
-Scope is intent; [`docs/MATRIX.md`](docs/MATRIX.md) records what is actually
-verified per system per platform (built → pinned → identifies → renders →
-shipped). A few cores boot-and-render verified today; the rest load and
-identify, with render verification in progress — the matrix is the honest
-source.
-
-**Legal holds (reserved slots, never built):** 3DS, Switch, PS2. Reasons live
-in `cores/*_hold/manifest.json` — in short: the 3DS/Switch upstreams fell to
-Nintendo's 2024 anti-circumvention actions, and no shippable open PS2
-libretro core exists. This protects the project and its users.
-
----
-
-## Install
-
-| Platform | Artifact | How |
-|---|---|---|
-| macOS (Apple Silicon) | `ezcore-<version>-macos-arm64.zip` | [Releases](https://github.com/JinUltimate1995/ezcore/releases) → [`docs/INSTALL.md`](docs/INSTALL.md) |
-| Android (arm64) | `ezcore-<version>-android-arm64.apk` | [Releases](https://github.com/JinUltimate1995/ezcore/releases) → [`docs/INSTALL.md`](docs/INSTALL.md) |
-| Windows / Linux | — | build from source for now (see below) |
-| iOS | — | not distributed yet (needs an Apple identity) |
-
-The macOS build is ad-hoc signed (not notarized): first launch needs the
-usual `xattr -cr /Applications/ezCore.app` dance — details in
-[`docs/INSTALL.md`](docs/INSTALL.md).
-
----
-
-## Build from source (macOS quick start)
-
-```bash
-git clone https://github.com/JinUltimate1995/ezcore.git
-cd ezcore
-scripts/prereqs.sh                      # one-shot toolchain (macOS/arm64)
-scripts/build_core.sh --fetch-headers   # vendor libretro.h
-scripts/build_runtime.sh macos          # runtime + CTest
-scripts/build_core.sh --tier1           # first six cores
-python3 scripts/build_catalog.py        # merge manifests (required asset)
-flutter analyze && flutter test         # gates
-flutter run -d macos                    # run the app
-```
-
-Full platform matrix, tiers and release assembly:
-[`docs/BUILDING.md`](docs/BUILDING.md). Maintainer release checklist:
-[`docs/RELEASING.md`](docs/RELEASING.md).
-
----
+ezCORE is a standalone product, unrelated to any console maker or publisher.
 
 ## Interface (Orbit console)
 
@@ -209,7 +115,60 @@ No game art ships with the app: every import gets a deterministic generative
 cover in the app identity, and player screenshots can be pinned as that
 game's cover.
 
----
+## Systems & cores
+
+Built and load-verified on macOS arm64 (15 bundled from the next build —
+v0.1.0 shipped 17; Snes9x, Genesis Plus GX, and FBNeo are build recipes
+only, their upstream licenses are non-commercial; Gambatte is GPL-2.0-only
+and therefore never bundled — PocketBit/SameBoy serves GB/GBC):
+
+GB/GBC (SameBoy) · GBA (mGBA) · NES/FDS (Mesen) ·
+Atari 2600 (Stella) · DOS (DOSBox Pure) · ScummVM (adventure games) ·
+TG-16 / PC Engine (Beetle PCE) · PS1 (SwanStation) · N64 (Mupen64Plus) ·
+DS (melonDS) · PSP (PPSSPP) · Dreamcast (Flycast) ·
+GameCube/Wii (Dolphin, desktop/Android) · Saturn (Beetle Saturn).
+
+Scope is intent; [`docs/MATRIX.md`](docs/MATRIX.md) records what is actually
+verified per system per platform (built → pinned → identifies → renders →
+shipped). A few cores boot-and-render verified today; the rest load and
+identify, with render verification in progress — the matrix is the honest
+source.
+
+**Legal holds (reserved slots, never built):** 3DS, Switch, PS2. Reasons live
+in `cores/*_hold/manifest.json` — in short: the 3DS/Switch upstreams fell to
+Nintendo's 2024 anti-circumvention actions, and no shippable open PS2
+libretro core exists. This protects the project and its users.
+
+## Install
+
+| Platform | Artifact | How |
+|---|---|---|
+| macOS (Apple Silicon) | `ezcore-<version>-macos-arm64.zip` | [Releases](https://github.com/JinUltimate1995/ezcore/releases) → [`docs/INSTALL.md`](docs/INSTALL.md) |
+| Android (arm64) | `ezcore-<version>-android-arm64.apk` | [Releases](https://github.com/JinUltimate1995/ezcore/releases) → [`docs/INSTALL.md`](docs/INSTALL.md) |
+| Windows / Linux | — | build from source for now (see below) |
+| iOS | — | not distributed yet (needs an Apple identity) |
+
+The macOS build is ad-hoc signed (not notarized): first launch needs the
+usual `xattr -cr /Applications/ezCore.app` dance — details in
+[`docs/INSTALL.md`](docs/INSTALL.md).
+
+## Build from source (macOS quick start)
+
+```bash
+git clone https://github.com/JinUltimate1995/ezcore.git
+cd ezcore
+scripts/prereqs.sh                      # one-shot toolchain (macOS/arm64)
+scripts/build_core.sh --fetch-headers   # vendor libretro.h
+scripts/build_runtime.sh macos          # runtime + CTest
+scripts/build_core.sh --tier1           # first six cores
+python3 scripts/build_catalog.py        # merge manifests (required asset)
+flutter analyze && flutter test         # gates
+flutter run -d macos                    # run the app
+```
+
+Full platform matrix, tiers and release assembly:
+[`docs/BUILDING.md`](docs/BUILDING.md). Maintainer release checklist:
+[`docs/RELEASING.md`](docs/RELEASING.md).
 
 ## Documentation
 
@@ -228,8 +187,6 @@ game's cover.
 | [`SECURITY.md`](SECURITY.md) · [`SUPPORT.md`](SUPPORT.md) | Vulnerability reporting · FAQ |
 | [`TRADEMARKS.md`](TRADEMARKS.md) · [`DMCA.md`](DMCA.md) | Brand policy · takedown policy |
 
----
-
 ## License & credits
 
 - **App shell + runtime:** GPL-3.0-only ([`LICENSE`](LICENSE)).
@@ -242,8 +199,6 @@ game's cover.
 
 ezCORE stands on the shoulders of the [libretro](https://www.libretro.com/)
 ecosystem and the emulator projects behind each core. Thank you.
-
----
 
 ## Support
 
@@ -262,15 +217,3 @@ cores, no paywalled features.** Paid options are additive only:
 
 The full plan, including what we will never do, is in
 [`docs/MONETIZATION.md`](docs/MONETIZATION.md).
-
----
-
-## A note on game files
-
-ezCORE plays **only** files you supply yourself. It ships no ROMs,
-BIOS/firmware, decryption keys, or game art, and links to none. Game
-imports stay where you keep them — the library references your folders;
-nothing leaves your device. See [`TRADEMARKS.md`](TRADEMARKS.md),
-[`DMCA.md`](DMCA.md), [`CONTRIBUTING.md`](CONTRIBUTING.md).
-
-ezCORE is a standalone product, unrelated to any console maker or publisher.
