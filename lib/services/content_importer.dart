@@ -297,31 +297,4 @@ class ContentImporter {
     'Sdk',
   };
 
-  /// Default roots for a "scan everything" pass.
-  /// Desktop: common ROM locations only — never the whole home dir.
-  /// Mobile: empty — sandboxed storage has no listable drive root.
-  static List<String> driveRoots() {
-    if (Platform.isAndroid || Platform.isIOS) return const [];
-    final home = Platform.environment['HOME'] ??
-        Platform.environment['USERPROFILE'];
-    if (home == null || home.isEmpty) return const [];
-    const candidates = [
-      'Documents/ROMS',
-      'Documents/Roms',
-      'Documents/roms',
-      'ROMs',
-      'Roms',
-      'roms',
-      'Games',
-      'games',
-      'Emulation',
-      'emulation',
-    ];
-    final out = <String>[];
-    for (final rel in candidates) {
-      final dir = Directory('$home/$rel');
-      if (dir.existsSync()) out.add(dir.path);
-    }
-    return out;
-  }
 }
