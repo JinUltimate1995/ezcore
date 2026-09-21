@@ -2,6 +2,7 @@
   "advancebit": {
     "artifacts": {
       "android-arm64": "441611bd198a78feab5e41e668433b6783240d706ef3944abcbce98d9bbe0c10",
+      "linux-x64": "26f5826576c722e144351e851baf8b2b37122070a19c082475f2166f59044f09",
       "macos-arm64": "2d8029a2287b9b92b190812feb54c033c5624bb7b2a3713a974a3ea0f2a42fdb"
     },
     "bios_files": [],
@@ -450,6 +451,7 @@
   "joystick": {
     "artifacts": {
       "android-arm64": "a99f82584295b950046c528852fb063a3745885173adbb8daf45e683edd2a515",
+      "linux-x64": "14f5c3a6b2a13108efa10d04a6e1ce4bb99b599d5e6a4afa36b9d26dc451cf4b",
       "macos-arm64": "58787f7ffd33d45aacdc331e2e3751abc3ef4d4c2178937a947d77f904734b22"
     },
     "bios_files": [],
@@ -495,6 +497,7 @@
   "nesbyte": {
     "artifacts": {
       "android-arm64": "7063eb166524c184f175d81d840eae167e90ae78fdf56ac79281cb035d3e44f2",
+      "linux-x64": "c883579a185a3aa880678b731b34b6448715afa87ce6ef785c6b20bc7d9a88a5",
       "macos-arm64": "940e471244ce202441442748dcae5d207690f8b876de5e56fe165bda59e8527b"
     },
     "bios_files": [
