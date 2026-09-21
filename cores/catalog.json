@@ -241,6 +241,7 @@
   },
   "dreamarc": {
     "artifacts": {
+      "linux-x64": "0407302467a879e79d06fb023ad98b165181b022622ba6c663171df0d5786c51",
       "macos-arm64": "33635e6499bb352214eace841d5c2bc74f709a7518ad93a9aa86e66eec6bb327"
     },
     "bios_files": [
@@ -644,6 +645,7 @@
   },
   "portcomp": {
     "artifacts": {
+      "linux-x64": "cc680091bc9ae1215c1b136c84c3207860c144aa88dde1204f6062a81a73dbb3",
       "macos-arm64": "f3483b102dec93d484b8c10bdb2bb2fe1c5f12e7425ca800db2985b85a4d5d9f"
     },
     "bios_files": [],
@@ -693,6 +695,7 @@
   },
   "powercube": {
     "artifacts": {
+      "linux-x64": "153229584c35feb5ce6fd3ef2b07357c4f3b77a172277fb1a0ca9da3fa59b4c9",
       "macos-arm64": "ff830c91ffa2e863416e4ea6614b3406d3dab0533a912faa43ff41d4607ba327"
     },
     "bios_files": [
