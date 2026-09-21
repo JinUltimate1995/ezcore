@@ -13,13 +13,13 @@ void main() {
     late Directory folder;
     await tester.runAsync(() async {
       folder = await Directory.systemTemp.createTemp('ezcore_import_ui');
-      // Valid GBA ROM fixture (magic bytes + size >= 512)
+      // Valid GBA ROM fixture (magic bytes at 0x04 + size >= 512)
       final bytes = Uint8List(4096);
       final magic = [0x24, 0xFF, 0xAE, 0x51, 0x69, 0x9A, 0xA2, 0x21];
       for (var i = 0; i < magic.length; i++) {
-        bytes[i] = magic[i];
+        bytes[0x04 + i] = magic[i];
       }
-      for (var i = magic.length; i < 4096; i++) {
+      for (var i = 0x04 + magic.length; i < 4096; i++) {
         bytes[i] = 0xFF;
       }
       await File('${folder.path}/fixture.gba').writeAsBytes(bytes);
