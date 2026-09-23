@@ -6,6 +6,7 @@ import '../cores/core_registry.dart';
 import '../models/core_manifest.dart';
 import '../services/bios_check.dart';
 import '../state/app_state.dart';
+import '../theme/layout.dart';
 import '../theme/tokens.dart';
 import '../widgets/hardware_art.dart';
 import '../widgets/orbit_widgets.dart';
@@ -71,8 +72,8 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final portrait = size.width < 700 ||
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    // One breakpoint definition for the whole app (theme/layout.dart).
+    final portrait = Layout.isPhone(Layout.of(context));
     final osPad = Tokens.osPad(size.width, portrait: portrait);
     return ListenableBuilder(
       listenable: widget.state.registry,

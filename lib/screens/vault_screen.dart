@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../services/system_labels.dart';
+import '../services/human_time.dart';
 import '../state/app_state.dart';
 import '../state/save_sync.dart';
+import '../theme/layout.dart';
 import '../theme/tokens.dart';
 import '../widgets/orbit_widgets.dart';
 import 'player_screen.dart';
@@ -37,8 +39,8 @@ class _VaultScreenState extends State<VaultScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final portrait = size.width < 700 ||
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    // One breakpoint definition for the whole app (theme/layout.dart).
+    final portrait = Layout.isPhone(Layout.of(context));
     final osPad = Tokens.osPad(size.width, portrait: portrait);
     return ListenableBuilder(
       listenable: widget.state,
@@ -174,15 +176,11 @@ class _SaveCard extends StatelessWidget {
     return '$hh:$mm:$ss';
   }
 
-  String _fmtWhen(DateTime d) {
-    final now = DateTime.now();
-    final diff = now.difference(d);
-    if (diff.inMinutes < 1) return 'Just now';
-    if (diff.inHours < 1) return '${diff.inMinutes}m ago';
-    if (diff.inDays < 1) return '${diff.inHours}h ago';
-    if (diff.inDays < 7) return '${diff.inDays}d ago';
-    return '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
-  }
+  String _fmtWhen(DateTime d) =>
+      // Shared formatter, so vault cards and "Continue playing" tiles
+      // always describe the same moment the same way.
+      lastPlayedLabel(d.millisecondsSinceEpoch);
+
 
   @override
   Widget build(BuildContext context) {

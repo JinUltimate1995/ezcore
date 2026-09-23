@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../emu/pcm_output.dart';
 import '../services/gamepad.dart';
 import '../state/app_state.dart';
+import '../theme/layout.dart';
 import '../theme/tokens.dart';
 import '../widgets/orbit_widgets.dart';
 
@@ -62,8 +63,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final portrait = size.width < 700 ||
-        MediaQuery.of(context).orientation == Orientation.portrait;
+    // One breakpoint definition for the whole app (theme/layout.dart).
+    final portrait = Layout.isPhone(Layout.of(context));
     final osPad = Tokens.osPad(size.width, portrait: portrait);
     return ListenableBuilder(
       listenable: widget.state,
@@ -219,7 +220,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         _row(
           'Ambient motion',
-          'Diagonal blue edge light. A quiet pulse across black panels.',
+          'Planet limb, drifting stars, and the occasional meteor. '
+              'Turn off for a completely still sky.',
           OrbitToggle(
               label: 'Ambient motion',
               value: _pref('motion', true),
