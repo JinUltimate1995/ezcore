@@ -78,7 +78,7 @@ The interface is the product. Orbit is the first expression of that idea.
 
 ## Latest progress
 
-### Progress log — 2026-09-23
+### Progress log — 2026-09-24
 
 **Current checkpoint: ezCORE `v0.2.0` — public experimental build.**
 
@@ -91,8 +91,8 @@ experience. Recent milestones include:
   favorites, recent games, and deterministic cover art.
 - **A connected player** — frames, audio, input, pause, fast-forward, reset,
   screenshots, cheats, BIOS guidance, and local saves share one runtime path.
-- **Orbit responsive UI** — the shell is being shaped around desktop, tablet,
-  phone-landscape, and phone-portrait layouts.
+- **Orbit responsive UI** — four layout families, animated space-scene motion,
+  reduced-motion support, and shared library state across the shell.
 - **A durable project direction** — the roadmap, core matrix, architecture
   state, and verification records now travel with the code.
 
@@ -144,8 +144,11 @@ screenshots, live cheat entries, and save/load actions.
 Local preferences for the way you play: audio, input, storage, appearance, and
 emulation behavior.
 
-The current published screenshots are from the v0.1.1 macOS build. Orbit is
-still being refined, and the project is growing with it.
+The imagery below is captured from the real Linux debug build of the current
+Flutter shell. Library uses the temporary SameBoy `cgb-acid2` test ROM, Systems
+uses the live core catalog, Capsule uses a temporary local save slot, and
+Settings is the live preferences screen. Capture data stays outside the
+repository; no commercial ROMs or proprietary game artwork are included.
 
 ---
 
@@ -161,7 +164,7 @@ still being refined, and the project is growing with it.
 | ![ezCORE Time Capsule](docs/images/time-capsule.png) | ![ezCORE Settings](docs/images/settings.png) |
 | **Return to the moment you saved.** | **Tune the experience without leaving the device.** |
 
-*Screenshots captured from the v0.1.1 macOS arm64 build.*
+*Real Linux debug captures using public-domain or local test data only.*
 
 ---
 

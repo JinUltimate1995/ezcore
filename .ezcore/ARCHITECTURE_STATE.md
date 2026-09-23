@@ -78,7 +78,8 @@ Pinned modular core artifacts
 
 - `state.json`: games, cheats, and flat settings.
 - `cores/<id>/`: verified local core artifacts and optimization sidecars.
-- `saves/<gameId>/<slot>.bin`: opaque local save-state bytes.
+- `<gameId>/<slot>.bin`: opaque local save-state bytes under the platform
+  data directory (the provider receives that directory directly).
 - `sram/<gameId>/`: per-game battery-save handoff directory.
 - `system/`: user-provided firmware location.
 - `art/` and `screenshots/`: local visual assets.

@@ -57,8 +57,7 @@ void main() {
       );
       // Exactly 1180 wide: first desktop.
       expect(
-        Layout.ofSize(
-            const Size(Tokens.bpDesktop, 900), Orientation.landscape),
+        Layout.ofSize(const Size(Tokens.bpDesktop, 900), Orientation.landscape),
         OrbitLayout.desktop,
       );
     });

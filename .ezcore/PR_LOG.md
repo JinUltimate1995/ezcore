@@ -15,15 +15,16 @@
 - **Documentation/state scope:** `README.md`, `ROADMAP.md`, selected `docs/`
   cross-references, agent reconnaissance pointers, and `.ezcore/` state memory.
   The local editorial guide remains ignored and is not part of the PR.
-- **Verification:** `flutter analyze` — no issues; `flutter test --no-pub` —
-  393 passed, 15 skipped, 0 failed; Linux CTest — 3/3 passed; README local-link
-  check — passed.
-- **Open PR gates:** two theme-owned blank lines at EOF fail
-  `git diff 6c9af64..HEAD --check`; the installed Dart formatter would change
-  15 design files; descriptive console names require maintainer review against
-  the repository trademark rule.
-- **Result:** PR candidate ready for maintainer review. No platform/device
-  claims beyond the canonical matrix are implied.
+- **Verification:** `flutter analyze` — no issues (`61.0s`);
+  `flutter test --no-pub` — 396 passed, 15 skipped, 0 failed; Linux CTest —
+  3/3 passed; Linux debug build — passed; Android debug APK build — passed;
+  focused Dart format check — 0 changed; README/local Markdown links —
+  passed.
+- **UI fixes:** Favorites chip filtering, global Recently added semantics,
+  Windows filename display, a renderer-safe animated ORBIT backdrop, and real
+  Linux captures using temporary SameBoy/local test data.
+- **Result:** PR candidate ready for maintainer review and merge. No
+  platform/device claims beyond the canonical matrix are implied.
 
 ## 2026-09-23 — `1b3b15d` / #22
 

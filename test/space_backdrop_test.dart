@@ -23,9 +23,7 @@ void main() {
         data: MediaQueryData(disableAnimations: reduceMotion),
         child: Directionality(
           textDirection: TextDirection.ltr,
-          child: Scaffold(
-            body: SpaceBackdrop(motion: motion),
-          ),
+          child: Scaffold(body: SpaceBackdrop(motion: motion)),
         ),
       ),
     );

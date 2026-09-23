@@ -9,12 +9,12 @@
 **M0 — Project control and baseline** — `[~] In Review`
 
 The repository now has a long-term roadmap, state memory, a rebuilt public
-README, and the completed Orbit redesign integrated on the feature branch.
-The combined branch is ready for maintainer review, not automatic merge:
-implementation tests are green on this host, while two PR-level whitespace
-findings and a formatter discrepancy remain to be resolved by the design
-owner. This project-control track did not edit the theme/UI implementation
-files.
+README, real Linux UI captures, and the completed Orbit redesign integrated on
+the feature branch. The combined branch is ready for maintainer review and
+merge: implementation tests and Linux/Android debug builds are green on this
+host, with platform/device limits still explicitly recorded. The earlier
+project-control slice did not edit the theme implementation; this explicitly
+approved follow-up adds focused UI fixes and regression coverage.
 
 **Completed communication slice:** README rebuilt with the ezCORE mission,
 current capabilities, dated progress stats, a Now → Next roadmap, technical
@@ -27,19 +27,22 @@ backdrop with reduced-motion behavior, and permanent layout/backdrop tests.
 
 ## Why the next task is first
 
-The latest combined read-only checks on 2026-09-24 observed:
+The latest combined checks on 2026-09-24 observed:
 
-- `flutter analyze`: **No issues found** (`111.8s`).
-- `flutter test --no-pub`: **393 passed, 15 skipped, 0 failed**.
+- `flutter analyze`: **No issues found** (`61.0s`).
+- `flutter test --no-pub`: **396 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
-- `git diff 6c9af64..HEAD --check`: reports two blank lines at EOF in
-  `lib/main.dart` and `lib/services/system_labels.dart`.
-- Dart formatter check on the 17 design Dart files reports that 15 would
-  change under the installed SDK; no broad formatter rewrite was applied.
+- `flutter build linux --debug`: **passed**.
+- `flutter build apk --debug`: **passed**; device boot remains unverified.
+- Focused formatter check on the design slice: **0 changed**.
+- Linux debug app capture: background visually reviewed; a second capture
+  differed over time, confirming the ORBIT scene is animated.
+- The earlier EOF whitespace findings are resolved and documented in
+  `KNOWN_ISSUES.md`.
 
 The code and test baseline is now stronger than the earlier theme-track
-snapshot. Finish the PR-level cleanup and policy review before starting the
-capability-contract milestone.
+snapshot. Finish maintainer review and merge before starting the capability-
+contract milestone.
 
 ## Milestone order
 
@@ -73,10 +76,9 @@ capability-contract milestone.
 
 ## Next logical task
 
-**Combined PR review and quality cleanup.** The maintainer should review the
-Orbit diff, resolve the two whitespace findings and formatter discrepancy
-without broad unrelated churn, and confirm the descriptive system-name wording
-against the repository's trademark policy. No additional architecture task
+**Maintainer review and merge.** Confirm the descriptive system-name wording
+against the repository's trademark policy, review the final diff, and merge
+PR #25 while the branch checks remain green. No additional architecture task
 should start until that handoff is clean.
 
 ## State-file maintenance rule

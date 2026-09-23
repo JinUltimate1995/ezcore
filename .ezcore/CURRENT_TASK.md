@@ -5,12 +5,12 @@
 - **Milestone:** Phase 0 — project control and public communication
 - **Task:** Integrate the completed Orbit redesign with the brand-forward,
   evidence-backed public README and project state
-- **Status:** PR candidate; implementation gates are green on this host,
-  maintainer review and PR-level cleanup remain
+- **Status:** PR ready for maintainer review and merge after the final push
 - **Date:** 2026-09-24
 - **Branch observed:** `feat/orbit-mockup-redesign`
-- **Scope:** Orbit design commits, `README.md`, roadmap/documentation, and
-  project-state memory; no ROMs, keys, or external core artifacts
+- **Scope:** Orbit design commits, responsive behavior fixes, animated backdrop,
+  sanitized README previews, roadmap/documentation, and project-state memory;
+  no ROMs, keys, or external core artifacts
 
 ## Objective
 
@@ -58,28 +58,38 @@ copying text or assets:
 - [x] Contribution rules and DCO expectations are visible.
 - [x] Sponsorship is requested without a paywall or false perk promise.
 - [x] License, core provenance, and content boundaries are clear.
-- [x] Orbit implementation files were not edited by this project-control task;
-  their completed design commits are integrated for combined review.
+- [x] The earlier documentation-only slice did not edit the theme
+  implementation; this explicitly approved UI cleanup now includes focused
+  behavior, renderer, animation, and regression-test fixes.
+- [x] Favorites, Recently added, and Windows path display have regression
+  coverage and corrected shared-library behavior.
+- [x] The Linux-rendered backdrop avoids the pale-wash failure and includes
+  animated ORBIT edge lights, orbital signals, stars, and meteors.
+- [x] README imagery is captured from the real Linux shell using only a
+  temporary SameBoy test ROM and local save data outside the repository.
 
 ## Verification
 
 - Local README link check: **passed**.
-- `flutter analyze`: **No issues found** (`111.8s`).
-- `flutter test --no-pub`: **393 passed, 15 skipped, 0 failed**.
+- `flutter analyze`: **No issues found** (`61.0s`).
+- `flutter test --no-pub`: **396 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
-- `git diff 6c9af64..HEAD --check`: **not clean**; two theme-owned blank lines
-  at EOF remain in `lib/main.dart` and `lib/services/system_labels.dart`.
-- Dart formatter check on the 17 design Dart files: **not clean**; 15 files
-  would be reformatted by the installed SDK. No broad rewrite was applied.
+- `flutter build linux --debug`: **passed**; stale CMake output was moved aside
+  before the clean rebuild.
+- `flutter build apk --debug`: **passed**; device boot remains unverified.
+- Focused Dart formatter check on the design slice: **0 changed**.
+- Linux debug app capture: **passed**; the background was visually reviewed and
+  a second capture differed over time, confirming motion.
 - Platform/device claims remain bounded by [`../docs/MATRIX.md`](../docs/MATRIX.md);
   this host did not verify every target.
 
 ## Coordination
 
-The theme/UI track's implementation is committed in the feature branch. This
-project-control task did not edit those files. The combined branch now needs
-maintainer review of the PR-level cleanup findings and the descriptive
-system-name wording before merge.
+The original documentation-only slice did not edit the theme implementation.
+This follow-up was explicitly authorized to fix and verify the completed UI
+work, so the branch now contains focused implementation and regression-test
+changes alongside the design commits. The combined branch is ready for
+maintainer review of the descriptive system-name wording and final PR diff.
 
 ## Completion record
 
@@ -98,10 +108,10 @@ explicit.
 
 ## Next logical task
 
-**Maintainer review and PR cleanup.** Resolve the two whitespace findings and
-formatter discrepancy with the design owner, review the compatibility-name
-wording against the repository policy, and approve the combined PR. After that,
-the next architecture milestone is capability-contract research described in
+**Maintainer review and merge.** Confirm the descriptive compatibility-name
+wording against the repository policy, review the final diff, and merge PR #25
+when the branch checks remain green. After that, the next architecture
+milestone is capability-contract research described in
 [`../ROADMAP.md`](../ROADMAP.md).
 
 ## Previous handoff

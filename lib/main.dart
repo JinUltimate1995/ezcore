@@ -63,7 +63,8 @@ class _EmuAppState extends State<EmuApp> {
             return const Scaffold(
               backgroundColor: Tokens.bg,
               body: Center(
-                  child: CircularProgressIndicator(color: Tokens.accent)),
+                child: CircularProgressIndicator(color: Tokens.accent),
+              ),
             );
           }
           if (state.loadError != null && kReleaseMode == false) {
@@ -186,8 +187,7 @@ class _ShellState extends State<Shell> {
                           Expanded(child: _page()),
                           if (!short)
                             Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(osPad, 0, osPad, 6),
+                              padding: EdgeInsets.fromLTRB(osPad, 0, osPad, 6),
                               child: const OrbitFooter(),
                             ),
                         ],
@@ -242,17 +242,10 @@ class _ShellState extends State<Shell> {
           initialFilter: libraryFilter,
           key: ValueKey('lib-$libraryFilterNonce-${libraryFilter ?? ''}'),
         ),
-        CoreManagerScreen(
-          state: widget.state,
-          onBrowseCore: _browseCore,
-        ),
+        CoreManagerScreen(state: widget.state, onBrowseCore: _browseCore),
         VaultScreen(state: widget.state),
-        SettingsScreen(
-          state: widget.state,
-          onGoVault: () => _go('vault'),
-        ),
+        SettingsScreen(state: widget.state, onGoVault: () => _go('vault')),
       ],
     );
   }
 }
-

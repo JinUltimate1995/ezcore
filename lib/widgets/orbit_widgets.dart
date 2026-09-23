@@ -35,7 +35,6 @@ class Ambient extends StatelessWidget {
       Positioned.fill(child: SpaceBackdrop(motion: motion));
 }
 
-
 /// The ezCORE lockup (brand mark + wordmark).
 ///
 /// Uses the committed brand asset so the mark can never drift from
@@ -123,7 +122,8 @@ class OrbitTopbar extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            if (leading != null) Align(alignment: Alignment.centerLeft, child: leading),
+            if (leading != null)
+              Align(alignment: Alignment.centerLeft, child: leading),
             brand,
             if (trailing != null)
               Align(alignment: Alignment.centerRight, child: trailing),
@@ -156,7 +156,10 @@ class OrbitStatusCluster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final clock = StreamBuilder<DateTime>(
-      stream: Stream.periodic(const Duration(seconds: 30), (_) => DateTime.now()),
+      stream: Stream.periodic(
+        const Duration(seconds: 30),
+        (_) => DateTime.now(),
+      ),
       initialData: DateTime.now(),
       builder: (context, snap) {
         final d = snap.data ?? DateTime.now();
@@ -181,13 +184,15 @@ class OrbitStatusCluster extends StatelessWidget {
             borderRadius: BorderRadius.circular(9),
             border: Border.all(color: const Color(0x30007BFF)),
           ),
-          child: Text('P1', style: Tokens.display(size: 11, weight: FontWeight.w600, ls: 0)),
+          child: Text(
+            'P1',
+            style: Tokens.display(size: 11, weight: FontWeight.w600, ls: 0),
+          ),
         ),
       ],
     );
   }
 }
-
 
 class OrbitNavItem {
   const OrbitNavItem(this.id, this.label, this.icon, this.filled);
@@ -199,14 +204,24 @@ class OrbitNavItem {
 
 const orbitNavItems = [
   OrbitNavItem('library', 'Library', Icons.grid_view_outlined, Icons.grid_view),
-  OrbitNavItem('systems', 'Systems', Icons.sports_esports_outlined, Icons.sports_esports),
+  OrbitNavItem(
+    'systems',
+    'Systems',
+    Icons.sports_esports_outlined,
+    Icons.sports_esports,
+  ),
   OrbitNavItem('vault', 'Capsule', Icons.history_outlined, Icons.history),
   OrbitNavItem('settings', 'Settings', Icons.settings_outlined, Icons.settings),
 ];
 
 /// Landscape left command rail (84px, 72px short).
 class OrbitRail extends StatelessWidget {
-  const OrbitRail({super.key, required this.page, required this.onGo, this.short = false});
+  const OrbitRail({
+    super.key,
+    required this.page,
+    required this.onGo,
+    this.short = false,
+  });
   final String page;
   final ValueChanged<String> onGo;
   final bool short;
@@ -240,7 +255,12 @@ class OrbitRail extends StatelessWidget {
 }
 
 class _RailButton extends StatelessWidget {
-  const _RailButton({required this.item, required this.active, required this.short, required this.onTap});
+  const _RailButton({
+    required this.item,
+    required this.active,
+    required this.short,
+    required this.onTap,
+  });
   final OrbitNavItem item;
   final bool active;
   final bool short;
@@ -268,14 +288,19 @@ class _RailButton extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(active ? item.filled : item.icon,
-                  size: short ? 18 : 21,
-                  color: active ? Colors.white : Tokens.muted),
+              Icon(
+                active ? item.filled : item.icon,
+                size: short ? 18 : 21,
+                color: active ? Colors.white : Tokens.muted,
+              ),
               const SizedBox(height: 8),
-              Text(label,
-                  style: Tokens.body(
-                      size: short ? 8 : 9,
-                      color: active ? Colors.white : Tokens.muted)),
+              Text(
+                label,
+                style: Tokens.body(
+                  size: short ? 8 : 9,
+                  color: active ? Colors.white : Tokens.muted,
+                ),
+              ),
             ],
           ),
         ),
@@ -311,7 +336,8 @@ class OrbitPrimary extends StatelessWidget {
         borderRadius: BorderRadius.circular(Tokens.radiusPrimary),
         gradient: onPressed == null
             ? const LinearGradient(
-                colors: [Color(0xFF2A3542), Color(0xFF1B222C)])
+                colors: [Color(0xFF2A3542), Color(0xFF1B222C)],
+              )
             : const LinearGradient(
                 colors: [Tokens.accentHi, Tokens.accentDeep],
                 begin: Alignment.topLeft,
@@ -320,8 +346,16 @@ class OrbitPrimary extends StatelessWidget {
         boxShadow: onPressed == null
             ? null
             : const [
-                BoxShadow(color: Color(0x45FFFFFF), offset: Offset(0, 1), blurRadius: 0),
-                BoxShadow(color: Color(0x22007BFF), offset: Offset(0, 5), blurRadius: 18),
+                BoxShadow(
+                  color: Color(0x45FFFFFF),
+                  offset: Offset(0, 1),
+                  blurRadius: 0,
+                ),
+                BoxShadow(
+                  color: Color(0x22007BFF),
+                  offset: Offset(0, 5),
+                  blurRadius: 18,
+                ),
               ],
       ),
       child: Row(
@@ -329,13 +363,23 @@ class OrbitPrimary extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: Colors.white),
           const SizedBox(width: 10),
-          Text(label,
-              style: Tokens.display(size: 12, weight: FontWeight.w800, ls: 0, color: Colors.white)),
+          Text(
+            label,
+            style: Tokens.display(
+              size: 12,
+              weight: FontWeight.w800,
+              ls: 0,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );
     final child = expanded
-        ? SizedBox(width: double.infinity, child: Center(child: btn))
+        ? SizedBox(
+            width: double.infinity,
+            child: Center(child: btn),
+          )
         : btn;
     return Opacity(
       opacity: onPressed == null ? 0.4 : 1,
@@ -350,8 +394,12 @@ class OrbitPrimary extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Tokens.radiusPrimary),
                     gradient: onPressed == null
-                        ? const LinearGradient(colors: [Color(0xFF2A3542), Color(0xFF1B222C)])
-                        : const LinearGradient(colors: [Tokens.accentHi, Tokens.accentDeep]),
+                        ? const LinearGradient(
+                            colors: [Color(0xFF2A3542), Color(0xFF1B222C)],
+                          )
+                        : const LinearGradient(
+                            colors: [Tokens.accentHi, Tokens.accentDeep],
+                          ),
                   ),
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -360,9 +408,15 @@ class OrbitPrimary extends StatelessWidget {
                     children: [
                       Icon(icon, size: 18, color: Colors.white),
                       const SizedBox(width: 10),
-                      Text(label,
-                          style: Tokens.display(
-                              size: 12, weight: FontWeight.w800, ls: 0, color: Colors.white)),
+                      Text(
+                        label,
+                        style: Tokens.display(
+                          size: 12,
+                          weight: FontWeight.w800,
+                          ls: 0,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 )
@@ -374,7 +428,12 @@ class OrbitPrimary extends StatelessWidget {
 }
 
 class OrbitSecondary extends StatelessWidget {
-  const OrbitSecondary({super.key, required this.label, required this.onPressed, this.icon});
+  const OrbitSecondary({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+  });
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
@@ -398,7 +457,13 @@ class OrbitSecondary extends StatelessWidget {
 }
 
 class OrbitRoundButton extends StatelessWidget {
-  const OrbitRoundButton({super.key, required this.icon, required this.onPressed, this.tooltip, this.active = false});
+  const OrbitRoundButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.tooltip,
+    this.active = false,
+  });
   final IconData icon;
   final VoidCallback? onPressed;
   final String? tooltip;
@@ -421,10 +486,14 @@ class OrbitRoundButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Tokens.radiusRound),
               border: Border.all(
-                  color: active ? Tokens.accent : const Color(0x26DDE6F4)),
+                color: active ? Tokens.accent : const Color(0x26DDE6F4),
+              ),
             ),
-            child: Icon(icon,
-                size: 20, color: active ? Tokens.accent : Tokens.text),
+            child: Icon(
+              icon,
+              size: 20,
+              color: active ? Tokens.accent : Tokens.text,
+            ),
           ),
         ),
       ),
@@ -486,15 +555,16 @@ class OrbitSearch extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(color: Tokens.line),
               ),
-              child: Text(shortcutLabel!,
-                  style: Tokens.body(size: 10, color: Tokens.muted)),
+              child: Text(
+                shortcutLabel!,
+                style: Tokens.body(size: 10, color: Tokens.muted),
+              ),
             ),
         ],
       ),
     );
   }
 }
-
 
 class OrbitSwitcher extends StatelessWidget {
   const OrbitSwitcher({super.key, required this.view, required this.onView});
@@ -514,15 +584,17 @@ class OrbitSwitcher extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _SwBtn(
-              icon: Icons.view_carousel_outlined,
-              active: view == 'flow',
-              tooltip: 'Cover Flow view',
-              onTap: () => onView('flow')),
+            icon: Icons.view_carousel_outlined,
+            active: view == 'flow',
+            tooltip: 'Cover Flow view',
+            onTap: () => onView('flow'),
+          ),
           _SwBtn(
-              icon: Icons.grid_view_outlined,
-              active: view == 'grid',
-              tooltip: 'Grid view',
-              onTap: () => onView('grid')),
+            icon: Icons.grid_view_outlined,
+            active: view == 'grid',
+            tooltip: 'Grid view',
+            onTap: () => onView('grid'),
+          ),
         ],
       ),
     );
@@ -530,7 +602,12 @@ class OrbitSwitcher extends StatelessWidget {
 }
 
 class _SwBtn extends StatelessWidget {
-  const _SwBtn({required this.icon, required this.active, required this.onTap, required this.tooltip});
+  const _SwBtn({
+    required this.icon,
+    required this.active,
+    required this.onTap,
+    required this.tooltip,
+  });
   final IconData icon;
   final bool active;
   final VoidCallback onTap;
@@ -550,8 +627,11 @@ class _SwBtn extends StatelessWidget {
             height: 38,
             width: 44,
             alignment: Alignment.center,
-            child: Icon(icon,
-                size: 17, color: active ? Colors.white : Tokens.muted),
+            child: Icon(
+              icon,
+              size: 17,
+              color: active ? Colors.white : Tokens.muted,
+            ),
           ),
         ),
       ),
@@ -560,7 +640,12 @@ class _SwBtn extends StatelessWidget {
 }
 
 class OrbitToggle extends StatelessWidget {
-  const OrbitToggle({super.key, required this.value, required this.onChanged, this.label = ''});
+  const OrbitToggle({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.label = '',
+  });
   final bool value;
   final ValueChanged<bool> onChanged;
   final String label;
@@ -604,7 +689,13 @@ class OrbitToggle extends StatelessWidget {
 }
 
 class OrbitSelect<T> extends StatelessWidget {
-  const OrbitSelect({super.key, required this.value, required this.options, required this.onChanged, this.labels});
+  const OrbitSelect({
+    super.key,
+    required this.value,
+    required this.options,
+    required this.onChanged,
+    this.labels,
+  });
   final T value;
   final List<T> options;
   final ValueChanged<T?> onChanged;
@@ -691,20 +782,28 @@ class OrbitChip extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (icon != null) ...[
-                  Icon(icon, size: 15, color: active ? Colors.white : Tokens.muted),
+                  Icon(
+                    icon,
+                    size: 15,
+                    color: active ? Colors.white : Tokens.muted,
+                  ),
                   const SizedBox(width: 7),
                 ],
                 Text(
                   label,
                   style: Tokens.chipLabel.copyWith(
-                      color: active ? Colors.white : Tokens.muted),
+                    color: active ? Colors.white : Tokens.muted,
+                  ),
                 ),
                 if (sub != null) ...[
                   const SizedBox(width: 6),
                   Text(
                     sub!,
                     style: Tokens.display(
-                        size: 8, ls: 0.1, color: Tokens.muted),
+                      size: 8,
+                      ls: 0.1,
+                      color: Tokens.muted,
+                    ),
                   ),
                 ],
               ],
@@ -829,8 +928,12 @@ class OrbitSectionHeader extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Text(title, style: Tokens.sectionTitle, maxLines: 1,
-              overflow: TextOverflow.ellipsis),
+          child: Text(
+            title,
+            style: Tokens.sectionTitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         if (onSeeAll != null)
           TextButton(
@@ -846,7 +949,6 @@ class OrbitSectionHeader extends StatelessWidget {
     );
   }
 }
-
 
 /// Footer: keyboard hints plus the two brand taglines from the studio plate.
 class OrbitFooter extends StatelessWidget {
@@ -880,7 +982,6 @@ class OrbitFooter extends StatelessWidget {
     );
   }
 }
-
 
 class _Hint extends StatelessWidget {
   const _Hint({required this.keys, required this.label});
@@ -951,10 +1052,24 @@ class GameCover extends StatelessWidget {
         ),
         boxShadow: selected
             ? const [
-                BoxShadow(color: Color(0xBB000000), offset: Offset(0, 26), blurRadius: 55),
-                BoxShadow(color: Color(0x80007BFF), blurRadius: 0, spreadRadius: 6),
+                BoxShadow(
+                  color: Color(0xBB000000),
+                  offset: Offset(0, 26),
+                  blurRadius: 55,
+                ),
+                BoxShadow(
+                  color: Color(0x80007BFF),
+                  blurRadius: 0,
+                  spreadRadius: 6,
+                ),
               ]
-            : const [BoxShadow(color: Color(0x55000000), offset: Offset(0, 10), blurRadius: 24)],
+            : const [
+                BoxShadow(
+                  color: Color(0x55000000),
+                  offset: Offset(0, 10),
+                  blurRadius: 24,
+                ),
+              ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius - 1),
@@ -967,7 +1082,10 @@ class GameCover extends StatelessWidget {
               _GenerativeArt(gameId: gameId),
             // Spine edge + sheen.
             Positioned(
-              left: 0, top: 0, bottom: 0, width: 4,
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: 4,
               child: Container(color: Colors.white.withValues(alpha: 0.08)),
             ),
             Positioned.fill(
@@ -991,7 +1109,9 @@ class GameCover extends StatelessWidget {
               ),
             // Bottom label scrim.
             Positioned(
-              left: 0, right: 0, bottom: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(10, 18, 10, 8),
                 decoration: BoxDecoration(
@@ -1009,18 +1129,26 @@ class GameCover extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (system.isNotEmpty)
-                      Text(system.toUpperCase(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Tokens.body(
-                              size: 7, ls: 1.5, color: Tokens.muted)),
-                    Text(title,
-                        maxLines: 2,
+                      Text(
+                        system.toUpperCase(),
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Tokens.body(
-                            size: 11,
-                            weight: FontWeight.w600,
-                            color: Colors.white)),
+                          size: 7,
+                          ls: 1.5,
+                          color: Tokens.muted,
+                        ),
+                      ),
+                    Text(
+                      title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Tokens.body(
+                        size: 11,
+                        weight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -1094,7 +1222,8 @@ class _CoverPainter extends CustomPainter {
               1.6,
               Paint()
                 ..color = Colors.white.withValues(
-                    alpha: (0.16 * (1 - r / 9)).clamp(0.02, 0.16)),
+                  alpha: (0.16 * (1 - r / 9)).clamp(0.02, 0.16),
+                ),
             );
           }
         }
@@ -1125,7 +1254,9 @@ class _CoverPainter extends CustomPainter {
         for (var i = 1; i <= 4; i++) {
           canvas.drawArc(
             Rect.fromCircle(
-                center: Offset(-w * 0.1, h * 1.05), radius: w * 0.28 * i),
+              center: Offset(-w * 0.1, h * 1.05),
+              radius: w * 0.28 * i,
+            ),
             -1.2,
             0.9,
             false,
@@ -1158,8 +1289,12 @@ class _CoverPainter extends CustomPainter {
 
 /// Core scopes segmented control (All / Added / Available).
 class CoreScopes extends StatelessWidget {
-  const CoreScopes(
-      {super.key, required this.scope, required this.onScope, this.expand = false});
+  const CoreScopes({
+    super.key,
+    required this.scope,
+    required this.onScope,
+    this.expand = false,
+  });
   final String scope;
   final ValueChanged<String> onScope;
   final bool expand;
@@ -1201,7 +1336,11 @@ class CoreScopes extends StatelessWidget {
 }
 
 class _ScopeBtn extends StatelessWidget {
-  const _ScopeBtn({required this.label, required this.active, required this.onTap});
+  const _ScopeBtn({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
   final String label;
   final bool active;
   final VoidCallback onTap;
@@ -1224,9 +1363,13 @@ class _ScopeBtn extends StatelessWidget {
                   border: Border.all(color: const Color(0x14DDE6F4)),
                 )
               : null,
-          child: Text(label,
-              style: Tokens.body(
-                  size: 11, color: active ? Colors.white : Tokens.muted)),
+          child: Text(
+            label,
+            style: Tokens.body(
+              size: 11,
+              color: active ? Colors.white : Tokens.muted,
+            ),
+          ),
         ),
       ),
     );
@@ -1245,8 +1388,9 @@ Future<T?> showOrbitDialog<T>(BuildContext context, Widget dialog) {
       return FadeTransition(
         opacity: curved,
         child: ScaleTransition(
-            scale: Tween<double>(begin: 0.97, end: 1).animate(curved),
-            child: child),
+          scale: Tween<double>(begin: 0.97, end: 1).animate(curved),
+          child: child,
+        ),
       );
     },
     pageBuilder: (context, _, _) => Center(
@@ -1274,7 +1418,12 @@ Future<T?> showOrbitDialog<T>(BuildContext context, Widget dialog) {
 
 /// One row of the stat panel: small muted label, real value.
 class OrbitStatRow extends StatelessWidget {
-  const OrbitStatRow({super.key, required this.label, required this.value, this.valueColor});
+  const OrbitStatRow({
+    super.key,
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
   final String label;
   final String value;
   final Color? valueColor;
@@ -1292,7 +1441,9 @@ class OrbitStatRow extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: Tokens.statValue.copyWith(color: valueColor ?? Tokens.text),
+              style: Tokens.statValue.copyWith(
+                color: valueColor ?? Tokens.text,
+              ),
             ),
           ),
         ],
@@ -1330,8 +1481,7 @@ class SnapshotTicks extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-        if (count > max)
-          Text('+$count-$max', style: Tokens.statLabel),
+        if (count > max) Text('+$count-$max', style: Tokens.statLabel),
       ],
     );
   }
@@ -1396,11 +1546,7 @@ class GameActionRow extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: [
-        _DockAction(
-          icon: Icons.tune,
-          label: 'Manage',
-          onTap: onManage,
-        ),
+        _DockAction(icon: Icons.tune, label: 'Manage', onTap: onManage),
         _DockAction(
           icon: Icons.bolt_outlined,
           label: 'Cheats (${game.cheatsOn})',
@@ -1418,7 +1564,11 @@ class GameActionRow extends StatelessWidget {
 }
 
 class _DockAction extends StatelessWidget {
-  const _DockAction({required this.icon, required this.label, required this.onTap});
+  const _DockAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
   final IconData icon;
   final String label;
   final VoidCallback onTap;
@@ -1548,8 +1698,11 @@ class OrbitIconButton extends StatelessWidget {
                   color: active ? Tokens.accent : const Color(0x26DDE6F4),
                 ),
               ),
-              child: Icon(icon,
-                  size: 18, color: active ? Tokens.accent : Tokens.text),
+              child: Icon(
+                icon,
+                size: 18,
+                color: active ? Tokens.accent : Tokens.text,
+              ),
             ),
           ),
         ),
@@ -1609,12 +1762,19 @@ class _BottomNavButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(active ? item.filled : item.icon,
-                size: 20, color: active ? Tokens.accent : Tokens.muted),
+            Icon(
+              active ? item.filled : item.icon,
+              size: 20,
+              color: active ? Tokens.accent : Tokens.muted,
+            ),
             const SizedBox(height: 4),
-            Text(label,
-                style: Tokens.body(
-                    size: 9, color: active ? Tokens.text : Tokens.muted)),
+            Text(
+              label,
+              style: Tokens.body(
+                size: 9,
+                color: active ? Tokens.text : Tokens.muted,
+              ),
+            ),
           ],
         ),
       ),
@@ -1652,21 +1812,31 @@ class SystemPickerRow extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             child: Row(
               children: [
-                Icon(Icons.videogame_asset_outlined,
-                    size: 18, color: selected ? Tokens.accent : Tokens.muted),
+                Icon(
+                  Icons.videogame_asset_outlined,
+                  size: 18,
+                  color: selected ? Tokens.accent : Tokens.muted,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     label,
                     style: Tokens.body(
-                        size: 12,
-                        color: selected ? Colors.white : Tokens.text),
+                      size: 12,
+                      color: selected ? Colors.white : Tokens.text,
+                    ),
                   ),
                 ),
-                Text('$count', style: Tokens.body(size: 10, color: Tokens.muted)),
+                Text(
+                  '$count',
+                  style: Tokens.body(size: 10, color: Tokens.muted),
+                ),
                 const SizedBox(width: 6),
-                Icon(Icons.chevron_right,
-                    size: 16, color: selected ? Tokens.accent : Tokens.muted),
+                Icon(
+                  Icons.chevron_right,
+                  size: 16,
+                  color: selected ? Tokens.accent : Tokens.muted,
+                ),
               ],
             ),
           ),
@@ -1693,9 +1863,11 @@ Future<void> showSystemPicker(
     (grouped[makerFor(e.key)] ??= []).add(e);
   }
   for (final list in grouped.values) {
-    list.sort((a, b) => shortSystemLabel(a.key)
-        .toLowerCase()
-        .compareTo(shortSystemLabel(b.key).toLowerCase()));
+    list.sort(
+      (a, b) => shortSystemLabel(
+        a.key,
+      ).toLowerCase().compareTo(shortSystemLabel(b.key).toLowerCase()),
+    );
   }
 
   return showModalBottomSheet<void>(
@@ -1730,9 +1902,14 @@ Future<void> showSystemPicker(
                 Row(
                   children: [
                     Expanded(
-                      child: Text('Select system',
-                          style: Tokens.display(
-                              size: 19, weight: FontWeight.w600, ls: -0.4)),
+                      child: Text(
+                        'Select system',
+                        style: Tokens.display(
+                          size: 19,
+                          weight: FontWeight.w600,
+                          ls: -0.4,
+                        ),
+                      ),
                     ),
                     OrbitRoundButton(
                       icon: Icons.close,
@@ -1764,8 +1941,7 @@ Future<void> showSystemPicker(
                   if (grouped[maker] != null) ...[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(4, 18, 4, 8),
-                      child: Text(maker.toUpperCase(),
-                          style: Tokens.eyebrow),
+                      child: Text(maker.toUpperCase(), style: Tokens.eyebrow),
                     ),
                     for (final e in grouped[maker]!)
                       SystemPickerRow(

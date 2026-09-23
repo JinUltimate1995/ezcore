@@ -119,24 +119,22 @@
   user-facing defect.
 - **Workaround:** None yet; preserve the current behavior until the maintainer
   and theme owner settle the breakpoint policy.
-- **Status:** `[?]` Needs maintainer decision.
-- **Follow-up:** Resolve before adding more layout-specific branches or
-  treating the tablet layout as complete.
+- **Status:** `[~]` Explicit current policy — portrait viewports use the phone
+  family; tablet layout is the landscape hub. Revisit only with a dedicated
+  tablet-portrait design, not as an incidental breakpoint change.
+- **Follow-up:** Keep the policy documented while the four-family responsive
+  contract remains stable.
 
-### EZC-009 — Theme-track diff has whitespace-only gate failures
+### EZC-009 — Resolved: PR diff whitespace is clean
 
-- **Description:** The combined PR diff still reports new blank lines at EOF
-  in `lib/main.dart` and `lib/services/system_labels.dart`. The working-tree
-  diff is clean because these lines are already in the design commits, but
-  `git diff 6c9af64..HEAD --check` is the relevant PR check.
+- **Description:** The earlier design commits carried one extra blank line at
+  EOF in each of two files. The focused cleanup removed both without changing
+  behavior.
 - **Affected platform:** Repository quality gate.
 - **Affected core/system:** None; theme/UI files.
-- **Reproduction:** `git diff 6c9af64..HEAD --check`.
-- **Severity:** Low, but it blocks a clean merge diff.
-- **Workaround:** Do not hide the failure with a broad formatter rewrite; have
-  the design owner remove the two extra blank lines in a focused cleanup.
-- **Status:** Open; owned by the theme/UI track and must be resolved before
-  merge.
+- **Verification:** `git diff main...HEAD --check` is clean after the fix
+  commit.
+- **Status:** Resolved for the combined PR.
 
 ### EZC-010 — Desktop/tablet Favorites chip does not apply its filter
 
@@ -154,10 +152,11 @@
   promised filter.
 - **Workaround:** Use the phone-portrait Favorites tab, or filter through a
   different surface until the theme owner reconciles the two paths.
-- **Status:** Open; identified during read-only integration review and owned
-  by the theme/UI track.
-- **Follow-up:** Add a regression test at desktop/tablet size, then choose one
-  shared filter representation for both UI paths.
+- **Verification:** `test/library_layouts_test.dart` now covers the desktop
+  Favorites chip and confirms the non-favorite disappears from the collection.
+- **Status:** Resolved; the chip now uses the shared `favorites` tab value.
+- **Follow-up:** Keep the tab/filter vocabulary aligned if the strip gains new
+  controls.
 
 ### EZC-011 — Tablet “Recently added” row renders the filtered collection
 
@@ -172,10 +171,11 @@
 - **Severity:** Medium — visible library metadata is misleading.
 - **Workaround:** Clear filters or use the desktop/phone collection until the
   data path is reconciled.
-- **Status:** Open; identified during read-only integration review and owned
-  by the theme/UI track.
-- **Follow-up:** Decide whether the section means import order or current
-  filter results, then add a regression test matching that contract.
+- **Verification:** `test/library_layouts_test.dart` now applies a tablet
+  search and verifies that the Recently added row remains an import-order
+  snapshot rather than duplicating the filtered collection.
+- **Status:** Resolved; the section now renders `recentlyAdded`.
+- **Follow-up:** Keep the section contract explicit if its source data changes.
 
 ### EZC-012 — Theme helper splits paths only on `/`
 
@@ -189,27 +189,35 @@
   tablet/portrait tile.
 - **Severity:** Low/Medium.
 - **Workaround:** None needed for core execution; presentation is misleading.
-- **Status:** Open; identified during read-only integration review and owned
-  by the theme/UI track.
-- **Follow-up:** Use platform-neutral path parsing or the existing path
-  dependency without changing the persisted `GameEntry` format.
+- **Verification:** `test/library_layouts_test.dart` now supplies a native
+  Windows path and verifies that only `windows-demo.gcm` is displayed.
+- **Status:** Resolved; display parsing normalizes both path separators without
+  changing the persisted `GameEntry` format.
+- **Follow-up:** Reuse the same display-only parsing if another tile exposes a
+  path.
 
-### EZC-013 — Dart formatter check differs on the design slice
+### EZC-013 — Resolved: design slice is formatted
 
-- **Description:** Running the installed Dart formatter in check-only mode on
-  the 17 Dart files changed by the Orbit design reports that 15 files would
-  change. A repository-wide check reports additional legacy files, so a broad
-  automatic rewrite would be unrelated churn.
+- **Description:** The installed Dart formatter initially wanted to reformat
+  most of the design slice. The slice was formatted deliberately, without a
+  repository-wide rewrite; the focused check is now clean.
 - **Affected platform:** Flutter source formatting gate.
 - **Affected core/system:** None; design-owned Dart files.
-- **Reproduction:** Run `dart format --output=none --set-exit-if-changed` on
-  the design file list from `git diff 6c9af64..HEAD --name-only`.
-- **Severity:** Medium for a strict formatting gate; no analyzer or test
-  failure was observed.
-- **Workaround:** Review and format only the design slice, then rerun analyzer,
-  tests, and the PR diff check; do not mass-reformat the repository.
-- **Status:** Open; owned by the theme/UI track and must be resolved or
-  explicitly waived before merge.
+- **Verification:** `dart format --output=none --set-exit-if-changed` on the
+  design slice reports `0 changed`.
+- **Status:** Resolved for the combined PR.
+
+### EZC-014 — Resolved: Linux backdrop wash
+
+- **Description:** A real Linux debug run exposed a renderer-specific pale
+  wash from very large stroked planet circles. The scene now uses sampled
+  orbital paths and viewport-local gradients, and the actual Linux build was
+  visually checked after the fix.
+- **Affected platform:** Linux desktop renderer.
+- **Affected core/system:** None; background presentation only.
+- **Verification:** Linux debug build launched and captured successfully; the
+  full Flutter suite and analyzer remain green.
+- **Status:** Resolved for the combined PR.
 
 ## Known limitations that are not defects
 

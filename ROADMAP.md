@@ -40,18 +40,18 @@ understandable before adding another feature.
   evidence-backed capabilities, contribution paths, and sponsorship.
 - [x] Complete — integrate the four-family Orbit redesign and its permanent
   layout/backdrop regression coverage.
-- [~] In progress — publish and review the combined UI/documentation PR.
-  The current checkout passes `flutter analyze`, the full Flutter suite
-  (`393` passed, `15` skipped), and Linux CTest (`3/3`); the PR diff still
-  needs maintainer review of the two whitespace findings and the descriptive
-  system-name wording against project policy.
+- [~] In progress — maintainer review and merge of the combined UI/documentation
+  PR. The current checkout passes `flutter analyze`, the full Flutter suite
+  (`396` passed, `15` skipped), Linux CTest (`3/3`), and Linux/Android debug
+  builds; the final review still covers descriptive system-name wording.
 - [ ] Planned — make CI/reproducible release verification a green, reviewed
   checkpoint again.
 
-**Why this comes first:** the combined branch now has a usable, tested baseline,
-but the public claims and compatibility boundaries still require maintainer
-review. Resolve the PR-level quality findings before starting the capability
-contract work; do not let roadmap edits blur implementation evidence.
+**Why this comes first:** the combined branch now has a usable, tested baseline
+and sanitized visual previews, but the public claims and compatibility
+boundaries still require maintainer review. Merge only after the final diff is
+approved; then begin capability-contract work without letting roadmap edits
+blur implementation evidence.
 
 ## Prioritized delivery phases
 
@@ -261,10 +261,9 @@ Game modifications, patches, assets, and profiles.
 
 ## Next task queue
 
-1. **M0-01 — Combined PR review and quality cleanup:** review the Orbit diff,
-   resolve the two whitespace findings and formatter output without broad
-   unrelated churn, and confirm the descriptive system-name wording against
-   project policy before merge.
+1. **M0-01 — Maintainer review and merge:** review the final Orbit/documentation
+   diff, confirm the descriptive system-name wording against project policy,
+   and merge PR #25 when the branch checks remain green.
 2. **M1-01 — Capability contract research:** specify the smallest capability
    object and lifecycle compatibility rules before changing the ABI.
 3. **M1-02 — Configuration hierarchy:** define global/system/core/game

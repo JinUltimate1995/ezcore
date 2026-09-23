@@ -32,9 +32,8 @@ Resolved by `PlatformLocalDataDirProvider`. Tests inject a temp directory via `L
 ├── cores/
 │   └── <id>/
 │       └── <id>.so|dylib|dll   # Installed core artifacts
-├── saves/                      # SaveSyncProvider (LocalSaveSyncProvider)
-│   └── <gameId>/
-│       └── <slot>.bin
+├── <gameId>/                    # LocalSaveSyncProvider save-state slots
+│   └── <slot>.bin
 ├── sram/<gameId>/              # Per-game battery-save handoff
 ├── system/                     # User-provided BIOS/firmware
 ├── screenshots/                # Captured PNG frames
@@ -165,7 +164,11 @@ Resolves and verifies installed core artifacts before launch:
 | `saves` | `LocalSaveSyncProvider(<platformDataDir>)` |
 | persistence | `PersistenceService(PlatformLocalDataDirProvider())` |
 
-The `AppState.ephemeral()` named factory returns an in-memory state with no disk backing — used by tests. The `AppState.internal` constructor accepts explicit persistence + saves for injection in tests.
+The provider is passed the platform data directory, so local save-state
+folders are `<platformDataDir>/<gameId>/<slot>.bin` (not a nested `saves/`
+directory). The `AppState.ephemeral()` named factory returns an in-memory state
+with no disk backing — used by tests. The `AppState.internal` constructor
+accepts explicit persistence + saves for injection in tests.
 
 Settings (`setSetting`/`removeSetting`) are persisted alongside games and cheats in `state.json`.
 

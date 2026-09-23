@@ -100,8 +100,9 @@ void main() {
     expect(find.text('Recently added'), findsOneWidget);
   });
 
-  testWidgets('phone portrait: tabs, featured game, no overflow',
-      (tester) async {
+  testWidgets('phone portrait: tabs, featured game, no overflow', (
+    tester,
+  ) async {
     await pumpAt(tester, const Size(390, 844));
     expect(tester.takeException(), isNull);
     expect(find.text('All'), findsOneWidget);
@@ -159,12 +160,104 @@ void main() {
     expect(find.text('1 game'), findsOneWidget);
   });
 
-  testWidgets('search still filters across layouts', (tester) async {
-    await pumpAt(tester, const Size(1024, 768));
+  testWidgets('desktop search filters the collection', (tester) async {
+    await pumpAt(tester, const Size(1600, 1000));
     await tester.enterText(find.byType(TextField).first, 'metroid');
     await tester.pumpAndSettle();
     expect(find.text('Metroid Prime'), findsWidgets);
     expect(find.text('Super Mario World'), findsNothing);
+  });
+
+  testWidgets('desktop Favorites chip filters the collection', (tester) async {
+    await pumpAt(
+      tester,
+      const Size(1600, 1000),
+      state: AppState()
+        ..games = const [
+          GameEntry(
+            id: 'favorite-demo',
+            title: 'Favorite Demo',
+            system: 'snes',
+            filePath: '/games/favorite-demo.sfc',
+            extension: 'sfc',
+            coreId: 'superfx',
+            favorite: true,
+          ),
+          GameEntry(
+            id: 'other-demo',
+            title: 'Other Demo',
+            system: 'snes',
+            filePath: '/games/other-demo.sfc',
+            extension: 'sfc',
+            coreId: 'superfx',
+          ),
+        ],
+    );
+
+    expect(find.text('Other Demo'), findsWidgets);
+    await tester.tap(find.text('Favorites').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Favorite Demo'), findsWidgets);
+    expect(find.text('Other Demo'), findsNothing);
+  });
+
+  testWidgets('tablet Recently added stays global when search is active', (
+    tester,
+  ) async {
+    await pumpAt(
+      tester,
+      const Size(1024, 768),
+      state: AppState()
+        ..games = const [
+          GameEntry(
+            id: 'recent-demo',
+            title: 'Recent Demo',
+            system: 'snes',
+            filePath: '/games/recent-demo.sfc',
+            extension: 'sfc',
+            coreId: 'superfx',
+          ),
+          GameEntry(
+            id: 'other-demo',
+            title: 'Other Demo',
+            system: 'genesis',
+            filePath: '/games/other-demo.md',
+            extension: 'md',
+            coreId: 'blastproc',
+          ),
+        ],
+    );
+
+    await tester.enterText(find.byType(TextField).first, 'Recent');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Recently added'), findsOneWidget);
+    expect(find.text('Recent Demo'), findsWidgets);
+    expect(find.text('Other Demo'), findsWidgets);
+  });
+
+  testWidgets('tablet tiles shorten Windows paths to the filename', (
+    tester,
+  ) async {
+    await pumpAt(
+      tester,
+      const Size(1024, 768),
+      state: AppState()
+        ..games = const [
+          GameEntry(
+            id: 'windows-demo',
+            title: 'Windows Demo',
+            system: 'gc',
+            filePath: r'C:\Users\Demo\Games\windows-demo.gcm',
+            extension: 'gcm',
+            coreId: 'powercube',
+          ),
+        ],
+    );
+
+    expect(find.text('windows-demo.gcm'), findsOneWidget);
+    expect(find.text(r'C:\Users\Demo\Games\windows-demo.gcm'), findsNothing);
   });
 
   testWidgets('empty library offers an import action', (tester) async {
@@ -183,8 +276,9 @@ void main() {
     expect(find.text('Metroid Prime'), findsWidgets);
   });
 
-  testWidgets('phone portrait uses a bottom command bar in the shell',
-      (tester) async {
+  testWidgets('phone portrait uses a bottom command bar in the shell', (
+    tester,
+  ) async {
     // The bottom bar is shell chrome, so exercise the Shell rather than
     // the bare screen.
     final state = AppState()..games = games;
@@ -215,8 +309,9 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('brand lockup asset is bundled, not silently falling back',
-      (tester) async {
+  testWidgets('brand lockup asset is bundled, not silently falling back', (
+    tester,
+  ) async {
     // The topbar falls back to a text wordmark if the asset is missing, so
     // assert the asset itself resolves from the bundle.
     final data = await rootBundle.load('assets/branding/lockup-light.png');

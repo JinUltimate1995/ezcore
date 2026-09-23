@@ -13,10 +13,7 @@ import 'package:ezcore/theme/tokens.dart';
 void main() {
   const phone = Size(390, 844);
 
-  Future<void> pumpPhone(
-    WidgetTester tester,
-    Widget child,
-  ) async {
+  Future<void> pumpPhone(WidgetTester tester, Widget child) async {
     tester.view.physicalSize = phone;
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
@@ -24,13 +21,17 @@ void main() {
       tester.view.resetDevicePixelRatio();
     });
     await tester.pumpWidget(
-      MaterialApp(theme: Tokens.theme(), home: Scaffold(body: child)),
+      MaterialApp(
+        theme: Tokens.theme(),
+        home: Scaffold(body: child),
+      ),
     );
     await tester.pumpAndSettle();
   }
 
-  testWidgets('library featured game + tabs render on a phone viewport',
-      (tester) async {
+  testWidgets('library featured game + tabs render on a phone viewport', (
+    tester,
+  ) async {
     final state = AppState();
     state.games = const [
       GameEntry(
@@ -52,8 +53,9 @@ void main() {
     expect(find.text('My GBA Dump'), findsWidgets);
   });
 
-  testWidgets('systems empty state renders on a phone viewport',
-      (tester) async {
+  testWidgets('systems empty state renders on a phone viewport', (
+    tester,
+  ) async {
     final state = AppState();
     await pumpPhone(tester, CoreManagerScreen(state: state));
     expect(find.text('The core collection'), findsOneWidget);

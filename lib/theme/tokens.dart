@@ -82,7 +82,11 @@ abstract final class Tokens {
 
   /// Single responsive side-margin: clamp(20, w*0.03, 52).
   /// Portrait phones use 24, short landscape 26 — handled by callers.
-  static double osPad(double width, {bool portrait = false, bool short_ = false}) {
+  static double osPad(
+    double width, {
+    bool portrait = false,
+    bool short_ = false,
+  }) {
     if (portrait) return 24;
     if (short_) return 26;
     final v = width * 0.03;
@@ -121,15 +125,14 @@ abstract final class Tokens {
     double ls = -1.0,
     Color color = text,
     double? height,
-  }) =>
-      TextStyle(
-        fontFamily: displayFamily,
-        fontSize: size,
-        fontWeight: weight,
-        letterSpacing: ls,
-        color: color,
-        height: height,
-      );
+  }) => TextStyle(
+    fontFamily: displayFamily,
+    fontSize: size,
+    fontWeight: weight,
+    letterSpacing: ls,
+    color: color,
+    height: height,
+  );
 
   static TextStyle body({
     double size = 14,
@@ -137,25 +140,25 @@ abstract final class Tokens {
     double ls = 0,
     Color color = text,
     double? height,
-  }) =>
-      TextStyle(
-        fontFamily: bodyFamily,
-        fontSize: size,
-        fontWeight: weight,
-        letterSpacing: ls,
-        color: color,
-        height: height,
-      );
+  }) => TextStyle(
+    fontFamily: bodyFamily,
+    fontSize: size,
+    fontWeight: weight,
+    letterSpacing: ls,
+    color: color,
+    height: height,
+  );
 
   static TextStyle get eyebrow => const TextStyle(
-        fontFamily: displayFamily,
-        fontSize: 9,
-        letterSpacing: 2.0,
-        color: muted,
-        fontWeight: FontWeight.w400,
-      );
+    fontFamily: displayFamily,
+    fontSize: 9,
+    letterSpacing: 2.0,
+    color: muted,
+    fontWeight: FontWeight.w400,
+  );
 
-  static TextStyle get h1 => display(size: 30, weight: FontWeight.w500, ls: -1.0);
+  static TextStyle get h1 =>
+      display(size: 30, weight: FontWeight.w500, ls: -1.0);
 
   static TextStyle get dockTitle =>
       display(size: 24, weight: FontWeight.w500, ls: -0.7, height: 1.16);
@@ -163,23 +166,22 @@ abstract final class Tokens {
   static TextStyle get dockBodyStyle =>
       body(size: 11, color: dockBody, height: 1.5);
 
-  static TextStyle get gameMeta =>
-      body(size: 10, ls: 0.25, color: text);
+  static TextStyle get gameMeta => body(size: 10, ls: 0.25, color: text);
 
   static TextStyle get systemLabel => const TextStyle(
-        fontFamily: displayFamily,
-        fontSize: 9,
-        letterSpacing: 1.0,
-        color: systemLabelFg,
-        fontWeight: FontWeight.w400,
-      );
+    fontFamily: displayFamily,
+    fontSize: 9,
+    letterSpacing: 1.0,
+    color: systemLabelFg,
+    fontWeight: FontWeight.w400,
+  );
 
   static TextStyle get flowCount => const TextStyle(
-        fontFamily: displayFamily,
-        fontSize: 9,
-        letterSpacing: 3.0,
-        color: muted,
-      );
+    fontFamily: displayFamily,
+    fontSize: 9,
+    letterSpacing: 3.0,
+    color: muted,
+  );
 
   static TextStyle get chipLabel =>
       body(size: 11, weight: FontWeight.w600, color: muted);
@@ -214,135 +216,170 @@ abstract final class Tokens {
 
   // ---- Decorations ----
   static BoxDecoration get dockDecor => BoxDecoration(
-        borderRadius: BorderRadius.circular(radiusDock),
-        gradient: const LinearGradient(
-          begin: Alignment(-1.0, -0.4),
-          end: Alignment(1.0, 0.6),
-          colors: [dockTop, dockBottom],
-          stops: [0.0, 0.65],
-        ),
-        border: Border.all(color: lineStrong),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0CFFFFFF),
-            offset: Offset(0, 1),
-            blurRadius: 0,
-            spreadRadius: 0,
-          ),
-          BoxShadow(
-            color: Color(0x66000000),
-            offset: Offset(0, 14),
-            blurRadius: 34,
-          ),
-        ],
-      );
+    borderRadius: BorderRadius.circular(radiusDock),
+    gradient: const LinearGradient(
+      begin: Alignment(-1.0, -0.4),
+      end: Alignment(1.0, 0.6),
+      colors: [dockTop, dockBottom],
+      stops: [0.0, 0.65],
+    ),
+    border: Border.all(color: lineStrong),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x0CFFFFFF),
+        offset: Offset(0, 1),
+        blurRadius: 0,
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Color(0x66000000),
+        offset: Offset(0, 14),
+        blurRadius: 34,
+      ),
+    ],
+  );
 
   static BoxDecoration get dialogDecor => BoxDecoration(
-        borderRadius: BorderRadius.circular(radiusDialog),
-        gradient: const LinearGradient(
-          begin: Alignment(-0.8, -0.8),
-          end: Alignment(0.6, 0.8),
-          colors: [dockTop, bg],
-          stops: [0.0, 0.65],
-        ),
-        border: Border.all(color: Color(0x30DDE6F4)),
-        boxShadow: const [
-          BoxShadow(color: Color(0x88000000), offset: Offset(0, 35), blurRadius: 150),
-          BoxShadow(color: Color(0x20DDE6F4), offset: Offset(0, 1), blurRadius: 0),
-        ],
-      );
+    borderRadius: BorderRadius.circular(radiusDialog),
+    gradient: const LinearGradient(
+      begin: Alignment(-0.8, -0.8),
+      end: Alignment(0.6, 0.8),
+      colors: [dockTop, bg],
+      stops: [0.0, 0.65],
+    ),
+    border: Border.all(color: Color(0x30DDE6F4)),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x88000000),
+        offset: Offset(0, 35),
+        blurRadius: 150,
+      ),
+      BoxShadow(color: Color(0x20DDE6F4), offset: Offset(0, 1), blurRadius: 0),
+    ],
+  );
 
   static BoxDecoration get coreCardDecor => BoxDecoration(
-        borderRadius: BorderRadius.circular(radiusCoreCard),
-        gradient: const LinearGradient(
-          begin: Alignment(-0.7, -0.7),
-          end: Alignment(0.7, 0.7),
-          colors: [Color(0xFF242B35), Color(0xFF10141A)],
-          stops: [0.0, 0.65],
-        ),
-        border: Border.all(color: Color(0x28DDE6F4)),
-        boxShadow: const [
-          BoxShadow(color: Color(0x12FFFFFF), offset: Offset(0, 1), blurRadius: 0),
-          BoxShadow(color: Color(0x99000000), offset: Offset(0, 22), blurRadius: 44),
-        ],
-      );
+    borderRadius: BorderRadius.circular(radiusCoreCard),
+    gradient: const LinearGradient(
+      begin: Alignment(-0.7, -0.7),
+      end: Alignment(0.7, 0.7),
+      colors: [Color(0xFF242B35), Color(0xFF10141A)],
+      stops: [0.0, 0.65],
+    ),
+    border: Border.all(color: Color(0x28DDE6F4)),
+    boxShadow: const [
+      BoxShadow(color: Color(0x12FFFFFF), offset: Offset(0, 1), blurRadius: 0),
+      BoxShadow(
+        color: Color(0x99000000),
+        offset: Offset(0, 22),
+        blurRadius: 44,
+      ),
+    ],
+  );
 
   static BoxDecoration get coreCardSelectedDecor => BoxDecoration(
-        borderRadius: BorderRadius.circular(radiusCoreCard),
-        gradient: const LinearGradient(
-          begin: Alignment(-0.7, -0.7),
-          end: Alignment(0.7, 0.7),
-          colors: [Color(0xFF242B35), Color(0xFF10141A)],
-          stops: [0.0, 0.65],
-        ),
-        border: Border.all(color: Color(0xFF6EB4FF)),
-        boxShadow: const [
-          BoxShadow(color: Color(0x35FFFFFF), offset: Offset(0, 1), blurRadius: 0),
-          BoxShadow(color: Color(0x35007BFF), offset: Offset(0, 0), blurRadius: 0, spreadRadius: 3),
-          BoxShadow(color: Color(0x88000000), offset: Offset(0, 24), blurRadius: 50),
-        ],
-      );
+    borderRadius: BorderRadius.circular(radiusCoreCard),
+    gradient: const LinearGradient(
+      begin: Alignment(-0.7, -0.7),
+      end: Alignment(0.7, 0.7),
+      colors: [Color(0xFF242B35), Color(0xFF10141A)],
+      stops: [0.0, 0.65],
+    ),
+    border: Border.all(color: Color(0xFF6EB4FF)),
+    boxShadow: const [
+      BoxShadow(color: Color(0x35FFFFFF), offset: Offset(0, 1), blurRadius: 0),
+      BoxShadow(
+        color: Color(0x35007BFF),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 3,
+      ),
+      BoxShadow(
+        color: Color(0x88000000),
+        offset: Offset(0, 24),
+        blurRadius: 50,
+      ),
+    ],
+  );
 
   /// Glass card: the selected-game dock, stat panel, and section tiles.
   static BoxDecoration get panelGlass => BoxDecoration(
-        borderRadius: BorderRadius.circular(dockPanelRadius),
-        gradient: const LinearGradient(
-          begin: Alignment(-0.9, -0.9),
-          end: Alignment(0.7, 0.9),
-          colors: [Color(0xF21B2430), Color(0xF20B111B)],
-          stops: [0.0, 0.7],
-        ),
-        border: Border.all(color: lineStrong),
-        boxShadow: const [
-          BoxShadow(color: Color(0x0AFFFFFF), offset: Offset(0, 1), blurRadius: 0),
-          BoxShadow(color: Color(0x7A000000), offset: Offset(0, 18), blurRadius: 42),
-        ],
-      );
+    borderRadius: BorderRadius.circular(dockPanelRadius),
+    gradient: const LinearGradient(
+      begin: Alignment(-0.9, -0.9),
+      end: Alignment(0.7, 0.9),
+      colors: [Color(0xF21B2430), Color(0xF20B111B)],
+      stops: [0.0, 0.7],
+    ),
+    border: Border.all(color: lineStrong),
+    boxShadow: const [
+      BoxShadow(color: Color(0x0AFFFFFF), offset: Offset(0, 1), blurRadius: 0),
+      BoxShadow(
+        color: Color(0x7A000000),
+        offset: Offset(0, 18),
+        blurRadius: 42,
+      ),
+    ],
+  );
 
   /// Recessed panel that holds the game's real stats.
   static BoxDecoration get statPanelDecor => BoxDecoration(
-        borderRadius: BorderRadius.circular(statPanelRadius),
-        color: const Color(0x66060A11),
-        border: Border.all(color: const Color(0x1FDDE6F4)),
-      );
+    borderRadius: BorderRadius.circular(statPanelRadius),
+    color: const Color(0x66060A11),
+    border: Border.all(color: const Color(0x1FDDE6F4)),
+  );
 
   /// Sheet surface (system picker, slot lists).
   static BoxDecoration get sheetDecor => BoxDecoration(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF182231), Color(0xFF0A0F18)],
-        ),
-        border: const Border(top: BorderSide(color: lineStrong)),
-        boxShadow: const [
-          BoxShadow(color: Color(0x99000000), offset: Offset(0, -14), blurRadius: 46),
-        ],
-      );
+    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+    gradient: const LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [Color(0xFF182231), Color(0xFF0A0F18)],
+    ),
+    border: const Border(top: BorderSide(color: lineStrong)),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x99000000),
+        offset: Offset(0, -14),
+        blurRadius: 46,
+      ),
+    ],
+  );
 
   /// Bottom command bar (phone portrait).
   static BoxDecoration get bottomBarDecor => BoxDecoration(
-        color: const Color(0xF2080D15),
-        border: const Border(top: BorderSide(color: lineStrong)),
-        boxShadow: const [
-          BoxShadow(color: Color(0x59000000), offset: Offset(0, -10), blurRadius: 26),
-        ],
-      );
+    color: const Color(0xF2080D15),
+    border: const Border(top: BorderSide(color: lineStrong)),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x59000000),
+        offset: Offset(0, -10),
+        blurRadius: 26,
+      ),
+    ],
+  );
 
   /// Pill chip in its resting state.
-  static BoxDecoration chipPill({bool active = false, double radius = pillRadius}) =>
-      BoxDecoration(
-        color: active ? const Color(0x2E007BFF) : const Color(0x0FDDE6F4),
-        borderRadius: BorderRadius.circular(radius),
-        border: Border.all(
-          color: active ? const Color(0x8C007BFF) : const Color(0x24DDE6F4),
-        ),
-        boxShadow: active
-            ? const [
-                BoxShadow(color: Color(0x4D007BFF), offset: Offset(0, 0), blurRadius: 16),
-              ]
-            : null,
-      );
+  static BoxDecoration chipPill({
+    bool active = false,
+    double radius = pillRadius,
+  }) => BoxDecoration(
+    color: active ? const Color(0x2E007BFF) : const Color(0x0FDDE6F4),
+    borderRadius: BorderRadius.circular(radius),
+    border: Border.all(
+      color: active ? const Color(0x8C007BFF) : const Color(0x24DDE6F4),
+    ),
+    boxShadow: active
+        ? const [
+            BoxShadow(
+              color: Color(0x4D007BFF),
+              offset: Offset(0, 0),
+              blurRadius: 16,
+            ),
+          ]
+        : null,
+  );
 
   static ThemeData theme() {
     final scheme = const ColorScheme.dark(
@@ -385,9 +422,7 @@ abstract final class Tokens {
         selectedColor: chipActiveBg,
         labelStyle: body(size: 12),
         side: const BorderSide(color: line),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(99),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,

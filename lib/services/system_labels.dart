@@ -119,4 +119,3 @@ String makerFor(String system) => systemMakers[system] ?? 'Other';
 /// Compact label for [system].
 String shortSystemLabel(String system) =>
     systemShortLabels[system] ?? systemLabels[system] ?? system;
-

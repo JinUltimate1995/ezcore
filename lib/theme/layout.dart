@@ -36,8 +36,7 @@ abstract final class Layout {
   /// how wide it is, because height is what runs out first.
   static OrbitLayout ofSize(Size size, Orientation orientation) {
     if (orientation == Orientation.portrait) return OrbitLayout.phonePortrait;
-    if (size.height < Tokens.bpShortHeight ||
-        size.width < Tokens.bpCompact) {
+    if (size.height < Tokens.bpShortHeight || size.width < Tokens.bpCompact) {
       return OrbitLayout.phoneLandscape;
     }
     if (size.width >= Tokens.bpDesktop) return OrbitLayout.desktop;
@@ -61,9 +60,9 @@ abstract final class Layout {
 
   /// Human label used in test names and debug overlays.
   static String label(OrbitLayout l) => switch (l) {
-        OrbitLayout.desktop => 'desktop',
-        OrbitLayout.tablet => 'tablet',
-        OrbitLayout.phoneLandscape => 'phone landscape',
-        OrbitLayout.phonePortrait => 'phone portrait',
-      };
+    OrbitLayout.desktop => 'desktop',
+    OrbitLayout.tablet => 'tablet',
+    OrbitLayout.phoneLandscape => 'phone landscape',
+    OrbitLayout.phonePortrait => 'phone portrait',
+  };
 }

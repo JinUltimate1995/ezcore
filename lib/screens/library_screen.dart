@@ -27,7 +27,12 @@ import 'player_screen.dart';
 /// the previous CoverFlow library is preserved: search, system filter,
 /// favorites, import, detail, play, remove.
 class LibraryScreen extends StatefulWidget {
-  const LibraryScreen({super.key, required this.state, this.onGo, this.initialFilter});
+  const LibraryScreen({
+    super.key,
+    required this.state,
+    this.onGo,
+    this.initialFilter,
+  });
   final AppState state;
   final ValueChanged<String>? onGo;
   final String? initialFilter;
@@ -46,7 +51,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
   final pageCtrl = PageController(viewportFraction: 0.24);
   final portraitCtrl = PageController(viewportFraction: 0.62);
   String query = '';
-  String filter = 'All systems'; // All systems | Favorites | system id | core:<id>
+  String filter =
+      'All systems'; // All systems | Favorites | system id | core:<id>
   String tab = 'all'; // all | favorites | recent
   String view = 'flow';
   int index = 0;
@@ -117,9 +123,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   /// Games with a real play stamp, newest first — "Continue playing".
   List<GameEntry> get continuePlaying {
-    final list =
-        widget.state.games.where((g) => g.lastPlayedMs > 0).toList()
-          ..sort((a, b) => b.lastPlayedMs.compareTo(a.lastPlayedMs));
+    final list = widget.state.games.where((g) => g.lastPlayedMs > 0).toList()
+      ..sort((a, b) => b.lastPlayedMs.compareTo(a.lastPlayedMs));
     return list;
   }
 
@@ -144,15 +149,22 @@ class _LibraryScreenState extends State<LibraryScreen> {
         ? portraitCtrl
         : pageCtrl;
     if (ctrl.hasClients) {
-      ctrl.animateToPage(index,
-          duration: Tokens.easeDur, curve: Tokens.ease);
+      ctrl.animateToPage(index, duration: Tokens.easeDur, curve: Tokens.ease);
     }
   }
 
   void _setFilter(String next) {
     setState(() {
-      tab = 'all';
-      filter = next;
+      if (next == 'Favorites') {
+        // Favorites is a tab, not a system value. Keeping one vocabulary
+        // prevents the desktop/tablet chip from selecting a value that the
+        // shared `filtered` predicate intentionally ignores.
+        tab = 'favorites';
+        filter = 'All systems';
+      } else {
+        tab = 'all';
+        filter = next;
+      }
       index = 0;
     });
   }
@@ -179,8 +191,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   void _play(GameEntry game) {
-    final compatible =
-        widget.state.registry.compatibleCores(game.extension);
+    final compatible = widget.state.registry.compatibleCores(game.extension);
     if (compatible.isEmpty) {
       orbitToast(context, 'No installed core opens this file yet');
       return;
@@ -212,9 +223,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   void _openImport() {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => ImportScreen(state: widget.state),
-      ),
+      MaterialPageRoute(builder: (_) => ImportScreen(state: widget.state)),
     );
   }
 
@@ -235,23 +244,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 game.favorite ? Icons.star : Icons.star_outline,
                 color: Tokens.text,
               ),
-              title: Text(game.favorite ? 'Unfavorite' : 'Favorite',
-                  style: Tokens.body()),
+              title: Text(
+                game.favorite ? 'Unfavorite' : 'Favorite',
+                style: Tokens.body(),
+              ),
               onTap: () {
                 widget.state.toggleFavorite(game.id);
                 Navigator.of(context).pop();
                 orbitToast(
-                    context,
-                    game.favorite
-                        ? 'Removed from favorites'
-                        : 'Added to your favorites');
+                  context,
+                  game.favorite
+                      ? 'Removed from favorites'
+                      : 'Added to your favorites',
+                );
               },
             ),
             ListTile(
               leading: const Icon(Icons.delete_outline, color: Tokens.text),
               title: Text('Remove from library', style: Tokens.body()),
-              subtitle: Text('Your file stays on disk',
-                  style: Tokens.body(size: 11, color: Tokens.muted)),
+              subtitle: Text(
+                'Your file stays on disk',
+                style: Tokens.body(size: 11, color: Tokens.muted),
+              ),
               onTap: () {
                 widget.state.removeGame(game.id);
                 Navigator.of(context).pop();
@@ -279,8 +293,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
         final selected = list.isEmpty ? null : list[index];
         return CallbackShortcuts(
           bindings: {
-            const SingleActivator(LogicalKeyboardKey.arrowRight): () => _move(1),
-            const SingleActivator(LogicalKeyboardKey.arrowLeft): () => _move(-1),
+            const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
+                _move(1),
+            const SingleActivator(LogicalKeyboardKey.arrowLeft): () =>
+                _move(-1),
             const SingleActivator(LogicalKeyboardKey.slash): () {
               searchFocus.requestFocus();
             },
@@ -299,7 +315,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
             child: switch (layout) {
               OrbitLayout.desktop => _desktop(list, selected, osPad),
               OrbitLayout.tablet => _hub(osPad),
-              OrbitLayout.phoneLandscape => _phoneLandscape(list, selected, osPad),
+              OrbitLayout.phoneLandscape => _phoneLandscape(
+                list,
+                selected,
+                osPad,
+              ),
               OrbitLayout.phonePortrait => _portrait(list, selected, osPad),
             },
           ),
@@ -322,7 +342,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
     // Flexible by default: inside a header Row the field must give up
     // space rather than overflow a narrow phone.
-    return width == null ? Expanded(child: box) : SizedBox(width: width, child: box);
+    return width == null
+        ? Expanded(child: box)
+        : SizedBox(width: width, child: box);
   }
 
   Widget _viewSwitcher() {
@@ -405,10 +427,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
         onTap: () => _setFilter('All systems'),
       ),
       Container(
-          width: 1,
-          height: 18,
-          color: Tokens.line,
-          margin: const EdgeInsets.symmetric(horizontal: 8)),
+        width: 1,
+        height: 18,
+        color: Tokens.line,
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+      ),
       for (final s in systems)
         OrbitChip(
           label: shortSystemLabel(s),
@@ -442,18 +465,29 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   String _shortFor(String id) {
     const shorts = {
-      'pocketbit': 'GB', 'gambatte': 'GBC', 'advancebit': 'GBA', 'nesbyte': 'NES',
-      'superfx': 'SNES', 'blastproc': 'MD', 'joystick': '2600',
-      'realmode': 'DOS', 'cardcon': 'PCE', 'geometry1': 'PS',
-      'rcp64': 'N64', 'dualscreen': 'DS', 'portcomp': 'PSP',
-      'dreamarc': 'DC', 'powercube': 'GC', 'twinsh': 'SAT',
-      'coinbox': 'ARC', 'pointclick': 'ADV',
+      'pocketbit': 'GB',
+      'gambatte': 'GBC',
+      'advancebit': 'GBA',
+      'nesbyte': 'NES',
+      'superfx': 'SNES',
+      'blastproc': 'MD',
+      'joystick': '2600',
+      'realmode': 'DOS',
+      'cardcon': 'PCE',
+      'geometry1': 'PS',
+      'rcp64': 'N64',
+      'dualscreen': 'DS',
+      'portcomp': 'PSP',
+      'dreamarc': 'DC',
+      'powercube': 'GC',
+      'twinsh': 'SAT',
+      'coinbox': 'ARC',
+      'pointclick': 'ADV',
     };
     return shorts[id] ?? id.substring(0, math.min(3, id.length)).toUpperCase();
   }
 
-  String _countLabel(int n) =>
-      n == 1 ? '1 game' : '$n games';
+  String _countLabel(int n) => n == 1 ? '1 game' : '$n games';
 
   Widget _empty() {
     final hasGames = widget.state.games.isNotEmpty;
@@ -463,9 +497,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('A little quiet in here.',
-                style: Tokens.display(
-                    size: 22, weight: FontWeight.w500, ls: -0.5)),
+            Text(
+              'A little quiet in here.',
+              style: Tokens.display(
+                size: 22,
+                weight: FontWeight.w500,
+                ls: -0.5,
+              ),
+            ),
             const SizedBox(height: 8),
             Text(
               hasGames
@@ -476,10 +515,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             ),
             const SizedBox(height: 20),
             if (hasGames)
-              OrbitSecondary(
-                label: 'Clear filters',
-                onPressed: _clearFilters,
-              )
+              OrbitSecondary(label: 'Clear filters', onPressed: _clearFilters)
             else
               OrbitPrimary(
                 label: 'Import a folder',
@@ -503,7 +539,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
             padding: EdgeInsets.fromLTRB(osPad, 22, osPad, 0),
             child: Row(
               children: [
-                Expanded(child: _titleBlock(_countLabel(widget.state.games.length))),
+                Expanded(
+                  child: _titleBlock(_countLabel(widget.state.games.length)),
+                ),
                 _search(width: 260, shortcut: 'Ctrl K'),
                 const SizedBox(width: 8),
                 _viewSwitcher(),
@@ -547,7 +585,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
   // ---- Phone landscape -----------------------------------------------------
 
   Widget _phoneLandscape(
-      List<GameEntry> list, GameEntry? selected, double osPad) {
+    List<GameEntry> list,
+    GameEntry? selected,
+    double osPad,
+  ) {
     if (list.isEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -556,7 +597,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
             padding: EdgeInsets.fromLTRB(osPad, 8, osPad, 0),
             child: Row(
               children: [
-                Expanded(child: _titleBlock(_countLabel(list.length), big: false)),
+                Expanded(
+                  child: _titleBlock(_countLabel(list.length), big: false),
+                ),
                 _search(width: 200, hint: 'Search games…'),
                 const SizedBox(width: 8),
                 _importButton(),
@@ -574,7 +617,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
           padding: EdgeInsets.fromLTRB(osPad, 8, osPad, 0),
           child: Row(
             children: [
-              Expanded(child: _titleBlock(_countLabel(list.length), big: false)),
+              Expanded(
+                child: _titleBlock(_countLabel(list.length), big: false),
+              ),
               _search(width: 200, hint: 'Search games…'),
               const SizedBox(width: 8),
               _viewSwitcher(),
@@ -619,8 +664,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
           child: view == 'grid'
               ? _grid(list, osPad)
               : list.isEmpty
-                  ? _empty()
-                  : _portraitFeatured(list, selected, osPad),
+              ? _empty()
+              : _portraitFeatured(list, selected, osPad),
         ),
         if (playable) _continueRow(osPad),
       ],
@@ -633,7 +678,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
   /// the cover takes whatever is left. A fixed height here overflowed on
   /// short phones once the shell's top and bottom bars were accounted for.
   Widget _portraitFeatured(
-      List<GameEntry> list, GameEntry? selected, double osPad) {
+    List<GameEntry> list,
+    GameEntry? selected,
+    double osPad,
+  ) {
     return Column(
       children: [
         Expanded(
@@ -669,9 +717,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         double delta = 0;
                         if (portraitCtrl.hasClients &&
                             portraitCtrl.position.haveDimensions) {
-                          delta =
-                              (i - (portraitCtrl.page ?? index.toDouble()))
-                                  .clamp(-4.0, 4.0);
+                          delta = (i - (portraitCtrl.page ?? index.toDouble()))
+                              .clamp(-4.0, 4.0);
                         } else {
                           delta = (i - index).toDouble().clamp(-4.0, 4.0);
                         }
@@ -683,8 +730,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         final scale = delta == 0
                             ? 1.0
                             : (0.9 - (a - 1) * 0.05).clamp(0.7, 0.9);
-                        final opacity =
-                            delta == 0 ? 1.0 : (0.85 - a * 0.12).clamp(0.3, 0.85);
+                        final opacity = delta == 0
+                            ? 1.0
+                            : (0.85 - a * 0.12).clamp(0.3, 0.85);
                         return Opacity(
                           opacity: opacity,
                           child: Transform(
@@ -698,9 +746,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                 if (i == index) {
                                   _openDetail(list[i]);
                                 } else {
-                                  portraitCtrl.animateToPage(i,
-                                      duration: Tokens.easeDur,
-                                      curve: Tokens.ease);
+                                  portraitCtrl.animateToPage(
+                                    i,
+                                    duration: Tokens.easeDur,
+                                    curve: Tokens.ease,
+                                  );
                                 }
                               },
                               onLongPress: () => _gameMenu(list[i]),
@@ -722,16 +772,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   Positioned(
                     left: 0,
                     child: _FlowButton(
-                        icon: Icons.chevron_left,
-                        enabled: index > 0,
-                        onTap: () => _move(-1)),
+                      icon: Icons.chevron_left,
+                      enabled: index > 0,
+                      onTap: () => _move(-1),
+                    ),
                   ),
                   Positioned(
                     right: 0,
                     child: _FlowButton(
-                        icon: Icons.chevron_right,
-                        enabled: index < list.length - 1,
-                        onTap: () => _move(1)),
+                      icon: Icons.chevron_right,
+                      enabled: index < list.length - 1,
+                      onTap: () => _move(1),
+                    ),
                   ),
                 ],
               );
@@ -749,7 +801,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 Text(
                   selected.title,
                   style: Tokens.display(
-                      size: 20, weight: FontWeight.w500, ls: -0.6),
+                    size: 20,
+                    weight: FontWeight.w500,
+                    ls: -0.6,
+                  ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -785,7 +840,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
       ],
     );
   }
-
 
   Widget _dots(int count) {
     if (count <= 1) return const SizedBox(height: 10);
@@ -855,7 +909,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
     // The two plate sections are enough on their own; a third identical row
     // only appears when the collection is actually being narrowed
     // (a search, a tab, or a system filter), where it earns its place.
-    final narrowed = query.isNotEmpty || tab != 'all' || filter != 'All systems';
+    final narrowed =
+        query.isNotEmpty || tab != 'all' || filter != 'All systems';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -884,8 +939,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         onSeeAll: () => _setTab('recent'),
                       ),
                       const SizedBox(height: 10),
-                      _tileRow(continuePlaying,
-                          footnote: (g) => lastPlayedLabel(g.lastPlayedMs)),
+                      _tileRow(
+                        continuePlaying,
+                        footnote: (g) => lastPlayedLabel(g.lastPlayedMs),
+                      ),
                       const SizedBox(height: 22),
                     ],
                     if (recentlyAdded.isNotEmpty) ...[
@@ -894,7 +951,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         onSeeAll: () => _clearFilters(),
                       ),
                       const SizedBox(height: 10),
-                      _tileRow(games, footnote: (g) => _systemNote(g)),
+                      // This row is an import-order snapshot, not a second
+                      // view of the currently filtered collection.
+                      _tileRow(recentlyAdded, footnote: (g) => _systemNote(g)),
                     ],
                     if (narrowed) ...[
                       const SizedBox(height: 22),
@@ -913,7 +972,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
-  Widget _tileRow(List<GameEntry> games, {required String Function(GameEntry) footnote}) {
+  Widget _tileRow(
+    List<GameEntry> games, {
+    required String Function(GameEntry) footnote,
+  }) {
     return SizedBox(
       height: 196,
       child: ListView.separated(
@@ -931,7 +993,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   String _systemNote(GameEntry g) {
-    final base = g.filePath.split('/').last;
+    // Persisted paths may come from Unix or Windows. Keep the persisted
+    // format untouched, but never display a full native path in a tile.
+    final parts = g.filePath
+        .replaceAll('\\', '/')
+        .split('/')
+        .where((part) => part.isNotEmpty)
+        .toList();
+    final base = parts.isEmpty ? '' : parts.last;
     return base.isEmpty ? shortSystemLabel(g.system) : base;
   }
 
@@ -979,18 +1048,25 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
   }
 
-  Widget _flowStage(List<GameEntry> list, GameEntry? selected, double osPad,
-      {required bool desktop}) {
+  Widget _flowStage(
+    List<GameEntry> list,
+    GameEntry? selected,
+    double osPad, {
+    required bool desktop,
+  }) {
     final height = MediaQuery.of(context).size.height;
     // A short viewport has no room for the reflection echo: it would eat a
     // third of the stage and shrink the covers to stamps.
-    final reflectH = (!desktop && Layout.isShort(Layout.of(context))) ||
+    final reflectH =
+        (!desktop && Layout.isShort(Layout.of(context))) ||
             widget.state.settings['reflection'] == false
         ? 0.0
         : 60.0;
     final budget = desktop ? height * 0.40 : height * 0.46;
-    final flowH = (desktop ? budget : math.min(budget, 300.0))
-        .clamp(150.0, 460.0);
+    final flowH = (desktop ? budget : math.min(budget, 300.0)).clamp(
+      150.0,
+      460.0,
+    );
     // The cover is what actually has to fit: the stage also holds the
     // reflection echo, so it is part of the budget rather than a bonus.
     final coverH = (flowH - 20 - reflectH).clamp(96.0, 330.0);
@@ -1045,8 +1121,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       final scale = delta == 0
                           ? 1.0
                           : (0.88 - (a - 1) * 0.06).clamp(0.6, 0.88);
-                      final opacity =
-                          delta == 0 ? 1.0 : (0.87 - a * 0.13).clamp(0.23, 0.87);
+                      final opacity = delta == 0
+                          ? 1.0
+                          : (0.87 - a * 0.13).clamp(0.23, 0.87);
                       return Opacity(
                         opacity: opacity,
                         child: Transform(
@@ -1060,9 +1137,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                               if (i == index) {
                                 _openDetail(list[i]);
                               } else {
-                                pageCtrl.animateToPage(i,
-                                    duration: Tokens.easeDur,
-                                    curve: Tokens.ease);
+                                pageCtrl.animateToPage(
+                                  i,
+                                  duration: Tokens.easeDur,
+                                  curve: Tokens.ease,
+                                );
                               }
                             },
                             onLongPress: () => _gameMenu(list[i]),
@@ -1085,7 +1164,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                     child: Transform(
                                       alignment: Alignment.topCenter,
                                       transform: Matrix4.identity()
-                                          ..scaleByDouble(1.0, -0.35, 1.0, 1.0),
+                                        ..scaleByDouble(1.0, -0.35, 1.0, 1.0),
                                       child: GameCover(
                                         gameId: list[i].id,
                                         title: list[i].title,
@@ -1107,16 +1186,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
               Positioned(
                 left: osPad,
                 child: _FlowButton(
-                    icon: Icons.chevron_left,
-                    enabled: index > 0,
-                    onTap: () => _move(-1)),
+                  icon: Icons.chevron_left,
+                  enabled: index > 0,
+                  onTap: () => _move(-1),
+                ),
               ),
               Positioned(
                 right: osPad,
                 child: _FlowButton(
-                    icon: Icons.chevron_right,
-                    enabled: index < list.length - 1,
-                    onTap: () => _move(1)),
+                  icon: Icons.chevron_right,
+                  enabled: index < list.length - 1,
+                  onTap: () => _move(1),
+                ),
               ),
             ],
           ),
@@ -1132,9 +1213,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         if (selected != null)
           Padding(
             padding: EdgeInsets.fromLTRB(osPad, 0, osPad, 12),
-            child: desktop
-                ? _desktopDock(selected)
-                : _compactDock(selected),
+            child: desktop ? _desktopDock(selected) : _compactDock(selected),
           ),
       ],
     );
@@ -1190,10 +1269,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 300,
-                child: GameStatPanel(game: g),
-              ),
+              SizedBox(width: 300, child: GameStatPanel(game: g)),
               const SizedBox(width: 16),
               Expanded(
                 child: Align(
@@ -1224,11 +1300,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         children: [
           Expanded(child: _dockCopy(g, compact: true)),
           const SizedBox(width: 12),
-          OrbitPrimary(
-            label: 'Play',
-            minHeight: 42,
-            onPressed: () => _play(g),
-          ),
+          OrbitPrimary(label: 'Play', minHeight: 42, onPressed: () => _play(g)),
           const SizedBox(width: 8),
           OrbitRoundButton(
             icon: Icons.more_horiz,
@@ -1252,16 +1324,22 @@ class _LibraryScreenState extends State<LibraryScreen> {
           children: [
             SystemLabel(text: shortSystemLabel(g.system)),
             Container(
-                width: 3,
-                height: 3,
-                decoration: const BoxDecoration(
-                    color: Tokens.separator, shape: BoxShape.circle)),
+              width: 3,
+              height: 3,
+              decoration: const BoxDecoration(
+                color: Tokens.separator,
+                shape: BoxShape.circle,
+              ),
+            ),
             Text('.${g.extension}', style: Tokens.gameMeta),
             Container(
-                width: 3,
-                height: 3,
-                decoration: const BoxDecoration(
-                    color: Tokens.separator, shape: BoxShape.circle)),
+              width: 3,
+              height: 3,
+              decoration: const BoxDecoration(
+                color: Tokens.separator,
+                shape: BoxShape.circle,
+              ),
+            ),
             Text(fileSizeLabel(g.fileSize), style: Tokens.gameMeta),
             if (g.favorite)
               const Icon(Icons.star, size: 12, color: Tokens.accent),
@@ -1293,8 +1371,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
 }
 
 class _FlowButton extends StatelessWidget {
-  const _FlowButton(
-      {required this.icon, required this.enabled, required this.onTap});
+  const _FlowButton({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
   final IconData icon;
   final bool enabled;
   final VoidCallback onTap;

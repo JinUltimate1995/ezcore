@@ -87,8 +87,9 @@ void main() {
   };
 
   for (final entry in viewports.entries) {
-    testWidgets('shell composes without overflow: ${entry.key}',
-        (tester) async {
+    testWidgets('shell composes without overflow: ${entry.key}', (
+      tester,
+    ) async {
       await pumpShell(tester, entry.value);
       expect(
         tester.takeException(),
@@ -115,8 +116,9 @@ void main() {
     }
   });
 
-  testWidgets('every space renders in the shell at phone portrait',
-      (tester) async {
+  testWidgets('every space renders in the shell at phone portrait', (
+    tester,
+  ) async {
     await pumpShell(tester, const Size(390, 844));
     for (final label in ['Library', 'Systems', 'Capsule', 'Settings']) {
       expect(find.text(label), findsOneWidget, reason: label);
