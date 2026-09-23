@@ -118,7 +118,7 @@ a combined work with our GPL-3.0-only app (the FSF treats a dlopen'd plugin
 shipped in the same bundle as one work), and it was marked `bundled` for macOS
 and Android. It is now unbundled everywhere.
 
-`scripts/legal_audit.py` was hardened so this class of bug cannot recur:
+`scripts/license_audit.py` was hardened so this class of bug cannot recur:
 
 - GPL-2.0-only is never bundleable
 - **a bare, ambiguous `GPL-2.0` is now a violation when bundled** — that
@@ -166,7 +166,7 @@ Attribution is explicit rather than implied by a name, and
 ## 7. Verified after the rename
 
 `flutter analyze lib test` clean · `flutter test` **192/192** · CTest **5/5**
-(`boot_nesbyte`, `boot_pocketbit`, `boot_advancebit`) · `scripts/legal_audit.py`
+(`boot_nesbyte`, `boot_pocketbit`, `boot_advancebit`) · `scripts/license_audit.py`
 clean · catalog regenerated with 21 entries.
 
 ## 8. Remaining

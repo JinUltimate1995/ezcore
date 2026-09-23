@@ -20,7 +20,7 @@
 6. [Monetization](#6-monetization)
 7. [Development Phases](#7-development-phases)
 8. [Vibe Coding Workflow](#8-vibe-coding-workflow)
-9. [Legal & Copyright Strategy](#9-legal--copyright-strategy)
+9. [Licensing & Copyright Strategy](#9-licensing--copyright-strategy)
 10. [Repository Structure](#10-repository-structure)
 11. [MD File Index](#11-md-file-index)
 
@@ -46,7 +46,7 @@ ezCore is an **open-source, multi-system emulator frontend** that makes playing 
 | **3D UI** | Not just flat lists — game boxes float, shelves rotate, transitions are juicy |
 | **Auto Scan** | Drop ROMs in a folder, ezCore identifies games, fetches metadata, organizes |
 | **Auto Cheats** | Built-in cheat database — enable GameShark/Action Replay codes with one tap |
-| **Modular Cores** | Support 50+ systems without bloating the app. Legal safety through separation. |
+| **Modular Cores** | Support 50+ systems without bloating the app. Licensing safety through separation. |
 | **Cross-Platform** | Windows, macOS, Linux, Android, iOS — one codebase, native performance |
 
 ### Design Philosophy
@@ -176,7 +176,7 @@ Package management: **vcpkg** (desktop) + **Conan** (mobile)
 
 ### Why Modular?
 
-1. **Legal safety** — cores are separate binaries, not linked into the main app
+1. **Licensing safety** — cores are separate binaries, not linked into the main app
 2. **Size** — users only download cores for systems they play
 3. **Community** — third-party developers can build cores without touching ezCore
 4. **Updates** — update cores independently of the main app
@@ -257,7 +257,7 @@ cores/
 | **Tier 2** (v1.1) | N64, PS1, PSP, DS | Mupen64Plus, PCSX-ReARMed, PPSSPP, DeSmuME |
 | **Tier 3** (v1.2) | Arcade, Neo Geo, TurboGrafx | FBNeo, Mednafen |
 | **Tier 4** (v2.0) | Saturn, Dreamcast | Yabause, Flycast |
-| **Never** | Switch, 3DS, PS2 | Legal holds — Nintendo litigation risk |
+| **Never** | Switch, 3DS, PS2 | Holds — Nintendo litigation risk |
 
 ---
 
@@ -605,7 +605,7 @@ docs/
 
 ---
 
-## 9. Legal & Copyright Strategy
+## 9. Licensing & Copyright Strategy
 
 ### The Core Principle
 
@@ -635,7 +635,7 @@ docs/
 - ✅ Provide cloud save infrastructure
 - ✅ Provide a marketplace for community-built cores (future)
 
-### Legal Holds (Never Build/Ship)
+### Holds (Never Build/Ship)
 
 | System | Reason |
 |---|---|
@@ -774,9 +774,9 @@ universal-emulator/
 |---|---|---|
 | 2026-09-16 | C++ for runtime | Direct libretro compatibility, performance, cross-platform |
 | 2026-09-16 | Flutter for UI | Hot reload, declarative 3D, cross-platform |
-| 2026-09-16 | Modular cores | Legal safety, size, community, independent updates |
+| 2026-09-16 | Modular cores | Licensing safety, size, community, independent updates |
 | 2026-09-16 | Cloud saves as #1 feature | Primary selling point, differentiator |
-| 2026-09-16 | No Switch/3DS/PS2 | Legal holds — Nintendo/Sony litigation risk |
+| 2026-09-16 | No Switch/3DS/PS2 | Holds — Nintendo/Sony litigation risk |
 | 2026-09-16 | Vibe coding via MD files | AI-driven development, you steer via specs |
 | 2026-09-16 | Not Rust | C++ has direct libretro compat, mature tooling, larger emulator community |
 | 2026-09-16 | Firebase for cloud (v1) | Fastest to ship, free tier generous, real-time sync |

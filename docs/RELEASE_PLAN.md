@@ -129,5 +129,5 @@ from the old roadmap draft.
   perf; pinning + the matrix test mitigate, not eliminate.
 - iOS JIT-less interpreter cores for late systems (N64/PSP-class) may be
   too slow on old phones — scope iOS system list by measurement, not hope.
-- Legal posture depends on the holds staying holds and the provenance
+- Distribution posture depends on the holds staying holds and the provenance
   audit completing before any public binary.

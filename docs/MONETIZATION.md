@@ -33,7 +33,7 @@
 - **License rule:** a paid build bundles only cores whose licenses permit
   commercial distribution. Non-commercial cores (Snes9x, Genesis Plus GX)
   are never bundled in any build — enforced by
-  [`scripts/legal_audit.py`](../scripts/legal_audit.py).
+  [`scripts/license_audit.py`](../scripts/license_audit.py).
 
 ### 3. ezCORE Cloud — sync & backup (planned, v1.1+)
 
