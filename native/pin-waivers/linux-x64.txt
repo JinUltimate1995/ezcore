@@ -1,0 +1,3 @@
+# linux-x64 pin-gate waivers (audited gaps, not silent omissions).
+# Each entry: core id + reason. Remove the line when the core stages.
+# (2026-09-22: empty — rgbds and nasm installed; pocketbit + rcp64 built, pinned.)

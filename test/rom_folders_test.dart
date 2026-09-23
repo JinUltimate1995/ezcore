@@ -19,16 +19,17 @@ const _mgbaManifest = '''
 }
 ''';
 
-/// Creates a fake ROM file with valid GBA magic bytes.
+/// Creates a fake ROM file with valid GBA magic bytes (at 0x04, where the
+/// real Nintendo logo lives inside the cart).
 Future<File> createFakeRom(Directory dir, String name, {int size = 4096}) async {
   final file = File('${dir.path}/$name.gba');
   final bytes = Uint8List(size);
-  // GBA magic: 0x24 0xFF 0xAE 0x51 0x69 0x9A 0xA2 0x21
+  // GBA magic: 0x24 0xFF 0xAE 0x51 0x69 0x9A 0xA2 0x21 at offset 0x04
   final magic = [0x24, 0xFF, 0xAE, 0x51, 0x69, 0x9A, 0xA2, 0x21];
   for (var i = 0; i < magic.length; i++) {
-    bytes[i] = magic[i];
+    bytes[0x04 + i] = magic[i];
   }
-  for (var i = magic.length; i < size; i++) {
+  for (var i = 0x04 + magic.length; i < size; i++) {
     bytes[i] = 0xFF;
   }
   await file.writeAsBytes(bytes);

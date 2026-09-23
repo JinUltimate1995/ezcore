@@ -22,27 +22,50 @@ class FakeHashVerifier implements HashVerifier {
 /// Creates a fake ROM file with valid magic bytes and size.
 ///
 /// [extension] determines which magic bytes to write. [size] is the total
-/// file size (must be >= 512 to pass validation). The file is filled with
-/// the magic bytes at the start, then 0xFF padding.
+/// file size (must be >= 512 to pass validation). Magic bytes are written
+/// at the offset where the real format carries them (GB logo at 0x104,
+/// GBA logo at 0x04, Genesis "SEGA" at 0x100) — mirroring the validator.
+/// The file is filled with 0xFF padding elsewhere.
 Future<File> createFakeRom(Directory dir, String name, String extension, {int size = 4096}) async {
   final file = File('${dir.path}/$name.$extension');
   final bytes = Uint8List(size);
 
   // Write magic bytes based on extension
   final magic = _magicForExtension(extension);
+  final offset = _offsetForExtension(extension);
   if (magic != null) {
-    for (var i = 0; i < magic.length && i < size; i++) {
-      bytes[i] = magic[i];
+    for (var i = 0; i < magic.length && offset + i < size; i++) {
+      bytes[offset + i] = magic[i];
     }
   }
 
   // Fill rest with 0xFF (non-text, non-zero)
-  for (var i = magic?.length ?? 0; i < size; i++) {
-    bytes[i] = 0xFF;
+  final start = magic == null ? 0 : offset + magic.length;
+  for (var i = start; i < size; i++) {
+    if (bytes[i] == 0) bytes[i] = 0xFF;
   }
 
   await file.writeAsBytes(bytes);
   return file;
+}
+
+/// Offset where the format's magic lives inside the cart (0 = file header).
+int _offsetForExtension(String ext) {
+  switch (ext.toLowerCase()) {
+    case 'gb':
+    case 'gbc':
+      return 0x104;
+    case 'gba':
+      return 0x04;
+    case 'md':
+    case 'gen':
+    case 'sms':
+    case 'gg':
+    case 'sg':
+      return 0x100;
+    default:
+      return 0;
+  }
 }
 
 /// Returns the magic bytes for a given extension, or null if none defined.

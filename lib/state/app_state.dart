@@ -146,6 +146,7 @@ class AppState extends ChangeNotifier {
           Platform.environment['EZCORE_CORES_DIR'] ??
           await _stagedVaultRoot() ??
           _bundledCoresRoot() ??
+          RepoLayout.stagedCoresRoot(executablePath: Platform.resolvedExecutable) ??
           RepoLayout.coresRoot(executablePath: Platform.resolvedExecutable) ??
           RepoLayout.coresRoot() ?? 'native/cores';
       final discovery = CoreDiscovery(Directory(coreRoot));
