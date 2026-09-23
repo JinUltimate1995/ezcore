@@ -4,7 +4,7 @@
 
 ## Current Project State
 
-- Version: 0.1.1
+- Version: 0.2.0
 - Release status: Public / Experimental
 - Main branch: Protected
 - CI: GitHub Actions disabled 2026-09-23 (no repo compute) — gates run locally (`flutter analyze` / `flutter test`); packages are built and uploaded manually
