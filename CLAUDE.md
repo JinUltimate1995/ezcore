@@ -27,7 +27,8 @@ Before changing any code for a non-trivial task, **STOP** and inspect:
 - [`project.md`](project.md) — engineering governance (this is the rulebook)
 - [`README.md`](README.md) — what the project is
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — how the code is laid out
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) / [`docs/RELEASE_PLAN.md`](docs/RELEASE_PLAN.md) — where the project is going
+- [`ROADMAP.md`](ROADMAP.md) — authoritative long-term roadmap / [`docs/RELEASE_PLAN.md`](docs/RELEASE_PLAN.md) — release gates
+- `.ezcore/CURRENT_TASK.md` and related state files — current task, evidence, and handoff
 - `git status`, current branch, relevant source/tests
 
 **The code is truth. Documentation can be stale. Read the code.**

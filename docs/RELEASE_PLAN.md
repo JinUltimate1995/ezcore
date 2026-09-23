@@ -1,9 +1,14 @@
 # ezCORE v1 Release Plan
 
-> **Date:** 2026-09-19 (updated — decisions settled, first release scoped)
-> **Status:** Active — supersedes `ROADMAP.md` (stale pre-build draft) for v1 scope.
+> **Date:** 2026-09-23 (updated — release scope remains separate from the living roadmap)
+> **Status:** Active release-scope companion; the authoritative long-term roadmap is [`../ROADMAP.md`](../ROADMAP.md).
+> **Evidence rule:** this document describes release gates and historical checkpoints; current implementation claims must be checked against [`MATRIX.md`](MATRIX.md), source, and tests.
 > **Goal:** a first public build an actual user can install, import their own
 > dumps into, play, save, and update — on macOS first, then mobile.
+
+> **Historical scope note:** the `v0.1.0` section below records the first
+> release gates. The current release is `v0.2.0`; use [`../ROADMAP.md`](../ROADMAP.md)
+> for active work and [`MATRIX.md`](MATRIX.md) for current verification.
 
 ## v0.1.0 scope (first public release)
 
@@ -29,7 +34,12 @@ Apple identity is available) + published store listings or TestFlight/beta
 tracks for iOS/Android **only if** their P1 gates clear; otherwise v1 is
 explicitly "macOS + Windows/Linux desktop, mobile beta to follow."
 
-## Where v1 stands (verified 2026-09-18, updated in place)
+## Historical v1 checkpoint (verified 2026-09-18)
+
+> This is a dated release checkpoint, not the current combined-branch gate.
+> For the latest evidence and open review items, see
+> [`../.ezcore/ROADMAP_STATE.md`](../.ezcore/ROADMAP_STATE.md) and
+> [`../.ezcore/KNOWN_ISSUES.md`](../.ezcore/KNOWN_ISSUES.md).
 
 - Orbit console UI complete, no placeholders: full suite green (see CI),
   `analyze lib/` clean, banned-content scan green, live cheats / slots /
