@@ -1041,6 +1041,26 @@ Use semantic versioning where appropriate:
 
 MAJOR.MINOR.PATCH
 
+Small increments — maintainer rule (2026-09-23):
+
+- Every release takes the smallest possible step: 0.2.0 -> 0.2.1 ->
+  0.2.2 ... Never skip a number.
+- Never jump to the next band (MINOR/MAJOR) by default. A band change is
+  the maintainer's explicit call; an agent never decides one. A direct
+  0.1.1 -> 0.2.0 jump was called out as NOT preferred — inside 0.x
+  semver permits any change, so the small step is always the honest
+  choice.
+- What changed (fix vs. feature) is recorded in the CHANGELOG section
+  headers, not in a big version number.
+- Published versions are immutable: once a tag/release exists it is
+  never renumbered, reused, or skipped.
+
+Every version bump updates all surfaces together: `pubspec.yaml`
+`version:`, the `- Version:` line in Current Project State above, a new
+dated `CHANGELOG.md` section, a `.github/release-notes/<tag>.md` file,
+and a regenerated `cores/release.json` (its tag must equal the pubspec
+version). The GitHub release is then announced with its built packages.
+
 Example:
 
 0.1.0
