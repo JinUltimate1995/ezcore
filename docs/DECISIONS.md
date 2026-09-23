@@ -94,7 +94,7 @@ The UI layer needs to render 3D scenes, handle navigation, manage state, and pro
 
 ### Context
 
-ezCore needs to support 50+ emulation systems. Monolithic core integration would bloat the app, create legal risk, and make updates difficult.
+ezCore needs to support 50+ emulation systems. Monolithic core integration would bloat the app, create IP risk, and make updates difficult.
 
 ### Decision
 
@@ -102,7 +102,7 @@ ezCore needs to support 50+ emulation systems. Monolithic core integration would
 
 ### Rationale
 
-1. **Legal safety** — cores are separate binaries, not linked into ezCore
+1. **Licensing safety** — cores are separate binaries, not linked into ezCore
 2. **Size** — users only download cores for systems they play
 3. **Community** — third-party developers can build cores without touching ezCore
 4. **Updates** — update cores independently of the main app
@@ -147,14 +147,14 @@ ezCore needs a primary selling point that differentiates it from existing emulat
 
 ---
 
-## ADR-005: Legal Holds — No Switch/3DS/PS2
+## ADR-005: Platform Holds — No Switch/3DS/PS2
 
 **Date:** 2026-09-16
 **Status:** Accepted
 
 ### Context
 
-Some emulation systems are legally risky due to active litigation from console manufacturers.
+Some emulation systems carry active litigation risk from console manufacturers.
 
 ### Decision
 
@@ -164,7 +164,7 @@ Some emulation systems are legally risky due to active litigation from console m
 
 1. **Nintendo litigation** — 2024 Yuzu settlement set precedent
 2. **Proprietary firmware** — these systems require copyrighted firmware
-3. **Risk/reward** — legal risk far outweighs user demand
+3. **Risk/reward** — the risk far outweighs user demand
 4. **Community reputation** — associating with litigation is bad for the project
 
 ### Consequences
@@ -257,7 +257,7 @@ Opt-In Cloud:
 ### Rationale
 
 1. **Trust** — emulation community is privacy-conscious; we earn trust by not collecting data
-2. **Legal** — less data = less liability (GDPR, CCPA compliance by design)
+2. **Compliance** — less data = less liability (GDPR, CCPA compliance by design)
 3. **Simplicity** — no analytics pipeline to build and maintain
 4. **Differentiation** — "we don't track you" is a selling point
 
@@ -460,7 +460,7 @@ Non-negotiables for every core repository:
 - Zero game content: no ROMs, BIOS, firmware, decryption keys, game art, or
   cheat databases — now or ever. Binaries are never committed; artifacts are
   sha256-pinned at build time only.
-- No legal-hold targets: Switch, 3DS, and PS2 stay excluded everywhere (ADR-005).
+- No hold targets: Switch, 3DS, and PS2 stay excluded everywhere (ADR-005).
 - Licence honesty: scaffolding is GPL-3.0 (matching ezCORE); the engine keeps
   its upstream licence, stated by name in the README. Upstream licences that
   are "GPL-2.0-or-later" are used under the "or later" terms, which make them

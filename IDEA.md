@@ -10,7 +10,7 @@ updated: 2026-09-15
 
 ezCORE is not simply an emulator frontend. It is the open-source universal game emulation platform — a single, highly-polished surface under which dozens of emulator implementations disappear behind a clean, modular architecture.
 
-The user provides their own legally obtained games and system files. ezCORE provides everything else: the library, the player, the tools, and the polish.
+The user provides their own games and system files. ezCORE provides everything else: the library, the player, the tools, and the polish.
 
 **ezCORE = platform / orchestration / frontend**
 **Cores = modular emulator implementations**
@@ -28,10 +28,10 @@ The user has **one** game library. ezCORE handles the complexity underneath. The
 ### Modular Core Architecture
 Cores are versioned plugins, signed and SHA-pinned, each declaring what systems it supports, what file extensions it opens, what cheat families it exposes, and what execution strategy it uses per platform. A core that satisfies the runtime ABI works on every platform unchanged.
 
-### Legal and Technical Separation
+### Licensing and Technical Separation
 ezCORE ships no copyrighted game content, BIOS/firmware, decryption keys, proprietary Nintendo assets, or cheat databases, and links to none. The UX clearly separates ezCORE software (which we build) from user-provided content (which the user owns).
 
-For newer or proprietary platforms (3DS, Switch, PS2), the architecture reserves slots and supports modular third-party integrations while keeping ezCORE itself cleanly separated from proprietary system software. Legal holds are enforced at the manifest level, not as an afterthought.
+For newer or proprietary platforms (3DS, Switch, PS2), the architecture reserves slots and supports modular third-party integrations while keeping ezCORE itself cleanly separated from proprietary system software. Holds are enforced at the manifest level, not as an afterthought.
 
 ## Product Identity
 
@@ -60,8 +60,8 @@ For newer or proprietary platforms (3DS, Switch, PS2), the architecture reserves
 ### Launch Scope
 GB/GBC · GBA · NES · SNES · Genesis/SMS/GG · Atari 2600 · DOS · TG-16 · PS1 · N64 · DS · PSP · Dreamcast · GameCube/Wii (desktop/Android) · Saturn · Arcade · ScummVM
 
-### Future / Legal Holds
-3DS, Switch, PS2 — reserved slots. Architecture supports them; legal/IP clearance gates actual implementation.
+### Future / Holds
+3DS, Switch, PS2 — reserved slots. Architecture supports them; IP clearance gates actual implementation.
 
 ### Dynamic Platform Registry
 The UI does not hardcode a console menu. New platforms appear dynamically as cores are installed. Today's scope is not tomorrow's ceiling.
@@ -69,7 +69,7 @@ The UI does not hardcode a console menu. New platforms appear dynamically as cor
 ## Major Product Surfaces
 
 ### Onboarding
-First launch · Platform discovery · Core setup · Game library import · Controller setup · Optional cloud configuration · Privacy/legal content explanation
+First launch · Platform discovery · Core setup · Game library import · Controller setup · Optional cloud configuration · Privacy & content-provenance explanation
 
 ### Home
 Recently played · Continue playing · Favorites · Recently added · Recommendations based on user's own library · Installed cores · Quick actions
@@ -128,7 +128,7 @@ Designed carefully: "No PS2 games yet → Add your own game files" / "No compati
 ### Error / Recovery States
 Missing system file · Incompatible core · Corrupted save · Unsupported format · Controller disconnected · Cloud sync conflict
 
-### Legal / User-Supplied Content UX
+### Licensing / User-Supplied Content UX
 Neutral, professional, non-preachy language: "Bring your own game files" / "ezCORE manages your collection and provides the tools to play it."
 
 ## Architecture (from UI perspective)
@@ -203,7 +203,7 @@ This is a **product vision and design principles** document. It establishes **pr
 
 ## What This Document Is Not
 - It is not a technical spec for any given core
-- It is not a legal brief (see TRADEMARKS.md, DMCA.md)
+- It is not a substitute for TRADEMARKS.md or DMCA.md
 - It is not an API reference (see docs/ARCHITECTURE.md)
 - It is not a feature roadmap with dates
 - It is not a build guide (see README.md)

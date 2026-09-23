@@ -4,10 +4,10 @@
 
 ## Current Project State
 
-- Version: 0.1.0
+- Version: 0.1.1
 - Release status: Public / Experimental
 - Main branch: Protected
-- CI: Live (5-OS matrix)
+- CI: GitHub Actions disabled 2026-09-23 (no repo compute) — gates run locally (`flutter analyze` / `flutter test`); packages are built and uploaded manually
 - Active milestone: Stabilization
 - Current focus: Bug fixes + regression protection
 - Architecture status: Evolving
@@ -166,7 +166,7 @@ If the suggestion should be changed:
 → explain what should change and why.
 
 If the maintainer explicitly decides to proceed despite a known tradeoff:
-→ respect the decision unless it creates a safety, legal, security, or fundamental integrity problem.
+→ respect the decision unless it creates a safety, licensing, security, or fundamental integrity problem.
 
 ============================================================
 3. EDUCATE THE MAINTAINER
@@ -929,7 +929,7 @@ Immediately report it.
 Do not simply delete it from the latest file and assume the problem is solved.
 
 ============================================================
-28. LICENSE AND LEGAL BOUNDARIES
+28. LICENSE AND DISTRIBUTION BOUNDARIES
 ============================================================
 
 ezCORE is an open-source emulator project.
@@ -1841,7 +1841,7 @@ When choosing the next task, generally consider:
 1. Critical regressions
 2. User-facing crashes/data loss
 3. Build/CI failures
-4. Security/legal problems
+4. Security/licensing problems
 5. Core architectural blockers
 6. Important usability problems
 7. High-value features
