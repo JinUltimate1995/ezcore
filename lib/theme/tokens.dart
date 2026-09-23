@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-/// ezCORE final-01 (Orbit console) design tokens.
+/// ezCORE (Orbit console) design tokens.
 ///
-/// Source of truth: `ezcore-design/studio/orbit-console/orbit-app.source.html`
-/// + `systems.css` — data-brand-build="ezcore-final-01".
-/// Approved identity: black / electric blue / silver-white. Dark only.
+/// Approved identity, unchanged by the studio-plate redesign: black /
+/// electric blue / silver-white, dark only. The brand plate pins the
+/// palette as `#0A0A0A · #007BFF · #DDE6F4 · #FFFFFF`; everything under
+/// "Space scene" re-mixes those same values for depth, it does not
+/// introduce a new hue.
+///
+/// Every colour, radius and type style the UI uses is declared here, which
+/// is what makes a future theme system a swap of this one file rather than
+/// a rewrite of the screens.
 ///
 /// Display: Space Grotesk · Body: Manrope (bundled in assets/fonts,
 /// OFL-licensed — fully offline, no runtime font fetching).
