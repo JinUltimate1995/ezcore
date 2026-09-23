@@ -3,7 +3,8 @@
 > **Status:** planning draft (2026-09-16) — **superseded** by
 > [`RELEASE_PLAN.md`](RELEASE_PLAN.md) (v1 scope) and
 > [`ARCHITECTURE.md`](ARCHITECTURE.md) (as-built). Kept for history; parts of
-> it (C++ runtime, download infrastructure) were never built as written.
+> it (C++ runtime) were never built as written; the download path that did
+> arrive is smaller and hybrid — see ADR-013.
 >
 > **Version:** 1.0
 > **Stack as written:** C++ (runtime) + Flutter/Dart (UI) + C/C++ (libretro cores)

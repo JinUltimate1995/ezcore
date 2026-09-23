@@ -76,8 +76,11 @@ explicitly "macOS + Windows/Linux desktop, mobile beta to follow."
    shell branding normalized, 5-OS CI matrix written. This machine cannot
    execute foreign binaries; first green CI run is the gate.
 7. **Desktop core updates** — DECIDED 2026-09-18: no download infrastructure
-   in v1. Delivery is `bundled` (manifest data matches): cores ship inside
-   the app bundle and update with app releases, hash-verified at staging.
+   in v1. **SUPERSEDED 2026-09-23 (ADR-013):** hybrid delivery — the desktop
+   giants (pointclick/dreamarc/powercube) are `download`, fetched from this
+   repo's GitHub Releases and hash-verified before staging; every other core
+   stays `bundled`. Original rationale kept on record: cores ship inside the
+   app bundle and update with app releases, hash-verified at staging.
    (iOS never downloads — stays bundled, App Review 2.5.2/4.7.)
 
 ## Phase C — mobile real (P1)
