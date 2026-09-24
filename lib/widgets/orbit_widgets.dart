@@ -214,6 +214,32 @@ const orbitNavItems = [
   OrbitNavItem('settings', 'Settings', Icons.settings_outlined, Icons.settings),
 ];
 
+/// Desktop/landscape rail adds two common library shortcuts. Phone portrait
+/// keeps the quieter four-item bottom bar in [orbitNavItems].
+const orbitRailItems = [
+  OrbitNavItem('library', 'Library', Icons.grid_view_outlined, Icons.grid_view),
+  OrbitNavItem(
+    'systems',
+    'Systems',
+    Icons.sports_esports_outlined,
+    Icons.sports_esports,
+  ),
+  OrbitNavItem(
+    'continue',
+    'Continue',
+    Icons.play_circle_outline,
+    Icons.play_circle,
+  ),
+  OrbitNavItem(
+    'favorites',
+    'Favorites',
+    Icons.favorite_outline,
+    Icons.favorite,
+  ),
+  OrbitNavItem('vault', 'Capsule', Icons.history_outlined, Icons.history),
+  OrbitNavItem('settings', 'Settings', Icons.settings_outlined, Icons.settings),
+];
+
 /// Landscape left command rail (84px, 72px short).
 class OrbitRail extends StatelessWidget {
   const OrbitRail({
@@ -231,14 +257,14 @@ class OrbitRail extends StatelessWidget {
     return Container(
       width: short ? Tokens.railShort : Tokens.rail,
       decoration: const BoxDecoration(
-        color: Color(0xCC0A0A0A),
+        color: Color(0xE608101C),
         border: Border(right: BorderSide(color: Color(0x16DDE6F4))),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          for (final it in orbitNavItems)
+          for (final it in orbitRailItems)
             Padding(
               padding: EdgeInsets.only(bottom: short ? 6 : 12),
               child: _RailButton(
@@ -269,6 +295,15 @@ class _RailButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = item.id == 'vault' ? 'Capsule' : item.label;
+    final foreground = active ? Colors.white : Tokens.muted;
+    final labelStyle = short
+        ? TextStyle(
+            fontFamily: Tokens.bodyFamily,
+            fontSize: 9,
+            fontWeight: FontWeight.w500,
+            color: foreground,
+          )
+        : Tokens.body(size: 9, color: foreground);
     return Material(
       color: active ? Tokens.chipActiveBg : Colors.transparent,
       borderRadius: BorderRadius.circular(8),
@@ -277,8 +312,11 @@ class _RailButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: double.infinity,
-          constraints: BoxConstraints(minHeight: short ? 54 : 64),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 3),
+          constraints: BoxConstraints(minHeight: short ? 50 : 64),
+          padding: EdgeInsets.symmetric(
+            vertical: short ? 4 : 12,
+            horizontal: 3,
+          ),
           decoration: active
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -293,13 +331,13 @@ class _RailButton extends StatelessWidget {
                 size: short ? 18 : 21,
                 color: active ? Colors.white : Tokens.muted,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: short ? 4 : 8),
               Text(
                 label,
-                style: Tokens.body(
-                  size: short ? 8 : 9,
-                  color: active ? Colors.white : Tokens.muted,
-                ),
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                style: labelStyle,
               ),
             ],
           ),
@@ -1044,7 +1082,7 @@ class GameCover extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF232B36), Color(0xFF12151C)],
+          colors: [Color(0xFF26364B), Color(0xFF111C2A)],
         ),
         border: Border.all(
           color: selected ? Colors.white : const Color(0x22DDE6F4),

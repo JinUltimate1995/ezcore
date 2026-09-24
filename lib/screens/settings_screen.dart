@@ -68,13 +68,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final layout = Layout.of(context);
-    final portrait = Layout.hasBottomBar(layout);
+    final portrait = Layout.isPortrait(layout);
+    final compactTabs = portrait || layout == OrbitLayout.phoneLandscape;
     final short = Layout.isShort(layout);
     final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(
       listenable: widget.state,
       builder: (context, _) {
-        final nav = _nav(portrait);
+        final nav = _nav(compactTabs);
         final panel = _panel();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,7 +133,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   osPad,
                   short ? 8 : 24,
                 ),
-                child: portrait
+                child: compactTabs
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -214,7 +215,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Black panels, blue highlights. Make it yours.',
+          'Midnight surfaces, electric-blue highlights. Make it yours.',
           style: Tokens.body(size: 12, color: Tokens.muted, height: 1.8),
         ),
         const SizedBox(height: 16),
@@ -263,6 +264,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
         _row(
+          'Cover flow feel',
+          'Choose the depth and snap used while browsing game covers.',
+          OrbitSelect<String>(
+            value: _pref('coverFlowStyle', 'classic'),
+            options: const ['classic', 'gentle', 'flat'],
+            labels: const {
+              'classic': 'Classic',
+              'gentle': 'Gentle',
+              'flat': 'Flat',
+            },
+            onChanged: (v) => _set('coverFlowStyle', v ?? 'classic'),
+          ),
+        ),
+        _row(
           'Default library view',
           'Flow for discovery. Grid for a bird\u2019s-eye view.',
           OrbitSelect<String>(
@@ -288,6 +303,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onPressed: () async {
               await _set('motion', true);
               await _set('reflection', true);
+              await _set('coverFlowStyle', 'classic');
               await _set('layout', 'flow');
               await _set('dense', false);
               if (mounted) {
@@ -707,11 +723,15 @@ class _NavBtn extends StatelessWidget {
             children: [
               Icon(icon, size: 16, color: active ? Colors.white : Tokens.muted),
               const SizedBox(width: 8),
-              Text(
-                label,
-                style: Tokens.body(
-                  size: 12,
-                  color: active ? Colors.white : Tokens.muted,
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Tokens.body(
+                    size: 12,
+                    color: active ? Colors.white : Tokens.muted,
+                  ),
                 ),
               ),
             ],

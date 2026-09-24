@@ -37,11 +37,9 @@ void main() {
     });
 
     test('a tall tablet in portrait is not treated as a phone', () {
-      // Width alone must not decide: orientation does.
       expect(
         Layout.ofSize(const Size(834, 1194), Orientation.portrait),
-        OrbitLayout.phonePortrait,
-        reason: 'portrait always uses the phone family',
+        OrbitLayout.tabletPortrait,
       );
       expect(
         Layout.ofSize(const Size(834, 1194), Orientation.landscape),
@@ -79,6 +77,7 @@ void main() {
       for (final l in [
         OrbitLayout.desktop,
         OrbitLayout.tablet,
+        OrbitLayout.tabletPortrait,
         OrbitLayout.phoneLandscape,
       ]) {
         expect(Layout.hasRail(l), isTrue, reason: Layout.label(l));
@@ -89,6 +88,7 @@ void main() {
     test('phone families are exactly the two phone shapes', () {
       expect(Layout.isPhone(OrbitLayout.phonePortrait), isTrue);
       expect(Layout.isPhone(OrbitLayout.phoneLandscape), isTrue);
+      expect(Layout.isPhone(OrbitLayout.tabletPortrait), isFalse);
       expect(Layout.isPhone(OrbitLayout.tablet), isFalse);
       expect(Layout.isPhone(OrbitLayout.desktop), isFalse);
     });
@@ -98,6 +98,7 @@ void main() {
       expect(Layout.isShort(OrbitLayout.tablet), isTrue);
       expect(Layout.isShort(OrbitLayout.desktop), isFalse);
       expect(Layout.isShort(OrbitLayout.phonePortrait), isFalse);
+      expect(Layout.isShort(OrbitLayout.tabletPortrait), isFalse);
     });
   });
 }

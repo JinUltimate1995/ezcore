@@ -72,7 +72,7 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final layout = Layout.of(context);
-    final portrait = Layout.hasBottomBar(layout);
+    final portrait = Layout.isPortrait(layout);
     final short = layout == OrbitLayout.phoneLandscape;
     final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(

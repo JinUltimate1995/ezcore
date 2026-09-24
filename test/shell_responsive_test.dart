@@ -108,6 +108,29 @@ void main() {
     expect(find.text('Settings'), findsOneWidget);
   });
 
+  testWidgets('portrait tablet keeps the rail and library hub', (tester) async {
+    await pumpShell(tester, const Size(834, 1194));
+    expect(tester.takeException(), isNull);
+    expect(find.byType(OrbitRail), findsOneWidget);
+    expect(find.byType(OrbitBottomNav), findsNothing);
+    expect(find.text('Continue playing'), findsOneWidget);
+  });
+
+  testWidgets('desktop rail routes to continue and favorite collections', (
+    tester,
+  ) async {
+    await pumpShell(tester, const Size(1600, 1000));
+    expect(find.text('Continue'), findsOneWidget);
+    expect(find.text('Favorites'), findsWidgets);
+
+    await tester.tap(find.text('Favorites').first);
+    // The space background animates continuously, so settle is never reached.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(find.text('1 game'), findsOneWidget);
+    expect(find.text('Super Mario World'), findsWidgets);
+  });
+
   testWidgets('landscape layouts use the command rail', (tester) async {
     for (final size in const [Size(1600, 1000), Size(1024, 768)]) {
       await pumpShell(tester, size);

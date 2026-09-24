@@ -1,5 +1,6 @@
 import 'package:ezcore/models/game_entry.dart';
 import 'package:ezcore/screens/library_screen.dart';
+import 'package:ezcore/screens/settings_screen.dart';
 import 'package:ezcore/state/app_state.dart';
 import 'package:ezcore/theme/tokens.dart';
 import 'package:ezcore/widgets/orbit_widgets.dart';
@@ -80,6 +81,15 @@ void main() {
     expect(find.textContaining('States ('), findsOneWidget);
   });
 
+  testWidgets('desktop cover flow uses the wide, neighbor-visible page size', (
+    tester,
+  ) async {
+    await pumpAt(tester, const Size(1600, 1000));
+    final page = tester.widget<PageView>(find.byType(PageView));
+
+    expect(page.controller!.viewportFraction, 0.18);
+  });
+
   testWidgets('desktop: unplayed game says "Never played"', (tester) async {
     // A library of one unplayed game: no play stamp means we must say so
     // rather than invent a date.
@@ -109,6 +119,54 @@ void main() {
     expect(find.text('Favorites'), findsOneWidget);
     expect(find.text('Recent'), findsOneWidget);
     expect(find.text('Play'), findsWidgets);
+  });
+
+  testWidgets('phone portrait cover flow uses its portrait preview spacing', (
+    tester,
+  ) async {
+    await pumpAt(tester, const Size(390, 844));
+    final page = tester.widget<PageView>(find.byType(PageView));
+
+    expect(page.controller!.viewportFraction, 0.62);
+  });
+
+  testWidgets('phone landscape keeps the wide preview flow', (tester) async {
+    await pumpAt(tester, const Size(844, 390));
+    final page = tester.widget<PageView>(find.byType(PageView));
+
+    expect(page.controller!.viewportFraction, 0.24);
+  });
+
+  testWidgets('appearance lets people tune the cover-flow feel', (
+    tester,
+  ) async {
+    final state = AppState.ephemeral();
+    tester.view.physicalSize = const Size(1024, 768);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: Tokens.theme(),
+        home: Scaffold(
+          body: SettingsScreen(state: state, initialTab: 'Appearance'),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('Cover flow feel'), findsOneWidget);
+    expect(find.text('Classic'), findsOneWidget);
+
+    await tester.tap(find.text('Classic'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Gentle').last);
+    await tester.pumpAndSettle();
+    expect(state.settings['coverFlowStyle'], 'gentle');
   });
 
   testWidgets('phone landscape: compact layout, no overflow', (tester) async {

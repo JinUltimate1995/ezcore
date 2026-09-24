@@ -8,6 +8,10 @@ All notable changes to ezCORE are documented here. The format follows
 
 ### Changed
 
+- Reworked the game library into a responsive cover-flow experience across
+  desktop, landscape phones, portrait phones, and tablets. Nearby covers stay
+  visible during elastic, centered paging, while Appearance settings now offer
+  Classic, Gentle, and Flat motion styles.
 - Replaced the Systems catalog vector drawings with consistent, unbranded product renders. Added system-family artwork fallbacks for future cores and improved the core browser across portrait, landscape, and compact layouts.
 
 ## [0.2.0] — 2026-09-23
