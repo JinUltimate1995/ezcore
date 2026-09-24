@@ -6,6 +6,12 @@ All notable changes to ezCORE are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Cores that do not export the optional libretro `retro_cheat_reset` or
+  `retro_cheat_set` symbols now load normally; unsupported cheat calls fail
+  safely instead of being treated as a core-load error.
+
 ## [0.2.0] — 2026-09-23
 
 **Hybrid on-demand cores, ROM import hardening, license-wording scrub.**
