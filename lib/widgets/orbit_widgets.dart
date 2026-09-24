@@ -1633,7 +1633,7 @@ class GameTile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             SizedBox(
-              height: 15,
+              height: 18,
               child: Text(
                 game.title,
                 style: Tokens.body(size: 11, weight: FontWeight.w600),
@@ -1643,7 +1643,7 @@ class GameTile extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             SizedBox(
-              height: 13,
+              height: 16,
               child: Text(
                 footnote,
                 style: Tokens.body(size: 9, color: Tokens.muted),

@@ -6,6 +6,10 @@ All notable changes to ezCORE are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Replaced the Systems catalog vector drawings with consistent, unbranded product renders. Added system-family artwork fallbacks for future cores and improved the core browser across portrait, landscape, and compact layouts.
+
 ## [0.2.0] — 2026-09-23
 
 **Hybrid on-demand cores, ROM import hardening, license-wording scrub.**

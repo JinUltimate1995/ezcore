@@ -147,9 +147,10 @@ emulation behavior.
 
 The imagery below is captured from the real Linux debug build of the current
 Flutter shell. Library uses the temporary SameBoy `cgb-acid2` test ROM, Systems
-uses the live core catalog, Capsule uses a temporary local save slot, and
-Settings is the live preferences screen. Capture data stays outside the
-repository; no commercial ROMs or proprietary game artwork are included.
+uses the live core catalog with original, unbranded material artwork, Capsule
+uses a temporary local save slot, and Settings is the live preferences screen.
+Capture data stays outside the repository; no commercial ROMs or proprietary
+game artwork are included.
 
 ---
 

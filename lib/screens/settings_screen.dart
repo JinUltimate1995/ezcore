@@ -67,9 +67,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // One breakpoint definition for the whole app (theme/layout.dart).
-    final portrait = Layout.isPhone(Layout.of(context));
-    final osPad = Tokens.osPad(size.width, portrait: portrait);
+    final layout = Layout.of(context);
+    final portrait = Layout.hasBottomBar(layout);
+    final short = Layout.isShort(layout);
+    final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(
       listenable: widget.state,
       builder: (context, _) {
@@ -79,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(osPad, 26, osPad, 0),
+              padding: EdgeInsets.fromLTRB(osPad, short ? 10 : 26, osPad, 0),
               child: Row(
                 children: [
                   Expanded(
@@ -94,7 +95,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Text(
                           'Fine-tune your experience',
                           style: Tokens.display(
-                            size: portrait ? 25 : 30,
+                            size: short ? 22 : (portrait ? 25 : 30),
                             weight: FontWeight.w500,
                             ls: -0.7,
                           ),
@@ -112,8 +113,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       border: Border.all(color: Tokens.line),
                     ),
                     child: Text(
-                      'LOCAL PREFERENCES',
-                      style: Tokens.body(size: 9, ls: 1.5, color: Tokens.muted),
+                      portrait ? 'LOCAL' : 'LOCAL PREFERENCES',
+                      style: Tokens.body(
+                        size: 12,
+                        ls: 0.8,
+                        color: Tokens.muted,
+                      ),
                     ),
                   ),
                 ],
@@ -121,7 +126,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(osPad, 32, osPad, 24),
+                padding: EdgeInsets.fromLTRB(
+                  osPad,
+                  short ? 12 : 32,
+                  osPad,
+                  short ? 8 : 24,
+                ),
                 child: portrait
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,7 +148,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(width: 170, child: nav),
-                          const SizedBox(width: 48),
+                          SizedBox(width: short ? 18 : 48),
                           Expanded(child: SingleChildScrollView(child: panel)),
                         ],
                       ),
