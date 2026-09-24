@@ -90,6 +90,39 @@ void main() {
     expect(page.controller!.viewportFraction, 0.18);
   });
 
+  testWidgets('cover art transforms continuously while the shelf is dragged', (
+    tester,
+  ) async {
+    await pumpAt(tester, const Size(1600, 1000));
+    final page = tester.widget<PageView>(find.byType(PageView));
+    final controller = page.controller!;
+    final firstCover = find.byWidgetPredicate(
+      (widget) =>
+          widget is GameCover && widget.gameId == 'g1' && widget.system != '',
+    );
+    final transformForFirstCover = find
+        .ancestor(of: firstCover, matching: find.byType(Transform))
+        .first;
+    final initialMatrix = tester
+        .widget<Transform>(transformForFirstCover)
+        .transform
+        .clone();
+    final viewport = tester.getRect(find.byType(PageView));
+    await tester.drag(
+      find.byType(PageView),
+      Offset(-viewport.width * controller.viewportFraction * 0.35, 0),
+    );
+    await tester.pump();
+
+    expect(controller.page!, greaterThan(0.15));
+    final draggedMatrix = tester
+        .widget<Transform>(transformForFirstCover)
+        .transform;
+    expect(draggedMatrix.storage[0], isNot(initialMatrix.storage[0]));
+
+    await tester.pump(const Duration(milliseconds: 500));
+  });
+
   testWidgets('desktop: unplayed game says "Never played"', (tester) async {
     // A library of one unplayed game: no play stamp means we must say so
     // rather than invent a date.
