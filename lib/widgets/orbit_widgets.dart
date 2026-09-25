@@ -277,8 +277,11 @@ class _RailButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: double.infinity,
-          constraints: BoxConstraints(minHeight: short ? 54 : 64),
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 3),
+          constraints: BoxConstraints(minHeight: short ? 50 : 64),
+          padding: EdgeInsets.symmetric(
+            vertical: short ? 4 : 12,
+            horizontal: 3,
+          ),
           decoration: active
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -293,13 +296,23 @@ class _RailButton extends StatelessWidget {
                 size: short ? 18 : 21,
                 color: active ? Colors.white : Tokens.muted,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: short ? 4 : 8),
               Text(
                 label,
-                style: Tokens.body(
-                  size: short ? 8 : 9,
-                  color: active ? Colors.white : Tokens.muted,
-                ),
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                style: short
+                    ? TextStyle(
+                        fontFamily: Tokens.bodyFamily,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w500,
+                        color: active ? Colors.white : Tokens.muted,
+                      )
+                    : Tokens.body(
+                        size: 9,
+                        color: active ? Colors.white : Tokens.muted,
+                      ),
               ),
             ],
           ),
@@ -1633,7 +1646,7 @@ class GameTile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             SizedBox(
-              height: 15,
+              height: 18,
               child: Text(
                 game.title,
                 style: Tokens.body(size: 11, weight: FontWeight.w600),
@@ -1643,7 +1656,7 @@ class GameTile extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             SizedBox(
-              height: 13,
+              height: 16,
               child: Text(
                 footnote,
                 style: Tokens.body(size: 9, color: Tokens.muted),

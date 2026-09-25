@@ -14,6 +14,7 @@ Rules enforced:
   4. Blocked holds (`blocked_reason`) ship nothing: delivery absent, no pins.
   5. Every distributed core is listed in THIRD_PARTY_NOTICES.md.
   6. Every distributed core has at least one pinned artifact.
+  7. Every bundled core-art WebP is listed in the artwork provenance record.
 
 `download` distributes the exact same bytes from our release assets as
 `bundled` does from the package — every rule above covers both (ADR-013).
@@ -64,6 +65,23 @@ def main():
 
     violations = []
     rows = []
+
+    artwork_dir = ROOT / "assets" / "core_art"
+    artwork = sorted(artwork_dir.glob("*.webp"))
+    provenance_path = ROOT / "docs" / "CORE_ART_PROVENANCE.md"
+    provenance = provenance_path.read_text() if provenance_path.is_file() else ""
+    if artwork and not provenance:
+        violations.append("core artwork: missing docs/CORE_ART_PROVENANCE.md")
+    for path in artwork:
+        if f"`{path.name}`" not in provenance:
+            violations.append(
+                f"core artwork: {path.name} missing from docs/CORE_ART_PROVENANCE.md"
+            )
+    for marker in ("ChatGPT Images", "openai.com/policies/row-terms-of-use"):
+        if artwork and marker not in provenance:
+            violations.append(
+                f"core artwork provenance: missing required marker {marker!r}"
+            )
     for path in sorted((ROOT / "cores").glob("*/manifest.json")):
         d = json.loads(path.read_text())
         cid = d.get("id", path.parent.name)
@@ -127,7 +145,7 @@ def main():
         for v in violations:
             print("  ✗ " + v)
         sys.exit(1)
-    print("\nOK: license rules hold")
+    print("\nOK: license and artwork provenance rules hold")
 
 
 if __name__ == "__main__":
