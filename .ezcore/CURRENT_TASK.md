@@ -14,7 +14,7 @@
   - `feat/library-coverflow-hardening-v2` — signed cover-flow hardening on
     top of the base branch
 - **Base commits:** `a3b3ee7`, `d82b4cd`, `4017681`
-- **Child commits:** `93a7f29`, `8e0311e`
+- **Child commits:** `93a7f29`, `8e0311e`, `da89f77`
 
 ## Objective
 
