@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 import '../services/local_data_dir.dart';
 
 /// Deterministic per-game cover identity + screenshot-cover resolution.
@@ -57,6 +59,9 @@ CoverSpec coverSpecFor(String gameId) {
 
 final Map<String, File?> _coverFileCache = <String, File?>{};
 
+/// Rebuilds mounted covers after a screenshot replaces a pinned file.
+final ValueNotifier<int> coverRevision = ValueNotifier<int>(0);
+
 /// Local screenshot-cover file for [gameId], or null when none was pinned.
 ///
 /// The first lookup checks disk. Repeated carousel frames reuse that result so
@@ -74,4 +79,5 @@ File? coverFileFor(String gameId) {
 
 void invalidateCoverFile(String gameId) {
   _coverFileCache.remove(gameId);
+  coverRevision.value++;
 }

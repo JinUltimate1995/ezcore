@@ -268,7 +268,7 @@ class OrbitRail extends StatelessWidget {
           final gap = short ? 2.0 : 12.0;
           final available = constraints.maxHeight - verticalPadding;
           final fittedHeight = short
-              ? ((available - gap * (count - 1)) / count).clamp(36.0, 50.0)
+              ? ((available - gap * (count - 1)) / count).clamp(48.0, 50.0)
               : 64.0;
           final fits = available >= fittedHeight * count + gap * (count - 1);
           final column = Column(
@@ -1110,7 +1110,6 @@ class GameCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final art = coverFileFor(gameId);
     return Container(
       width: width,
       height: height,
@@ -1151,10 +1150,18 @@ class GameCover extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            if (art != null)
-              Image.file(art, fit: BoxFit.cover)
-            else
-              _GenerativeArt(gameId: gameId),
+            ValueListenableBuilder<int>(
+              valueListenable: coverRevision,
+              builder: (_, _, _) {
+                final art = coverFileFor(gameId);
+                if (art != null) {
+                  PaintingBinding.instance.imageCache.evict(FileImage(art));
+                }
+                return art == null
+                    ? _GenerativeArt(gameId: gameId)
+                    : Image.file(art, fit: BoxFit.cover);
+              },
+            ),
             // Spine edge + sheen.
             Positioned(
               left: 0,

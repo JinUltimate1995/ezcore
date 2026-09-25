@@ -93,13 +93,26 @@ class _LibraryScreenState extends State<LibraryScreen> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.filter != widget.filter) {
       _applyCollection(widget.filter);
+      _clearSearch();
       _syncCarouselToIndex();
     }
+  }
+
+  void _syncViewPreference() {
+    final setting = widget.state.settings['layout'];
+    if (setting != 'grid' && setting != 'flow') return;
+    final next = setting as String;
+    if (view == next) return;
+    view = next;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _syncCarouselToIndex();
+    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _syncViewPreference();
     final layout = Layout.of(context);
     if (_lastLayout != layout) {
       if (layout == OrbitLayout.phonePortrait && tab == 'continue') {
@@ -136,15 +149,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   void _handlePointerSignal(PointerSignalEvent event) {
     if (event is! PointerScrollEvent) return;
-    final delta = event.scrollDelta.dx != 0
-        ? event.scrollDelta.dx
-        : event.scrollDelta.dy;
-    _pointerScroll += delta;
-    if (_pointerScroll.abs() < 24) return;
-    final direction = _pointerScroll > 0 ? 1 : -1;
-    _pointerScroll = 0;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _move(direction);
+    GestureBinding.instance.pointerSignalResolver.register(event, (resolved) {
+      if (resolved is! PointerScrollEvent) return;
+      final delta = resolved.scrollDelta.dx != 0
+          ? resolved.scrollDelta.dx
+          : resolved.scrollDelta.dy;
+      _pointerScroll += delta;
+      if (_pointerScroll.abs() < 24) return;
+      final direction = _pointerScroll > 0 ? 1 : -1;
+      _pointerScroll = 0;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _move(direction);
+      });
     });
   }
 
@@ -329,14 +345,25 @@ class _LibraryScreenState extends State<LibraryScreen> {
     widget.onFilterChanged?.call(value);
   }
 
+  void _clearSearch() {
+    query = '';
+    searchCtrl.clear();
+  }
+
   void _setFilter(String next) {
-    setState(() => _applyCollection(next));
+    setState(() {
+      _applyCollection(next);
+      _clearSearch();
+    });
     _notifyCollection();
     _resetCarousel();
   }
 
   void _setTab(String next) {
-    setState(() => _applyCollection(next));
+    setState(() {
+      _applyCollection(next);
+      _clearSearch();
+    });
     _notifyCollection();
     _resetCarousel();
   }
@@ -466,9 +493,20 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 style: Tokens.body(size: 11, color: Tokens.muted),
               ),
               onTap: () {
+                final oldList = filtered;
+                final removedAt = oldList.indexWhere((g) => g.id == game.id);
                 widget.state.removeGame(game.id);
+                final newLength = filtered.length;
+                final nextIndex = removedAt >= 0 && removedAt < index
+                    ? index - 1
+                    : index;
                 Navigator.of(context).pop();
-                setState(() => index = 0);
+                setState(() {
+                  index = newLength == 0
+                      ? 0
+                      : nextIndex.clamp(0, newLength - 1).toInt();
+                });
+                _resetCarousel();
               },
             ),
           ],
@@ -489,8 +527,17 @@ class _LibraryScreenState extends State<LibraryScreen> {
     return ListenableBuilder(
       listenable: widget.state,
       builder: (context, _) {
+        _syncViewPreference();
         final list = filtered;
-        if (index >= list.length) index = list.isEmpty ? 0 : list.length - 1;
+        final clampedIndex = list.isEmpty
+            ? 0
+            : index.clamp(0, list.length - 1).toInt();
+        if (clampedIndex != index) {
+          index = clampedIndex;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) _syncCarouselToIndex();
+          });
+        }
         final selected = list.isEmpty ? null : list[index];
         return Focus(
           focusNode: libraryFocus,
@@ -597,6 +644,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Widget _strip(double osPad) {
     final chips = <Widget>[
+      OrbitChip(
+        label: 'Capsule',
+        icon: Icons.history_outlined,
+        active: false,
+        onTap: () => widget.onGo?.call('vault'),
+      ),
       OrbitChip(
         label: 'All systems',
         active: tab == 'all' && filter == 'All systems',
@@ -874,34 +927,66 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Widget _portrait(List<GameEntry> list, GameEntry? selected, double osPad) {
     final playable = selected != null;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(osPad, 10, osPad, 0),
-          child: Row(
-            children: [
-              _search(hint: 'Search games…'),
-              const SizedBox(width: 8),
-              _viewSwitcher(),
-              const SizedBox(width: 8),
-              _importButton(),
-            ],
-          ),
-        ),
-        Padding(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxHeight < 520;
+        final controls = _portraitControls(osPad);
+        final tabs = Padding(
           padding: EdgeInsets.fromLTRB(osPad, 12, osPad, 8),
           child: OrbitTabs(value: tab, onChanged: _setTab),
-        ),
-        Expanded(
-          child: view == 'grid'
-              ? _grid(list, osPad)
-              : list.isEmpty
-              ? _empty()
-              : _portraitFeatured(list, selected, osPad),
-        ),
-        if (playable) _continueRow(osPad),
-      ],
+        );
+        if (compact) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                controls,
+                tabs,
+                SizedBox(
+                  height: 240,
+                  child: view == 'grid'
+                      ? _grid(list, osPad)
+                      : list.isEmpty
+                      ? _empty()
+                      : _portraitFeatured(list, selected, osPad),
+                ),
+                if (playable) _continueRow(osPad),
+              ],
+            ),
+          );
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            controls,
+            tabs,
+            Expanded(
+              child: view == 'grid'
+                  ? _grid(list, osPad)
+                  : list.isEmpty
+                  ? _empty()
+                  : _portraitFeatured(list, selected, osPad),
+            ),
+            if (playable) _continueRow(osPad),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _portraitControls(double osPad) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(osPad, 10, osPad, 0),
+      child: Row(
+        children: [
+          _search(hint: 'Search games…'),
+          const SizedBox(width: 8),
+          _viewSwitcher(),
+          const SizedBox(width: 8),
+          _importButton(),
+        ],
+      ),
     );
   }
 
@@ -1185,6 +1270,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
     // (a search, a tab, or a system filter), where it earns its place.
     final narrowed =
         query.isNotEmpty || tab != 'all' || filter != 'All systems';
+    final hasGlobalHub = continuing.isNotEmpty || recent.isNotEmpty;
+    final showNarrowedRow =
+        narrowed &&
+        (query.isNotEmpty ||
+            filter != 'All systems' ||
+            (tab != 'all' && tab != 'recent' && tab != 'continue'));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -1200,7 +1291,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         ),
         _strip(osPad),
         Expanded(
-          child: games.isEmpty
+          child: !hasGlobalHub && games.isEmpty
               ? _empty()
               : ListView(
                   padding: EdgeInsets.fromLTRB(osPad, 8, osPad, 20),
@@ -1227,7 +1318,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       // view of the currently filtered collection.
                       _tileRow(recent, footnote: (g) => _systemNote(g)),
                     ],
-                    if (narrowed) ...[
+                    if (showNarrowedRow && games.isNotEmpty) ...[
                       const SizedBox(height: 22),
                       OrbitSectionHeader(
                         title: switch (tab) {
@@ -1240,6 +1331,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       const SizedBox(height: 10),
                       _tileRow(games, footnote: (g) => _systemNote(g)),
                     ],
+                    if (games.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 22),
+                        child: Text(
+                          'No titles match this view.',
+                          style: Tokens.body(size: 12, color: Tokens.muted),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                   ],
                 ),
         ),

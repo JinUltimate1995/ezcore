@@ -80,21 +80,62 @@ void main() {
     state.loaded = true;
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1.0;
-    addTearDown(() {
+    addTearDown(() async {
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump();
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
     await tester.pumpWidget(
       MaterialApp(
         theme: Tokens.theme(),
         debugShowCheckedModeBanner: false,
-        home: Shell(state: state),
+        home: Shell(key: UniqueKey(), state: state),
       ),
     );
     await tester.pump();
     // Let the still background and the cover-flow settle.
     await tester.pump(const Duration(milliseconds: 50));
   }
+
+  testWidgets('tiny and short phone shells remain usable', (tester) async {
+    for (final size in const [Size(320, 320), Size(360, 480), Size(390, 360)]) {
+      await pumpShell(tester, size);
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: 'layout overflow at $size',
+      );
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump();
+    }
+  });
+
+  testWidgets('short rail keeps accessible touch targets', (tester) async {
+    await pumpShell(tester, const Size(640, 320));
+    final rail = find.byType(OrbitRail);
+    for (final label in [
+      'Library',
+      'Systems',
+      'Continue',
+      'Favorites',
+      'Capsule',
+      'Settings',
+    ]) {
+      final target = find.descendant(
+        of: rail,
+        matching: find.bySemanticsLabel(label),
+      );
+      expect(target, findsOneWidget, reason: label);
+      expect(
+        tester.getSize(target).height,
+        greaterThanOrEqualTo(48),
+        reason: '$label target',
+      );
+    }
+  });
 
   final viewports = <String, Size>{
     'desktop': Size(1600, 1000),

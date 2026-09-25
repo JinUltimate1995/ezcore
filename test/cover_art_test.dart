@@ -1,10 +1,17 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezcore/services/cover_art.dart';
 import 'package:ezcore/services/local_data_dir.dart';
+import 'package:ezcore/widgets/orbit_widgets.dart';
 
 void main() {
+  final onePixelPng = base64Decode(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+  );
+
   test('cover spec is deterministic per game id', () {
     final a = coverSpecFor('imp-test-rom');
     final b = coverSpecFor('imp-test-rom');
@@ -51,10 +58,44 @@ void main() {
     invalidateCoverFile(id);
     expect(coverFileFor(id), isNull);
     art.parent.createSync(recursive: true);
-    art.writeAsBytesSync([1]);
+    art.writeAsBytesSync(onePixelPng);
     expect(coverFileFor(id), isNull, reason: 'the cache avoids disk churn');
 
     invalidateCoverFile(id);
     expect(coverFileFor(id)?.path, art.path);
+  });
+
+  testWidgets('a mounted cover refreshes after a screenshot is pinned', (
+    tester,
+  ) async {
+    final dir = Directory.systemTemp.createTempSync('ezcore-cover-widget-');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    PlatformLocalDataDirProvider.pinStartupDir(dir.path);
+    const id = 'cover-widget-test';
+    final art = File('${dir.path}/art/$id.png');
+    invalidateCoverFile(id);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: GameCover(
+            gameId: id,
+            title: 'Fixture',
+            system: 'test',
+            width: 120,
+            height: 160,
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.byType(Image), findsNothing);
+
+    art.parent.createSync(recursive: true);
+    art.writeAsBytesSync(onePixelPng);
+    invalidateCoverFile(id);
+    await tester.pump();
+
+    expect(find.byType(Image), findsOneWidget);
   });
 }
