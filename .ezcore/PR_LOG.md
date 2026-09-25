@@ -25,9 +25,11 @@
   passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug build
   passed; Android debug APK build passed; manifest, license, artwork,
   provenance, banned-content, and whitespace gates passed.
-- **Result:** Local replacement stack is ready for independent review and
-  maintainer approval. No replacement PR has been pushed yet; old PRs remain
-  to be closed as superseded only after the new branches are opened.
+- **Result:** Replacement PRs [#29](https://github.com/JinUltimate1995/ezcore/pull/29)
+  and [#30](https://github.com/JinUltimate1995/ezcore/pull/30) are open for
+  independent review and maintainer approval. Old PRs #27 and #28 were closed
+  as superseded after the replacement PRs opened; neither replacement has been
+  merged.
 
 ## Historical PR candidate — 2026-09-24 — Orbit redesign and public front door
 

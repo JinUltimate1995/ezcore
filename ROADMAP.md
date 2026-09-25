@@ -3,10 +3,11 @@
 > **Status:** authoritative long-term roadmap for ezCORE.
 > **Last audited:** 2026-09-25.
 > **Current release:** `v0.2.0` (public, experimental).
-> **Current repository state:** the replacement stack is ready for review in
-> two local branches: `feat/core-artwork-responsive-v2` contains the artwork
-> and compact-shell evidence repair, and `feat/library-coverflow-hardening-v2`
-> adds the signed cover-flow hardening commit on top. Flutter, Linux native,
+> **Current repository state:** the replacement stack is open for review in
+> stacked PRs [#29](https://github.com/JinUltimate1995/ezcore/pull/29) and
+> [#30](https://github.com/JinUltimate1995/ezcore/pull/30): the base PR carries
+> the artwork/compact-shell evidence repair, and the child PR adds the signed
+> cover-flow hardening and public evidence refresh. Flutter, Linux native,
 > provenance, Linux debug, and Android debug gates are green on this checkout;
 > maintainer review, approval, and device/platform verification remain separate
 > release gates.
