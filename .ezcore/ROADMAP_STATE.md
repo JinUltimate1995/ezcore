@@ -1,6 +1,6 @@
 # ezCORE Roadmap State
 
-> Snapshot date: 2026-09-24
+> Snapshot date: 2026-09-25
 > Canonical roadmap: [`../ROADMAP.md`](../ROADMAP.md)
 > Release evidence: [`../docs/MATRIX.md`](../docs/MATRIX.md)
 
@@ -8,47 +8,54 @@
 
 **M0 — Project control and baseline** — `[~] In Review`
 
-The repository now has a long-term roadmap, state memory, a rebuilt public
-README, real Linux UI captures, and the completed Orbit redesign integrated on
-the feature branch. The combined branch is ready for maintainer review and
-merge: implementation tests and Linux/Android debug builds are green on this
-host, with platform/device limits still explicitly recorded. The earlier
-project-control slice did not edit the theme implementation; this explicitly
-approved follow-up adds focused UI fixes and regression coverage.
+The replacement stack now has a long-term roadmap, state memory, a rebuilt
+public README, real Linux UI captures, and the completed Orbit redesign split
+across two signed branches. The base branch contains the artwork/provenance
+and compact-shell evidence repair; the child branch adds the cover-flow
+lifecycle, input, accessibility, and responsive hardening. Independent review
+found no blocking defect. Replacement PRs
+[#29](https://github.com/JinUltimate1995/ezcore/pull/29) and
+[#30](https://github.com/JinUltimate1995/ezcore/pull/30) are awaiting maintainer
+approval; neither has been merged. Platform/device limits remain explicitly
+recorded.
 
 **Completed communication slice:** README rebuilt with the ezCORE mission,
 current capabilities, dated progress stats, a Now → Next roadmap, technical
 boundaries, build instructions, contribution guidance, and optional GitHub
 Sponsorship support.
 
-**Completed UI slice:** the Orbit shell now has desktop, tablet, phone-
-landscape, and phone-portrait layouts, shared library state, an animated
-backdrop with reduced-motion behavior, and permanent layout/backdrop tests.
+**Completed UI slice:** the Orbit shell now has desktop, tablet landscape,
+tablet portrait, phone-landscape, and phone-portrait layouts. Desktop and phone
+use the cover flow; both tablet orientations retain the focused
+Continue/Recently Added hub. Shared library state, reduced-motion behavior,
+compact-shell protections, and permanent layout/backdrop tests are included.
 
 ## Why the next task is first
 
-The latest combined checks on 2026-09-24 observed:
+The latest checks on 2026-09-25 observed:
 
-- `flutter analyze`: **No issues found** (`61.0s`).
-- `flutter test --no-pub`: **396 passed, 15 skipped, 0 failed**.
+- `flutter analyze`: **No issues found** (`18.3s`).
+- `flutter test --no-pub`: **441 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
 - `flutter build linux --debug`: **passed**.
 - `flutter build apk --debug`: **passed**; device boot remains unverified.
-- Focused formatter check on the design slice: **0 changed**.
-- Linux debug app capture: background visually reviewed; a second capture
-  differed over time, confirming the ORBIT scene is animated.
-- The earlier EOF whitespace findings are resolved and documented in
-  `KNOWN_ISSUES.md`.
+- Focused formatter checks: **0 changed** for the repaired files; the existing
+  `player_screen.dart` formatting debt is outside this slice.
+- Manifest, license, artwork provenance, WebP decode, banned-content, and
+  whitespace gates: **passed**.
+- Linux debug captures: desktop Library/Systems/Capsule/Settings and an
+  834×700 tablet hub were visually reviewed; temporary ROM/save data stayed
+  outside the repository.
 
-The code and test baseline is now stronger than the earlier theme-track
-snapshot. Finish maintainer review and merge before starting the capability-
-contract milestone.
+The code and evidence baseline is ready for independent review. Finish the
+maintainer review and sequential merge before starting the capability-contract
+milestone.
 
 ## Milestone order
 
 | Order | Milestone | Status | Gate |
 |---:|---|---|---|
-| 0 | Project control and baseline | [~] In Review | Maintainer-approved combined PR with clean diff and recorded platform limits |
+| 0 | Project control and baseline | [~] In Review | Maintainer-approved sequential replacement PRs with clean diff and recorded platform limits |
 | 1 | Runtime and core contract | [~] Partially implemented | Capabilities, lifecycle, media, and config are explicit |
 | 2 | Controller profiles | [ ] Planned | Hierarchical profiles and portable packages |
 | 3 | Library and metadata | [~] Partially implemented | Provider-independent durable library model |
@@ -76,10 +83,10 @@ contract milestone.
 
 ## Next logical task
 
-**Maintainer review and merge.** Confirm the descriptive system-name wording
-against the repository's trademark policy, review the final diff, and merge
-PR #25 while the branch checks remain green. No additional architecture task
-should start until that handoff is clean.
+**Maintainer approval and sequential merge.** Independent review is complete
+with no blocking findings. Confirm the recorded platform limits and provenance
+statement, obtain maintainer approval, and merge #29 before #30. No additional
+architecture task should start until that handoff is clean.
 
 ## State-file maintenance rule
 
