@@ -20,8 +20,9 @@
   tablet hub behavior, and the public evidence checkpoint.
 - **Documentation/evidence:** README, roadmap, changelog, `.ezcore/` state,
   and sanitized Linux captures now describe five layout families. Captures use
-  temporary SameBoy/local save data outside the repository.
-- **Verification:** `flutter analyze` clean; `flutter test --no-pub` **440
+  temporary SameBoy/local save data outside the repository. Follow-up review
+  added a revision-keyed same-path screenshot-cover cache regression.
+- **Verification:** `flutter analyze` clean; `flutter test --no-pub` **441
   passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug build
   passed; Android debug APK build passed; manifest, license, artwork,
   provenance, banned-content, and whitespace gates passed.

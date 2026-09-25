@@ -7,9 +7,14 @@ import 'package:ezcore/services/cover_art.dart';
 import 'package:ezcore/services/local_data_dir.dart';
 import 'package:ezcore/widgets/orbit_widgets.dart';
 
+class _CacheMarker extends ImageStreamCompleter {}
+
 void main() {
   final onePixelPng = base64Decode(
     'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+  );
+  final redPixelPng = base64Decode(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==',
   );
 
   test('cover spec is deterministic per game id', () {
@@ -97,5 +102,64 @@ void main() {
     await tester.pump();
 
     expect(find.byType(Image), findsOneWidget);
+  });
+
+  testWidgets('a mounted cover replaces bytes at the same screenshot path', (
+    tester,
+  ) async {
+    final dir = Directory.systemTemp.createTempSync('ezcore-cover-replace-');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    PlatformLocalDataDirProvider.pinStartupDir(dir.path);
+    const id = 'cover-replace-test';
+    final art = File('${dir.path}/art/$id.png');
+    art.parent.createSync(recursive: true);
+    art.writeAsBytesSync(onePixelPng);
+    invalidateCoverFile(id);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: GameCover(
+            gameId: id,
+            title: 'Fixture',
+            system: 'test',
+            width: 120,
+            height: 160,
+          ),
+        ),
+      ),
+    );
+    final firstRevision = coverRevision.value;
+    expect(find.byType(Image), findsOneWidget);
+    final firstProvider = tester.widget<Image>(find.byType(Image)).image;
+    expect(firstProvider, isA<FileImage>());
+    expect((firstProvider as FileImage).file.path, art.path);
+
+    // Seed the cache with a marker that has no file bytes. A replacement must
+    // evict it and make the mounted Image resolve the new same-path provider.
+    final cache = PaintingBinding.instance.imageCache;
+    final key = FileImage(art);
+    cache.evict(key);
+    final marker = _CacheMarker();
+    final markerHandle = marker.keepAlive();
+    addTearDown(() {
+      cache.evict(key);
+      markerHandle.dispose();
+    });
+    cache.putIfAbsent(key, () => marker);
+    expect(cache.statusForKey(key).tracked, isTrue);
+
+    // The screenshot path is unchanged; only its bytes are replaced.
+    art.writeAsBytesSync(redPixelPng);
+    invalidateCoverFile(id);
+    await tester.pump();
+
+    expect(coverRevision.value, greaterThan(firstRevision));
+    expect(find.byType(Image), findsOneWidget);
+    expect(cache.statusForKey(key).tracked, isTrue);
+    final secondProvider = tester.widget<Image>(find.byType(Image)).image;
+    expect(secondProvider, isA<FileImage>());
+    expect((secondProvider as FileImage).file.path, art.path);
+    expect(art.readAsBytesSync(), redPixelPng);
   });
 }

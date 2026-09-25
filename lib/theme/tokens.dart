@@ -79,7 +79,7 @@ abstract final class Tokens {
   static const fastDur = Duration(milliseconds: 200);
 
   /// Single responsive side-margin: clamp(20, w*0.03, 52).
-  /// Portrait phones use 24, short landscape 26 — handled by callers.
+  /// Portrait layouts use 24, short landscape callers use 26.
   static double osPad(
     double width, {
     bool portrait = false,

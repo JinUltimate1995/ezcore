@@ -12,7 +12,9 @@ phone Library use the cover flow; both tablet orientations retain the
 Continue/Recently Added hub. The shell now shares compact padding, preserves
 rail touch targets, and has regression coverage for very small phone/landscape
 viewports, wheel isolation, carousel synchronization, screenshot-cover
-refresh, and stale search state.
+refresh, and stale search state. Screenshot covers also use a revision key so a
+file-to-file replacement at the same path cannot retain a stale Flutter image
+cache entry.
 
 The base artwork branch records the maintainer's statement that the project
 WebPs were created for ezCORE by Codex using ChatGPT Images, pins every flat
@@ -23,7 +25,7 @@ record, not independent legal clearance.
 Directly executed checks on the replacement child branch:
 
 - `flutter analyze`: **No issues found** (`18.3s`).
-- `flutter test --no-pub`: **440 passed, 15 skipped, 0 failed**.
+- `flutter test --no-pub`: **441 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
 - `flutter build linux --debug`: **passed**.
 - `flutter build apk --debug`: **passed**; device boot remains unverified.

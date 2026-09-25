@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// they get their own test: if these drift, every screen drifts with them.
 void main() {
   group('Layout.ofSize', () {
-    // Studio-plate viewports: the four frames the design is drawn for.
+    // Studio-plate viewports: the five frames the design is drawn for.
     test('desktop window', () {
       expect(
         Layout.ofSize(const Size(1600, 1000), Orientation.landscape),

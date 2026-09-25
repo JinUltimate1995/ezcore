@@ -46,7 +46,7 @@ understandable before adding another feature.
   layout/backdrop regression coverage.
 - [~] In progress — maintainer review and sequential merge of the two signed
   replacement branches. The current checkout passes `flutter analyze`, the full
-  Flutter suite (`440` passed, `15` skipped), Linux CTest (`3/3`), and
+  Flutter suite (`441` passed, `15` skipped), Linux CTest (`3/3`), and
   Linux/Android debug builds; the final review covers the replacement diff and
   recorded platform limits.
 - [ ] Planned — make CI/reproducible release verification a green, reviewed

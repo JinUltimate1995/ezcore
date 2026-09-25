@@ -33,7 +33,7 @@ compact-shell protections, and permanent layout/backdrop tests are included.
 The latest checks on 2026-09-25 observed:
 
 - `flutter analyze`: **No issues found** (`18.3s`).
-- `flutter test --no-pub`: **440 passed, 15 skipped, 0 failed**.
+- `flutter test --no-pub`: **441 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
 - `flutter build linux --debug`: **passed**.
 - `flutter build apk --debug`: **passed**; device boot remains unverified.

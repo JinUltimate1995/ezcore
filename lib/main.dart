@@ -20,8 +20,9 @@ Future<void> main() async {
 }
 
 /// ezCORE — Orbit console shell (final-01).
-/// 4 spaces: Library / Systems / Capsule / Settings.
-/// Landscape ≥700px → left command rail; portrait → top command dock.
+/// Five layout families: desktop, tablet landscape/portrait, and phone
+/// landscape/portrait. All but phone portrait use the command rail; phone
+/// portrait uses the bottom command bar.
 class EmuApp extends StatefulWidget {
   const EmuApp({super.key, required this.dirProvider});
   final LocalDataDirProvider dirProvider;

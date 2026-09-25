@@ -68,7 +68,7 @@ without changing the runtime/core boundary.
 ## Verification
 
 - `flutter analyze`: **No issues found** (`18.3s`).
-- `flutter test --no-pub`: **440 passed, 15 skipped, 0 failed**.
+- `flutter test --no-pub`: **441 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
 - `flutter build linux --debug`: **passed**.
 - `flutter build apk --debug`: **passed**; device boot remains unverified.
@@ -89,6 +89,8 @@ flat WebP file, documents the release decode gate, aligns compact Library
 padding with the shell, and adds real compact-shell/Vault/artwork regression
 coverage. The child branch adds the cover-flow state machine and responsive
 hardening, including the five-layout contract and the tablet hub guarantee.
+Follow-up review also added a revision-keyed mounted-cover rebuild and a
+same-path screenshot-cache regression test.
 
 The old pushed PR candidates are to be superseded rather than rewritten. The
 replacement branches must be reviewed in order, with the base merged before

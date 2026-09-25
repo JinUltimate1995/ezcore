@@ -24,7 +24,7 @@
   stack now passes the complete suite.
 - **Affected platform:** Flutter widget-test host; theme/layout code paths.
 - **Affected core/system:** None.
-- **Verification:** `flutter test --no-pub` — **440 passed, 15 skipped, 0
+- **Verification:** `flutter test --no-pub` — **441 passed, 15 skipped, 0
   failed**.
 - **Status:** Resolved for the current checkout; skipped integration cases
   remain explicitly unverified rather than silently counted as gameplay.

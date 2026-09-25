@@ -1152,14 +1152,20 @@ class GameCover extends StatelessWidget {
           children: [
             ValueListenableBuilder<int>(
               valueListenable: coverRevision,
-              builder: (_, _, _) {
+              builder: (_, revision, _) {
                 final art = coverFileFor(gameId);
                 if (art != null) {
                   PaintingBinding.instance.imageCache.evict(FileImage(art));
                 }
                 return art == null
                     ? _GenerativeArt(gameId: gameId)
-                    : Image.file(art, fit: BoxFit.cover);
+                    : Image.file(
+                        art,
+                        // FileImage keys by path, so a revision key is needed
+                        // to make same-path screenshot replacements reload.
+                        key: ValueKey<String>('game-cover:$gameId:$revision'),
+                        fit: BoxFit.cover,
+                      );
               },
             ),
             // Spine edge + sheen.
