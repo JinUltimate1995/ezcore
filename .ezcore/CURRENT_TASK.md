@@ -3,18 +3,19 @@
 ## Active task record
 
 - **Milestone:** Phase 0 — project control and public communication
-- **Task:** Review and sequentially merge the responsive Orbit/cover-flow
-  replacement stack
-- **Status:** Local gates and independent review are green; replacement PRs #29
-  and #30 are open and awaiting maintainer approval; no merge yet
+- **Task:** Responsive Orbit/cover-flow replacement stack closeout
+- **Status:** Complete — replacement PRs #29 and #30, plus topology integration
+  PR #31, are merged into `main`; local gates and independent review are green
 - **Date:** 2026-09-25
-- **Branches observed:**
-  - `feat/core-artwork-responsive-v2` — artwork, provenance, compact-shell
-    evidence, and the base repair commit
-  - `feat/library-coverflow-hardening-v2` — signed cover-flow hardening on
-    top of the base branch
+- **Merged pull requests:**
+  - [#29](https://github.com/JinUltimate1995/ezcore/pull/29) — artwork,
+    provenance, compact-shell evidence, and base repair
+  - [#30](https://github.com/JinUltimate1995/ezcore/pull/30) — signed cover-flow
+    hardening on the stacked base
+  - [#31](https://github.com/JinUltimate1995/ezcore/pull/31) — child-delta
+    integration into `main` after the stacked merge topology was resolved
 - **Base commits:** `a3b3ee7`, `d82b4cd`, `4017681`
-- **Child implementation/evidence commits:** `93a7f29`, `8e0311e`, `da89f77`
+- **Child implementation/evidence commits:** `93a7f29`, `8e0311e`, `da89f77`, `588dff9`
 
 ## Objective
 
@@ -92,16 +93,13 @@ hardening, including the five-layout contract and the tablet hub guarantee.
 Follow-up review also added a revision-keyed mounted-cover rebuild and a
 same-path screenshot-cache regression test.
 
-The old pushed PR candidates are to be superseded rather than rewritten. The
-replacement branches must be reviewed in order, with the base merged before
-the child.
+The old pushed PR candidates were superseded rather than rewritten. The
+replacement stack was reviewed in order: #29 merged the artwork/evidence base,
+#30 merged the child into the stacked base, and #31 replayed only the child
+delta onto `main`. The old #27/#28 candidates are closed.
 
 ## Next logical task
 
-Independent review of the exact base and child ranges found no blocking source,
-boundary, artwork, or responsive-contract defect, and the follow-up cover-cache
-mutation check passed. Inspect the final diff and screenshots, obtain the
-required maintainer approval, then merge
-[#29](https://github.com/JinUltimate1995/ezcore/pull/29) before
-[#30](https://github.com/JinUltimate1995/ezcore/pull/30). Do not begin the
-capability-contract milestone until that handoff is clean.
+M0 closeout is complete. Begin the isolated M1 capability-contract research
+milestone next; do not expand the responsive shell scope or change the runtime
+ABI as part of this closeout.
