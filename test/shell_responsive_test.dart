@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ezcore/main.dart';
 import 'package:ezcore/models/core_manifest.dart';
 import 'package:ezcore/models/game_entry.dart';
-import 'package:ezcore/screens/core_manager_screen.dart';
 import 'package:ezcore/state/app_state.dart';
 import 'package:ezcore/theme/tokens.dart';
 import 'package:ezcore/widgets/orbit_widgets.dart';
@@ -139,29 +138,16 @@ void main() {
     }
   });
 
-  testWidgets('populated Systems fits the 480x320 shell content width', (
-    tester,
-  ) async {
-    final state = AppState.ephemeral()..games = games;
-    state.registry.loadCatalog({core.id: jsonEncode(core.toJson())});
-    state.registry.install(core, expectedSha256: 'test-pin');
-    final screens = <String, Widget Function()>{
-      'Systems': () => CoreManagerScreen(state: state),
-    };
-    for (final entry in screens.entries) {
-      tester.view.physicalSize = const Size(408, 276);
-      tester.view.devicePixelRatio = 1.0;
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: Tokens.theme(),
-          home: Scaffold(body: entry.value()),
-        ),
-      );
-      await tester.pump();
-      expect(tester.takeException(), isNull, reason: '${entry.key} at 408x276');
+  testWidgets('populated shell fits the 480x320 content width', (tester) async {
+    await pumpShell(tester, const Size(480, 320));
+    expect(tester.takeException(), isNull, reason: 'initial Library shell');
+
+    final rail = find.byType(OrbitRail);
+    for (final label in ['Systems', 'Capsule', 'Settings']) {
+      await tester.tap(find.descendant(of: rail, matching: find.text(label)));
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(tester.takeException(), isNull, reason: '$label at 480x320');
     }
-    tester.view.resetPhysicalSize();
-    tester.view.resetDevicePixelRatio();
   });
 
   testWidgets('phone portrait uses the bottom command bar', (tester) async {

@@ -51,5 +51,7 @@ hardware trade-dress resemblance, and approved their redistribution in ezCORE.
 | `superfx.webp` | SuperFX / SNES family |
 | `twinsh.webp` | TwinSH / Saturn family |
 
-`scripts/license_audit.py` fails if a WebP is added to `assets/core_art/`
-without being listed in this record.
+`scripts/license_audit.py` fails if any file is added to `assets/core_art/`
+without being a flat WebP listed in this record. Nested directories, symlinks,
+and non-WebP files are rejected because Flutter would otherwise bundle them
+without a provenance entry.

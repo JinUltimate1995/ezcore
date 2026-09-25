@@ -48,7 +48,10 @@ identity.
 # 0. clean tree, gates green
 python3 scripts/fill_manifest_data.py --check
 python3 scripts/build_catalog.py
+python3 scripts/license_audit.py
+python3 scripts/verify_core_art.py
 flutter analyze && flutter test
+flutter test --no-pub test/hardware_art_test.dart
 
 # 1. per-platform artifacts (repeat per platform)
 scripts/release.sh macos  --out dist/          # needs full macOS tier staged
@@ -69,10 +72,13 @@ gh release create v0.1.0 \
 ```
 
 `scripts/release.sh` refuses to assemble a release unless: manifests are
-policy-clean (`fill_manifest_data --check`), the banned-content scan passes,
-the staged cores match the committed pins, and the bundle is rebuilt for the
-target OS. It also bundles **exactly** the cores whose manifest `delivery`
-promises `bundled` for that OS — held cores stay out even when staged.
+policy-clean (`fill_manifest_data --check`), the license and artwork provenance
+audit passes, every bundled WebP decodes, the banned-content scan passes, the
+staged cores match the committed pins, and the bundle is rebuilt for the target
+OS. The artwork gate covers the exact flat `assets/core_art/` set, not just
+files ending in `.webp`. It also bundles **exactly** the cores whose manifest
+`delivery` promises `bundled` for that OS — held cores stay out even when
+staged.
 
 ### macOS signing & pins (read this before touching codesign)
 

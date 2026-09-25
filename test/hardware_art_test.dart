@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezcore/widgets/hardware_art.dart';
@@ -53,8 +54,13 @@ void main() {
         jsonDecode(File('docs/CORE_ART_PROVENANCE.json').readAsStringSync())
             as Map<String, dynamic>;
     final recorded = (record['files'] as Map).keys.toSet();
-    final actual = Directory('assets/core_art')
-        .listSync()
+    final entries = Directory('assets/core_art').listSync();
+    expect(entries.whereType<Directory>(), isEmpty);
+    expect(
+      entries.whereType<File>().where((file) => !file.path.endsWith('.webp')),
+      isEmpty,
+    );
+    final actual = entries
         .whereType<File>()
         .where((file) => file.path.endsWith('.webp'))
         .map((file) => file.uri.pathSegments.last)
@@ -80,6 +86,19 @@ void main() {
       frame.image.dispose();
       codec.dispose();
     }
+  });
+
+  testWidgets('artwork decoding is capped for catalog-sized images', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: CoreArtwork(coreId: 'pocketbit')),
+    );
+    await tester.pump();
+
+    final image = tester.widget<Image>(find.byType(Image));
+    expect(image.image, isA<ResizeImage>());
+    expect((image.image as ResizeImage).width, 640);
   });
 
   test('new cores use system-family artwork without a per-core image', () {

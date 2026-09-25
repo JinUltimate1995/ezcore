@@ -62,15 +62,28 @@ def verify_core_art():
     """Validate the exact artwork set, provenance record, and pins."""
     art_dir = ROOT / "assets" / "core_art"
     record_path = ROOT / "docs" / "CORE_ART_PROVENANCE.json"
-    actual = {path.name: path for path in art_dir.glob("*.webp")}
+    violations = []
+    if not art_dir.is_dir():
+        return ["core artwork: missing assets/core_art directory"]
+    entries = list(art_dir.iterdir())
+    for entry in entries:
+        if entry.is_dir() or entry.is_symlink() or entry.suffix.lower() != ".webp":
+            violations.append(
+                "core artwork: assets/core_art must contain only flat WebP files "
+                f"({entry.name})"
+            )
+    actual = {
+        path.name: path
+        for path in entries
+        if path.is_file() and not path.is_symlink() and path.suffix.lower() == ".webp"
+    }
     if not record_path.is_file():
-        return ["core artwork: missing docs/CORE_ART_PROVENANCE.json"]
+        return violations + ["core artwork: missing docs/CORE_ART_PROVENANCE.json"]
     try:
         record = json.loads(record_path.read_text())
     except (OSError, json.JSONDecodeError) as exc:
-        return [f"core artwork: invalid provenance JSON: {exc}"]
+        return violations + [f"core artwork: invalid provenance JSON: {exc}"]
 
-    violations = []
     if record.get("schema") != 1:
         violations.append("core artwork provenance: unsupported schema")
     source = record.get("source", {})

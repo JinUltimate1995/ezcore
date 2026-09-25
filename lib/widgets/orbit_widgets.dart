@@ -862,15 +862,16 @@ class OrbitTabs extends StatelessWidget {
         builder: (context, constraints) {
           final tight = constraints.maxWidth < 330;
           return Row(
-            mainAxisSize: MainAxisSize.min,
             children: [
               for (final e in tabs.entries)
-                _TabButton(
-                  label: e.value,
-                  active: value == e.key,
-                  height: height - 8,
-                  tight: tight,
-                  onTap: () => onChanged(e.key),
+                Expanded(
+                  child: _TabButton(
+                    label: e.value,
+                    active: value == e.key,
+                    height: height - 8,
+                    tight: tight,
+                    onTap: () => onChanged(e.key),
+                  ),
                 ),
             ],
           );
@@ -908,9 +909,12 @@ class _TabButton extends StatelessWidget {
           child: Container(
             height: height,
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: tight ? 12 : 18),
+            padding: EdgeInsets.symmetric(horizontal: tight ? 6 : 18),
             child: Text(
               label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
               style: Tokens.body(
                 size: tight ? 10 : 11,
                 weight: active ? FontWeight.w700 : FontWeight.w600,
