@@ -45,22 +45,24 @@ void main() {
       expect(artwork, 'assets/core_art/$id.webp', reason: id);
       expect(File(artwork).existsSync(), isTrue, reason: '$id artwork exists');
     }
+    expect(File('assets/core_art/generic.webp').existsSync(), isTrue);
   });
 
-  test('every bundled artwork file has a provenance record', () {
-    final provenance = File('docs/CORE_ART_PROVENANCE.md').readAsStringSync();
-    final files = Directory(
-      'assets/core_art',
-    ).listSync().whereType<File>().where((file) => file.path.endsWith('.webp'));
+  test('every bundled artwork file has a structured provenance record', () {
+    final record =
+        jsonDecode(File('docs/CORE_ART_PROVENANCE.json').readAsStringSync())
+            as Map<String, dynamic>;
+    final recorded = (record['files'] as Map).keys.toSet();
+    final actual = Directory('assets/core_art')
+        .listSync()
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.webp'))
+        .map((file) => file.uri.pathSegments.last)
+        .toSet();
 
-    expect(files, isNotEmpty);
-    for (final file in files) {
-      expect(
-        provenance,
-        contains('`${file.uri.pathSegments.last}`'),
-        reason: '${file.path} must be listed in CORE_ART_PROVENANCE.md',
-      );
-    }
+    expect(recorded, actual);
+    expect(recorded, isNotEmpty);
+    expect((record['rights'] as Map)['maintainer_review'], 'approved');
   });
 
   test('every bundled WebP decodes as an image', () async {

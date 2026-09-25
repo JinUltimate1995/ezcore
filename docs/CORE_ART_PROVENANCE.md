@@ -22,6 +22,11 @@ not claim that generated output is unique or free of every third-party right.
 Any future replacement or externally sourced artwork must receive its own
 provenance and license record before distribution.
 
+The machine-readable record, including the exact file set and SHA-256 pins, is
+[`CORE_ART_PROVENANCE.json`](CORE_ART_PROVENANCE.json). The maintainer reviewed
+all files on 2026-09-25 for visible logos, copied branding, and unacceptable
+hardware trade-dress resemblance, and approved their redistribution in ezCORE.
+
 ## Files
 
 | File | Catalog role |

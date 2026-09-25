@@ -74,6 +74,7 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
     final layout = Layout.of(context);
     final portrait = Layout.hasBottomBar(layout);
     final short = Layout.isShort(layout);
+    final ultraCompact = short && size.height < 360;
     final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(
       listenable: widget.state.registry,
@@ -91,7 +92,12 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(osPad, short ? 8 : 22, osPad, 0),
+              padding: EdgeInsets.fromLTRB(
+                osPad,
+                ultraCompact ? 4 : (short ? 8 : 22),
+                osPad,
+                0,
+              ),
               child: portrait
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +157,12 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
                     ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(osPad, short ? 8 : 22, osPad, 0),
+              padding: EdgeInsets.fromLTRB(
+                osPad,
+                ultraCompact ? 4 : (short ? 8 : 22),
+                osPad,
+                0,
+              ),
               child: Row(
                 children: [
                   if (portrait)
@@ -163,6 +174,19 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
                           scope = s;
                           selectedId = null;
                         }),
+                      ),
+                    )
+                  else if (short)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: CoreScopes(
+                          scope: scope,
+                          onScope: (s) => setState(() {
+                            scope = s;
+                            selectedId = null;
+                          }),
+                        ),
                       ),
                     )
                   else
@@ -220,12 +244,17 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
                 ),
               if (sel != null)
                 Container(
-                  margin: EdgeInsets.fromLTRB(osPad, 0, osPad, short ? 6 : 12),
+                  margin: EdgeInsets.fromLTRB(
+                    osPad,
+                    0,
+                    osPad,
+                    ultraCompact ? 2 : (short ? 6 : 12),
+                  ),
                   padding: EdgeInsets.fromLTRB(
-                    short ? 14 : 22,
-                    short ? 10 : 18,
-                    short ? 14 : 22,
-                    short ? 8 : 12,
+                    ultraCompact ? 8 : (short ? 14 : 22),
+                    ultraCompact ? 6 : (short ? 10 : 18),
+                    ultraCompact ? 8 : (short ? 14 : 22),
+                    ultraCompact ? 6 : (short ? 8 : 12),
                   ),
                   decoration: Tokens.dockDecor,
                   child: portrait
@@ -335,44 +364,59 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
   Widget _dockLandscape(CoreManifest m, {bool compact = false}) {
     final installed = widget.state.registry.isInstalled(m.id);
     final count = widget.state.games.where((g) => g.coreId == m.id).length;
+    final ultraCompact = compact && MediaQuery.sizeOf(context).height < 360;
+    final actions = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        OrbitPrimary(
+          label: ultraCompact ? 'Games' : 'Browse games',
+          icon: Icons.grid_view,
+          minHeight: compact ? 40 : 48,
+          onPressed: installed ? () => widget.onBrowseCore?.call(m.id) : null,
+        ),
+        SizedBox(width: compact ? 6 : 8),
+        OrbitSecondary(
+          label: installed
+              ? (compact ? 'Remove' : 'Remove core')
+              : _busyId == m.id
+              ? 'Downloading…'
+              : 'Add core',
+          icon: installed
+              ? Icons.close
+              : _busyId == m.id
+              ? Icons.downloading
+              : Icons.add,
+          onPressed: () => installed ? _confirmRemove(m) : _install(m),
+        ),
+      ],
+    );
+    if (ultraCompact) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(child: _dockUltraCompactCopy(m, count)),
+          const SizedBox(width: 8),
+          actions,
+        ],
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: _dockCopy(m, count, compact: compact)),
-            SizedBox(width: compact ? 8 : 16),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                OrbitPrimary(
-                  label: 'Browse games',
-                  icon: Icons.grid_view,
-                  minHeight: compact ? 40 : 48,
-                  onPressed: installed
-                      ? () => widget.onBrowseCore?.call(m.id)
-                      : null,
-                ),
-                SizedBox(width: compact ? 6 : 8),
-                OrbitSecondary(
-                  label: installed
-                      ? (compact ? 'Remove' : 'Remove core')
-                      : _busyId == m.id
-                      ? 'Downloading…'
-                      : 'Add core',
-                  icon: installed
-                      ? Icons.close
-                      : _busyId == m.id
-                      ? Icons.downloading
-                      : Icons.add,
-                  onPressed: () => installed ? _confirmRemove(m) : _install(m),
-                ),
-              ],
-            ),
-          ],
-        ),
+        if (compact) ...[
+          _dockCopy(m, count, compact: true),
+          const SizedBox(height: 6),
+          Align(alignment: Alignment.centerRight, child: actions),
+        ] else
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: _dockCopy(m, count)),
+              const SizedBox(width: 16),
+              actions,
+            ],
+          ),
         if (!compact) const SizedBox(height: 8),
         if (!compact)
           Container(
@@ -406,6 +450,28 @@ class _CoreManagerScreenState extends State<CoreManagerScreen> {
               ],
             ),
           ),
+      ],
+    );
+  }
+
+  Widget _dockUltraCompactCopy(CoreManifest m, int count) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          m.name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Tokens.display(size: 16, weight: FontWeight.w500),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          '$count ${count == 1 ? 'game' : 'games'} in your library',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Tokens.body(size: 11, color: Tokens.muted),
+        ),
       ],
     );
   }

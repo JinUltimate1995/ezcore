@@ -44,6 +44,7 @@ class _VaultScreenState extends State<VaultScreen> {
     final layout = Layout.of(context);
     final portrait = Layout.hasBottomBar(layout);
     final short = Layout.isShort(layout);
+    final ultraCompact = short && size.height < 360;
     final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(
       listenable: widget.state,
@@ -53,22 +54,27 @@ class _VaultScreenState extends State<VaultScreen> {
             : '${widget.state.saves.id.toUpperCase()} VAULT';
         final title = Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text('PLAY. PRESERVE. ANYWHERE.', style: Tokens.eyebrow),
-            const SizedBox(height: 7),
+            if (!ultraCompact) ...[
+              Text('PLAY. PRESERVE. ANYWHERE.', style: Tokens.eyebrow),
+              const SizedBox(height: 7),
+            ],
             Text(
               'Your time capsule',
               style: Tokens.display(
-                size: short ? 22 : (portrait ? 27 : 32),
+                size: ultraCompact ? 20 : (short ? 22 : (portrait ? 27 : 32)),
                 weight: FontWeight.w500,
                 ls: -1.0,
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Not just where you stopped. Where you want to return.',
-              style: Tokens.body(size: 12, color: Tokens.muted, height: 1.6),
-            ),
+            if (!ultraCompact) ...[
+              const SizedBox(height: 8),
+              Text(
+                'Not just where you stopped. Where you want to return.',
+                style: Tokens.body(size: 12, color: Tokens.muted, height: 1.6),
+              ),
+            ],
           ],
         );
         final badge = Container(

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:ezcore/main.dart';
+import 'package:ezcore/models/core_manifest.dart';
 import 'package:ezcore/models/game_entry.dart';
+import 'package:ezcore/screens/core_manager_screen.dart';
 import 'package:ezcore/state/app_state.dart';
 import 'package:ezcore/theme/tokens.dart';
 import 'package:ezcore/widgets/orbit_widgets.dart';
@@ -56,8 +60,23 @@ void main() {
     ),
   ];
 
+  const core = CoreManifest(
+    id: 'powercube',
+    name: 'PowerCube',
+    version: '1.0.0',
+    license: 'GPL-2.0-or-later',
+    systems: ['gc'],
+    extensions: ['gcm', 'iso'],
+    cheatFamilies: [],
+    cheatsSupported: false,
+    delivery: {'linux': 'bundled'},
+    artifacts: {'linux-x64': 'test-pin'},
+  );
+
   Future<void> pumpShell(WidgetTester tester, Size size) async {
     final state = AppState()..games = games;
+    state.registry.loadCatalog({core.id: jsonEncode(core.toJson())});
+    state.registry.install(core, expectedSha256: 'test-pin');
     state.loaded = true;
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1.0;
@@ -98,6 +117,52 @@ void main() {
       );
     });
   }
+
+  testWidgets('Settings and populated Systems fit compact landscape shells', (
+    tester,
+  ) async {
+    for (final size in const [Size(844, 390), Size(568, 320)]) {
+      await pumpShell(tester, size);
+      expect(tester.takeException(), isNull, reason: 'initial shell at $size');
+      final rail = find.byType(OrbitRail);
+      await tester.tap(
+        find.descendant(of: rail, matching: find.text('Settings')),
+      );
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(tester.takeException(), isNull, reason: 'Settings at $size');
+
+      await tester.tap(
+        find.descendant(of: rail, matching: find.text('Systems')),
+      );
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(tester.takeException(), isNull, reason: 'Systems at $size');
+    }
+  });
+
+  testWidgets('populated Systems fits the 480x320 shell content width', (
+    tester,
+  ) async {
+    final state = AppState.ephemeral()..games = games;
+    state.registry.loadCatalog({core.id: jsonEncode(core.toJson())});
+    state.registry.install(core, expectedSha256: 'test-pin');
+    final screens = <String, Widget Function()>{
+      'Systems': () => CoreManagerScreen(state: state),
+    };
+    for (final entry in screens.entries) {
+      tester.view.physicalSize = const Size(408, 276);
+      tester.view.devicePixelRatio = 1.0;
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: Tokens.theme(),
+          home: Scaffold(body: entry.value()),
+        ),
+      );
+      await tester.pump();
+      expect(tester.takeException(), isNull, reason: '${entry.key} at 408x276');
+    }
+    tester.view.resetPhysicalSize();
+    tester.view.resetDevicePixelRatio();
+  });
 
   testWidgets('phone portrait uses the bottom command bar', (tester) async {
     await pumpShell(tester, const Size(390, 844));

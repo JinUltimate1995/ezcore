@@ -166,6 +166,9 @@ class CoreArtwork extends StatelessWidget {
       hardwareArtworkAsset(coreId, systems: systems),
       fit: fit,
       filterQuality: FilterQuality.high,
+      // The largest card is about 300 logical pixels; cap decode memory
+      // instead of retaining every 1024px catalog image at full size.
+      cacheWidth: 640,
       excludeFromSemantics: true,
     );
   }

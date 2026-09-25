@@ -69,12 +69,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final size = MediaQuery.of(context).size;
     final layout = Layout.of(context);
     final portrait = Layout.hasBottomBar(layout);
+    final compact = layout == OrbitLayout.phoneLandscape;
+    final useTabs = portrait || compact;
     final short = Layout.isShort(layout);
     final osPad = Tokens.osPad(size.width, portrait: portrait, short_: short);
     return ListenableBuilder(
       listenable: widget.state,
       builder: (context, _) {
-        final nav = _nav(portrait);
+        final nav = _nav(useTabs);
         final panel = _panel();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,11 +89,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'SIMPLE. POWERFUL. EVERYWHERE.',
-                          style: Tokens.eyebrow,
-                        ),
-                        const SizedBox(height: 7),
+                        if (!compact) ...[
+                          Text(
+                            'SIMPLE. POWERFUL. EVERYWHERE.',
+                            style: Tokens.eyebrow,
+                          ),
+                          const SizedBox(height: 7),
+                        ],
                         Text(
                           'Fine-tune your experience',
                           style: Tokens.display(
@@ -103,24 +107,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Tokens.line),
-                    ),
-                    child: Text(
-                      portrait ? 'LOCAL' : 'LOCAL PREFERENCES',
-                      style: Tokens.body(
-                        size: 12,
-                        ls: 0.8,
-                        color: Tokens.muted,
+                  if (!compact)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: Tokens.line),
+                      ),
+                      child: Text(
+                        portrait ? 'LOCAL' : 'LOCAL PREFERENCES',
+                        style: Tokens.body(
+                          size: 12,
+                          ls: 0.8,
+                          color: Tokens.muted,
+                        ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -132,7 +137,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   osPad,
                   short ? 8 : 24,
                 ),
-                child: portrait
+                child: useTabs
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
