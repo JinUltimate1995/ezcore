@@ -12,10 +12,12 @@ The replacement stack now has a long-term roadmap, state memory, a rebuilt
 public README, real Linux UI captures, and the completed Orbit redesign split
 across two signed branches. The base branch contains the artwork/provenance
 and compact-shell evidence repair; the child branch adds the cover-flow
-lifecycle, input, accessibility, and responsive hardening. Replacement PRs
+lifecycle, input, accessibility, and responsive hardening. Independent review
+found no blocking defect. Replacement PRs
 [#29](https://github.com/JinUltimate1995/ezcore/pull/29) and
-[#30](https://github.com/JinUltimate1995/ezcore/pull/30) are open for review;
-neither has been merged. Platform/device limits remain explicitly recorded.
+[#30](https://github.com/JinUltimate1995/ezcore/pull/30) are awaiting maintainer
+approval; neither has been merged. Platform/device limits remain explicitly
+recorded.
 
 **Completed communication slice:** README rebuilt with the ezCORE mission,
 current capabilities, dated progress stats, a Now → Next roadmap, technical
@@ -81,11 +83,10 @@ milestone.
 
 ## Next logical task
 
-**Independent review and sequential merge.** Review the base artwork/evidence
-commit range, then the child cover-flow commits, confirm the recorded platform
-limits and provenance statement, obtain maintainer approval, and merge #29
-before #30. No additional architecture task should start until that handoff
-is clean.
+**Maintainer approval and sequential merge.** Independent review is complete
+with no blocking findings. Confirm the recorded platform limits and provenance
+statement, obtain maintainer approval, and merge #29 before #30. No additional
+architecture task should start until that handoff is clean.
 
 ## State-file maintenance rule
 
