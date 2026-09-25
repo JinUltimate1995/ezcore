@@ -2,10 +2,10 @@
 
 > Chronological development memory for meaningful, reviewed changes.
 > Entries below are based on the current git history and changelog. The
-> current PR candidate is recorded here for review; local-only guidance is
+> current merged replacement stack is recorded here; local-only guidance is
 > intentionally omitted.
 
-## Replacement candidate — 2026-09-25 — responsive Orbit/cover-flow stack
+## Replacement stack — 2026-09-25 — responsive Orbit/cover-flow stack (merged)
 
 - **Objective:** Replace the superseded Orbit PR candidates with two clean,
   DCO-signed branches: reviewed core artwork/evidence first, then Library
@@ -26,11 +26,13 @@
   passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug build
   passed; Android debug APK build passed; manifest, license, artwork,
   provenance, banned-content, and whitespace gates passed.
-- **Result:** Replacement PRs [#29](https://github.com/JinUltimate1995/ezcore/pull/29)
-  and [#30](https://github.com/JinUltimate1995/ezcore/pull/30) are open for
-  maintainer approval. Independent review found no blocking defect; old PRs #27
-  and #28 were closed as superseded after the replacement PRs opened. Neither
-  replacement has been merged.
+- **Result:** PR [#29](https://github.com/JinUltimate1995/ezcore/pull/29) merged
+  the artwork/evidence base into `main`; PR
+  [#30](https://github.com/JinUltimate1995/ezcore/pull/30) merged the reviewed
+  child into the stacked base; PR
+  [#31](https://github.com/JinUltimate1995/ezcore/pull/31) replayed only the
+  child delta into `main`. Independent review found no blocking defect. Old
+  PRs #27 and #28 were closed as superseded after the replacement PRs opened.
 
 ## Historical PR candidate — 2026-09-24 — Orbit redesign and public front door
 

@@ -6,18 +6,15 @@
 
 ## Current milestone
 
-**M0 — Project control and baseline** — `[~] In Review`
+**M0 — Project control and baseline** — `[x] Complete`
 
 The replacement stack now has a long-term roadmap, state memory, a rebuilt
-public README, real Linux UI captures, and the completed Orbit redesign split
-across two signed branches. The base branch contains the artwork/provenance
-and compact-shell evidence repair; the child branch adds the cover-flow
-lifecycle, input, accessibility, and responsive hardening. Independent review
-found no blocking defect. Replacement PRs
-[#29](https://github.com/JinUltimate1995/ezcore/pull/29) and
-[#30](https://github.com/JinUltimate1995/ezcore/pull/30) are awaiting maintainer
-approval; neither has been merged. Platform/device limits remain explicitly
-recorded.
+public README, real Linux UI captures, and the completed Orbit redesign merged
+into `main`. PR #29 carried the artwork/provenance and compact-shell evidence
+repair; PR #30 carried the cover-flow lifecycle, input, accessibility, and
+responsive hardening; PR #31 replayed the reviewed child delta into `main`
+after the stacked topology was resolved. Independent review found no blocking
+defect. Platform/device limits remain explicitly recorded.
 
 **Completed communication slice:** README rebuilt with the ezCORE mission,
 current capabilities, dated progress stats, a Now → Next roadmap, technical
@@ -47,15 +44,15 @@ The latest checks on 2026-09-25 observed:
   834×700 tablet hub were visually reviewed; temporary ROM/save data stayed
   outside the repository.
 
-The code and evidence baseline is ready for independent review. Finish the
-maintainer review and sequential merge before starting the capability-contract
-milestone.
+The M0 code and evidence baseline is merged and independently reviewed. The next
+milestone is capability-contract research; no additional responsive-shell work
+is required for this closeout.
 
 ## Milestone order
 
 | Order | Milestone | Status | Gate |
 |---:|---|---|---|
-| 0 | Project control and baseline | [~] In Review | Maintainer-approved sequential replacement PRs with clean diff and recorded platform limits |
+| 0 | Project control and baseline | [x] Complete | Reviewed replacement stack merged into `main` with recorded platform limits |
 | 1 | Runtime and core contract | [~] Partially implemented | Capabilities, lifecycle, media, and config are explicit |
 | 2 | Controller profiles | [ ] Planned | Hierarchical profiles and portable packages |
 | 3 | Library and metadata | [~] Partially implemented | Provider-independent durable library model |
@@ -83,10 +80,9 @@ milestone.
 
 ## Next logical task
 
-**Maintainer approval and sequential merge.** Independent review is complete
-with no blocking findings. Confirm the recorded platform limits and provenance
-statement, obtain maintainer approval, and merge #29 before #30. No additional
-architecture task should start until that handoff is clean.
+**M1 capability-contract research.** Specify the smallest capability object and
+lifecycle compatibility rules before changing the ABI. Start with a focused
+branch, failing-first tests where applicable, and explicit maintainer review.
 
 ## State-file maintenance rule
 
