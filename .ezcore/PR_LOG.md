@@ -5,7 +5,31 @@
 > current PR candidate is recorded here for review; local-only guidance is
 > intentionally omitted.
 
-## PR candidate — 2026-09-24 — Orbit redesign and public front door
+## Replacement candidate — 2026-09-25 — responsive Orbit/cover-flow stack
+
+- **Objective:** Replace the superseded Orbit PR candidates with two clean,
+  DCO-signed branches: reviewed core artwork/evidence first, then Library
+  cover-flow hardening.
+- **Base branch:** `feat/core-artwork-responsive-v2` at `4017681` on top of
+  `a3b3ee7` and `d82b4cd`. It adds exact flat-WebP provenance enforcement,
+  release/decode documentation, shared compact padding, short-shell/Vault
+  coverage, and the artwork cache-cap regression.
+- **Child branch:** `feat/library-coverflow-hardening-v2` at `8e0311e` on top
+  of `93a7f29`. It hardens the cover-flow lifecycle, filters, input, reduced
+  motion, compact phone layouts, rail targets, screenshot-cover refresh, and
+  tablet hub behavior.
+- **Documentation/evidence:** README, roadmap, changelog, `.ezcore/` state,
+  and sanitized Linux captures now describe five layout families. Captures use
+  temporary SameBoy/local save data outside the repository.
+- **Verification:** `flutter analyze` clean; `flutter test --no-pub` **440
+  passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug build
+  passed; Android debug APK build passed; manifest, license, artwork,
+  provenance, banned-content, and whitespace gates passed.
+- **Result:** Local replacement stack is ready for independent review and
+  maintainer approval. No replacement PR has been pushed yet; old PRs remain
+  to be closed as superseded only after the new branches are opened.
+
+## Historical PR candidate — 2026-09-24 — Orbit redesign and public front door
 
 - **Objective:** Integrate the completed studio-plate Orbit redesign with the
   evidence-backed README, authoritative roadmap, architecture notes, and

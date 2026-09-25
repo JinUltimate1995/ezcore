@@ -1,6 +1,6 @@
 # ezCORE Known Issues
 
-> Snapshot date: 2026-09-24
+> Snapshot date: 2026-09-25
 > This file records observed problems separately from the roadmap. Historical
 > release checkpoints remain in [`../docs/IMPLEMENTATION_STATUS.md`](../docs/IMPLEMENTATION_STATUS.md).
 
@@ -9,22 +9,22 @@
 ### EZC-001 — Resolved: analyzer gate is clean
 
 - **Description:** The earlier unused-import warning and timeout were observed
-  while the theme files were still changing. The completed branch now passes
-  `flutter analyze` with no issues.
+  while the theme files were still changing. The completed replacement stack
+  now passes `flutter analyze` with no issues.
 - **Affected platform:** Flutter targets (source-level gate).
 - **Affected core/system:** None; presentation/test files only.
-- **Verification:** `flutter analyze` — **No issues found** (`111.8s`).
+- **Verification:** `flutter analyze` — **No issues found** (`18.3s`).
 - **Status:** Resolved for the current checkout; CI/device coverage remains
   separate.
 
 ### EZC-002 — Resolved: full Flutter suite is green
 
 - **Description:** The earlier full run reported 373 passed, 15 skipped, and
-  10 failed while the theme files were changing. The completed branch now
-  passes the complete suite.
+  10 failed while the theme files were changing. The completed replacement
+  stack now passes the complete suite.
 - **Affected platform:** Flutter widget-test host; theme/layout code paths.
 - **Affected core/system:** None.
-- **Verification:** `flutter test --no-pub` — **393 passed, 15 skipped, 0
+- **Verification:** `flutter test --no-pub` — **440 passed, 15 skipped, 0
   failed**.
 - **Status:** Resolved for the current checkout; skipped integration cases
   remain explicitly unverified rather than silently counted as gameplay.
@@ -105,25 +105,21 @@
   implementation evidence only, not runtime compatibility.
 - **Status:** Open platform verification queue.
 
-### EZC-008 — Responsive policy needs an explicit tablet-portrait decision
+### EZC-008 — Resolved: tablet portrait is an explicit fifth layout
 
-- **Description:** `Layout.ofSize` currently maps every portrait viewport to
-  `OrbitLayout.phonePortrait`, including an 834×1194 tablet-sized viewport.
-  The new layout test explicitly expects that behavior, while the broader
-  product direction calls out tablet responsiveness as a distinct target.
+- **Description:** The earlier responsive policy mapped every portrait viewport
+  to the phone family. The replacement stack now distinguishes a tablet-sized
+  portrait viewport at the shared `bpCompact` breakpoint.
 - **Affected platform:** Flutter UI on tablets and large phones.
 - **Affected core/system:** None.
-- **Reproduction:** Call `Layout.ofSize(const Size(834, 1194),
-  Orientation.portrait)` and inspect the result.
-- **Severity:** Medium — this is a product/UX policy ambiguity, not a proven
-  user-facing defect.
-- **Workaround:** None yet; preserve the current behavior until the maintainer
-  and theme owner settle the breakpoint policy.
-- **Status:** `[~]` Explicit current policy — portrait viewports use the phone
-  family; tablet layout is the landscape hub. Revisit only with a dedicated
-  tablet-portrait design, not as an incidental breakpoint change.
-- **Follow-up:** Keep the policy documented while the four-family responsive
-  contract remains stable.
+- **Verification:** `Layout.ofSize(const Size(834, 1194), Orientation.portrait)`
+  returns `OrbitLayout.tabletPortrait`; the shell test verifies the rail and
+  Continue/Recently Added hub. An 834×700 Linux capture is stored at
+  `docs/images/library-tablet.png`.
+- **Status:** Resolved for the current five-family contract. Desktop and
+  phone layouts use cover flow; both tablet orientations retain the hub.
+- **Follow-up:** Revisit breakpoints only through a dedicated responsive design
+  task with new evidence.
 
 ### EZC-009 — Resolved: PR diff whitespace is clean
 
@@ -134,7 +130,7 @@
 - **Affected core/system:** None; theme/UI files.
 - **Verification:** `git diff main...HEAD --check` is clean after the fix
   commit.
-- **Status:** Resolved for the combined PR.
+- **Status:** Resolved for the replacement stack.
 
 ### EZC-010 — Desktop/tablet Favorites chip does not apply its filter
 
@@ -205,7 +201,7 @@
 - **Affected core/system:** None; design-owned Dart files.
 - **Verification:** `dart format --output=none --set-exit-if-changed` on the
   design slice reports `0 changed`.
-- **Status:** Resolved for the combined PR.
+- **Status:** Resolved for the replacement stack.
 
 ### EZC-014 — Resolved: Linux backdrop wash
 
@@ -217,7 +213,7 @@
 - **Affected core/system:** None; background presentation only.
 - **Verification:** Linux debug build launched and captured successfully; the
   full Flutter suite and analyzer remain green.
-- **Status:** Resolved for the combined PR.
+- **Status:** Resolved for the replacement stack.
 
 ## Known limitations that are not defects
 

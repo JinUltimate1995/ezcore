@@ -3,119 +3,100 @@
 ## Active task record
 
 - **Milestone:** Phase 0 — project control and public communication
-- **Task:** Integrate the completed Orbit redesign with the brand-forward,
-  evidence-backed public README and project state
-- **Status:** PR ready for maintainer review and merge after the final push
-- **Date:** 2026-09-24
-- **Branch observed:** `feat/orbit-mockup-redesign`
-- **Scope:** Orbit design commits, responsive behavior fixes, animated backdrop,
-  sanitized README previews, roadmap/documentation, and project-state memory;
-  no ROMs, keys, or external core artifacts
+- **Task:** Review and sequentially merge the responsive Orbit/cover-flow
+  replacement stack
+- **Status:** Local gates green; awaiting independent review, maintainer
+  approval, and replacement pull requests
+- **Date:** 2026-09-25
+- **Branches observed:**
+  - `feat/core-artwork-responsive-v2` — artwork, provenance, compact-shell
+    evidence, and the base repair commit
+  - `feat/library-coverflow-hardening-v2` — signed cover-flow hardening on
+    top of the base branch
+- **Base commits:** `a3b3ee7`, `d82b4cd`, `4017681`
+- **Child commits:** `93a7f29`, `8e0311e`
 
 ## Objective
 
-Make a first-time visitor understand what ezCORE is, why it is different, what
-works today, how to obtain or build it, and how to help — without repeating
-stale marketing claims or presenting roadmap items as shipped features.
+Deliver the responsive Orbit shell as two clean, reviewable, DCO-signed
+replacement branches. The base branch establishes the reviewed core-artwork
+surface and compact evidence; the child branch hardens Library cover flow
+without changing the runtime/core boundary.
 
-## Editorial decisions
+## Scope
 
-- Lead with a concise product identity: local-first, console-minded, and
-  focused on Game → Play.
-- Show momentum through a dated progress log, concrete foundation stats, and
-  a Now → Next product roadmap.
-- Put current capabilities and boundaries before architecture details without
-  letting limitations dominate the first impression.
-- Make download/build paths visible near the top.
-- Keep the core catalog compact and link to the evidence-based matrix for
-  per-platform detail.
-- Describe Orbit with personality, without hype or invented compatibility.
-- Include a direct, non-paywalled sponsorship path and concrete non-financial
-  contribution paths.
-- Preserve the project’s strict boundaries around ROMs, BIOS/firmware, keys,
-  cheat databases, circumvention, trademarks, and held systems.
+### In scope
 
-## Research basis
+- Five responsive layout families: desktop, tablet landscape, tablet portrait,
+  phone landscape, and phone portrait.
+- Desktop and phone cover flow with keyboard, pointer, wheel, reduced-motion,
+  grid round-trip, and accessibility coverage.
+- Continue/Recently Added tablet hub behavior, including empty filtered views.
+- Compact shell padding, rail hit targets, carousel/index synchronization,
+  screenshot-cover refresh, and stale-search clearing.
+- Project-generated WebP artwork, exact provenance/file/pin verification, and
+  release decode documentation.
+- Sanitized Linux screenshots, README/roadmap alignment, and project-state
+  memory.
 
-The structure was informed by public examples and official guidance, without
-copying text or assets:
+### Out of scope
 
-- GitHub’s README guidance: explain what the project does, why it is useful,
-  how to get started, where to get help, and who maintains it.
-- RetroArch: clear identity, screenshots, API explanation, support, and
-  documentation links.
-- mGBA: concise feature list, platform status, downloads, and build path.
-- RetroPie: a short quick-start path with binaries and source clearly separated.
-- Zed: concise installation/contribution sections and transparent sponsorship
-  language.
+- Runtime ABI, native execution, core behavior, or dependency changes.
+- ROMs, BIOS/firmware, keys, commercial artwork, or proprietary game content.
+- New platform claims or device/gameplay claims beyond the evidence recorded in
+  [`../docs/MATRIX.md`](../docs/MATRIX.md).
 
 ## Acceptance criteria
 
-- [x] README has a strong, human identity and clear navigation.
-- [x] Current platform/core status is linked to canonical evidence.
-- [x] Implemented capabilities are separated from planned work.
-- [x] Build-from-source instructions remain usable.
-- [x] Contribution rules and DCO expectations are visible.
-- [x] Sponsorship is requested without a paywall or false perk promise.
-- [x] License, core provenance, and content boundaries are clear.
-- [x] The earlier documentation-only slice did not edit the theme
-  implementation; this explicitly approved UI cleanup now includes focused
-  behavior, renderer, animation, and regression-test fixes.
-- [x] Favorites, Recently added, and Windows path display have regression
-  coverage and corrected shared-library behavior.
-- [x] The Linux-rendered backdrop avoids the pale-wash failure and includes
-  animated ORBIT edge lights, orbital signals, stars, and meteors.
-- [x] README imagery is captured from the real Linux shell using only a
-  temporary SameBoy test ROM and local save data outside the repository.
+- [x] Tablet landscape and tablet portrait retain the focused
+  Continue/Recently Added hub.
+- [x] Desktop and phone cover flow show neighboring covers and preserve the
+  selected game through grid round trips, removal, and collection changes.
+- [x] Compact phone/landscape shells and short rail targets have regression
+  coverage.
+- [x] Mouse-wheel input over the shelf does not also scroll the enclosing dock.
+- [x] Screenshot pinning invalidates both the service lookup and mounted cover
+  image cache.
+- [x] Invalid persisted layout and cover-flow preferences fail safely.
+- [x] Core artwork has a maintainer-reviewed ChatGPT Images/Codex provenance
+  statement, exact flat WebP file-set gate, SHA-256 pins, and decode test.
+- [x] Public screenshots match the current Linux shell and use only temporary
+  public-domain/local fixture data outside the repository.
+- [x] README, roadmap, changelog, and `.ezcore/` state describe the current
+  five-layout evidence rather than the superseded PR candidate.
 
 ## Verification
 
-- Local README link check: **passed**.
-- `flutter analyze`: **No issues found** (`61.0s`).
-- `flutter test --no-pub`: **396 passed, 15 skipped, 0 failed**.
+- `flutter analyze`: **No issues found** (`18.3s`).
+- `flutter test --no-pub`: **440 passed, 15 skipped, 0 failed**.
 - `ctest --test-dir runtime/build-linux --output-on-failure`: **3/3 passed**.
-- `flutter build linux --debug`: **passed**; stale CMake output was moved aside
-  before the clean rebuild.
+- `flutter build linux --debug`: **passed**.
 - `flutter build apk --debug`: **passed**; device boot remains unverified.
-- Focused Dart formatter check on the design slice: **0 changed**.
-- Linux debug app capture: **passed**; the background was visually reviewed and
-  a second capture differed over time, confirming motion.
-- Platform/device claims remain bounded by [`../docs/MATRIX.md`](../docs/MATRIX.md);
-  this host did not verify every target.
-
-## Coordination
-
-The original documentation-only slice did not edit the theme implementation.
-This follow-up was explicitly authorized to fix and verify the completed UI
-work, so the branch now contains focused implementation and regression-test
-changes alongside the design commits. The combined branch is ready for
-maintainer review of the descriptive system-name wording and final PR diff.
+- `python3 scripts/fill_manifest_data.py --check`: **passed**.
+- `python3 scripts/license_audit.py`: **passed**.
+- `python3 scripts/verify_core_art.py`: **passed**.
+- `bash scripts/banned_content_scan.sh`: **passed**.
+- Focused Dart format checks: repaired files report no changes. The existing
+  `player_screen.dart` formatting debt is outside this slice and was not
+  reformatted wholesale.
+- Linux captures were visually reviewed for desktop Library, Systems, Capsule,
+  Settings, and an 834×700 tablet hub. Capture data stayed outside the repo.
 
 ## Completion record
 
-The README was rebuilt around the product vision and current implementation.
-It now foregrounds the strongest differentiators—Game → Play, a premium
-console-like Orbit surface, local-first ownership, a growing modular core
-system, Time Capsule saves, and a clear “one emulator to play it all” north
-star—then backs them with progress stats, a Now → Next roadmap, technical
-boundaries, build instructions, contribution paths, and sponsorship. Future
-themes, shaders, mods, metadata providers, achievements, netplay, and cloud
-features are presented as the next chapters rather than as a wall of caveats.
+The base branch now closes the artwork provenance set boundary, verifies every
+flat WebP file, documents the release decode gate, aligns compact Library
+padding with the shell, and adds real compact-shell/Vault/artwork regression
+coverage. The child branch adds the cover-flow state machine and responsive
+hardening, including the five-layout contract and the tablet hub guarantee.
 
-The core catalog now pairs every ezCORE codename with the recognizable system
-name it serves, while keeping upstream attribution and trademark boundaries
-explicit.
+The old pushed PR candidates are to be superseded rather than rewritten. The
+replacement branches must be reviewed in order, with the base merged before
+the child.
 
 ## Next logical task
 
-**Maintainer review and merge.** Confirm the descriptive compatibility-name
-wording against the repository policy, review the final diff, and merge PR #25
-when the branch checks remain green. After that, the next architecture
-milestone is capability-contract research described in
-[`../ROADMAP.md`](../ROADMAP.md).
-
-## Previous handoff
-
-The earlier project-control task created the root roadmap, `.ezcore/` state
-memory, documentation cross-references, and conservative platform/core status
-tracking. Those files remain the source of development memory.
+Run independent review on the exact base and child commit ranges, inspect the
+final diff and screenshots, obtain the required maintainer approval, then open
+and sequentially merge the two DCO-signed replacement PRs. Do not begin the
+capability-contract milestone until that handoff is clean.

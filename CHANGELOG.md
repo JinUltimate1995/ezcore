@@ -15,6 +15,15 @@ All notable changes to ezCORE are documented here. The format follows
   product renders. Added system-family artwork fallbacks for future cores and
   improved the core browser across portrait, landscape, and compact layouts.
 
+### Verification
+
+- Replacement-stack checks: `flutter analyze` clean; `flutter test --no-pub`
+  **440 passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug and
+  Android debug builds passed.
+- Manifest, license, artwork provenance/WebP decode, banned-content, and
+  whitespace gates passed. Device boot and unlisted platform execution remain
+  unverified.
+
 ## [0.2.0] — 2026-09-23
 
 **Hybrid on-demand cores, ROM import hardening, license-wording scrub.**
