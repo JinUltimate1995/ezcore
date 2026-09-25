@@ -5,7 +5,34 @@
 > current PR candidate is recorded here for review; local-only guidance is
 > intentionally omitted.
 
-## PR candidate — 2026-09-24 — Orbit redesign and public front door
+## Replacement candidate — 2026-09-25 — responsive Orbit/cover-flow stack
+
+- **Objective:** Replace the superseded Orbit PR candidates with two clean,
+  DCO-signed branches: reviewed core artwork/evidence first, then Library
+  cover-flow hardening.
+- **Base branch:** `feat/core-artwork-responsive-v2` at `4017681` on top of
+  `a3b3ee7` and `d82b4cd`. It adds exact flat-WebP provenance enforcement,
+  release/decode documentation, shared compact padding, short-shell/Vault
+  coverage, and the artwork cache-cap regression.
+- **Child branch:** `feat/library-coverflow-hardening-v2` on top of `8e0311e`
+  and `93a7f29`. It hardens the cover-flow lifecycle, filters, input, reduced
+  motion, compact phone layouts, rail targets, screenshot-cover refresh,
+  tablet hub behavior, and the public evidence checkpoint.
+- **Documentation/evidence:** README, roadmap, changelog, `.ezcore/` state,
+  and sanitized Linux captures now describe five layout families. Captures use
+  temporary SameBoy/local save data outside the repository. Follow-up review
+  added a revision-keyed same-path screenshot-cover cache regression.
+- **Verification:** `flutter analyze` clean; `flutter test --no-pub` **441
+  passed / 15 skipped / 0 failed**; Linux CTest **3/3**; Linux debug build
+  passed; Android debug APK build passed; manifest, license, artwork,
+  provenance, banned-content, and whitespace gates passed.
+- **Result:** Replacement PRs [#29](https://github.com/JinUltimate1995/ezcore/pull/29)
+  and [#30](https://github.com/JinUltimate1995/ezcore/pull/30) are open for
+  maintainer approval. Independent review found no blocking defect; old PRs #27
+  and #28 were closed as superseded after the replacement PRs opened. Neither
+  replacement has been merged.
+
+## Historical PR candidate — 2026-09-24 — Orbit redesign and public front door
 
 - **Objective:** Integrate the completed studio-plate Orbit redesign with the
   evidence-backed README, authoritative roadmap, architecture notes, and

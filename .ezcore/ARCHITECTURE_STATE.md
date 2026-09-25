@@ -1,6 +1,6 @@
 # ezCORE Architecture State
 
-> Snapshot date: 2026-09-23
+> Snapshot date: 2026-09-25
 > This file describes the current implementation, not the long-term wish list.
 > Detailed as-built documentation remains in
 > [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md).
@@ -27,9 +27,10 @@ Pinned modular core artifacts
   Systems, Time Capsule, Player, Settings, Import, game detail, and cheats
   surfaces.
 - `lib/theme/tokens.dart` and `lib/widgets/` provide the current visual system.
-- `lib/theme/layout.dart` centralizes four responsive layout families for the
-  shell and screens. The current policy maps all portrait viewports to the
-  phone family; the tablet-portrait policy is still under review.
+- `lib/theme/layout.dart` centralizes five responsive layout families for the
+  shell and screens. Desktop and phone use the cover flow; both tablet
+  orientations retain the Continue/Recently Added hub. Platform-specific
+  visual verification remains separate from this source-level contract.
 - Responsive portrait/landscape branches exist; platform-specific visual
   verification is not complete.
 
