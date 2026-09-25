@@ -14,10 +14,10 @@
   `a3b3ee7` and `d82b4cd`. It adds exact flat-WebP provenance enforcement,
   release/decode documentation, shared compact padding, short-shell/Vault
   coverage, and the artwork cache-cap regression.
-- **Child branch:** `feat/library-coverflow-hardening-v2` at `da89f77` on top
-  of `8e0311e` and `93a7f29`. It hardens the cover-flow lifecycle, filters,
-  input, reduced motion, compact phone layouts, rail targets, screenshot-cover
-  refresh, tablet hub behavior, and the public evidence checkpoint.
+- **Child branch:** `feat/library-coverflow-hardening-v2` on top of `8e0311e`
+  and `93a7f29`. It hardens the cover-flow lifecycle, filters, input, reduced
+  motion, compact phone layouts, rail targets, screenshot-cover refresh,
+  tablet hub behavior, and the public evidence checkpoint.
 - **Documentation/evidence:** README, roadmap, changelog, `.ezcore/` state,
   and sanitized Linux captures now describe five layout families. Captures use
   temporary SameBoy/local save data outside the repository.
