@@ -8,6 +8,9 @@ All notable changes to ezCORE are documented here. The format follows
 
 ### Changed
 
+- Reworked desktop and phone Library browsing into a responsive cover-flow
+  experience with nearby covers, centered paging, and Classic, Gentle, and Flat
+  motion styles. Tablet layouts keep the focused Continue/Recently added hub.
 - Replaced the Systems catalog vector drawings with consistent, project-generated
   product renders. Added system-family artwork fallbacks for future cores and
   improved the core browser across portrait, landscape, and compact layouts.

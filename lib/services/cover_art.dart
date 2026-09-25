@@ -55,10 +55,23 @@ CoverSpec coverSpecFor(String gameId) {
   );
 }
 
+final Map<String, File?> _coverFileCache = <String, File?>{};
+
 /// Local screenshot-cover file for [gameId], or null when none was pinned.
-/// Synchronous: the path is derived without touching disk beyond existsSync.
+///
+/// The first lookup checks disk. Repeated carousel frames reuse that result so
+/// a drag does not perform synchronous filesystem probes for every cover.
+/// Screenshot writes call [invalidateCoverFile] to publish the new file.
 File? coverFileFor(String gameId) {
-  final file = File(
-      '${PlatformLocalDataDirProvider.path()}/art/$gameId.png');
-  return file.existsSync() ? file : null;
+  if (_coverFileCache.containsKey(gameId)) {
+    return _coverFileCache[gameId];
+  }
+  final file = File('${PlatformLocalDataDirProvider.path()}/art/$gameId.png');
+  final resolved = file.existsSync() ? file : null;
+  _coverFileCache[gameId] = resolved;
+  return resolved;
+}
+
+void invalidateCoverFile(String gameId) {
+  _coverFileCache.remove(gameId);
 }

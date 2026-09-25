@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezcore/services/cover_art.dart';
+import 'package:ezcore/services/local_data_dir.dart';
 
 void main() {
   test('cover spec is deterministic per game id', () {
@@ -16,7 +19,10 @@ void main() {
       final spec = coverSpecFor(id);
       expect(spec.motif, inInclusiveRange(0, 4));
       expect(
-        [spec.top, spec.bottom].every((c) => c >= 0xFF0A0A0A && c <= 0xFF2A3542),
+        [
+          spec.top,
+          spec.bottom,
+        ].every((c) => c >= 0xFF0A0A0A && c <= 0xFF2A3542),
         isTrue,
         reason: 'palette must stay dark navy/slate for $id',
       );
@@ -33,5 +39,22 @@ void main() {
 
   test('no pinned screenshot cover resolves to null', () {
     expect(coverFileFor('definitely-not-a-real-game-id-12345'), isNull);
+  });
+
+  test('cached cover lookup refreshes after a screenshot is pinned', () {
+    final dir = Directory.systemTemp.createTempSync('ezcore-cover-cache-');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    PlatformLocalDataDirProvider.pinStartupDir(dir.path);
+    const id = 'cover-cache-test';
+    final art = File('${dir.path}/art/$id.png');
+
+    invalidateCoverFile(id);
+    expect(coverFileFor(id), isNull);
+    art.parent.createSync(recursive: true);
+    art.writeAsBytesSync([1]);
+    expect(coverFileFor(id), isNull, reason: 'the cache avoids disk churn');
+
+    invalidateCoverFile(id);
+    expect(coverFileFor(id)?.path, art.path);
   });
 }
