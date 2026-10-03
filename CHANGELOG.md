@@ -8,6 +8,30 @@ All notable changes to ezCORE are documented here. The format follows
 
 ### Added
 
+- **ezCORE looks like the OS it is.** One top bar on every space carries the
+  ezCORE lockup, "Emulation shouldn't be hard." and a status corner that only
+  shows what is true: the time, and P1 while a controller is connected. The
+  rail holds four spaces — Library, Systems, Capsule (every save, now one tap
+  away instead of inside Settings) and Settings — switched with keys 1–4; Esc
+  goes back. The library opens on "The collection": system tabs, a sort menu,
+  and a 3D shelf with flatter angles, floor reflections and a glowing front
+  cover over the game's art. Its dock shows the system, file type and size,
+  with a favourite heart, Let's play (or Resume) and a menu (game page, play
+  from start). On desktop, key hints show how to browse.
+- **The ezCORE brand, everywhere.** The twin-hexagon mark, the "ez CORE"
+  wordmark, the app icon and its dark, light and blue variations are now exact
+  vector files generated from one source (`scripts/build_brand.py`), with
+  sharp launcher icons on Android, iOS, macOS, Windows and — new — Linux. The
+  app draws the same mark in its sidebar and the full lockup in About, and the
+  window is titled ezCORE. See `docs/BRAND.md`.
+- **3D, Grid or List — your choice, in Library and Cores.** The 3D shelf is
+  back: the game in front faces you, its art fills the background, and one bar
+  carries its action — Resume if you have played it, otherwise Play. It opens
+  on the game you played last. Browse by swiping, the mouse wheel, the arrow
+  keys or a controller's d-pad; open the front game for its page. Grid and List
+  keep Resume and Continue playing on top. Cores get the same three views, and
+  on wide screens the details follow the core in front. Each choice is
+  remembered.
 - **Sticks, keyboard, mouse and touch reach your games.** Controller sticks
   are real analog input (Linux and Windows today). Every key reaches games that
   read a keyboard; in DOS and adventure games the keyboard is all theirs and
@@ -83,6 +107,16 @@ All notable changes to ezCORE are documented here. The format follows
   d-pad moves, A chooses, B goes back.
 
 ### Fixed
+
+- **Dreamcast games draw on the GPU.** Flycast crashed as soon as a game
+  started, because ezCORE answered the core's "which graphics API do you
+  prefer?" question wrongly and then accepted Vulkan, which it cannot display
+  yet. It now prefers OpenGL and says no to Vulkan, so Flycast renders on
+  OpenGL.
+- **Covers no longer reload on every frame.** Each cover dropped its image
+  from memory whenever it was redrawn, so a scrolling shelf re-read every
+  cover from disk 60 times a second. A cover is now reloaded only when its
+  file is replaced.
 
 - **Cores now get to finish closing a game.** The runtime never called a core's
   `retro_unload_game`, where many cores write battery saves and caches; it is
