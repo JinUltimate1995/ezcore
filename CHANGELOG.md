@@ -84,6 +84,18 @@ All notable changes to ezCORE are documented here. The format follows
 
 ### Fixed
 
+- **PSP games draw, and quitting them no longer crashes.** Cores that declare
+  their settings the way most libretro cores do (`SET_CORE_OPTIONS_V2_INTL`)
+  had every setting silently dropped; PPSSPP then never presented a frame. It
+  now renders. ezCORE also now tells a core its graphics are going away before
+  it unloads the game, as RetroArch does — PPSSPP crashed on quit otherwise.
+
+- **Dreamcast games draw on the GPU.** Flycast crashed as soon as a game
+  started, because ezCORE answered the core's "which graphics API do you
+  prefer?" question wrongly and then accepted Vulkan, which it cannot display
+  yet. It now prefers OpenGL and says no to Vulkan, so Flycast renders on
+  OpenGL.
+
 - **Cores now get to finish closing a game.** The runtime never called a core's
   `retro_unload_game`, where many cores write battery saves and caches; it is
   now called, and shutdown follows libretro's order (unload the game, release
